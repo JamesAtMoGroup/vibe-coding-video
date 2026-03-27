@@ -8,9 +8,21 @@ Remotion project: `~/Projects/vibe-coding-video/`
 
 ---
 
-## Current Status: CH 0-1 — 30s Sample ✅
+## Current Status: CH 0-1 — Full Video COMPLETE ✅
 
-### What's Done
+### Phase Summary
+
+| Phase | Status | Notes |
+|-------|--------|-------|
+| Phase 1 — VTT Transcription (13 files) | ✅ Done | Whisper small model, --language zh |
+| Phase 2 — VTT Correction | ✅ Done | All brand names fixed |
+| Phase 3 — HTML Analysis & Scene Planning | ✅ Done | 14 scenes mapped to HTML 1:1 |
+| Phase 4 — Scene Development (FullVideo.tsx) | ✅ Done | 14 scenes + CALLOUTS built |
+| Phase 5 — Integration & Render | ✅ Done | `CH0-1-complete.mp4` — 50.7 MB, 15m 15s |
+
+---
+
+## CH 0-1 — 30s Sample ✅
 
 | Task | Status | Notes |
 |------|--------|-------|
@@ -22,111 +34,61 @@ Remotion project: `~/Projects/vibe-coding-video/`
 | 30s render | ✅ Done | `sample-30s.mp4` (2.2 MB) |
 | Audio mix | ✅ Done | Speaker 0.75, BGM 0.18 |
 
-### Callout Timings (VTT-based, 0-1_1.1)
+---
 
-| Frame | Label | Text | Side |
-|-------|-------|------|------|
-| 133–300 | 很多人的感受 | 「寫程式」\n感覺離我很遠 | right (top-right) |
-| 302–516 | 好消息 | 零技術背景\n也可以 | right |
-| 518–720 | 關鍵 | 靠 AI 的幫助\n讓電腦替你做事 | right |
-| 838–900 | 本章主題 | 寫程式\n到底是什麼 | right |
+## CH 0-1 — Full Video (FullVideo.tsx)
 
-### Callout Card Style (current)
-- macOS Messages notification style
-- Position: top-right corner, `right: 16, top: NAV_H + 20`
-- Slides in from right edge (translateX 380 → 0)
-- Width: 420px
-- Font: Noto Sans TC 34px bold for message body
-- Green Messages app icon (CSS-drawn)
+### Audio Segments & Scenes
 
-### Audio Files
-- Speaker: `public/audio/0-1_1.1_studio.wav` — volume 0.75
-- BGM: `public/audio/course_background_music.wav` — volume 0.18
+| Seg | File | Frames | Scene | VTT Status |
+|-----|------|--------|-------|------------|
+| 1.1 | 0-1_1.1_studio.wav | 1211 | SceneHero | ✅ Corrected |
+| 2.1 | 0-1_2.1.wav | 1169 | SceneSection01Card1 | ✅ Corrected |
+| 2.2 | 0-1_2.2.wav | 1258 | SceneSection01Analogy | ✅ Corrected (Simplified→Traditional) |
+| 2.3 | 0-1_2.3.wav | 1481 | SceneSection01Card2 | ✅ OK |
+| 3.0 | 0-1_3.0.wav | 2863 | SceneSection02Intro | ✅ OK |
+| 3.1 | 0-1_3.1.wav | 3710 | SceneSection02Usecases | ✅ OK |
+| 3.2 | 0-1_3.2.wav | 1614 | SceneSection02LeisureQuiz | ✅ Corrected (寫成是→寫程式) |
+| 4.1 | 0-1_4.1.wav | 2372 | SceneSection03AICoding | ✅ Corrected (土法煉鋼) |
+| 4.2 | 0-1_4.2.wav | 1124 | SceneSection03VibeCoding | ✅ Corrected (chill/feel/程式碼) |
+| 4.3 | 0-1_4.3.wav | 2239 | SceneSection03Analogy | ✅ Corrected (Vibe/甲方/乙方) |
+| 5.1 | 0-1_5.1.wav | 1704 | SceneSection04VibeTraits | ✅ Corrected (Vibe Coding) |
+| 5.2 | 0-1_5.2.wav | 990 | SceneSection04AITraits | ✅ Corrected (Vibe→corrected) |
+| 5.3 | 0-1_5.3.wav | 3264 | SceneSection04Path | ✅ Corrected (Simplified→Traditional) |
+| 6.1 | 0-1_6.1.wav | 2461 | SceneTakeaway | ✅ Corrected (Japanese katakana removed) |
+
+**Total frames:** 27,461 (~15.2 minutes)
+
+### Scene → HTML Mapping
+
+| Scene | HTML Section |
+|-------|-------------|
+| SceneHero | `.hero` |
+| SceneSection01Card1 | `Section 01 .card:first` |
+| SceneSection01Analogy | `Section 01 .analogy` |
+| SceneSection01Card2 | `Section 01 .card:second` |
+| SceneSection02Intro | `Section 02 .card + .usecase-grid` |
+| SceneSection02Usecases | `Section 02 .analogy (具體例子)` |
+| SceneSection02LeisureQuiz | `Section 02 .card (樂趣) + .quiz-box` |
+| SceneSection03AICoding | `Section 03 .card (AI Coding 定義)` |
+| SceneSection03VibeCoding | `Section 03 .card (Vibe Coding 定義)` |
+| SceneSection03Analogy | `Section 03 .analogy + .card (感覺)` |
+| SceneSection04VibeTraits | `Section 04 .card + .compare table` |
+| SceneSection04AITraits | `Section 04 .compare table (AI column)` |
+| SceneSection04Path | `Section 04 .path + .quiz-box` |
+| SceneTakeaway | `.takeaway` |
 
 ---
 
-## Pending: HeyGen Digital Avatar
+## Render Target
 
-**Goal:** Add avatar `f7af57d29abd4254a1e43441ec16ce40` as a circle in bottom-right corner, lipsynced to audio, muted in Remotion.
-
-**Blocker:** HeyGen API credits insufficient (`MOVIO_PAYMENT_INSUFFICIENT_CREDIT`).
-API credits are separate from regular HeyGen plan — purchase at HeyGen Developer Console.
-
-**When credits are available, run:**
-```bash
-# Audio already uploaded — asset_id: 807d290115804f09bf6f82e4e9d81434
-# Valid for 7 days from 2026-03-27. Re-upload if expired:
-# ffmpeg -y -i "public/audio/0-1_1.1_studio.wav" -t 30 -ab 128k /tmp/avatar_audio_30s.mp3
-# curl -X POST https://upload.heygen.com/v1/asset \
-#   -H "x-api-key: [KEY]" -H "Content-Type: audio/mpeg" --data-binary @/tmp/avatar_audio_30s.mp3
-
-# Create video:
-curl -X POST "https://api.heygen.com/v2/video/generate" \
-  -H "x-api-key: [KEY]" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "video_inputs": [{
-      "character": {
-        "type": "avatar",
-        "avatar_id": "f7af57d29abd4254a1e43441ec16ce40",
-        "avatar_style": "normal"
-      },
-      "voice": {
-        "type": "audio",
-        "audio_asset_id": "807d290115804f09bf6f82e4e9d81434"
-      }
-    }],
-    "dimension": { "width": 512, "height": 512 }
-  }'
-# Poll: GET https://api.heygen.com/v1/video_status.get?video_id={id}
-# Download MP4 → public/avatar/avatar-ch0-1.mp4
-# Add <Video> to Opening.tsx: bottom-right circle, muted={true}
 ```
-
-**Remotion integration (after download):**
-```tsx
-// In Opening.tsx — add below Callout cards
-<div style={{
-  position: "absolute",
-  bottom: 32, right: 32,
-  width: 180, height: 180,
-  borderRadius: "50%",
-  overflow: "hidden",
-  border: "3px solid rgba(124,255,178,0.5)",
-  boxShadow: "0 0 24px rgba(124,255,178,0.2)",
-  zIndex: 50,
-}}>
-  <Video
-    src={staticFile("avatar/avatar-ch0-1.mp4")}
-    muted
-    style={{ width: "100%", height: "100%", objectFit: "cover" }}
-  />
-</div>
+Output: ~/Downloads/Vibe Coding 剪輯/CH0-1-complete.mp4
+Codec: h264
+Resolution: 1920×1080
+FPS: 30
+Duration: ~15.2 min (27,461 frames)
 ```
-
----
-
-## Remaining Work — Full CH 0-1 Video
-
-Audio files not yet processed (no VTT):
-
-| File | Section | HTML Block |
-|------|---------|-----------|
-| 0-1_2.1.wav | 二、自動化概念 | Section 01 Card 1 |
-| 0-1_2.2.wav | 二、生活比喻 | Section 01 Analogy |
-| 0-1_2.3.wav | 二、廣義vs狹義 | Section 01 Card 2 |
-| 0-1_3.0.wav | 三、非工程師前言 | Section 02 Card |
-| 0-1_3.1.wav | 三、具體場景 | Section 02 Usecase |
-| 0-1_3.2.wav | 三、生活樂趣 | Section 02 Card + Quiz |
-| 0-1_4.1.wav | 四、AI Coding 定義 | Section 03 Card |
-| 0-1_4.2.wav | 四、Vibe Coding 定義 | Section 03 Card |
-| 0-1_4.3.wav | 四、實際感覺 | Section 03 Analogy |
-| 0-1_5.1.wav | 五、Vibe 特性 | Section 04 Compare |
-| 0-1_5.2.wav | 五、AI Coding 特性 | Section 04 Compare |
-| 0-1_5.3.wav | 五、學習路徑 | Section 04 Path + Quiz |
-| 0-1_6.1.wav | 六、收尾 | Takeaway |
-
-**Next step when resuming:** Run Whisper VTT on all remaining audio files, then build scenes.
 
 ---
 
@@ -146,24 +108,33 @@ Audio files not yet processed (no VTT):
 ```
 ~/Projects/vibe-coding-video/
   src/
-    Root.tsx          — Compositions: Intro2s (4K 120f) + Video30s (1080p 900f)
-    Video30s.tsx      — Audio wiring (speaker 0.75, BGM 0.18)
-    Opening.tsx       — All visual components: ProgressBar, HeroSection,
-                        Section01, CalloutCard (macOS notification style)
+    Root.tsx          — Compositions: Intro2s + Video30s + FullVideo
+    Video30s.tsx      — 30s sample
+    Opening.tsx       — Hero + Section01 (30s sample only)
+    FullVideo.tsx     — All 14 scenes for complete CH 0-1 video
     Intro2s.tsx       — Brand intro (separate)
     hooks.ts          — useMorphIn, useGlitch, useTypewriter
     index.ts          — Remotion entry
   public/
     audio/
-      0-1_1.1.wav           — original
-      0-1_1.1_studio.wav    — EQ + compressed (used in render)
+      0-1_1.1.wav               — original
+      0-1_1.1_studio.wav        — EQ + compressed (used in 30s sample)
+      0-1_2.1.wav ~ 0-1_6.1.wav — all 13 segments (added 2026-03-26)
       course_background_music.wav
       intro-stinger.wav
     aischool-logo.webp
 
 Source assets: ~/Downloads/Vibe Coding 剪輯/0-1/
   (N)ch0-1.html         — visual reference (single source of truth)
-  0-1 音檔/             — 14 WAV files
+  0-1 音檔/             — 14 WAV files + 14 corrected VTTs
   章節0-1_逐字講稿.docx — script for VTT correction
-  0-1 音檔/0-1_1.1.vtt  — corrected VTT (only one done so far)
 ```
+
+---
+
+## HeyGen Digital Avatar (Pending)
+
+**Blocker:** HeyGen API credits insufficient (`MOVIO_PAYMENT_INSUFFICIENT_CREDIT`).
+
+When credits available, add avatar `f7af57d29abd4254a1e43441ec16ce40` to bottom-right circle in FullVideo.tsx.
+Audio asset_id: `807d290115804f09bf6f82e4e9d81434` (may be expired — valid 7 days from 2026-03-27).
