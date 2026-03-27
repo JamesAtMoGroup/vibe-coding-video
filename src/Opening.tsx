@@ -105,8 +105,16 @@ const CALLOUTS: Callout[] = [
   { from: 838, to: 900,  label: "本章主題",     text: "寫程式\n到底是什麼",           side: "right", yPct: 0.38 },
 ];
 
+// iMessage notification constants — S=2 for Vibe Coding 1080p
+const S_NOTIF       = 2;
+const NOTIF_W       = 290 * S_NOTIF;   // 580px
+const NOTIF_TOP     = 12  * S_NOTIF;   // 24px below nav
+const NOTIF_RIGHT   = 20  * S_NOTIF;   // 40px from right
+const NOTIF_SLIDE_H = 110 * S_NOTIF;   // 220px slide down from above
+const FADE_OUT_F    = 50;
+
 const CalloutCard: React.FC<{ c: Callout; safeTop: number; safeHeight: number }> = ({
-  c, safeTop, safeHeight,
+  c, safeTop,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -116,11 +124,13 @@ const CalloutCard: React.FC<{ c: Callout; safeTop: number; safeHeight: number }>
   const localF   = frame - c.from;
   const duration = c.to - c.from;
 
-  // Slide in from right edge — exact macOS notification behaviour
+  // Slide DOWN from above nav bar
   const progress = spring({ frame: localF, fps, config: { damping: 22, stiffness: 130 } });
-  const slideX   = interpolate(progress, [0, 1], [380, 0], clamp);
-  const scaleIn  = interpolate(progress, [0, 1], [0.96, 1], clamp);
-  const opacity  = interpolate(localF, [0, 8, duration - 12, duration], [0, 1, 1, 0], clamp);
+  const slideY   = interpolate(progress, [0, 1], [-NOTIF_SLIDE_H, 0], clamp);
+  const scaleIn  = interpolate(progress, [0, 1], [0.94, 1], clamp);
+  const fadeIn   = interpolate(localF, [0, 8], [0, 1], clamp);
+  const fadeOut  = interpolate(localF, [duration - FADE_OUT_F, duration], [1, 0], clamp);
+  const opacity  = Math.min(fadeIn, fadeOut);
 
   // Typewriter main text (starts after card lands, ~10f)
   const CHARS_PER_FRAME = 1.4;
@@ -135,12 +145,12 @@ const CalloutCard: React.FC<{ c: Callout; safeTop: number; safeHeight: number }>
   return (
     <div style={{
       position: "absolute",
-      top: safeTop + 20,   // just below progress bar, like macOS top-right corner
-      right: 16,
+      top: safeTop + NOTIF_TOP,
+      right: NOTIF_RIGHT,
       zIndex: 30,
+      width: NOTIF_W,
       opacity,
-      transform: `translateX(${slideX}px) scale(${scaleIn})`,
-      width: 420,
+      transform: `translateY(${slideY}px) scale(${scaleIn})`,
     }}>
       {/* macOS notification shell — frosted dark */}
       <div style={{

@@ -35,20 +35,20 @@ const CONTAINER_W = 860;
 // Audio segment durations (computed: Math.ceil(duration * 30) + 10)
 // ─────────────────────────────────────────────────────────────────────────────
 const SEGMENTS = [
-  { id: "1.1",  file: "0-1_1.1_studio.wav",  frames: 1211 }, // 40.05s Hero
-  { id: "2.1",  file: "0-1_2.1.wav",           frames: 1169 }, // 38.64s Section01 Card1
-  { id: "2.2",  file: "0-1_2.2.wav",           frames: 1258 }, // 41.61s Section01 Analogy
-  { id: "2.3",  file: "0-1_2.3.wav",           frames: 1481 }, // 49.04s Section01 Card2
-  { id: "3.0",  file: "0-1_3.0.wav",           frames: 2863 }, // 95.11s Section02 Card
-  { id: "3.1",  file: "0-1_3.1.wav",           frames: 3710 }, // 123.34s Section02 Usecases
-  { id: "3.2",  file: "0-1_3.2.wav",           frames: 1614 }, // 53.50s Section02 Leisure+Quiz
-  { id: "4.1",  file: "0-1_4.1.wav",           frames: 2372 }, // 78.76s Section03 AI Coding
-  { id: "4.2",  file: "0-1_4.2.wav",           frames: 1124 }, // 37.15s Section03 Vibe Coding def
-  { id: "4.3",  file: "0-1_4.3.wav",           frames: 2239 }, // 74.30s Section03 Analogy
-  { id: "5.1",  file: "0-1_5.1.wav",           frames: 1704 }, // 56.47s Section04 Vibe traits
-  { id: "5.2",  file: "0-1_5.2.wav",           frames:  990 }, // 32.69s Section04 AI traits
-  { id: "5.3",  file: "0-1_5.3.wav",           frames: 3264 }, // 108.48s Section04 Path+Quiz
-  { id: "6.1",  file: "0-1_6.1.wav",           frames: 2461 }, // 81.73s Takeaway
+  { id: "1.1",  file: "0-1_1.1.wav",    frames: 1150 }, // 37.99s Hero
+  { id: "2.1",  file: "0-1_2.1.wav",    frames: 1128 }, // 37.24s Section01 Card1
+  { id: "2.2",  file: "0-1_2.2.wav",    frames: 1158 }, // 38.27s Section01 Analogy
+  { id: "2.3",  file: "0-1_2.3.wav",    frames: 1387 }, // 45.88s Section01 Card2
+  { id: "3.0",  file: "0-1_3.0.wav",    frames: 2789 }, // 92.60s Section02 Card
+  { id: "3.1",  file: "0-1_3.1.wav",    frames: 3663 }, // 121.77s Section02 Usecases
+  { id: "3.2",  file: "0-1_3.2.wav",    frames: 1576 }, // 52.20s Section02 Leisure+Quiz
+  { id: "4.1",  file: "0-1_4.1.wav",    frames: 2348 }, // 77.93s Section03 AI Coding
+  { id: "4.2",  file: "0-1_4.2.wav",    frames: 1075 }, // 35.48s Section03 Vibe Coding def
+  { id: "4.3",  file: "0-1_4.3.wav",    frames: 2206 }, // 73.19s Section03 Analogy
+  { id: "5.1",  file: "0-1_5.1.wav",    frames: 1381 }, // 45.70s Section04 Vibe traits
+  { id: "5.2",  file: "0-1_5.2.wav",    frames:  944 }, // 31.11s Section04 AI traits
+  { id: "5.3",  file: "0-1_5.3.wav",    frames: 3234 }, // 107.46s Section04 Path+Quiz
+  { id: "6.1",  file: "0-1_6.1.wav",    frames: 2432 }, // 80.71s Takeaway
 ] as const;
 
 // Cumulative start frames
@@ -123,12 +123,19 @@ const ProgressBar: React.FC<{ progressPct?: number }> = ({ progressPct = 8 }) =>
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Callout Card — macOS Messages notification style
+// iMessage Notification Callout — S=2 for Vibe Coding 1080p
 // ─────────────────────────────────────────────────────────────────────────────
+const S             = 2;
+const NOTIF_W       = 290 * S;   // 580px  card width
+const NOTIF_TOP     = 12  * S;   // 24px   gap below nav bar
+const NOTIF_RIGHT   = 20  * S;   // 40px   gap from right edge
+const NOTIF_SLIDE_H = 110 * S;   // 220px  slides DOWN from above nav
+const FADE_OUT_F    = 50;        // 1.67s  slow fade out at end
+
 type Callout = {
   from: number; to: number;
   label: string; text: string;
-  side: "left" | "right"; yPct: number;
+  side?: "left" | "right"; yPct?: number; // kept for compat, ignored in layout
 };
 
 const CalloutCard: React.FC<{ c: Callout }> = ({ c }) => {
@@ -140,11 +147,17 @@ const CalloutCard: React.FC<{ c: Callout }> = ({ c }) => {
   const localF   = frame - c.from;
   const duration = c.to - c.from;
 
-  const progress = spring({ frame: localF, fps, config: { damping: 22, stiffness: 130 } });
-  const slideX   = interpolate(progress, [0, 1], [380, 0], clamp);
-  const scaleIn  = interpolate(progress, [0, 1], [0.96, 1], clamp);
-  const opacity  = interpolate(localF, [0, 8, duration - 12, duration], [0, 1, 1, 0], clamp);
+  // Slide DOWN from above nav bar
+  const progress  = spring({ frame: localF, fps, config: { damping: 22, stiffness: 130 } });
+  const slideY    = interpolate(progress, [0, 1], [-NOTIF_SLIDE_H, 0], clamp);
+  const scaleIn   = interpolate(progress, [0, 1], [0.94, 1], clamp);
 
+  // Fade in fast, fade out slowly over last FADE_OUT_F frames
+  const fadeIn    = interpolate(localF, [0, 8], [0, 1], clamp);
+  const fadeOut   = interpolate(localF, [duration - FADE_OUT_F, duration], [1, 0], clamp);
+  const opacity   = Math.min(fadeIn, fadeOut);
+
+  // Typewriter (starts 10f after card arrives)
   const CHARS_PER_FRAME = 1.4;
   const charsVisible = interpolate(
     Math.max(0, localF - 10),
@@ -157,50 +170,53 @@ const CalloutCard: React.FC<{ c: Callout }> = ({ c }) => {
   return (
     <div style={{
       position: "absolute",
-      top: NAV_H + 20,
-      right: 16,
+      top: NAV_H + NOTIF_TOP,
+      right: NOTIF_RIGHT,
       zIndex: 30,
+      width: NOTIF_W,
       opacity,
-      transform: `translateX(${slideX}px) scale(${scaleIn})`,
-      width: 420,
+      transform: `translateY(${slideY}px) scale(${scaleIn})`,
     }}>
       <div style={{
-        background: "rgba(38, 38, 40, 0.88)",
+        background: "rgba(38, 38, 40, 0.90)",
         backdropFilter: "blur(28px)",
         WebkitBackdropFilter: "blur(28px)",
         borderRadius: 18,
-        padding: "14px 16px 16px",
-        boxShadow: "0 12px 40px rgba(0,0,0,0.7), 0 1px 0 rgba(255,255,255,0.07) inset",
-        border: "1px solid rgba(255,255,255,0.10)",
+        padding: "14px 18px 18px",
+        boxShadow: "0 16px 48px rgba(0,0,0,0.75), 0 1px 0 rgba(255,255,255,0.08) inset",
+        border: "1px solid rgba(255,255,255,0.11)",
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 9 }}>
+        {/* Header: Messages icon + "訊息" + "剛剛" */}
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
           <div style={{
             width: 28, height: 28, borderRadius: 7, flexShrink: 0,
             background: "linear-gradient(145deg, #3cdb6e, #28c95a)",
             display: "flex", alignItems: "center", justifyContent: "center",
             boxShadow: "0 2px 6px rgba(40,201,90,0.4)",
           }}>
-            <div style={{ width: 15, height: 12, borderRadius: "6px 6px 6px 2px", background: "#ffffff" }} />
+            <div style={{ width: 15, height: 12, borderRadius: "6px 6px 6px 2px", background: "#fff" }} />
           </div>
           <span style={{
-            fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif",
+            fontFamily: "'Noto Sans TC','PingFang TC',sans-serif",
             fontSize: 13, fontWeight: 500,
-            color: "rgba(255,255,255,0.45)",
-            flex: 1,
+            color: "rgba(255,255,255,0.45)", flex: 1,
           }}>訊息</span>
           <span style={{
-            fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif",
-            fontSize: 12, color: "rgba(255,255,255,0.3)",
+            fontFamily: "'Noto Sans TC','PingFang TC',sans-serif",
+            fontSize: 12, color: "rgba(255,255,255,0.30)",
           }}>剛剛</span>
         </div>
+
+        {/* Sender / label */}
         <div style={{
-          fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif",
+          fontFamily: "'Noto Sans TC','PingFang TC',sans-serif",
           fontSize: 15, fontWeight: 700,
-          color: "rgba(255,255,255,0.90)",
-          marginBottom: 5,
+          color: "rgba(255,255,255,0.88)", marginBottom: 6,
         }}>{c.label}</div>
+
+        {/* Message body — typewriter */}
         <div style={{
-          fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif",
+          fontFamily: "'Noto Sans TC','PingFang TC',sans-serif",
           fontSize: 34, fontWeight: 800,
           color: "#ffffff", lineHeight: 1.35,
           whiteSpace: "pre-wrap" as const,
@@ -210,10 +226,8 @@ const CalloutCard: React.FC<{ c: Callout }> = ({ c }) => {
           {displayText}
           {Math.floor(charsVisible) < c.text.length && (
             <span style={{
-              display: "inline-block",
-              width: 2, height: "0.85em",
-              background: "rgba(255,255,255,0.7)",
-              marginLeft: 3,
+              display: "inline-block", width: 2, height: "0.85em",
+              background: "rgba(255,255,255,0.7)", marginLeft: 3,
               verticalAlign: "text-bottom",
               opacity: localF % 16 < 8 ? 1 : 0,
             }} />
@@ -1126,7 +1140,7 @@ export const FullVideo: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
       {/* BGM — plays through the whole video */}
-      <Audio src={staticFile("audio/course_background_music.wav")} volume={0.10} />
+      <Audio src={staticFile("audio/course_background_music.wav")} volume={0.10} loop />
 
       {SEGMENTS.map((seg, i) => {
         const SceneComponent = SCENES[i];

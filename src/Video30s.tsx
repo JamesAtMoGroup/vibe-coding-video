@@ -10,7 +10,7 @@ export const Video30s: React.FC = () => {
       {/* 講者聲音 — normalized to -16 LUFS */}
       <Audio src={staticFile("audio/0-1_1.1_studio.wav")} volume={1.0} />
       {/* 背景音樂 */}
-      <Audio src={staticFile("audio/course_background_music.wav")} volume={0.10} />
+      <Audio src={staticFile("audio/course_background_music.wav")} volume={0.10} loop />
     </AbsoluteFill>
   );
 };
