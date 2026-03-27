@@ -8,9 +8,10 @@ Remotion project: `~/Projects/vibe-coding-video/`
 
 ---
 
-## Current Status: CH 0-1 — Full Video v3 ✅
+## Current Status: CH 0-1 — Full Video v5 ✅
 
-**Latest render:** `out/CH0-1-complete.mp4` — 65 MB, 14m 27s (2026-03-27 15:05)
+**Latest render:** `out/CH01-1/CH0-1-complete.mp4` — 60 MB, 14m 27s (2026-03-27 16:08)
+**Subtitles:** `out/CH01-1/CH0-1-subtitles.vtt` — 22 KB, all 14 segments merged
 
 ### Version History
 
@@ -19,6 +20,8 @@ Remotion project: `~/Projects/vibe-coding-video/`
 | v1 | 47 MB | Initial full video, all 14 scenes |
 | v2 | 49 MB | VTT-synced progressive animation, iMessage stacking, focus glow, audio pipeline |
 | v3 | 65 MB | Mobile-sized text (36px body), CONTAINER_W=1500, SUBTITLE_H=160 |
+| v4 | 58 MB | Lottie avatar (replaced HeyGen), output folder CH01-1/ |
+| v5 | 60 MB | All small fonts fixed: table 26/28px, steps 24/28px, quiz 24/26px, nav 16px, iMessage sender 22px |
 
 ---
 
@@ -35,7 +38,10 @@ Remotion project: `~/Projects/vibe-coding-video/`
 | iMessage stacking | ✅ Done | New card pushes old down, old slides up when expired |
 | Focus highlight | ✅ Done | Green glow on first appear |
 | Mobile scaling | ✅ Done | CONTAINER_W=1500, fonts 36-88px |
-| HeyGen avatar | 🔄 Generating | Script running, placeholders in place |
+| All font sizes fixed | ✅ Done | Table 26/28px, steps 24/28px, quiz 24/26px, nav 16px |
+| Lottie avatar | ✅ Done | speaking-animation.json, replaced HeyGen |
+| Output folder structure | ✅ Done | out/CH01-1/ with .mp4 + .vtt |
+| Merged VTT | ✅ Done | 6_merge_vtt.sh, all 14 segments, correct timestamps |
 
 ---
 
@@ -74,6 +80,12 @@ Remotion project: `~/Projects/vibe-coding-video/`
 - Section header: 52px
 - Card body: 36px
 - AnalogyBox body: 34px
+- Compare table header: 28px, body: 26px
+- Learning path step title: 28px, desc: 24px, number circle: 48×48px 18px
+- Quiz label: 18px (Space Mono), body: 26px, bullets: 24px
+- Nav bar text: 16px (Space Mono)
+- iMessage sender: 22px, body: 34px, "訊息" label: 18px
+- **Rule**: content minimum 24px, UI chrome minimum 16px
 
 ### Audio
 - Speaker: −16 LUFS → `volume={1.0}`
@@ -103,27 +115,29 @@ Remotion project: `~/Projects/vibe-coding-video/`
 ```
 ~/Projects/vibe-coding-video/
   src/
-    Root.tsx          — Compositions: Intro2s + Video30s + FullVideo
-    Video30s.tsx      — 30s sample (uses Opening.tsx)
-    Opening.tsx       — Hero + Section01 for 30s sample
-    FullVideo.tsx     — All 14 scenes, complete CH 0-1 video
-    Intro2s.tsx       — Brand intro
-    hooks.ts          — useMorphIn, useGlitch, useTypewriter
+    Root.tsx                  — Compositions: Intro2s + Video30s + FullVideo
+    Video30s.tsx              — 30s sample (uses Opening.tsx)
+    Opening.tsx               — Hero + Section01 for 30s sample
+    FullVideo.tsx             — All 14 scenes, complete CH 0-1 video
+    Intro2s.tsx               — Brand intro
+    hooks.ts                  — useMorphIn, useGlitch, useTypewriter
+    speaking-animation.json   — Lottie animation (extracted from speaking.lottie)
   public/
     audio/            — 15 WAV files (denoised + trimmed + normalized)
-    avatar/           — HeyGen MP4s (placeholders now, real ones pending)
     aischool-logo.webp
   scripts/
-    0a_denoise.sh     — Noise removal
-    0b_trim_silence.sh — Trim leading/trailing silence
-    0_normalize_audio.sh — −16 LUFS normalization
-    1_transcribe.sh   — Whisper VTT
-    2_correct_vtts.sh — Brand name correction
-    3_calc_frames.sh  — Frame count calculation
-    4_render.sh       — Remotion render
-    5_heygen_avatar.sh — HeyGen avatar video generation
+    0a_denoise.sh          — Noise removal
+    0b_trim_silence.sh     — Trim leading/trailing silence
+    0_normalize_audio.sh   — −16 LUFS normalization
+    1_transcribe.sh        — Whisper VTT
+    2_correct_vtts.sh      — Brand name correction
+    3_calc_frames.sh       — Frame count calculation
+    4_render.sh            — Remotion render → out/CH{chapter}/
+    6_merge_vtt.sh         — Merge all VTTs → out/CH{chapter}/CH{chapter}-subtitles.vtt
   out/
-    CH0-1-complete.mp4  — Latest render (65MB, 14m27s)
+    CH01-1/
+      CH0-1-complete.mp4    — Latest render (60MB, 14m27s)
+      CH0-1-subtitles.vtt   — Merged subtitles (22KB)
 
 Source assets: ~/Downloads/Vibe Coding 剪輯/0-1/
   (N)ch0-1.html         — Visual reference
@@ -134,13 +148,4 @@ Source assets: ~/Downloads/Vibe Coding 剪輯/0-1/
 
 ## Pending
 
-1. **HeyGen avatar** — `scripts/5_heygen_avatar.sh` running in background
-   - Will replace `public/avatar/0-1_*.mp4` placeholders with real lip-sync videos
-   - Final re-render needed after completion
-   - Avatar ID: `f7af57d29abd4254a1e43441ec16ce40`
-   - API credits: 6,000 remaining (as of 2026-03-27)
-
-2. **Final re-render with real avatar**
-   ```bash
-   npx remotion render FullVideo out/CH0-1-complete.mp4 --codec=h264
-   ```
+- None. CH 0-1 is complete.
