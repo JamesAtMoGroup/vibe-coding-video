@@ -148,7 +148,7 @@ const CalloutCard: React.FC<{ c: Callout; safeTop: number; safeHeight: number }>
       top: safeTop + NOTIF_TOP,
       right: NOTIF_RIGHT,
       zIndex: 30,
-      width: NOTIF_W,
+      maxWidth: NOTIF_W,
       opacity,
       transform: `translateY(${slideY}px) scale(${scaleIn})`,
     }}>
@@ -215,7 +215,6 @@ const CalloutCard: React.FC<{ c: Callout; safeTop: number; safeHeight: number }>
           lineHeight: 1.35,
           whiteSpace: "pre-wrap" as const,
           letterSpacing: "-0.02em",
-          minHeight: "2.7em",
         }}>
           {displayText}
           {Math.floor(charsVisible) < c.text.length && (
