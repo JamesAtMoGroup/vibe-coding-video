@@ -8,7 +8,14 @@ Remotion project: `~/Projects/vibe-coding-video/`
 
 ---
 
-## Current Status: CH 0-1 — Full Video v5 ✅
+## Current Status: CH 0-2 — Full Video v1 ✅
+
+**Latest render:** `out/CH02-2/CH0-2-complete.mp4` — 43.9 MB, ~9m 28s (2026-03-27 16:48)
+**Subtitles:** `out/CH02-2/CH0-2-subtitles.vtt` — 15 KB, all 11 segments merged, 185 cues
+
+---
+
+## CH 0-1 — Full Video v5 ✅
 
 **Latest render:** `out/CH01-1/CH0-1-complete.mp4` — 60 MB, 14m 27s (2026-03-27 16:08)
 **Subtitles:** `out/CH01-1/CH0-1-subtitles.vtt` — 22 KB, all 14 segments merged
@@ -146,6 +153,26 @@ Source assets: ~/Downloads/Vibe Coding 剪輯/0-1/
 
 ---
 
+## CH 0-2 Audio Segments (post-pipeline durations)
+
+| Seg | File | Frames | Scene |
+|-----|------|--------|-------|
+| 1.1 | 0.2_1.1.wav | 1493 | SceneHero |
+| 2.1 | 0.2_2.1.wav | 1723 | SceneSection01 |
+| 3.1 | 0.2_3.1.wav | 1324 | SceneSection02Intro |
+| 3.2 | 0.2_3.2.wav | 3159 | SceneSection02Tools |
+| 3.3 | 0.2_3.3.wav | 1434 | SceneSection02Quiz |
+| 4.0 | 0.2_4.0.wav | 1224 | SceneSection03Intro |
+| 4.1 | 0.2_4.1.wav | 589 | SceneSection03Tool |
+| 4.2 | 0.2_4.2.wav | 1828 | SceneSection03Analogy |
+| 5.0 | 0.2_5.0.wav | 1342 | SceneSection04Intro |
+| 5.1 | 0.2_5.1.wav | 1052 | SceneSection04Table |
+| 6.1 | 0.2_6.1.wav | 1836 | SceneSection05Takeaway |
+
+**Total: 17,004 frames (~9m 28s)**
+
+---
+
 ## Pending
 
-- None. CH 0-1 is complete.
+- None. CH 0-1 and CH 0-2 are complete.
