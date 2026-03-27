@@ -38,20 +38,20 @@ const SUBTITLE_H  = 160;  // reserved at bottom for subtitles
 // Audio segment durations (computed: Math.ceil(duration * 30) + 10)
 // ─────────────────────────────────────────────────────────────────────────────
 const SEGMENTS = [
-  { id: "1.1",  file: "0-1_1.1.wav",    frames: 1131 }, // 37.34s Hero
-  { id: "2.1",  file: "0-1_2.1.wav",    frames: 1061 }, // 35.02s Section01 Card1
-  { id: "2.2",  file: "0-1_2.2.wav",    frames: 1067 }, // 35.20s Section01 Analogy
-  { id: "2.3",  file: "0-1_2.3.wav",    frames: 1367 }, // 45.23s Section01 Card2
-  { id: "3.0",  file: "0-1_3.0.wav",    frames: 2641 }, // 87.68s Section02 Card
-  { id: "3.1",  file: "0-1_3.1.wav",    frames: 3619 }, // 120.28s Section02 Usecases
-  { id: "3.2",  file: "0-1_3.2.wav",    frames: 1546 }, // 51.18s Section02 Leisure+Quiz
-  { id: "4.1",  file: "0-1_4.1.wav",    frames: 2293 }, // 76.07s Section03 AI Coding
-  { id: "4.2",  file: "0-1_4.2.wav",    frames: 1050 }, // 34.64s Section03 Vibe Coding def
-  { id: "4.3",  file: "0-1_4.3.wav",    frames: 2187 }, // 72.54s Section03 Analogy
-  { id: "5.1",  file: "0-1_5.1.wav",    frames: 1607 }, // 53.22s Section04 Vibe traits
-  { id: "5.2",  file: "0-1_5.2.wav",    frames:  874 }, // 28.79s Section04 AI traits
-  { id: "5.3",  file: "0-1_5.3.wav",    frames: 3148 }, // 104.58s Section04 Path+Quiz
-  { id: "6.1",  file: "0-1_6.1.wav",    frames: 2429 }, // 80.62s Takeaway
+  { id: "1.1",  file: "0-1_1.1.wav",    frames: 1126 }, // 37.20s Hero
+  { id: "2.1",  file: "0-1_2.1.wav",    frames: 1006 }, // 33.18s Section01 Card1
+  { id: "2.2",  file: "0-1_2.2.wav",    frames:  985 }, // 32.50s Section01 Analogy
+  { id: "2.3",  file: "0-1_2.3.wav",    frames: 1303 }, // 43.08s Section01 Card2
+  { id: "3.0",  file: "0-1_3.0.wav",    frames: 2636 }, // 87.52s Section02 Card
+  { id: "3.1",  file: "0-1_3.1.wav",    frames: 3576 }, // 118.85s Section02 Usecases
+  { id: "3.2",  file: "0-1_3.2.wav",    frames: 1540 }, // 50.99s Section02 Leisure+Quiz
+  { id: "4.1",  file: "0-1_4.1.wav",    frames: 2288 }, // 75.91s Section03 AI Coding
+  { id: "4.2",  file: "0-1_4.2.wav",    frames: 1044 }, // 34.46s Section03 Vibe Coding def
+  { id: "4.3",  file: "0-1_4.3.wav",    frames: 2151 }, // 71.34s Section03 Analogy
+  { id: "5.1",  file: "0-1_5.1.wav",    frames: 1601 }, // 53.01s Section04 Vibe traits
+  { id: "5.2",  file: "0-1_5.2.wav",    frames:  836 }, // 27.53s Section04 AI traits
+  { id: "5.3",  file: "0-1_5.3.wav",    frames: 3144 }, // 104.44s Section04 Path+Quiz
+  { id: "6.1",  file: "0-1_6.1.wav",    frames: 2380 }, // 79.00s Takeaway
 ] as const;
 
 // Cumulative start frames
