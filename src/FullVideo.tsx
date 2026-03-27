@@ -43,7 +43,7 @@ const SEGMENTS = [
   { id: "2.2",  file: "0-1_2.2.wav",    frames:  985 }, // 32.50s Section01 Analogy
   { id: "2.3",  file: "0-1_2.3.wav",    frames: 1303 }, // 43.08s Section01 Card2
   { id: "3.0",  file: "0-1_3.0.wav",    frames: 2636 }, // 87.52s Section02 Card
-  { id: "3.1",  file: "0-1_3.1.wav",    frames: 3576 }, // 118.85s Section02 Usecases
+  { id: "3.1",  file: "0-1_3.1.wav",    frames: 3414 }, // 113.46s Section02 Usecases (dup removed)
   { id: "3.2",  file: "0-1_3.2.wav",    frames: 1540 }, // 50.99s Section02 Leisure+Quiz
   { id: "4.1",  file: "0-1_4.1.wav",    frames: 2288 }, // 75.91s Section03 AI Coding
   { id: "4.2",  file: "0-1_4.2.wav",    frames: 1044 }, // 34.46s Section03 Vibe Coding def
@@ -114,14 +114,10 @@ const ProgressBar: React.FC<{ progressPct?: number }> = ({ progressPct = 8 }) =>
         letterSpacing: "0.05em",
         marginBottom: 8,
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <Img
-            src={staticFile("aischool-logo.webp")}
-            style={{ height: 22, width: "auto", mixBlendMode: "screen", opacity: 0.9 }}
-          />
-          <span>AI 寫程式入門課程</span>
-        </div>
-        <span>章節 0-1 / 4</span>
+        <Img
+          src={staticFile("aischool-logo.webp")}
+          style={{ height: 22, width: "auto", mixBlendMode: "screen", opacity: 0.9 }}
+        />
       </div>
       <div style={{ height: 3, background: "rgba(255,255,255,0.06)", borderRadius: 99, overflow: "hidden" }}>
         <div style={{
@@ -680,14 +676,14 @@ const SceneSection02Usecases: React.FC = () => {
   const header    = useFadeUp(15);
   const analogy   = useFadeUp(25);
   const analogyHL = useFocusHighlight(25);
-  const scene2    = useFadeUp(1370);
-  const scene3    = useFadeUp(2240);
+  const scene2    = useFadeUp(1790);
+  const scene3    = useFadeUp(2810);
 
   const CALLOUTS: Callout[] = [
-    { from: 1140, to: 1948, label: "場景一", text: "200 封信，一次送出",       side: "right", yPct: 0.3 },
-    { from: 1950, to: 2968, label: "場景二", text: "兩小時縮短到幾秒",       side: "right", yPct: 0.4 },
-    { from: 2970, to: 3358, label: "場景三", text: "每天早上，自動通知降價",   side: "right", yPct: 0.35 },
-    { from: 3360, to: 3653, label: "現在就能做到", text: "AI 時代，都可以實現", side: "right", yPct: 0.3 },
+    { from: 1039, to: 1847, label: "場景一",    text: "200 封信，一次送出",       side: "right", yPct: 0.3 },
+    { from: 1849, to: 2867, label: "場景二",    text: "兩小時縮短到幾秒",         side: "right", yPct: 0.4 },
+    { from: 2869, to: 3257, label: "場景三",    text: "每天早上，自動通知降價",   side: "right", yPct: 0.35 },
+    { from: 3259, to: 3414, label: "現在就能做到", text: "AI 時代，都可以實現",   side: "right", yPct: 0.3 },
   ];
 
   return (
@@ -905,9 +901,9 @@ const SceneSection03Analogy: React.FC = () => {
           </AnalogyBox>
           <div style={{
             background: C.surface, border: `1px solid ${C.border}`,
-            borderRadius: 22, padding: "36px 44px", marginBottom: 20, ...card2, ...card2HL,
+            borderRadius: 22, padding: "24px 36px", marginBottom: 20, ...card2, ...card2HL,
           }}>
-            <p style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", fontSize: 36, color: C.muted, lineHeight: 1.8, margin: 0 }}>
+            <p style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", fontSize: 28, color: C.muted, lineHeight: 1.7, margin: 0 }}>
               實際體驗 Vibe Coding 的感覺是這樣的：你用自然語言（中文就行）描述你想要什麼，
               例如「我想要一個可以讓朋友填寫旅遊偏好的表單頁面，整體設計是可愛風格，提交之後要顯示一個『謝謝填寫』的畫面」，AI 工具就會直接產出一個可以用的成品。
               如果不滿意某個地方，繼續在對話框說「把背景換成藍色」、「把按鈕的文字改得更可愛一點」，AI 就會幫你修改。
@@ -1062,8 +1058,8 @@ const SceneSection04Path: React.FC = () => {
   const CALLOUTS: Callout[] = [
     { from:  150, to: 1048, label: "建議路徑",  text: "先從 Vibe Coding 開始",       side: "right", yPct: 0.3 },
     { from: 1050, to: 1738, label: "進階",      text: "學 AI Coding 核心知識",        side: "right", yPct: 0.4 },
-    { from: 1740, to: 2428, label: "不用成為",  text: "工程師，1% 關鍵知識就夠",       side: "right", yPct: 0.35 },
-    { from: 2430, to: 3224, label: "核心觀念",  text: "學 1%，就夠了",                 side: "right", yPct: 0.3 },
+    { from: 1740, to: 2428, label: "不用成為",  text: "工程師，基本核心觀念就夠",       side: "right", yPct: 0.35 },
+    { from: 2430, to: 3224, label: "核心觀念",  text: "學基本核心觀念，就夠了",         side: "right", yPct: 0.3 },
   ];
 
   const steps = [
@@ -1150,7 +1146,7 @@ const SceneTakeaway: React.FC = () => {
 
   const CALLOUTS: Callout[] = [
     { from:  123, to: 1982, label: "回顧",   text: "本章重點，整理",                   side: "right", yPct: 0.3 },
-    { from: 1984, to: 2336, label: "下一章", text: "實際動手做，第一個 AI 作品",        side: "right", yPct: 0.4 },
+    { from: 1984, to: 2336, label: "下一章", text: "最好上手、最值得優先學習的工具",    side: "right", yPct: 0.4 },
     { from: 2338, to: 2422, label: "我們",   text: "下個章節見",                        side: "right", yPct: 0.35 },
   ];
 
