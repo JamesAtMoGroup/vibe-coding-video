@@ -9,6 +9,7 @@ import {
   interpolate,
   spring,
   Img,
+  Video,
 } from "remotion";
 import { Lottie } from "@remotion/lottie";
 import speakingData from "./speaking-animation.json";
@@ -113,14 +114,10 @@ const ProgressBar: React.FC<{ progressPct?: number }> = ({ progressPct = 66.6 })
         letterSpacing: "0.05em",
         marginBottom: 8,
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <Img
-            src={staticFile("aischool-logo.webp")}
-            style={{ height: 22, width: "auto", mixBlendMode: "screen", opacity: 0.9 }}
-          />
-          <span>AI 寫程式入門課程</span>
-        </div>
-        <span>章節 0-2 / 3</span>
+        <Img
+          src={staticFile("aischool-logo.webp")}
+          style={{ height: 22, width: "auto", mixBlendMode: "screen", opacity: 0.9 }}
+        />
       </div>
       <div style={{ height: 3, background: "rgba(255,255,255,0.06)", borderRadius: 99, overflow: "hidden" }}>
         <div style={{
@@ -701,6 +698,30 @@ const SceneSection02Intro: React.FC = () => {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
+// AppsScriptInset — 5s screen recording overlay (bottom-right)
+// ─────────────────────────────────────────────────────────────────────────────
+const AppsScriptInset: React.FC = () => {
+  const frame = useCurrentFrame();
+  const opacity = interpolate(frame, [0, 15, 135, 150], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const W = 660, H = Math.round(660 * 1438 / 2936);
+  return (
+    <div style={{
+      position: "absolute",
+      right: 48, bottom: SUBTITLE_H + 24,
+      width: W, height: H,
+      borderRadius: 18,
+      overflow: "hidden",
+      opacity,
+      boxShadow: "0 8px 40px rgba(0,0,0,0.6)",
+      border: "2px solid rgba(124,255,178,0.4)",
+      zIndex: 50,
+    }}>
+      <Video src={staticFile("video/apps-script-location.mov")} style={{ width: "100%", height: "100%" }} />
+    </div>
+  );
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
 // SCENE 4 — SceneSection02Tools (segment 0.2_3.2)
 // Tool 1a + 1b cards + usecase list
 // ─────────────────────────────────────────────────────────────────────────────
@@ -779,6 +800,10 @@ const SceneSection02Tools: React.FC = () => {
           <UsecaseList items={usecaseItems} fadeStyle={usecases} />
         </div>
       </div>
+      {/* Apps Script location screen recording — appears with callout at frame 720 */}
+      <Sequence from={720} durationInFrames={150}>
+        <AppsScriptInset />
+      </Sequence>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
       <AvatarOverlay />
     </AbsoluteFill>
@@ -1155,8 +1180,8 @@ const SceneSection05Takeaway: React.FC = () => {
       }}>
         <div style={{ paddingTop: 40 }}>
           <SectionHeader num="05" title="費用怎麼算？" fadeStyle={header} />
-          <UsecaseList items={costItems} fadeStyle={usecases} marginBottom={12} />
-          <AnalogyBox label="入門成本" fadeStyle={analogy} highlightStyle={analogyHL} marginBottom={16}>
+          <UsecaseList items={costItems} fadeStyle={usecases} marginBottom={8} />
+          <AnalogyBox label="入門成本" fadeStyle={analogy} highlightStyle={analogyHL} marginBottom={12}>
             整體來說，在你剛入門的這個階段，<strong style={{ color: "#ffffff" }}>完全可以不花任何一毛錢，就開始學習了。</strong>
           </AnalogyBox>
 
@@ -1164,7 +1189,7 @@ const SceneSection05Takeaway: React.FC = () => {
           <div style={{
             background: "linear-gradient(135deg, rgba(124,255,178,0.07), rgba(124,255,178,0.03))",
             border: "1px solid rgba(124,255,178,0.25)",
-            borderRadius: 22, padding: "28px 36px", ...takebox,
+            borderRadius: 22, padding: "18px 28px", ...takebox,
           }}>
             <div style={{
               fontFamily: "'Space Mono', monospace", fontSize: 22, fontWeight: 700,
@@ -1175,12 +1200,12 @@ const SceneSection05Takeaway: React.FC = () => {
               <div style={{ width: 6, height: 6, background: C.primary, borderRadius: 1, boxShadow: "0 0 6px #7cffb2" }} />
               本章重點整理
             </div>
-            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column" as const, gap: 10, padding: 0, margin: 0 }}>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column" as const, gap: 8, padding: 0, margin: 0 }}>
               {takeawayItems.map((item, i) => (
                 <li key={i} style={{
                   display: "flex", alignItems: "flex-start", gap: 12,
                   fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif",
-                  fontSize: 36, color: C.text, lineHeight: 1.55, ...item.style,
+                  fontSize: 28, color: C.text, lineHeight: 1.5, ...item.style,
                 }}>
                   <div style={{
                     background: C.primary, color: "#000000",
