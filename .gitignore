@@ -1,6 +1,8 @@
 node_modules/
 out/
 .DS_Store
-*.mp4
-*.wav
-*.webp
+*.log
+
+# Large audio source files — stored locally in ~/Downloads/Vibe Coding 剪輯/
+public/audio/*.wav
+public/avatar/
