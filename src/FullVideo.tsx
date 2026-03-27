@@ -9,6 +9,7 @@ import {
   interpolate,
   spring,
   Img,
+  Video,
 } from "remotion";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -29,26 +30,27 @@ const C = {
 const clamp = { extrapolateLeft: "clamp" as const, extrapolateRight: "clamp" as const };
 
 const NAV_H       = 72;
-const CONTAINER_W = 860;
+const CONTAINER_W = 1500;
+const SUBTITLE_H  = 160;  // reserved at bottom for subtitles
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Audio segment durations (computed: Math.ceil(duration * 30) + 10)
 // ─────────────────────────────────────────────────────────────────────────────
 const SEGMENTS = [
-  { id: "1.1",  file: "0-1_1.1.wav",    frames: 1150 }, // 37.99s Hero
-  { id: "2.1",  file: "0-1_2.1.wav",    frames: 1128 }, // 37.24s Section01 Card1
-  { id: "2.2",  file: "0-1_2.2.wav",    frames: 1158 }, // 38.27s Section01 Analogy
-  { id: "2.3",  file: "0-1_2.3.wav",    frames: 1387 }, // 45.88s Section01 Card2
-  { id: "3.0",  file: "0-1_3.0.wav",    frames: 2789 }, // 92.60s Section02 Card
-  { id: "3.1",  file: "0-1_3.1.wav",    frames: 3663 }, // 121.77s Section02 Usecases
-  { id: "3.2",  file: "0-1_3.2.wav",    frames: 1576 }, // 52.20s Section02 Leisure+Quiz
-  { id: "4.1",  file: "0-1_4.1.wav",    frames: 2348 }, // 77.93s Section03 AI Coding
-  { id: "4.2",  file: "0-1_4.2.wav",    frames: 1075 }, // 35.48s Section03 Vibe Coding def
-  { id: "4.3",  file: "0-1_4.3.wav",    frames: 2206 }, // 73.19s Section03 Analogy
-  { id: "5.1",  file: "0-1_5.1.wav",    frames: 1381 }, // 45.70s Section04 Vibe traits
-  { id: "5.2",  file: "0-1_5.2.wav",    frames:  944 }, // 31.11s Section04 AI traits
-  { id: "5.3",  file: "0-1_5.3.wav",    frames: 3234 }, // 107.46s Section04 Path+Quiz
-  { id: "6.1",  file: "0-1_6.1.wav",    frames: 2432 }, // 80.71s Takeaway
+  { id: "1.1",  file: "0-1_1.1.wav",    frames: 1131 }, // 37.34s Hero
+  { id: "2.1",  file: "0-1_2.1.wav",    frames: 1061 }, // 35.02s Section01 Card1
+  { id: "2.2",  file: "0-1_2.2.wav",    frames: 1067 }, // 35.20s Section01 Analogy
+  { id: "2.3",  file: "0-1_2.3.wav",    frames: 1367 }, // 45.23s Section01 Card2
+  { id: "3.0",  file: "0-1_3.0.wav",    frames: 2641 }, // 87.68s Section02 Card
+  { id: "3.1",  file: "0-1_3.1.wav",    frames: 3619 }, // 120.28s Section02 Usecases
+  { id: "3.2",  file: "0-1_3.2.wav",    frames: 1546 }, // 51.18s Section02 Leisure+Quiz
+  { id: "4.1",  file: "0-1_4.1.wav",    frames: 2293 }, // 76.07s Section03 AI Coding
+  { id: "4.2",  file: "0-1_4.2.wav",    frames: 1050 }, // 34.64s Section03 Vibe Coding def
+  { id: "4.3",  file: "0-1_4.3.wav",    frames: 2187 }, // 72.54s Section03 Analogy
+  { id: "5.1",  file: "0-1_5.1.wav",    frames: 1607 }, // 53.22s Section04 Vibe traits
+  { id: "5.2",  file: "0-1_5.2.wav",    frames:  874 }, // 28.79s Section04 AI traits
+  { id: "5.3",  file: "0-1_5.3.wav",    frames: 3148 }, // 104.58s Section04 Path+Quiz
+  { id: "6.1",  file: "0-1_6.1.wav",    frames: 2429 }, // 80.62s Takeaway
 ] as const;
 
 // Cumulative start frames
@@ -70,6 +72,17 @@ function useFadeUp(startFrame: number) {
   const opacity = interpolate(f, [0, 18], [0, 1], clamp);
   const y = interpolate(progress, [0, 1], [24, 0], clamp);
   return { opacity, transform: `translateY(${y}px)` };
+}
+
+function useFocusHighlight(startFrame: number, duration = 75) {
+  const frame = useCurrentFrame();
+  const f = frame - startFrame;
+  if (f < 0 || f > duration) return {};
+  const intensity = interpolate(f, [0, duration], [1, 0], clamp);
+  return {
+    boxShadow: `0 0 ${Math.round(intensity * 24)}px rgba(124,255,178,${(intensity * 0.55).toFixed(2)})`,
+    borderColor: `rgba(124,255,178,${(0.14 + intensity * 0.5).toFixed(2)})`,
+  };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -126,11 +139,12 @@ const ProgressBar: React.FC<{ progressPct?: number }> = ({ progressPct = 8 }) =>
 // iMessage Notification Callout — S=2 for Vibe Coding 1080p
 // ─────────────────────────────────────────────────────────────────────────────
 const S             = 2;
-const NOTIF_W       = 290 * S;   // 580px  card width
-const NOTIF_TOP     = 12  * S;   // 24px   gap below nav bar
-const NOTIF_RIGHT   = 20  * S;   // 40px   gap from right edge
-const NOTIF_SLIDE_H = 110 * S;   // 220px  slides DOWN from above nav
-const FADE_OUT_F    = 50;        // 1.67s  slow fade out at end
+const NOTIF_W       = 290 * S;   // 580px  fixed width
+const NOTIF_TOP     = 12  * S;   // 24px   gap below nav
+const NOTIF_RIGHT   = 20  * S;   // 40px   from right edge
+const NOTIF_SLIDE_H = 110 * S;   // 220px  slide-in height
+const NOTIF_SLOT_H  = 100 * S;   // 200px  per slot (card height + gap)
+const FADE_OUT_F    = 50;
 
 type Callout = {
   from: number; to: number;
@@ -138,9 +152,32 @@ type Callout = {
   side?: "left" | "right"; yPct?: number; // kept for compat, ignored in layout
 };
 
-const CalloutCard: React.FC<{ c: Callout }> = ({ c }) => {
+// Compute smooth Y offset for stacking: each newer active callout pushes this one down
+// Pure function — no hooks, takes frame/fps as params
+function calcStackOffset(c: Callout, allCallouts: Callout[], frame: number, fps: number): number {
+  let offset = 0;
+  for (const other of allCallouts) {
+    if (other.from <= c.from) continue; // only newer cards push this one down
+    if (frame < other.from) continue;   // not started yet
+    const localF = frame - other.from;
+    if (frame <= other.to) {
+      const p = spring({ frame: localF, fps, config: { damping: 22, stiffness: 100 } });
+      offset += p * NOTIF_SLOT_H;
+    } else {
+      const expiredF = frame - other.to;
+      const p = spring({ frame: expiredF, fps, config: { damping: 22, stiffness: 100 } });
+      offset += (1 - p) * NOTIF_SLOT_H;
+    }
+  }
+  return offset;
+}
+
+const CalloutCard: React.FC<{ c: Callout; allCallouts: Callout[] }> = ({ c, allCallouts }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+
+  // All hooks must be called before any conditional returns
+  const stackOffset = calcStackOffset(c, allCallouts, frame, fps);
 
   if (frame < c.from || frame > c.to) return null;
 
@@ -170,10 +207,10 @@ const CalloutCard: React.FC<{ c: Callout }> = ({ c }) => {
   return (
     <div style={{
       position: "absolute",
-      top: NAV_H + NOTIF_TOP,
+      top: NAV_H + NOTIF_TOP + stackOffset,
       right: NOTIF_RIGHT,
       zIndex: 30,
-      width: NOTIF_W,
+      maxWidth: NOTIF_W,
       opacity,
       transform: `translateY(${slideY}px) scale(${scaleIn})`,
     }}>
@@ -221,7 +258,6 @@ const CalloutCard: React.FC<{ c: Callout }> = ({ c }) => {
           color: "#ffffff", lineHeight: 1.35,
           whiteSpace: "pre-wrap" as const,
           letterSpacing: "-0.02em",
-          minHeight: "2.7em",
         }}>
           {displayText}
           {Math.floor(charsVisible) < c.text.length && (
@@ -261,6 +297,40 @@ const BgOrbs: React.FC = () => {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Avatar Overlay — HeyGen lip-sync circle, bottom-right corner
+// ─────────────────────────────────────────────────────────────────────────────
+const AVATAR_SIZE   = 180;
+const AVATAR_RIGHT  = 40;
+const AVATAR_BOTTOM = 40;
+
+const AvatarOverlay: React.FC<{ segmentId: string }> = ({ segmentId }) => {
+  const frame  = useCurrentFrame();
+  const fadeIn = interpolate(frame, [0, 20], [0, 1], clamp);
+
+  return (
+    <div style={{
+      position: "absolute",
+      bottom: AVATAR_BOTTOM,
+      right: AVATAR_RIGHT,
+      width: AVATAR_SIZE,
+      height: AVATAR_SIZE,
+      borderRadius: "50%",
+      overflow: "hidden",
+      border: "3px solid rgba(124,255,178,0.6)",
+      boxShadow: "0 0 20px rgba(124,255,178,0.25), 0 4px 16px rgba(0,0,0,0.6)",
+      opacity: fadeIn,
+      zIndex: 20,
+    }}>
+      <Video
+        src={staticFile(`avatar/0-1_${segmentId}.mp4`)}
+        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        muted
+      />
+    </div>
+  );
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Section Header helper
 // ─────────────────────────────────────────────────────────────────────────────
 const SectionHeader: React.FC<{ num: string; title: string; fadeStyle: React.CSSProperties }> = ({
@@ -269,7 +339,7 @@ const SectionHeader: React.FC<{ num: string; title: string; fadeStyle: React.CSS
   <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24, ...fadeStyle }}>
     <span style={{
       fontFamily: "'Space Mono', monospace",
-      fontSize: 13, color: C.primary,
+      fontSize: 22, color: C.primary,
       background: "rgba(124,255,178,0.08)",
       border: `1px solid ${C.border}`,
       padding: "6px 14px", borderRadius: 99,
@@ -277,7 +347,7 @@ const SectionHeader: React.FC<{ num: string; title: string; fadeStyle: React.CSS
     }}>{num}</span>
     <h2 style={{
       fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif",
-      fontSize: 24, fontWeight: 700,
+      fontSize: 52, fontWeight: 700,
       letterSpacing: "-0.01em",
       color: C.text, margin: 0,
     }}>{title}</h2>
@@ -285,17 +355,17 @@ const SectionHeader: React.FC<{ num: string; title: string; fadeStyle: React.CSS
 );
 
 // Card helper
-const Card: React.FC<{ children: React.ReactNode; fadeStyle?: React.CSSProperties; marginBottom?: number }> = ({
-  children, fadeStyle = {}, marginBottom = 20,
+const Card: React.FC<{ children: React.ReactNode; fadeStyle?: React.CSSProperties; highlightStyle?: React.CSSProperties; marginBottom?: number }> = ({
+  children, fadeStyle = {}, highlightStyle = {}, marginBottom = 20,
 }) => (
   <div style={{
     background: C.surface, border: `1px solid ${C.border}`,
-    borderRadius: 16, padding: "28px 32px", marginBottom,
-    ...fadeStyle,
+    borderRadius: 22, padding: "36px 44px", marginBottom,
+    ...fadeStyle, ...highlightStyle,
   }}>
     <p style={{
       fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif",
-      fontSize: 17, color: C.muted, lineHeight: 1.8, margin: 0,
+      fontSize: 36, color: C.muted, lineHeight: 1.8, margin: 0,
     }}>
       {children}
     </p>
@@ -305,15 +375,15 @@ const Card: React.FC<{ children: React.ReactNode; fadeStyle?: React.CSSPropertie
 // Analogy box helper
 const AnalogyBox: React.FC<{
   label: string; children: React.ReactNode;
-  fadeStyle?: React.CSSProperties; marginBottom?: number;
-}> = ({ label, children, fadeStyle = {}, marginBottom = 20 }) => (
+  fadeStyle?: React.CSSProperties; highlightStyle?: React.CSSProperties; marginBottom?: number;
+}> = ({ label, children, fadeStyle = {}, highlightStyle = {}, marginBottom = 20 }) => (
   <div style={{
     background: C.primaryLight, borderLeft: `4px solid ${C.primary}`,
-    borderRadius: "0 16px 16px 0", padding: "24px 28px", marginBottom,
-    ...fadeStyle,
+    borderRadius: "0 16px 16px 0", padding: "32px 38px", marginBottom,
+    ...fadeStyle, ...highlightStyle,
   }}>
     <div style={{
-      fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700,
+      fontFamily: "'Space Mono', monospace", fontSize: 18, fontWeight: 700,
       color: C.primary, letterSpacing: "0.08em",
       textTransform: "uppercase" as const, marginBottom: 10,
       display: "flex", alignItems: "center", gap: 8,
@@ -323,7 +393,7 @@ const AnalogyBox: React.FC<{
     </div>
     <p style={{
       fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif",
-      fontSize: 16, color: "#c8ffe0", lineHeight: 1.75, margin: 0,
+      fontSize: 34, color: "#c8ffe0", lineHeight: 1.75, margin: 0,
     }}>
       {children}
     </p>
@@ -339,10 +409,10 @@ const SceneHero: React.FC = () => {
   const sub   = useFadeUp(75);
 
   const CALLOUTS_HERO: Callout[] = [
-    { from: 133, to: 300,  label: "很多人的感受", text: "「寫程式」\n感覺離我很遠",    side: "right", yPct: 0.28 },
-    { from: 302, to: 516,  label: "好消息",       text: "零技術背景\n也可以",           side: "right", yPct: 0.22 },
-    { from: 518, to: 720,  label: "關鍵",         text: "靠 AI 的幫助\n讓電腦替你做事", side: "right", yPct: 0.55 },
-    { from: 838, to: 1000, label: "本章主題",     text: "寫程式\n到底是什麼",           side: "right", yPct: 0.38 },
+    { from: 133, to: 300,  label: "很多人的感受", text: "「寫程式」，感覺離我很遠",    side: "right", yPct: 0.28 },
+    { from: 302, to: 516,  label: "好消息",       text: "零技術背景，也可以",           side: "right", yPct: 0.22 },
+    { from: 518, to: 836,  label: "關鍵",         text: "靠 AI 的幫助，讓電腦替你做事", side: "right", yPct: 0.55 },
+    { from: 838, to: 1140, label: "本章主題",     text: "寫程式，到底是什麼",           side: "right", yPct: 0.38 },
   ];
 
   return (
@@ -350,7 +420,7 @@ const SceneHero: React.FC = () => {
       <BgOrbs />
       <ProgressBar progressPct={2} />
       <div style={{
-        position: "absolute", top: NAV_H, bottom: 0,
+        position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
         overflow: "hidden", zIndex: 10,
       }}>
@@ -358,30 +428,31 @@ const SceneHero: React.FC = () => {
           <div style={{ padding: "64px 0 48px", borderBottom: `1px solid ${C.border}`, marginBottom: 56 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 22, ...meta }}>
               <span style={{
-                fontFamily: "'Space Mono', monospace", fontSize: 13, color: C.primary,
+                fontFamily: "'Space Mono', monospace", fontSize: 20, color: C.primary,
                 border: `1px solid ${C.primary}`, padding: "5px 14px", borderRadius: 99,
                 letterSpacing: "0.05em", boxShadow: "0 0 10px rgba(124,255,178,0.2)",
               }}>CH 0-1</span>
-              <span style={{ fontSize: 13, padding: "5px 14px", borderRadius: 99, fontWeight: 500, background: "rgba(124,255,178,0.1)", color: C.primary }}>✦ 完全零基礎</span>
-              <span style={{ fontSize: 13, padding: "5px 14px", borderRadius: 99, fontWeight: 500, background: "rgba(255,209,102,0.1)", color: C.yellow }}>✦ 約 10 分鐘</span>
+              <span style={{ fontSize: 20, padding: "5px 14px", borderRadius: 99, fontWeight: 500, background: "rgba(124,255,178,0.1)", color: C.primary }}>✦ 完全零基礎</span>
+              <span style={{ fontSize: 20, padding: "5px 14px", borderRadius: 99, fontWeight: 500, background: "rgba(255,209,102,0.1)", color: C.yellow }}>✦ 約 10 分鐘</span>
             </div>
             <div style={{ marginBottom: 20, ...title }}>
-              <div style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", fontSize: 54, fontWeight: 900, lineHeight: 1.25, letterSpacing: "-0.02em", color: C.text }}>
+              <div style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", fontSize: 88, fontWeight: 900, lineHeight: 1.25, letterSpacing: "-0.02em", color: C.text }}>
                 AI 寫程式是什麼？
               </div>
-              <div style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", fontSize: 54, fontWeight: 900, lineHeight: 1.25, letterSpacing: "-0.02em", color: C.text }}>
+              <div style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", fontSize: 88, fontWeight: 900, lineHeight: 1.25, letterSpacing: "-0.02em", color: C.text }}>
                 Vibe Coding 入門
               </div>
             </div>
             <div style={{ ...sub }}>
-              <p style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", fontSize: 19, color: C.muted, lineHeight: 1.75, margin: 0, maxWidth: 600 }}>
+              <p style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", fontSize: 36, color: C.muted, lineHeight: 1.75, margin: 0, maxWidth: 600 }}>
                 從「寫程式」的本質出發，理解為什麼現在是人人都能寫程式的時代，以及 Vibe Coding 與 AI Coding 有什麼不同。
               </p>
             </div>
           </div>
         </div>
       </div>
-      {CALLOUTS_HERO.map((c, i) => <CalloutCard key={i} c={c} />)}
+      {CALLOUTS_HERO.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS_HERO} />)}
+      <AvatarOverlay segmentId="1.1" />
     </AbsoluteFill>
   );
 };
@@ -390,13 +461,14 @@ const SceneHero: React.FC = () => {
 // SCENE 2 — Section 01 Card 1: 自動化概念 (segment 2.1)
 // ─────────────────────────────────────────────────────────────────────────────
 const SceneSection01Card1: React.FC = () => {
-  const header = useFadeUp(20);
-  const card   = useFadeUp(40);
+  const header = useFadeUp(15);
+  const card   = useFadeUp(30);
+  const cardHL = useFocusHighlight(30);
 
   const CALLOUTS: Callout[] = [
-    { from: 150, to: 400,  label: "核心概念", text: "把人要做的事\n外包給電腦",      side: "right", yPct: 0.3 },
-    { from: 510, to: 750,  label: "正式名稱", text: "自動化",                         side: "right", yPct: 0.4 },
-    { from: 780, to: 1000, label: "條件",     text: "固定步驟\n電腦可執行",           side: "right", yPct: 0.3 },
+    { from: 150, to: 508,  label: "核心概念", text: "把人要做的事，外包給電腦",      side: "right", yPct: 0.3 },
+    { from: 510, to: 628,  label: "正式名稱", text: "自動化",                         side: "right", yPct: 0.4 },
+    { from: 630, to: 1118, label: "條件",     text: "固定步驟，電腦可執行",           side: "right", yPct: 0.3 },
   ];
 
   return (
@@ -404,13 +476,13 @@ const SceneSection01Card1: React.FC = () => {
       <BgOrbs />
       <ProgressBar progressPct={10} />
       <div style={{
-        position: "absolute", top: NAV_H, bottom: 0,
+        position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
         overflow: "hidden", zIndex: 10,
       }}>
-        <div style={{ paddingTop: 40 }}>
+        <div style={{ paddingTop: 56 }}>
           <SectionHeader num="01" title="寫程式，究竟是什麼？" fadeStyle={header} />
-          <Card fadeStyle={card}>
+          <Card fadeStyle={card} highlightStyle={cardHL}>
             <strong style={{ color: C.text }}>寫程式的本質，就是把「人要做的事」轉交給電腦去執行。</strong>
             <br />
             這件事有個更正式的名字，叫做{" "}
@@ -419,7 +491,8 @@ const SceneSection01Card1: React.FC = () => {
           </Card>
         </div>
       </div>
-      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} />)}
+      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
+      <AvatarOverlay segmentId="2.1" />
     </AbsoluteFill>
   );
 };
@@ -428,13 +501,15 @@ const SceneSection01Card1: React.FC = () => {
 // SCENE 3 — Section 01 Analogy: 生活比喻 (segment 2.2)
 // ─────────────────────────────────────────────────────────────────────────────
 const SceneSection01Analogy: React.FC = () => {
-  const header  = useFadeUp(20);
-  const card    = useFadeUp(35);
-  const analogy = useFadeUp(55);
+  const header    = useFadeUp(15);
+  const card      = useFadeUp(25);
+  const cardHL    = useFocusHighlight(25);
+  const analogy   = useFadeUp(397);
+  const analogyHL = useFocusHighlight(397);
 
   const CALLOUTS: Callout[] = [
-    { from: 200, to: 500,  label: "比喻",   text: "訓練\n永不出錯的助手",   side: "right", yPct: 0.35 },
-    { from: 790, to: 1050, label: "關鍵",   text: "說清楚規則\n剩下交給他", side: "right", yPct: 0.4 },
+    { from: 407, to: 888,  label: "比喻",   text: "訓練，永不出錯的助手",   side: "right", yPct: 0.35 },
+    { from: 890, to: 1148, label: "關鍵",   text: "說清楚規則，剩下交給他", side: "right", yPct: 0.4 },
   ];
 
   return (
@@ -442,20 +517,20 @@ const SceneSection01Analogy: React.FC = () => {
       <BgOrbs />
       <ProgressBar progressPct={15} />
       <div style={{
-        position: "absolute", top: NAV_H, bottom: 0,
+        position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
         overflow: "hidden", zIndex: 10,
       }}>
-        <div style={{ paddingTop: 40 }}>
+        <div style={{ paddingTop: 56 }}>
           <SectionHeader num="01" title="寫程式，究竟是什麼？" fadeStyle={header} />
-          <Card fadeStyle={card}>
+          <Card fadeStyle={card} highlightStyle={cardHL}>
             <strong style={{ color: C.text }}>寫程式的本質，就是把「人要做的事」轉交給電腦去執行。</strong>
             <br />
             這件事有個更正式的名字，叫做{" "}
             <span style={{ color: C.primary, fontWeight: 700 }}>自動化</span>
             。只要一件工作有固定的步驟、電腦能一一代勞，它就可以被自動化。
           </Card>
-          <AnalogyBox label="一句話理解" fadeStyle={analogy}>
+          <AnalogyBox label="一句話理解" fadeStyle={analogy} highlightStyle={analogyHL}>
             想像你每天上班前都要手動把一疊文件依日期排好、蓋上編號。
             <strong style={{ color: "#ffffff" }}>
               {" "}寫程式，就像是訓練一個永遠不會出錯、也不需要午休的助手，讓它幫你把這件事自動完成。
@@ -464,7 +539,8 @@ const SceneSection01Analogy: React.FC = () => {
           </AnalogyBox>
         </div>
       </div>
-      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} />)}
+      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
+      <AvatarOverlay segmentId="2.2" />
     </AbsoluteFill>
   );
 };
@@ -473,14 +549,17 @@ const SceneSection01Analogy: React.FC = () => {
 // SCENE 4 — Section 01 Card 2: 廣義vs狹義 (segment 2.3)
 // ─────────────────────────────────────────────────────────────────────────────
 const SceneSection01Card2: React.FC = () => {
-  const header  = useFadeUp(20);
-  const card1   = useFadeUp(35);
-  const analogy = useFadeUp(55);
-  const card2   = useFadeUp(75);
+  const header    = useFadeUp(15);
+  const card1     = useFadeUp(25);
+  const card1HL   = useFocusHighlight(25);
+  const analogy   = useFadeUp(35);
+  const analogyHL = useFocusHighlight(35);
+  const card2     = useFadeUp(200);
+  const card2HL   = useFocusHighlight(200);
 
   const CALLOUTS: Callout[] = [
-    { from: 210, to: 450,  label: "廣義來說", text: "試算表公式\n也是寫程式",         side: "right", yPct: 0.3 },
-    { from: 690, to: 950,  label: "狹義來說", text: "正規程式語言\n網頁・App・智慧家電", side: "right", yPct: 0.45 },
+    { from: 210, to: 688,  label: "廣義來說", text: "試算表公式，也是寫程式",         side: "right", yPct: 0.3 },
+    { from: 690, to: 1377, label: "狹義來說", text: "正規程式語言：網頁・App・智慧家電", side: "right", yPct: 0.45 },
   ];
 
   return (
@@ -488,27 +567,27 @@ const SceneSection01Card2: React.FC = () => {
       <BgOrbs />
       <ProgressBar progressPct={20} />
       <div style={{
-        position: "absolute", top: NAV_H, bottom: 0,
+        position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
         overflow: "hidden", zIndex: 10,
       }}>
-        <div style={{ paddingTop: 40 }}>
+        <div style={{ paddingTop: 56 }}>
           <SectionHeader num="01" title="寫程式，究竟是什麼？" fadeStyle={header} />
-          <Card fadeStyle={card1}>
+          <Card fadeStyle={card1} highlightStyle={card1HL}>
             <strong style={{ color: C.text }}>寫程式的本質，就是把「人要做的事」轉交給電腦去執行。</strong>
             <br />
             這件事有個更正式的名字，叫做{" "}
             <span style={{ color: C.primary, fontWeight: 700 }}>自動化</span>
             。
           </Card>
-          <AnalogyBox label="一句話理解" fadeStyle={analogy}>
+          <AnalogyBox label="一句話理解" fadeStyle={analogy} highlightStyle={analogyHL}>
             寫程式，就像是訓練一個永遠不會出錯的助手。說清楚規則，剩下交給它。
           </AnalogyBox>
           <div style={{
             background: C.surface, border: `1px solid ${C.border}`,
-            borderRadius: 16, padding: "28px 32px", marginBottom: 20, ...card2,
+            borderRadius: 22, padding: "36px 44px", marginBottom: 20, ...card2, ...card2HL,
           }}>
-            <p style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", fontSize: 17, color: C.muted, lineHeight: 1.8, margin: 0 }}>
+            <p style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", fontSize: 36, color: C.muted, lineHeight: 1.8, margin: 0 }}>
               廣義來說，試算表裡的公式也算是一種「寫程式」——每一條公式就是給電腦的一道指令，告訴它「用這個規則算出結果」。
               <br /><br />
               但狹義的「程式」，指的是用正規的程式語言，寫出我們日常生活中會用到的各種軟體：
@@ -517,7 +596,8 @@ const SceneSection01Card2: React.FC = () => {
           </div>
         </div>
       </div>
-      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} />)}
+      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
+      <AvatarOverlay segmentId="2.3" />
     </AbsoluteFill>
   );
 };
@@ -526,18 +606,19 @@ const SceneSection01Card2: React.FC = () => {
 // SCENE 5 — Section 02 Card: 非工程師前言 (segment 3.0)
 // ─────────────────────────────────────────────────────────────────────────────
 const SceneSection02Intro: React.FC = () => {
-  const header = useFadeUp(20);
-  const card   = useFadeUp(40);
-  const case1  = useFadeUp(900);
-  const case2  = useFadeUp(1500);
-  const case3  = useFadeUp(2100);
+  const header = useFadeUp(15);
+  const card   = useFadeUp(25);
+  const cardHL = useFocusHighlight(25);
+  const case1  = useFadeUp(770);
+  const case2  = useFadeUp(1370);
+  const case3  = useFadeUp(1910);
 
   const CALLOUTS: Callout[] = [
-    { from: 120, to: 400,   label: "關鍵問題",  text: "這跟我\n有什麼關係？",        side: "right", yPct: 0.3  },
-    { from: 720, to: 1000,  label: "情境一",    text: "大量\n重複的工作",              side: "right", yPct: 0.4  },
-    { from: 1440, to: 1700, label: "情境二",    text: "手動輸入\n容易失誤",            side: "right", yPct: 0.35 },
-    { from: 2040, to: 2400, label: "情境三",    text: "定期收集\n整合資訊",            side: "right", yPct: 0.4  },
-    { from: 2580, to: 2860, label: "結論",      text: "適合交給\n小幫手執行",          side: "right", yPct: 0.3  },
+    { from: 120,  to: 838,  label: "關鍵問題",  text: "這跟我，有什麼關係？",        side: "right", yPct: 0.3  },
+    { from: 840,  to: 1438, label: "情境一",    text: "大量重複的工作",              side: "right", yPct: 0.4  },
+    { from: 1440, to: 1978, label: "情境二",    text: "手動輸入，容易失誤",            side: "right", yPct: 0.35 },
+    { from: 1980, to: 2638, label: "情境三",    text: "定期收集，整合資訊",            side: "right", yPct: 0.4  },
+    { from: 2640, to: 2779, label: "結論",      text: "適合交給小幫手執行",          side: "right", yPct: 0.3  },
   ];
 
   return (
@@ -545,13 +626,13 @@ const SceneSection02Intro: React.FC = () => {
       <BgOrbs />
       <ProgressBar progressPct={28} />
       <div style={{
-        position: "absolute", top: NAV_H, bottom: 0,
+        position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
         overflow: "hidden", zIndex: 10,
       }}>
-        <div style={{ paddingTop: 40 }}>
+        <div style={{ paddingTop: 56 }}>
           <SectionHeader num="02" title="非工程師，可以用寫程式做什麼？" fadeStyle={header} />
-          <Card fadeStyle={card}>
+          <Card fadeStyle={card} highlightStyle={cardHL}>
             不需要成為軟體工程師，<strong style={{ color: C.text }}>只要你手上有下面這三種麻煩</strong>，寫程式就能幫上你的忙：
           </Card>
 
@@ -564,29 +645,30 @@ const SceneSection02Intro: React.FC = () => {
             ].map((item, i) => (
               <div key={i} style={{
                 background: C.surface2, border: `1px solid ${C.border}`,
-                borderRadius: 16, padding: "22px 24px", ...item.style,
+                borderRadius: 16, padding: "30px 32px", ...item.style,
               }}>
                 <div style={{
-                  fontFamily: "'Space Mono', monospace", fontSize: 22,
+                  fontFamily: "'Space Mono', monospace", fontSize: 34,
                   color: C.primary, marginBottom: 12,
-                  width: 36, height: 36,
+                  width: 54, height: 54,
                   display: "flex", alignItems: "center", justifyContent: "center",
                   background: "rgba(124,255,178,0.08)", borderRadius: 8,
                 }}>{item.icon}</div>
                 <h3 style={{
                   fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif",
-                  fontSize: 15, fontWeight: 700, marginBottom: 6, color: C.text,
+                  fontSize: 30, fontWeight: 700, marginBottom: 6, color: C.text,
                 }}>{item.title}</h3>
                 <p style={{
                   fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif",
-                  fontSize: 13, color: C.muted, lineHeight: 1.6, margin: 0,
+                  fontSize: 24, color: C.muted, lineHeight: 1.6, margin: 0,
                 }}>{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </div>
-      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} />)}
+      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
+      <AvatarOverlay segmentId="3.0" />
     </AbsoluteFill>
   );
 };
@@ -595,16 +677,17 @@ const SceneSection02Intro: React.FC = () => {
 // SCENE 6 — Section 02 Usecases: 具體場景 (segment 3.1)
 // ─────────────────────────────────────────────────────────────────────────────
 const SceneSection02Usecases: React.FC = () => {
-  const header  = useFadeUp(20);
-  const analogy = useFadeUp(40);
-  const scene2  = useFadeUp(1800);
-  const scene3  = useFadeUp(2800);
+  const header    = useFadeUp(15);
+  const analogy   = useFadeUp(25);
+  const analogyHL = useFocusHighlight(25);
+  const scene2    = useFadeUp(1370);
+  const scene3    = useFadeUp(2240);
 
   const CALLOUTS: Callout[] = [
-    { from: 120,  to: 500,  label: "場景一", text: "200 封信\n一次送出",       side: "right", yPct: 0.3 },
-    { from: 1800, to: 2100, label: "場景二", text: "兩小時\n縮短到幾秒",       side: "right", yPct: 0.4 },
-    { from: 2800, to: 3100, label: "場景三", text: "每天早上\n自動通知降價",   side: "right", yPct: 0.35 },
-    { from: 3300, to: 3700, label: "現在就能做到", text: "AI 時代\n都可以實現", side: "right", yPct: 0.3 },
+    { from: 1140, to: 1948, label: "場景一", text: "200 封信，一次送出",       side: "right", yPct: 0.3 },
+    { from: 1950, to: 2968, label: "場景二", text: "兩小時縮短到幾秒",       side: "right", yPct: 0.4 },
+    { from: 2970, to: 3358, label: "場景三", text: "每天早上，自動通知降價",   side: "right", yPct: 0.35 },
+    { from: 3360, to: 3653, label: "現在就能做到", text: "AI 時代，都可以實現", side: "right", yPct: 0.3 },
   ];
 
   return (
@@ -612,13 +695,13 @@ const SceneSection02Usecases: React.FC = () => {
       <BgOrbs />
       <ProgressBar progressPct={38} />
       <div style={{
-        position: "absolute", top: NAV_H, bottom: 0,
+        position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
         overflow: "hidden", zIndex: 10,
       }}>
-        <div style={{ paddingTop: 40 }}>
+        <div style={{ paddingTop: 56 }}>
           <SectionHeader num="02" title="非工程師，可以用寫程式做什麼？" fadeStyle={header} />
-          <AnalogyBox label="具體例子" fadeStyle={analogy}>
+          <AnalogyBox label="具體例子" fadeStyle={analogy} highlightStyle={analogyHL}>
             <strong style={{ color: "#ffffff" }}>場景一：</strong>你負責活動行銷，每次寄邀請信都要開 Excel、一行一行複製姓名改稱謂、一封一封手動寄出。
             寫一個自動寄信程式，就能讓電腦替你把 200 封個人化的信件，在指定時間一次送出。
             <br /><br />
@@ -630,7 +713,8 @@ const SceneSection02Usecases: React.FC = () => {
           </AnalogyBox>
         </div>
       </div>
-      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} />)}
+      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
+      <AvatarOverlay segmentId="3.1" />
     </AbsoluteFill>
   );
 };
@@ -639,13 +723,14 @@ const SceneSection02Usecases: React.FC = () => {
 // SCENE 7 — Section 02 Leisure + Quiz (segment 3.2)
 // ─────────────────────────────────────────────────────────────────────────────
 const SceneSection02LeisureQuiz: React.FC = () => {
-  const header = useFadeUp(20);
-  const card   = useFadeUp(40);
-  const quiz   = useFadeUp(900);
+  const header = useFadeUp(15);
+  const card   = useFadeUp(25);
+  const cardHL = useFocusHighlight(25);
+  const quiz   = useFadeUp(1280);
 
   const CALLOUTS: Callout[] = [
-    { from: 120, to: 450,  label: "寫程式的另一面", text: "生活樂趣\n提升品質",    side: "right", yPct: 0.3 },
-    { from: 600, to: 900,  label: "你的 idea",       text: "懂得跟 AI 溝通\n就能實現", side: "right", yPct: 0.45 },
+    { from: 210,  to: 1288, label: "寫程式的另一面", text: "生活樂趣，提升品質",    side: "right", yPct: 0.3 },
+    { from: 1290, to: 1566, label: "你的 idea",       text: "懂得跟 AI 溝通，就能實現", side: "right", yPct: 0.45 },
   ];
 
   return (
@@ -653,13 +738,13 @@ const SceneSection02LeisureQuiz: React.FC = () => {
       <BgOrbs />
       <ProgressBar progressPct={45} />
       <div style={{
-        position: "absolute", top: NAV_H, bottom: 0,
+        position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
         overflow: "hidden", zIndex: 10,
       }}>
-        <div style={{ paddingTop: 40 }}>
+        <div style={{ paddingTop: 56 }}>
           <SectionHeader num="02" title="非工程師，可以用寫程式做什麼？" fadeStyle={header} />
-          <Card fadeStyle={card}>
+          <Card fadeStyle={card} highlightStyle={cardHL}>
             除了提升工作效率，<strong style={{ color: C.text }}>寫程式這件事，其實也可以成為一種生活樂趣，甚至提升你的生活品質。</strong>
             <br /><br />
             你腦袋裡有沒有一些有趣的點子，一直很想做，卻不知道怎麼執行？
@@ -696,7 +781,8 @@ const SceneSection02LeisureQuiz: React.FC = () => {
           </div>
         </div>
       </div>
-      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} />)}
+      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
+      <AvatarOverlay segmentId="3.2" />
     </AbsoluteFill>
   );
 };
@@ -705,14 +791,15 @@ const SceneSection02LeisureQuiz: React.FC = () => {
 // SCENE 8 — Section 03: AI Coding 定義 (segment 4.1)
 // ─────────────────────────────────────────────────────────────────────────────
 const SceneSection03AICoding: React.FC = () => {
-  const header = useFadeUp(20);
-  const card   = useFadeUp(40);
+  const header = useFadeUp(15);
+  const card   = useFadeUp(30);
+  const cardHL = useFocusHighlight(30);
 
   const CALLOUTS: Callout[] = [
-    { from: 120,  to: 450,  label: "神燈精靈", text: "AI 幫我們\n實現困難的事",     side: "right", yPct: 0.3 },
-    { from: 750,  to: 1100, label: "AI Coding", text: "AI 輔助\n程式設計",          side: "right", yPct: 0.4 },
-    { from: 1500, to: 1900, label: "定義",      text: "AI 產生\n部分或全部程式碼",  side: "right", yPct: 0.35 },
-    { from: 2050, to: 2370, label: "效率",      text: "每行手打\n→ AI 生成",         side: "right", yPct: 0.3 },
+    { from:    0, to:  928, label: "神燈精靈", text: "AI 幫我們，實現困難的事",     side: "right", yPct: 0.3 },
+    { from:  930, to: 1168, label: "AI Coding", text: "AI 輔助程式設計",          side: "right", yPct: 0.4 },
+    { from: 1170, to: 2008, label: "定義",      text: "AI 產生，部分或全部程式碼",  side: "right", yPct: 0.35 },
+    { from: 2010, to: 2338, label: "效率",      text: "每行手打 → AI 生成",         side: "right", yPct: 0.3 },
   ];
 
   return (
@@ -720,13 +807,13 @@ const SceneSection03AICoding: React.FC = () => {
       <BgOrbs />
       <ProgressBar progressPct={55} />
       <div style={{
-        position: "absolute", top: NAV_H, bottom: 0,
+        position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
         overflow: "hidden", zIndex: 10,
       }}>
-        <div style={{ paddingTop: 40 }}>
+        <div style={{ paddingTop: 56 }}>
           <SectionHeader num="03" title="Vibe Coding 是什麼？" fadeStyle={header} />
-          <Card fadeStyle={card}>
+          <Card fadeStyle={card} highlightStyle={cardHL}>
             AI 就像是<strong style={{ color: C.text }}>神燈精靈</strong>，可以幫助我們實現很多曾經覺得很困難、甚至辦不到的事情。在 AI 寫程式的領域中，有兩種不同的方式：
             <br /><br />
             <span style={{ color: C.primary, fontWeight: 700 }}>AI Coding（AI 輔助程式設計）</span>，指的是在寫程式的過程中，讓 AI 幫你產生部分或全部的程式碼。
@@ -734,7 +821,8 @@ const SceneSection03AICoding: React.FC = () => {
           </Card>
         </div>
       </div>
-      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} />)}
+      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
+      <AvatarOverlay segmentId="4.1" />
     </AbsoluteFill>
   );
 };
@@ -743,12 +831,13 @@ const SceneSection03AICoding: React.FC = () => {
 // SCENE 9 — Section 03: Vibe Coding 定義 (segment 4.2)
 // ─────────────────────────────────────────────────────────────────────────────
 const SceneSection03VibeCoding: React.FC = () => {
-  const header = useFadeUp(20);
-  const card   = useFadeUp(40);
+  const header = useFadeUp(15);
+  const card   = useFadeUp(25);
+  const cardHL = useFocusHighlight(25);
 
   const CALLOUTS: Callout[] = [
-    { from: 120, to: 400,  label: "Vibe", text: "輕鬆\n靠感覺",              side: "right", yPct: 0.3 },
-    { from: 530, to: 900,  label: "Vibe Coding", text: "完全不碰\n程式碼",   side: "right", yPct: 0.4 },
+    { from:   0, to:  628, label: "Vibe", text: "輕鬆，靠感覺",              side: "right", yPct: 0.3 },
+    { from: 630, to: 1065, label: "Vibe Coding", text: "完全不碰程式碼",   side: "right", yPct: 0.4 },
   ];
 
   return (
@@ -756,13 +845,13 @@ const SceneSection03VibeCoding: React.FC = () => {
       <BgOrbs />
       <ProgressBar progressPct={60} />
       <div style={{
-        position: "absolute", top: NAV_H, bottom: 0,
+        position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
         overflow: "hidden", zIndex: 10,
       }}>
-        <div style={{ paddingTop: 40 }}>
+        <div style={{ paddingTop: 56 }}>
           <SectionHeader num="03" title="Vibe Coding 是什麼？" fadeStyle={header} />
-          <Card fadeStyle={card}>
+          <Card fadeStyle={card} highlightStyle={cardHL}>
             <span style={{ color: C.primary, fontWeight: 700 }}>AI Coding</span>，指的是讓 AI 幫你產生部分或全部的程式碼。
             <br /><br />
             而 <span style={{ color: C.primary, fontWeight: 700 }}>Vibe Coding</span> 是近年出現的新詞，「Vibe」有「跟著感覺走、輕鬆隨興」的意思。
@@ -770,7 +859,8 @@ const SceneSection03VibeCoding: React.FC = () => {
           </Card>
         </div>
       </div>
-      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} />)}
+      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
+      <AvatarOverlay segmentId="4.2" />
     </AbsoluteFill>
   );
 };
@@ -779,16 +869,19 @@ const SceneSection03VibeCoding: React.FC = () => {
 // SCENE 10 — Section 03 Analogy: 實際感覺 (segment 4.3)
 // ─────────────────────────────────────────────────────────────────────────────
 const SceneSection03Analogy: React.FC = () => {
-  const header  = useFadeUp(20);
-  const card    = useFadeUp(35);
-  const analogy = useFadeUp(55);
-  const card2   = useFadeUp(1200);
+  const header    = useFadeUp(15);
+  const card      = useFadeUp(25);
+  const cardHL    = useFocusHighlight(25);
+  const analogy   = useFadeUp(228);
+  const analogyHL = useFocusHighlight(228);
+  const card2     = useFadeUp(1310);
+  const card2HL   = useFocusHighlight(1310);
 
   const CALLOUTS: Callout[] = [
-    { from: 120,  to: 500,  label: "你是甲方",  text: "需求提出者\nAI 是工程師",       side: "right", yPct: 0.3 },
-    { from: 900,  to: 1300, label: "用說的就行", text: "描述需求\nAI 建出成品",          side: "right", yPct: 0.4 },
-    { from: 1600, to: 1950, label: "修改也一樣", text: "「把背景\n換成藍色」",           side: "right", yPct: 0.35 },
-    { from: 2050, to: 2230, label: "全程",       text: "不需要寫\n任何一行程式碼",       side: "right", yPct: 0.3 },
+    { from:  238, to:  904, label: "你是甲方",  text: "需求提出者，AI 是工程師",       side: "right", yPct: 0.3 },
+    { from:  906, to: 1703, label: "用說的就行", text: "描述需求，AI 建出成品",          side: "right", yPct: 0.4 },
+    { from: 1705, to: 1974, label: "修改也一樣", text: "「把背景換成藍色」",           side: "right", yPct: 0.35 },
+    { from: 1976, to: 2196, label: "全程",       text: "不需要寫任何一行程式碼",       side: "right", yPct: 0.3 },
   ];
 
   return (
@@ -796,25 +889,25 @@ const SceneSection03Analogy: React.FC = () => {
       <BgOrbs />
       <ProgressBar progressPct={65} />
       <div style={{
-        position: "absolute", top: NAV_H, bottom: 0,
+        position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
         overflow: "hidden", zIndex: 10,
       }}>
-        <div style={{ paddingTop: 40 }}>
+        <div style={{ paddingTop: 56 }}>
           <SectionHeader num="03" title="Vibe Coding 是什麼？" fadeStyle={header} />
-          <Card fadeStyle={card}>
+          <Card fadeStyle={card} highlightStyle={cardHL}>
             <span style={{ color: C.primary, fontWeight: 700 }}>Vibe Coding</span>：完全靠描述和對話來驅動 AI 產出程式，自己完全不碰程式碼的開發方式。
           </Card>
-          <AnalogyBox label="一句話理解" fadeStyle={analogy}>
+          <AnalogyBox label="一句話理解" fadeStyle={analogy} highlightStyle={analogyHL}>
             Vibe Coding 就像是你扮演<strong style={{ color: "#ffffff" }}>甲方（需求提出者）</strong>，AI 是<strong style={{ color: "#ffffff" }}>工程師（執行者）</strong>。
             你只要說「我要一個可以讓朋友填寫旅遊偏好的表單頁面」，AI 就去把整個東西做出來。
             你不需要懂它是怎麼建的，也不用看程式碼長什麼樣子。
           </AnalogyBox>
           <div style={{
             background: C.surface, border: `1px solid ${C.border}`,
-            borderRadius: 16, padding: "28px 32px", marginBottom: 20, ...card2,
+            borderRadius: 22, padding: "36px 44px", marginBottom: 20, ...card2, ...card2HL,
           }}>
-            <p style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", fontSize: 17, color: C.muted, lineHeight: 1.8, margin: 0 }}>
+            <p style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", fontSize: 36, color: C.muted, lineHeight: 1.8, margin: 0 }}>
               實際體驗 Vibe Coding 的感覺是這樣的：你用自然語言（中文就行）描述你想要什麼，
               例如「我想要一個可以讓朋友填寫旅遊偏好的表單頁面，整體設計是可愛風格，提交之後要顯示一個『謝謝填寫』的畫面」，AI 工具就會直接產出一個可以用的成品。
               如果不滿意某個地方，繼續在對話框說「把背景換成藍色」、「把按鈕的文字改得更可愛一點」，AI 就會幫你修改。
@@ -823,7 +916,8 @@ const SceneSection03Analogy: React.FC = () => {
           </div>
         </div>
       </div>
-      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} />)}
+      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
+      <AvatarOverlay segmentId="4.3" />
     </AbsoluteFill>
   );
 };
@@ -832,14 +926,15 @@ const SceneSection03Analogy: React.FC = () => {
 // SCENE 11 — Section 04: Vibe Coding 特性 (segment 5.1)
 // ─────────────────────────────────────────────────────────────────────────────
 const SceneSection04VibeTraits: React.FC = () => {
-  const header = useFadeUp(20);
-  const intro  = useFadeUp(40);
-  const table  = useFadeUp(200);
+  const header  = useFadeUp(15);
+  const intro   = useFadeUp(25);
+  const introHL = useFocusHighlight(25);
+  const table   = useFadeUp(305);
 
   const CALLOUTS: Callout[] = [
-    { from: 120,  to: 450,  label: "人工介入比例", text: "Vibe Coding\n非常低",         side: "right", yPct: 0.3 },
-    { from: 700,  to: 1100, label: "好處",         text: "不需學\n任何程式知識",         side: "right", yPct: 0.4 },
-    { from: 1200, to: 1700, label: "壞處",         text: "複雜需求\n難精準達成",          side: "right", yPct: 0.35 },
+    { from:  315, to:  643, label: "人工介入比例", text: "Vibe Coding，非常低",         side: "right", yPct: 0.3 },
+    { from:  645, to: 1112, label: "好處",         text: "不需學任何程式知識",         side: "right", yPct: 0.4 },
+    { from: 1114, to: 1371, label: "壞處",         text: "複雜需求，難精準達成",          side: "right", yPct: 0.35 },
   ];
 
   return (
@@ -847,13 +942,13 @@ const SceneSection04VibeTraits: React.FC = () => {
       <BgOrbs />
       <ProgressBar progressPct={72} />
       <div style={{
-        position: "absolute", top: NAV_H, bottom: 0,
+        position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
         overflow: "hidden", zIndex: 10,
       }}>
-        <div style={{ paddingTop: 40 }}>
+        <div style={{ paddingTop: 56 }}>
           <SectionHeader num="04" title="Vibe Coding vs AI Coding：有什麼差別？" fadeStyle={header} />
-          <Card fadeStyle={intro}>
+          <Card fadeStyle={intro} highlightStyle={introHL}>
             這兩種方式都是 AI 輔助開發，但<strong style={{ color: C.text }}>人工介入的程度</strong>不同，適合的使用情境也有所差異。
           </Card>
           {/* Compare table — Vibe column highlighted */}
@@ -888,7 +983,8 @@ const SceneSection04VibeTraits: React.FC = () => {
           </div>
         </div>
       </div>
-      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} />)}
+      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
+      <AvatarOverlay segmentId="5.1" />
     </AbsoluteFill>
   );
 };
@@ -897,12 +993,12 @@ const SceneSection04VibeTraits: React.FC = () => {
 // SCENE 12 — Section 04: AI Coding 特性 (segment 5.2)
 // ─────────────────────────────────────────────────────────────────────────────
 const SceneSection04AITraits: React.FC = () => {
-  const header = useFadeUp(20);
-  const table  = useFadeUp(40);
+  const header = useFadeUp(15);
+  const table  = useFadeUp(200);
 
   const CALLOUTS: Callout[] = [
-    { from: 120, to: 450, label: "AI Coding", text: "有 Vibe 成分\n更精準引導",    side: "right", yPct: 0.3 },
-    { from: 550, to: 980, label: "優勢",      text: "遇問題\n有能力排查",          side: "right", yPct: 0.4 },
+    { from: 210, to: 718, label: "AI Coding", text: "有 Vibe 成分，更精準引導",    side: "right", yPct: 0.3 },
+    { from: 720, to: 934, label: "優勢",      text: "遇問題，有能力排查",          side: "right", yPct: 0.4 },
   ];
 
   return (
@@ -910,11 +1006,11 @@ const SceneSection04AITraits: React.FC = () => {
       <BgOrbs />
       <ProgressBar progressPct={78} />
       <div style={{
-        position: "absolute", top: NAV_H, bottom: 0,
+        position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
         overflow: "hidden", zIndex: 10,
       }}>
-        <div style={{ paddingTop: 40 }}>
+        <div style={{ paddingTop: 56 }}>
           <SectionHeader num="04" title="Vibe Coding vs AI Coding：有什麼差別？" fadeStyle={header} />
           <div style={{
             background: C.surface, border: `1px solid ${C.border}`,
@@ -947,7 +1043,8 @@ const SceneSection04AITraits: React.FC = () => {
           </div>
         </div>
       </div>
-      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} />)}
+      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
+      <AvatarOverlay segmentId="5.2" />
     </AbsoluteFill>
   );
 };
@@ -956,17 +1053,17 @@ const SceneSection04AITraits: React.FC = () => {
 // SCENE 13 — Section 04: 學習路徑 + Quiz (segment 5.3)
 // ─────────────────────────────────────────────────────────────────────────────
 const SceneSection04Path: React.FC = () => {
-  const header = useFadeUp(20);
-  const step1  = useFadeUp(100);
-  const step2  = useFadeUp(800);
-  const step3  = useFadeUp(1600);
-  const quiz   = useFadeUp(2500);
+  const header = useFadeUp(15);
+  const step1  = useFadeUp(140);
+  const step2  = useFadeUp(920);
+  const step3  = useFadeUp(1970);
+  const quiz   = useFadeUp(2530);
 
   const CALLOUTS: Callout[] = [
-    { from: 120,  to: 500,  label: "建議路徑",  text: "先從\nVibe Coding 開始",       side: "right", yPct: 0.3 },
-    { from: 800,  to: 1300, label: "進階",      text: "學 AI Coding\n核心知識",        side: "right", yPct: 0.4 },
-    { from: 1600, to: 2100, label: "不用成為",  text: "工程師\n1% 關鍵知識就夠",       side: "right", yPct: 0.35 },
-    { from: 2800, to: 3260, label: "核心觀念",  text: "學 1%\n就夠了",                 side: "right", yPct: 0.3 },
+    { from:  150, to: 1048, label: "建議路徑",  text: "先從 Vibe Coding 開始",       side: "right", yPct: 0.3 },
+    { from: 1050, to: 1738, label: "進階",      text: "學 AI Coding 核心知識",        side: "right", yPct: 0.4 },
+    { from: 1740, to: 2428, label: "不用成為",  text: "工程師，1% 關鍵知識就夠",       side: "right", yPct: 0.35 },
+    { from: 2430, to: 3224, label: "核心觀念",  text: "學 1%，就夠了",                 side: "right", yPct: 0.3 },
   ];
 
   const steps = [
@@ -980,11 +1077,11 @@ const SceneSection04Path: React.FC = () => {
       <BgOrbs />
       <ProgressBar progressPct={85} />
       <div style={{
-        position: "absolute", top: NAV_H, bottom: 0,
+        position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
         overflow: "hidden", zIndex: 10,
       }}>
-        <div style={{ paddingTop: 40 }}>
+        <div style={{ paddingTop: 56 }}>
           <SectionHeader num="04" title="Vibe Coding vs AI Coding：有什麼差別？" fadeStyle={header} />
 
           {/* Path steps */}
@@ -1033,7 +1130,8 @@ const SceneSection04Path: React.FC = () => {
           </div>
         </div>
       </div>
-      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} />)}
+      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
+      <AvatarOverlay segmentId="5.3" />
     </AbsoluteFill>
   );
 };
@@ -1042,18 +1140,18 @@ const SceneSection04Path: React.FC = () => {
 // SCENE 14 — Takeaway (segment 6.1)
 // ─────────────────────────────────────────────────────────────────────────────
 const SceneTakeaway: React.FC = () => {
-  const header = useFadeUp(20);
-  const box    = useFadeUp(60);
-  const item1  = useFadeUp(200);
-  const item2  = useFadeUp(500);
-  const item3  = useFadeUp(800);
-  const item4  = useFadeUp(1100);
-  const item5  = useFadeUp(1400);
+  const header = useFadeUp(15);
+  const box    = useFadeUp(25);
+  const item1  = useFadeUp(174);
+  const item2  = useFadeUp(428);
+  const item3  = useFadeUp(829);
+  const item4  = useFadeUp(1065);
+  const item5  = useFadeUp(1418);
 
   const CALLOUTS: Callout[] = [
-    { from: 180,  to: 600,  label: "回顧",   text: "本章重點\n整理",                   side: "right", yPct: 0.3 },
-    { from: 1600, to: 2000, label: "下一章", text: "實際動手做\n第一個 AI 作品",        side: "right", yPct: 0.4 },
-    { from: 2200, to: 2460, label: "我們",   text: "下個章節見",                        side: "right", yPct: 0.35 },
+    { from:  123, to: 1982, label: "回顧",   text: "本章重點，整理",                   side: "right", yPct: 0.3 },
+    { from: 1984, to: 2336, label: "下一章", text: "實際動手做，第一個 AI 作品",        side: "right", yPct: 0.4 },
+    { from: 2338, to: 2422, label: "我們",   text: "下個章節見",                        side: "right", yPct: 0.35 },
   ];
 
   const items = [
@@ -1069,11 +1167,11 @@ const SceneTakeaway: React.FC = () => {
       <BgOrbs />
       <ProgressBar progressPct={95} />
       <div style={{
-        position: "absolute", top: NAV_H, bottom: 0,
+        position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
         overflow: "hidden", zIndex: 10,
       }}>
-        <div style={{ paddingTop: 40 }}>
+        <div style={{ paddingTop: 56 }}>
           <SectionHeader num="✦" title="本章重點整理" fadeStyle={header} />
           {/* Takeaway box */}
           <div style={{
@@ -1082,7 +1180,7 @@ const SceneTakeaway: React.FC = () => {
             borderRadius: 16, padding: 32, marginTop: 8, ...box,
           }}>
             <div style={{
-              fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700,
+              fontFamily: "'Space Mono', monospace", fontSize: 22, fontWeight: 700,
               color: C.primary, letterSpacing: "0.1em",
               textTransform: "uppercase" as const, marginBottom: 20,
               display: "flex", alignItems: "center", gap: 8,
@@ -1095,11 +1193,11 @@ const SceneTakeaway: React.FC = () => {
                 <li key={i} style={{
                   display: "flex", alignItems: "flex-start", gap: 12,
                   fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif",
-                  fontSize: 15, color: C.text, lineHeight: 1.6, ...item.style,
+                  fontSize: 36, color: C.text, lineHeight: 1.6, ...item.style,
                 }}>
                   <div style={{
                     background: C.primary, color: "#000000",
-                    fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700,
+                    fontFamily: "'Space Mono', monospace", fontSize: 18, fontWeight: 700,
                     width: 22, height: 22, borderRadius: "50%",
                     display: "flex", alignItems: "center", justifyContent: "center",
                     flexShrink: 0, marginTop: 2,
@@ -1111,7 +1209,8 @@ const SceneTakeaway: React.FC = () => {
           </div>
         </div>
       </div>
-      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} />)}
+      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
+      <AvatarOverlay segmentId="6.1" />
     </AbsoluteFill>
   );
 };

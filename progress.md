@@ -3,103 +3,98 @@
 ## Project Overview
 
 Course video production for **AI 寫程式入門課程** using Remotion.
-Skill spec: `~/Downloads/Vibe Coding 剪輯/course-video.md`
+Skill spec: `~/.claude/skills/course-video.md`
 Remotion project: `~/Projects/vibe-coding-video/`
 
 ---
 
-## Current Status: CH 0-1 — Full Video COMPLETE ✅
+## Current Status: CH 0-1 — Full Video v3 ✅
 
-### Phase Summary
+**Latest render:** `out/CH0-1-complete.mp4` — 65 MB, 14m 27s (2026-03-27 15:05)
+
+### Version History
+
+| Version | Size | Notes |
+|---------|------|-------|
+| v1 | 47 MB | Initial full video, all 14 scenes |
+| v2 | 49 MB | VTT-synced progressive animation, iMessage stacking, focus glow, audio pipeline |
+| v3 | 65 MB | Mobile-sized text (36px body), CONTAINER_W=1500, SUBTITLE_H=160 |
+
+---
+
+## Phase Completion
 
 | Phase | Status | Notes |
 |-------|--------|-------|
-| Phase 1 — VTT Transcription (13 files) | ✅ Done | Whisper small model, --language zh |
-| Phase 2 — VTT Correction | ✅ Done | All brand names fixed |
-| Phase 3 — HTML Analysis & Scene Planning | ✅ Done | 14 scenes mapped to HTML 1:1 |
-| Phase 4 — Scene Development (FullVideo.tsx) | ✅ Done | 14 scenes + CALLOUTS built |
-| Phase 5 — Integration & Render | ✅ Done | `CH0-1-complete.mp4` — 50.7 MB, 15m 15s |
+| Audio pipeline (denoise→trim→normalize) | ✅ Done | 0a → 0b → 0_normalize |
+| VTT Transcription (14 files) | ✅ Done | Whisper small, --language zh |
+| VTT Correction | ✅ Done | All brand names fixed |
+| HTML Analysis & Scene Planning | ✅ Done | 14 scenes mapped to HTML 1:1 |
+| Scene Development (FullVideo.tsx) | ✅ Done | 14 scenes + VTT-synced CALLOUTS |
+| Progressive slide animation | ✅ Done | Each block timed to VTT speaker content |
+| iMessage stacking | ✅ Done | New card pushes old down, old slides up when expired |
+| Focus highlight | ✅ Done | Green glow on first appear |
+| Mobile scaling | ✅ Done | CONTAINER_W=1500, fonts 36-88px |
+| HeyGen avatar | 🔄 Generating | Script running, placeholders in place |
 
 ---
 
-## CH 0-1 — 30s Sample ✅
+## Audio Segments (post-pipeline durations)
 
-| Task | Status | Notes |
-|------|--------|-------|
-| VTT transcription (0-1_1.1) | ✅ Done | Corrected: Vycoding → Vibe Coding |
-| Opening.tsx — Hero section | ✅ Done | Matches `(N)ch0-1.html` exactly |
-| Opening.tsx — Section 01 | ✅ Done | Scrolls in at f600–f700 |
-| ProgressBar | ✅ Done | Logo + "AI 寫程式入門課程" \| "章節 0-1 / 4" |
-| Callout Cards (字卡) | ✅ Done | macOS Messages notification style |
-| 30s render | ✅ Done | `sample-30s.mp4` (2.2 MB) |
-| Audio mix | ✅ Done | Speaker 0.75, BGM 0.18 |
+| Seg | File | Frames | Scene |
+|-----|------|--------|-------|
+| 1.1 | 0-1_1.1.wav | 1131 | SceneHero |
+| 2.1 | 0-1_2.1.wav | 1061 | SceneSection01Card1 |
+| 2.2 | 0-1_2.2.wav | 1067 | SceneSection01Analogy |
+| 2.3 | 0-1_2.3.wav | 1367 | SceneSection01Card2 |
+| 3.0 | 0-1_3.0.wav | 2641 | SceneSection02Intro |
+| 3.1 | 0-1_3.1.wav | 3619 | SceneSection02Usecases |
+| 3.2 | 0-1_3.2.wav | 1546 | SceneSection02LeisureQuiz |
+| 4.1 | 0-1_4.1.wav | 2293 | SceneSection03AICoding |
+| 4.2 | 0-1_4.2.wav | 1050 | SceneSection03VibeCoding |
+| 4.3 | 0-1_4.3.wav | 2187 | SceneSection03Analogy |
+| 5.1 | 0-1_5.1.wav | 1607 | SceneSection04VibeTraits |
+| 5.2 | 0-1_5.2.wav | 874 | SceneSection04AITraits |
+| 5.3 | 0-1_5.3.wav | 3148 | SceneSection04Path |
+| 6.1 | 0-1_6.1.wav | 2429 | SceneTakeaway |
 
----
-
-## CH 0-1 — Full Video (FullVideo.tsx)
-
-### Audio Segments & Scenes
-
-| Seg | File | Frames | Scene | VTT Status |
-|-----|------|--------|-------|------------|
-| 1.1 | 0-1_1.1_studio.wav | 1211 | SceneHero | ✅ Corrected |
-| 2.1 | 0-1_2.1.wav | 1169 | SceneSection01Card1 | ✅ Corrected |
-| 2.2 | 0-1_2.2.wav | 1258 | SceneSection01Analogy | ✅ Corrected (Simplified→Traditional) |
-| 2.3 | 0-1_2.3.wav | 1481 | SceneSection01Card2 | ✅ OK |
-| 3.0 | 0-1_3.0.wav | 2863 | SceneSection02Intro | ✅ OK |
-| 3.1 | 0-1_3.1.wav | 3710 | SceneSection02Usecases | ✅ OK |
-| 3.2 | 0-1_3.2.wav | 1614 | SceneSection02LeisureQuiz | ✅ Corrected (寫成是→寫程式) |
-| 4.1 | 0-1_4.1.wav | 2372 | SceneSection03AICoding | ✅ Corrected (土法煉鋼) |
-| 4.2 | 0-1_4.2.wav | 1124 | SceneSection03VibeCoding | ✅ Corrected (chill/feel/程式碼) |
-| 4.3 | 0-1_4.3.wav | 2239 | SceneSection03Analogy | ✅ Corrected (Vibe/甲方/乙方) |
-| 5.1 | 0-1_5.1.wav | 1704 | SceneSection04VibeTraits | ✅ Corrected (Vibe Coding) |
-| 5.2 | 0-1_5.2.wav | 990 | SceneSection04AITraits | ✅ Corrected (Vibe→corrected) |
-| 5.3 | 0-1_5.3.wav | 3264 | SceneSection04Path | ✅ Corrected (Simplified→Traditional) |
-| 6.1 | 0-1_6.1.wav | 2461 | SceneTakeaway | ✅ Corrected (Japanese katakana removed) |
-
-**Total frames:** 27,461 (~15.2 minutes)
-
-### Scene → HTML Mapping
-
-| Scene | HTML Section |
-|-------|-------------|
-| SceneHero | `.hero` |
-| SceneSection01Card1 | `Section 01 .card:first` |
-| SceneSection01Analogy | `Section 01 .analogy` |
-| SceneSection01Card2 | `Section 01 .card:second` |
-| SceneSection02Intro | `Section 02 .card + .usecase-grid` |
-| SceneSection02Usecases | `Section 02 .analogy (具體例子)` |
-| SceneSection02LeisureQuiz | `Section 02 .card (樂趣) + .quiz-box` |
-| SceneSection03AICoding | `Section 03 .card (AI Coding 定義)` |
-| SceneSection03VibeCoding | `Section 03 .card (Vibe Coding 定義)` |
-| SceneSection03Analogy | `Section 03 .analogy + .card (感覺)` |
-| SceneSection04VibeTraits | `Section 04 .card + .compare table` |
-| SceneSection04AITraits | `Section 04 .compare table (AI column)` |
-| SceneSection04Path | `Section 04 .path + .quiz-box` |
-| SceneTakeaway | `.takeaway` |
-
----
-
-## Render Target
-
-```
-Output: ~/Downloads/Vibe Coding 剪輯/CH0-1-complete.mp4
-Codec: h264
-Resolution: 1920×1080
-FPS: 30
-Duration: ~15.2 min (27,461 frames)
-```
+**Total: 26,020 frames (~14m 27s)**
 
 ---
 
 ## Key Design Decisions
 
-- **No emoji** anywhere — CSS 6px square dot with `#7cffb2` glow, or `✦`
-- **Colors:** `#000000` bg, `#0d0d0d` surface, `#7cffb2` primary, `#ffd166` yellow
-- **Fonts:** Noto Sans TC (body/titles), Space Mono (labels/badges)
-- **Callouts:** macOS Messages notification style, top-right corner only
-- **Removed permanently:** particles, CodeChar drift, CornerLines, ScanSweep, GlowRing, Glitch
-- **VTT over estimates:** always use Whisper VTT timestamps, never estimate seconds
+### Layout
+- `CONTAINER_W = 1500` (up from 860/960 — mobile friendly)
+- `SUBTITLE_H = 160` — bottom reserved for subtitles
+- `NAV_H = 72`
+
+### Typography (mobile-readable at 1080p)
+- Hero title: 88px
+- Section header: 52px
+- Card body: 36px
+- AnalogyBox body: 34px
+
+### Audio
+- Speaker: −16 LUFS → `volume={1.0}`
+- BGM: `volume={0.10} loop`
+- Pipeline: denoise (highpass+afftdn+lowpass) → trim silence (silencedetect+atrim) → normalize
+
+### Callout Cards
+- Style: macOS iMessage notification
+- Direction: slides DOWN from top (translateY, not translateX)
+- Width: `maxWidth: NOTIF_W` (580px max, shrinks to content)
+- No `\n` in text — use `，`、`：` instead
+- Stacking: newer card pushes older ones down, spring-animated
+- `calcStackOffset` is a plain function (not a hook) — called before `return null`
+
+### Visual
+- Focus highlight: green glow on element first appear (`useFocusHighlight`)
+- Progressive animation: each content block timed to VTT speaker content
+
+### Removed permanently
+- Particles, CodeChar drift, CornerLines, ScanSweep, GlowRing, Glitch effects
+- No emoji anywhere
 
 ---
 
@@ -109,32 +104,43 @@ Duration: ~15.2 min (27,461 frames)
 ~/Projects/vibe-coding-video/
   src/
     Root.tsx          — Compositions: Intro2s + Video30s + FullVideo
-    Video30s.tsx      — 30s sample
-    Opening.tsx       — Hero + Section01 (30s sample only)
-    FullVideo.tsx     — All 14 scenes for complete CH 0-1 video
-    Intro2s.tsx       — Brand intro (separate)
+    Video30s.tsx      — 30s sample (uses Opening.tsx)
+    Opening.tsx       — Hero + Section01 for 30s sample
+    FullVideo.tsx     — All 14 scenes, complete CH 0-1 video
+    Intro2s.tsx       — Brand intro
     hooks.ts          — useMorphIn, useGlitch, useTypewriter
-    index.ts          — Remotion entry
   public/
-    audio/
-      0-1_1.1.wav               — original
-      0-1_1.1_studio.wav        — EQ + compressed (used in 30s sample)
-      0-1_2.1.wav ~ 0-1_6.1.wav — all 13 segments (added 2026-03-26)
-      course_background_music.wav
-      intro-stinger.wav
+    audio/            — 15 WAV files (denoised + trimmed + normalized)
+    avatar/           — HeyGen MP4s (placeholders now, real ones pending)
     aischool-logo.webp
+  scripts/
+    0a_denoise.sh     — Noise removal
+    0b_trim_silence.sh — Trim leading/trailing silence
+    0_normalize_audio.sh — −16 LUFS normalization
+    1_transcribe.sh   — Whisper VTT
+    2_correct_vtts.sh — Brand name correction
+    3_calc_frames.sh  — Frame count calculation
+    4_render.sh       — Remotion render
+    5_heygen_avatar.sh — HeyGen avatar video generation
+  out/
+    CH0-1-complete.mp4  — Latest render (65MB, 14m27s)
 
 Source assets: ~/Downloads/Vibe Coding 剪輯/0-1/
-  (N)ch0-1.html         — visual reference (single source of truth)
-  0-1 音檔/             — 14 WAV files + 14 corrected VTTs
-  章節0-1_逐字講稿.docx — script for VTT correction
+  (N)ch0-1.html         — Visual reference
+  0-1 音檔/             — 14 WAV + 14 VTTs
 ```
 
 ---
 
-## HeyGen Digital Avatar (Pending)
+## Pending
 
-**Blocker:** HeyGen API credits insufficient (`MOVIO_PAYMENT_INSUFFICIENT_CREDIT`).
+1. **HeyGen avatar** — `scripts/5_heygen_avatar.sh` running in background
+   - Will replace `public/avatar/0-1_*.mp4` placeholders with real lip-sync videos
+   - Final re-render needed after completion
+   - Avatar ID: `f7af57d29abd4254a1e43441ec16ce40`
+   - API credits: 6,000 remaining (as of 2026-03-27)
 
-When credits available, add avatar `f7af57d29abd4254a1e43441ec16ce40` to bottom-right circle in FullVideo.tsx.
-Audio asset_id: `807d290115804f09bf6f82e4e9d81434` (may be expired — valid 7 days from 2026-03-27).
+2. **Final re-render with real avatar**
+   ```bash
+   npx remotion render FullVideo out/CH0-1-complete.mp4 --codec=h264
+   ```
