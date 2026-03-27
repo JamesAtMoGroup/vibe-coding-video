@@ -7,10 +7,10 @@ export const Video30s: React.FC = () => {
   return (
     <AbsoluteFill>
       <Opening />
-      {/* 講者聲音 */}
-      <Audio src={staticFile("audio/0-1_1.1_studio.wav")} volume={0.75} />
+      {/* 講者聲音 — normalized to -16 LUFS */}
+      <Audio src={staticFile("audio/0-1_1.1_studio.wav")} volume={1.0} />
       {/* 背景音樂 */}
-      <Audio src={staticFile("audio/course_background_music.wav")} volume={0.18} />
+      <Audio src={staticFile("audio/course_background_music.wav")} volume={0.10} />
     </AbsoluteFill>
   );
 };

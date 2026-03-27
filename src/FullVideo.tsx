@@ -1126,14 +1126,14 @@ export const FullVideo: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
       {/* BGM — plays through the whole video */}
-      <Audio src={staticFile("audio/course_background_music.wav")} volume={0.18} />
+      <Audio src={staticFile("audio/course_background_music.wav")} volume={0.10} />
 
       {SEGMENTS.map((seg, i) => {
         const SceneComponent = SCENES[i];
         return (
           <Sequence key={seg.id} from={SEG_STARTS[i]} durationInFrames={seg.frames}>
-            {/* Speaker audio for this segment */}
-            <Audio src={staticFile(`audio/${seg.file}`)} volume={0.75} />
+            {/* Speaker audio — normalized to -16 LUFS */}
+            <Audio src={staticFile(`audio/${seg.file}`)} volume={1.0} />
             {/* Visual scene */}
             <SceneComponent />
           </Sequence>
