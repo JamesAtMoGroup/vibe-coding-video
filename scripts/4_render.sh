@@ -13,14 +13,17 @@ set -e
 COMPOSITION="${1:?Usage: $0 <CompositionId> [chapter]}"
 CHAPTER="${2:-}"
 PROJECT="/Users/jamesshih/Projects/vibe-coding-video"
-OUTPUT_DIR="/Users/jamesshih/Downloads/Vibe Coding 剪輯"
 
 if [ "$COMPOSITION" = "Video30s" ]; then
-  OUTPUT="${OUTPUT_DIR}/sample-30s.mp4"
+  OUT_FOLDER="${PROJECT}/out"
+  OUTPUT="${OUT_FOLDER}/sample-30s.mp4"
 elif [ -n "$CHAPTER" ]; then
-  OUTPUT="${OUTPUT_DIR}/CH${CHAPTER}-complete.mp4"
+  OUT_FOLDER="${PROJECT}/out/CH${CHAPTER//-/}"
+  mkdir -p "$OUT_FOLDER"
+  OUTPUT="${OUT_FOLDER}/CH${CHAPTER}-complete.mp4"
 else
-  OUTPUT="${OUTPUT_DIR}/${COMPOSITION}.mp4"
+  OUT_FOLDER="${PROJECT}/out"
+  OUTPUT="${OUT_FOLDER}/${COMPOSITION}.mp4"
 fi
 
 echo "=== Rendering: ${COMPOSITION} ==="

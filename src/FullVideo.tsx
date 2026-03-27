@@ -9,8 +9,9 @@ import {
   interpolate,
   spring,
   Img,
-  Video,
 } from "remotion";
+import { Lottie } from "@remotion/lottie";
+import speakingData from "./speaking-animation.json";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Design System — exact match to (N)ch0-1.html CSS variables
@@ -108,7 +109,7 @@ const ProgressBar: React.FC<{ progressPct?: number }> = ({ progressPct = 8 }) =>
         justifyContent: "space-between",
         alignItems: "center",
         fontFamily: "'Space Mono', monospace",
-        fontSize: 13,
+        fontSize: 16,
         color: C.muted,
         letterSpacing: "0.05em",
         marginBottom: 8,
@@ -235,19 +236,19 @@ const CalloutCard: React.FC<{ c: Callout; allCallouts: Callout[] }> = ({ c, allC
           </div>
           <span style={{
             fontFamily: "'Noto Sans TC','PingFang TC',sans-serif",
-            fontSize: 13, fontWeight: 500,
+            fontSize: 18, fontWeight: 500,
             color: "rgba(255,255,255,0.45)", flex: 1,
           }}>訊息</span>
           <span style={{
             fontFamily: "'Noto Sans TC','PingFang TC',sans-serif",
-            fontSize: 12, color: "rgba(255,255,255,0.30)",
+            fontSize: 15, color: "rgba(255,255,255,0.30)",
           }}>剛剛</span>
         </div>
 
         {/* Sender / label */}
         <div style={{
           fontFamily: "'Noto Sans TC','PingFang TC',sans-serif",
-          fontSize: 15, fontWeight: 700,
+          fontSize: 22, fontWeight: 700,
           color: "rgba(255,255,255,0.88)", marginBottom: 6,
         }}>{c.label}</div>
 
@@ -297,13 +298,13 @@ const BgOrbs: React.FC = () => {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Avatar Overlay — HeyGen lip-sync circle, bottom-right corner
+// Speaker Lottie — bottom-right corner circle
 // ─────────────────────────────────────────────────────────────────────────────
-const AVATAR_SIZE   = 180;
+const AVATAR_SIZE   = 200;
 const AVATAR_RIGHT  = 40;
 const AVATAR_BOTTOM = 40;
 
-const AvatarOverlay: React.FC<{ segmentId: string }> = ({ segmentId }) => {
+const AvatarOverlay: React.FC = () => {
   const frame  = useCurrentFrame();
   const fadeIn = interpolate(frame, [0, 20], [0, 1], clamp);
 
@@ -321,10 +322,9 @@ const AvatarOverlay: React.FC<{ segmentId: string }> = ({ segmentId }) => {
       opacity: fadeIn,
       zIndex: 20,
     }}>
-      <Video
-        src={staticFile(`avatar/0-1_${segmentId}.mp4`)}
-        style={{ width: "100%", height: "100%", objectFit: "cover" }}
-        muted
+      <Lottie
+        animationData={speakingData}
+        style={{ width: "100%", height: "100%" }}
       />
     </div>
   );
@@ -452,7 +452,7 @@ const SceneHero: React.FC = () => {
         </div>
       </div>
       {CALLOUTS_HERO.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS_HERO} />)}
-      <AvatarOverlay segmentId="1.1" />
+      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -492,7 +492,7 @@ const SceneSection01Card1: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay segmentId="2.1" />
+      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -540,7 +540,7 @@ const SceneSection01Analogy: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay segmentId="2.2" />
+      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -597,7 +597,7 @@ const SceneSection01Card2: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay segmentId="2.3" />
+      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -668,7 +668,7 @@ const SceneSection02Intro: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay segmentId="3.0" />
+      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -714,7 +714,7 @@ const SceneSection02Usecases: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay segmentId="3.1" />
+      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -762,7 +762,7 @@ const SceneSection02LeisureQuiz: React.FC = () => {
             background: "rgba(255,209,102,0.03)", ...quiz,
           }}>
             <div style={{
-              fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700,
+              fontFamily: "'Space Mono', monospace", fontSize: 18, fontWeight: 700,
               color: C.yellow, letterSpacing: "0.08em",
               textTransform: "uppercase" as const, marginBottom: 14,
               display: "flex", alignItems: "center", gap: 8,
@@ -770,19 +770,19 @@ const SceneSection02LeisureQuiz: React.FC = () => {
               <div style={{ width: 6, height: 6, background: C.yellow, borderRadius: 1, boxShadow: "0 0 6px #ffd166" }} />
               想一想
             </div>
-            <p style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", color: C.muted, fontSize: 15, lineHeight: 1.7, margin: 0 }}>
+            <p style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", color: C.muted, fontSize: 26, lineHeight: 1.7, margin: 0 }}>
               回想一下你最近一週的工作或日常生活，有沒有哪件事讓你覺得「這也太重複了吧」？
             </p>
             <ul style={{ paddingLeft: 20, marginTop: 12 }}>
               {["那件事有固定的步驟嗎？", "每次做的時候，流程幾乎都一樣嗎？", "如果有個助手可以幫你做，你會想把它交出去嗎？"].map((q, i) => (
-                <li key={i} style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", color: C.muted, fontSize: 14, marginBottom: 8 }}>{q}</li>
+                <li key={i} style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", color: C.muted, fontSize: 24, marginBottom: 8 }}>{q}</li>
               ))}
             </ul>
           </div>
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay segmentId="3.2" />
+      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -822,7 +822,7 @@ const SceneSection03AICoding: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay segmentId="4.1" />
+      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -860,7 +860,7 @@ const SceneSection03VibeCoding: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay segmentId="4.2" />
+      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -917,7 +917,7 @@ const SceneSection03Analogy: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay segmentId="4.3" />
+      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -954,14 +954,14 @@ const SceneSection04VibeTraits: React.FC = () => {
           {/* Compare table — Vibe column highlighted */}
           <div style={{
             background: C.surface, border: `1px solid ${C.border}`,
-            borderRadius: 16, overflow: "hidden", marginBottom: 20, ...table,
+            borderRadius: 22, overflow: "hidden", marginBottom: 20, ...table,
           }}>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <thead>
                 <tr style={{ borderBottom: `2px solid ${C.border}` }}>
-                  <th style={{ padding: "14px 20px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 13, textAlign: "left", color: C.muted }}></th>
-                  <th style={{ padding: "14px 20px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 13, textAlign: "left", color: C.primary }}>Vibe Coding</th>
-                  <th style={{ padding: "14px 20px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 13, textAlign: "left", color: C.text }}>AI Coding</th>
+                  <th style={{ padding: "22px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 26, textAlign: "left", color: C.muted, width: "18%" }}></th>
+                  <th style={{ padding: "22px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 28, textAlign: "left", color: C.primary, width: "41%" }}>Vibe Coding</th>
+                  <th style={{ padding: "22px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 28, textAlign: "left", color: C.text, width: "41%" }}>AI Coding</th>
                 </tr>
               </thead>
               <tbody>
@@ -972,10 +972,10 @@ const SceneSection04VibeTraits: React.FC = () => {
                   ["限制",     "複雜需求難以精準達成，卡關時不容易解決", "需要投入一點學習時間"],
                   ["適合誰",   "初學者、想快速驗證創意的人",          "想穩定產出可用作品的人"],
                 ].map(([label, vibe, ai], i) => (
-                  <tr key={i} style={{ borderBottom: i < 4 ? "1px solid rgba(255,255,255,0.04)" : "none" }}>
-                    <td style={{ padding: "14px 20px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 13, fontWeight: 600, color: C.text }}>{label}</td>
-                    <td style={{ padding: "14px 20px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 14, color: C.primary, verticalAlign: "top" }}>{vibe}</td>
-                    <td style={{ padding: "14px 20px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 14, color: "#cccccc", verticalAlign: "top" }}>{ai}</td>
+                  <tr key={i} style={{ borderBottom: i < 4 ? `1px solid ${C.border}` : "none" }}>
+                    <td style={{ padding: "20px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 26, fontWeight: 700, color: C.text }}>{label}</td>
+                    <td style={{ padding: "20px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 26, color: C.primary, verticalAlign: "top" }}>{vibe}</td>
+                    <td style={{ padding: "20px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 26, color: "#cccccc", verticalAlign: "top" }}>{ai}</td>
                   </tr>
                 ))}
               </tbody>
@@ -984,7 +984,7 @@ const SceneSection04VibeTraits: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay segmentId="5.1" />
+      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -1014,14 +1014,14 @@ const SceneSection04AITraits: React.FC = () => {
           <SectionHeader num="04" title="Vibe Coding vs AI Coding：有什麼差別？" fadeStyle={header} />
           <div style={{
             background: C.surface, border: `1px solid ${C.border}`,
-            borderRadius: 16, overflow: "hidden", marginBottom: 20, ...table,
+            borderRadius: 22, overflow: "hidden", marginBottom: 20, ...table,
           }}>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <thead>
                 <tr style={{ borderBottom: `2px solid ${C.border}` }}>
-                  <th style={{ padding: "14px 20px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 13, textAlign: "left", color: C.muted }}></th>
-                  <th style={{ padding: "14px 20px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 13, textAlign: "left", color: C.primary }}>Vibe Coding</th>
-                  <th style={{ padding: "14px 20px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 13, textAlign: "left", color: C.text }}>AI Coding</th>
+                  <th style={{ padding: "22px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 28, textAlign: "left", color: C.muted }}></th>
+                  <th style={{ padding: "22px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 28, textAlign: "left", color: C.primary }}>Vibe Coding</th>
+                  <th style={{ padding: "22px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 28, textAlign: "left", color: C.text }}>AI Coding</th>
                 </tr>
               </thead>
               <tbody>
@@ -1033,9 +1033,9 @@ const SceneSection04AITraits: React.FC = () => {
                   ["適合誰",   "初學者、想快速驗證創意的人",          "想穩定產出可用作品的人"],
                 ].map(([label, vibe, ai], i) => (
                   <tr key={i} style={{ borderBottom: i < 4 ? "1px solid rgba(255,255,255,0.04)" : "none" }}>
-                    <td style={{ padding: "14px 20px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 13, fontWeight: 600, color: C.text }}>{label}</td>
-                    <td style={{ padding: "14px 20px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 14, color: C.primary, verticalAlign: "top" }}>{vibe}</td>
-                    <td style={{ padding: "14px 20px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 14, color: "#cccccc", verticalAlign: "top" }}>{ai}</td>
+                    <td style={{ padding: "20px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 26, fontWeight: 700, color: C.text }}>{label}</td>
+                    <td style={{ padding: "20px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 26, color: C.primary, verticalAlign: "top" }}>{vibe}</td>
+                    <td style={{ padding: "20px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 26, color: "#cccccc", verticalAlign: "top" }}>{ai}</td>
                   </tr>
                 ))}
               </tbody>
@@ -1044,7 +1044,7 @@ const SceneSection04AITraits: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay segmentId="5.2" />
+      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -1088,12 +1088,12 @@ const SceneSection04Path: React.FC = () => {
           <div style={{ display: "flex", flexDirection: "column", gap: 0, marginBottom: 20 }}>
             {steps.map((step, i) => (
               <div key={i} style={{ display: "flex", gap: 20, alignItems: "flex-start", ...step.style }}>
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 36, flexShrink: 0 }}>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 48, flexShrink: 0 }}>
                   <div style={{
-                    width: 36, height: 36, borderRadius: "50%",
+                    width: 48, height: 48, borderRadius: "50%",
                     background: C.primary,
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700,
+                    fontFamily: "'Space Mono', monospace", fontSize: 18, fontWeight: 700,
                     color: "#000000", flexShrink: 0,
                   }}>{step.num}</div>
                   {i < 2 && (
@@ -1101,8 +1101,8 @@ const SceneSection04Path: React.FC = () => {
                   )}
                 </div>
                 <div style={{ paddingBottom: 28, flex: 1 }}>
-                  <h3 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: 15, fontWeight: 700, marginBottom: 4, color: C.text }}>{step.title}</h3>
-                  <p style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: 14, color: C.muted, lineHeight: 1.65, margin: 0 }}>{step.desc}</p>
+                  <h3 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: 28, fontWeight: 700, marginBottom: 6, color: C.text }}>{step.title}</h3>
+                  <p style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: 24, color: C.muted, lineHeight: 1.65, margin: 0 }}>{step.desc}</p>
                 </div>
               </div>
             ))}
@@ -1115,7 +1115,7 @@ const SceneSection04Path: React.FC = () => {
             background: "rgba(255,209,102,0.03)", ...quiz,
           }}>
             <div style={{
-              fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700,
+              fontFamily: "'Space Mono', monospace", fontSize: 18, fontWeight: 700,
               color: C.yellow, letterSpacing: "0.08em",
               textTransform: "uppercase" as const, marginBottom: 14,
               display: "flex", alignItems: "center", gap: 8,
@@ -1123,7 +1123,7 @@ const SceneSection04Path: React.FC = () => {
               <div style={{ width: 6, height: 6, background: C.yellow, borderRadius: 1, boxShadow: "0 0 6px #ffd166" }} />
               想一想
             </div>
-            <p style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", color: C.muted, fontSize: 15, lineHeight: 1.7, margin: 0 }}>
+            <p style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", color: C.muted, fontSize: 26, lineHeight: 1.7, margin: 0 }}>
               如果你現在可以立刻用自然語言「描述出」一個小工具，你會描述什麼？
               <br />試著用一、兩句話說說看——不用管技術可不可行，先想想你<strong style={{ color: C.text }}>真的想要</strong>什麼。
             </p>
@@ -1131,7 +1131,7 @@ const SceneSection04Path: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay segmentId="5.3" />
+      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -1210,7 +1210,7 @@ const SceneTakeaway: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay segmentId="6.1" />
+      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
