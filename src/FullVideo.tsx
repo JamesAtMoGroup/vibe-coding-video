@@ -3,6 +3,7 @@ import {
   AbsoluteFill,
   Audio,
   Sequence,
+  Video,
   staticFile,
   useCurrentFrame,
   useVideoConfig,
@@ -10,8 +11,6 @@ import {
   spring,
   Img,
 } from "remotion";
-import { Lottie } from "@remotion/lottie";
-import speakingData from "./speaking-animation.json";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Design System — exact match to (N)ch0-1.html CSS variables
@@ -35,32 +34,75 @@ const CONTAINER_W = 1500;
 const SUBTITLE_H  = 160;  // reserved at bottom for subtitles
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Audio segment durations (computed: Math.ceil(duration * 30) + 10)
+// Audio segment durations (updated from new audio files)
+// Segments 1.1 through 4.2 (first 9), then tail 5.1 through 6.1
 // ─────────────────────────────────────────────────────────────────────────────
 const SEGMENTS = [
-  { id: "1.1",  file: "0-1_1.1.wav",    frames: 1126 }, // 37.20s Hero
-  { id: "2.1",  file: "0-1_2.1.wav",    frames: 1006 }, // 33.18s Section01 Card1
-  { id: "2.2",  file: "0-1_2.2.wav",    frames:  985 }, // 32.50s Section01 Analogy
-  { id: "2.3",  file: "0-1_2.3.wav",    frames: 1303 }, // 43.08s Section01 Card2
-  { id: "3.0",  file: "0-1_3.0.wav",    frames: 2636 }, // 87.52s Section02 Card
-  { id: "3.1",  file: "0-1_3.1.wav",    frames: 3414 }, // 113.46s Section02 Usecases (dup removed)
-  { id: "3.2",  file: "0-1_3.2.wav",    frames: 1540 }, // 50.99s Section02 Leisure+Quiz
-  { id: "4.1",  file: "0-1_4.1.wav",    frames: 2288 }, // 75.91s Section03 AI Coding
-  { id: "4.2",  file: "0-1_4.2.wav",    frames: 1044 }, // 34.46s Section03 Vibe Coding def
-  { id: "4.3",  file: "0-1_4.3.wav",    frames: 2151 }, // 71.34s Section03 Analogy
-  { id: "5.1",  file: "0-1_5.1.wav",    frames: 1601 }, // 53.01s Section04 Vibe traits
-  { id: "5.2",  file: "0-1_5.2.wav",    frames:  836 }, // 27.53s Section04 AI traits
-  { id: "5.3",  file: "0-1_5.3.wav",    frames: 3144 }, // 104.44s Section04 Path+Quiz
-  { id: "6.1",  file: "0-1_6.1.wav",    frames: 2380 }, // 79.00s Takeaway
+  { id: "1.1",  file: "0-1_1.1.wav",  frames: 1144 },
+  { id: "2.1",  file: "0-1_2.1.wav",  frames: 1024 },
+  { id: "2.2",  file: "0-1_2.2.wav",  frames: 1003 },
+  { id: "2.3",  file: "0-1_2.3.wav",  frames: 1321 },
+  { id: "3.0",  file: "0-1_3.0.wav",  frames: 2654 },
+  { id: "3.1",  file: "0-1_3.1.wav",  frames: 3594 },
+  { id: "3.2",  file: "0-1_3.2.wav",  frames: 1558 },
+  { id: "4.1",  file: "0-1_4.1.wav",  frames: 2305 },
+  { id: "4.2",  file: "0-1_4.2.wav",  frames: 1062 },
+  // 4.3 is handled separately below (split into 3 parts with 2 MP4 inserts)
+  { id: "5.1",  file: "0-1_5.1.wav",  frames: 1618 },
+  { id: "5.2",  file: "0-1_5.2.wav",  frames:  854 },
+  { id: "5.3",  file: "0-1_5.3.wav",  frames: 3162 },
+  { id: "6.1",  file: "0-1_6.1.wav",  frames: 2398 },
 ] as const;
 
-// Cumulative start frames
-const SEG_STARTS = SEGMENTS.reduce((acc, seg, i) => {
-  acc.push(i === 0 ? 0 : acc[i - 1] + SEGMENTS[i - 1].frames);
+// First 9 segments (1.1 through 4.2) — cumulative starts
+const SEG_9 = SEGMENTS.slice(0, 9) as readonly { id: string; file: string; frames: number }[];
+const SEG_9_STARTS = SEG_9.reduce((acc, seg, i) => {
+  acc.push(i === 0 ? 0 : acc[i - 1] + SEG_9[i - 1].frames);
+  return acc;
+}, [] as number[]);
+const SEG_9_END = SEG_9_STARTS[8] + SEG_9[8].frames; // 4.2 ends here
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 4.3 split sequence with 2 MP4 inserts
+// ─────────────────────────────────────────────────────────────────────────────
+const F_43A_START  = SEG_9_END;
+const F_43A_END    = F_43A_START  + 865;
+const F_MP4_1_START = F_43A_END;
+const F_MP4_1_END   = F_MP4_1_START + 1677;
+const F_43B_START  = F_MP4_1_END;
+const F_43B_END    = F_43B_START  + 1083;
+const F_MP4_2_START = F_43B_END;
+const F_MP4_2_END   = F_MP4_2_START + 813;
+const F_43C_START  = F_MP4_2_END;
+const F_43C_END    = F_43C_START  + 240;
+
+// Tail segments (5.1 through 6.1) — start right after 4.3c
+const TAIL_SEGS = SEGMENTS.slice(9) as readonly { id: string; file: string; frames: number }[];
+const TAIL_STARTS = TAIL_SEGS.reduce((acc, seg, i) => {
+  acc.push(i === 0 ? F_43C_END : acc[i - 1] + TAIL_SEGS[i - 1].frames);
   return acc;
 }, [] as number[]);
 
-const TOTAL_FRAMES = SEG_STARTS[SEGMENTS.length - 1] + SEGMENTS[SEGMENTS.length - 1].frames;
+export const TOTAL_FRAMES = TAIL_STARTS[TAIL_SEGS.length - 1] + TAIL_SEGS[TAIL_SEGS.length - 1].frames;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SceneMediaInsert — full-screen video insert with fade in/out
+// ─────────────────────────────────────────────────────────────────────────────
+const SceneMediaInsert: React.FC<{ src: string }> = ({ src }) => {
+  const frame = useCurrentFrame();
+  const FADE = 15;
+  const opacity = interpolate(frame, [0, FADE], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  return (
+    <AbsoluteFill style={{ backgroundColor: "#000000" }}>
+      <div style={{ position: "absolute", inset: 0, opacity }}>
+        <Video
+          src={staticFile(src)}
+          style={{ width: "100%", height: "100%", objectFit: "contain" }}
+        />
+      </div>
+    </AbsoluteFill>
+  );
+};
 
 // ─────────────────────────────────────────────────────────────────────────────
 // useFadeUp — replicates HTML `animation: fadeUp 0.6s ease both`
@@ -85,6 +127,26 @@ function useFocusHighlight(startFrame: number, duration = 75) {
     borderColor: `rgba(124,255,178,${(0.14 + intensity * 0.5).toFixed(2)})`,
   };
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// useSceneTransition + SceneScroller — scroll-up animation between scenes
+// ─────────────────────────────────────────────────────────────────────────────
+function useSceneTransition(): React.CSSProperties {
+  const frame = useCurrentFrame();
+  const { durationInFrames, fps } = useVideoConfig();
+  const TRANS = 22;
+  const inProg = spring({ frame, fps, config: { damping: 28, stiffness: 160 } });
+  const inY = interpolate(inProg, [0, 1], [700, 0], clamp);
+  const outF = Math.max(0, frame - (durationInFrames - TRANS));
+  const outProg = spring({ frame: outF, fps, config: { damping: 28, stiffness: 160 } });
+  const outY = interpolate(outProg, [0, 1], [0, -700], clamp);
+  return { transform: `translateY(${inY + outY}px)` };
+}
+
+const SceneScroller: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const trans = useSceneTransition();
+  return <div style={{ position: "absolute", inset: 0, ...trans }}>{children}</div>;
+};
 
 // ─────────────────────────────────────────────────────────────────────────────
 // ProgressBar
@@ -135,136 +197,320 @@ const ProgressBar: React.FC<{ progressPct?: number }> = ({ progressPct = 8 }) =>
 // ─────────────────────────────────────────────────────────────────────────────
 // iMessage Notification Callout — S=2 for Vibe Coding 1080p
 // ─────────────────────────────────────────────────────────────────────────────
+// ─── iMessage constants (S=2, exact match to article-video S=3 scaled down) ──
 const S             = 2;
-const NOTIF_W       = 290 * S;   // 580px  fixed width
-const NOTIF_TOP     = 12  * S;   // 24px   gap below nav
-const NOTIF_RIGHT   = 20  * S;   // 40px   from right edge
-const NOTIF_SLIDE_H = 110 * S;   // 220px  slide-in height
-const NOTIF_SLOT_H  = 100 * S;   // 200px  per slot (card height + gap)
+const NOTIF_W       = 290 * S;   // 580px
+const NOTIF_TOP     = 12  * S;   // 24px  gap below nav
+const NOTIF_RIGHT   = 20  * S;   // 40px  from right edge
+const NOTIF_SLOT    = 148 * S;   // 296px per slot (card height + gap)
+const NOTIF_SLIDE_H = 110 * S;   // 220px slide-in distance
 const FADE_OUT_F    = 50;
 
-type Callout = {
-  from: number; to: number;
-  label: string; text: string;
-  side?: "left" | "right"; yPct?: number; // kept for compat, ignored in layout
-};
-
-// Compute smooth Y offset for stacking: each newer active callout pushes this one down
-// Pure function — no hooks, takes frame/fps as params
-function calcStackOffset(c: Callout, allCallouts: Callout[], frame: number, fps: number): number {
-  let offset = 0;
-  for (const other of allCallouts) {
-    if (other.from <= c.from) continue; // only newer cards push this one down
-    if (frame < other.from) continue;   // not started yet
-    const localF = frame - other.from;
-    if (frame <= other.to) {
-      const p = spring({ frame: localF, fps, config: { damping: 22, stiffness: 100 } });
-      offset += p * NOTIF_SLOT_H;
-    } else {
-      const expiredF = frame - other.to;
-      const p = spring({ frame: expiredF, fps, config: { damping: 22, stiffness: 100 } });
-      offset += (1 - p) * NOTIF_SLOT_H;
-    }
-  }
-  return offset;
-}
+type Callout = { from: number; to: number; sender: string; text: string; };
 
 const CalloutCard: React.FC<{ c: Callout; allCallouts: Callout[] }> = ({ c, allCallouts }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // All hooks must be called before any conditional returns
-  const stackOffset = calcStackOffset(c, allCallouts, frame, fps);
-
-  if (frame < c.from || frame > c.to) return null;
-
   const localF   = frame - c.from;
   const duration = c.to - c.from;
+  const totalVisible = duration + FADE_OUT_F;
 
-  // Slide DOWN from above nav bar
-  const progress  = spring({ frame: localF, fps, config: { damping: 22, stiffness: 130 } });
-  const slideY    = interpolate(progress, [0, 1], [-NOTIF_SLIDE_H, 0], clamp);
-  const scaleIn   = interpolate(progress, [0, 1], [0.94, 1], clamp);
+  if (localF < 0 || localF >= totalVisible) return null;
 
-  // Fade in fast, fade out slowly over last FADE_OUT_F frames
-  const fadeIn    = interpolate(localF, [0, 8], [0, 1], clamp);
-  const fadeOut   = interpolate(localF, [duration - FADE_OUT_F, duration], [1, 0], clamp);
-  const opacity   = Math.min(fadeIn, fadeOut);
+  // Stack push-down from newer notifications
+  let totalYPush = 0;
+  for (const newer of allCallouts) {
+    if (newer.from <= c.from) continue;
+    if (frame < newer.from) continue;
+    const pushF = frame - newer.from;
+    const pushP = spring({ frame: pushF, fps, config: { damping: 22, stiffness: 120 } });
+    totalYPush += NOTIF_SLOT * pushP;
+  }
 
-  // Typewriter (starts 10f after card arrives)
-  const CHARS_PER_FRAME = 1.4;
+  // Entry: slide down from top
+  const entryP = spring({ frame: localF, fps, config: { damping: 22, stiffness: 130 } });
+  const slideY = interpolate(entryP, [0, 1], [-NOTIF_SLIDE_H, 0], clamp);
+
+  // Opacity: fade in → hold → slow fade out
+  const opacity = interpolate(
+    localF,
+    [0, 10, duration, totalVisible],
+    [0, 1, 1, 0],
+    clamp,
+  );
+
+  // Stack depth fade
+  const stackDepth = totalYPush / NOTIF_SLOT;
+  const depthAlpha = interpolate(stackDepth, [0, 1, 2], [1, 0.65, 0.35], clamp);
+
+  // Typewriter — 0.85 chars/frame, starts at frame 14
+  const CHARS_PER_FRAME = 0.85;
   const charsVisible = interpolate(
-    Math.max(0, localF - 10),
+    Math.max(0, localF - 14),
     [0, c.text.length / CHARS_PER_FRAME],
     [0, c.text.length],
-    clamp
+    clamp,
   );
   const displayText = c.text.slice(0, Math.floor(charsVisible));
+  const cursor = localF % 20 < 10 && charsVisible < c.text.length ? "|" : "";
+
+  const iconSize   = 38 * S;
+  const fontBase   = 11 * S;
+  const fontSender = 13 * S;
+  const fontBody   = 13 * S;
 
   return (
     <div style={{
       position: "absolute",
-      top: NAV_H + NOTIF_TOP + stackOffset,
+      top: NAV_H + NOTIF_TOP + totalYPush,
       right: NOTIF_RIGHT,
-      zIndex: 30,
-      maxWidth: NOTIF_W,
-      opacity,
-      transform: `translateY(${slideY}px) scale(${scaleIn})`,
+      width: NOTIF_W,
+      transform: `translateY(${slideY}px)`,
+      opacity: opacity * depthAlpha,
+      pointerEvents: "none",
+      zIndex: 100,
     }}>
       <div style={{
-        background: "rgba(38, 38, 40, 0.90)",
-        backdropFilter: "blur(28px)",
-        WebkitBackdropFilter: "blur(28px)",
-        borderRadius: 18,
-        padding: "14px 18px 18px",
-        boxShadow: "0 16px 48px rgba(0,0,0,0.75), 0 1px 0 rgba(255,255,255,0.08) inset",
-        border: "1px solid rgba(255,255,255,0.11)",
+        background: "rgba(28,28,30,0.9)",
+        backdropFilter: "blur(48px)",
+        WebkitBackdropFilter: "blur(48px)",
+        border: `${1 * S}px solid rgba(255,255,255,0.13)`,
+        borderRadius: 14 * S,
+        boxShadow: `0 ${8 * S}px ${40 * S}px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.06) inset`,
+        padding: `${10 * S}px ${14 * S}px`,
+        display: "flex",
+        gap: 11 * S,
+        alignItems: "flex-start",
       }}>
-        {/* Header: Messages icon + "訊息" + "剛剛" */}
-        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
-          <div style={{
-            width: 28, height: 28, borderRadius: 7, flexShrink: 0,
-            background: "linear-gradient(145deg, #3cdb6e, #28c95a)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            boxShadow: "0 2px 6px rgba(40,201,90,0.4)",
-          }}>
-            <div style={{ width: 15, height: 12, borderRadius: "6px 6px 6px 2px", background: "#fff" }} />
+        {/* Messages app icon */}
+        <div style={{
+          width: iconSize, height: iconSize,
+          borderRadius: 9 * S,
+          background: "linear-gradient(145deg, #3DDC6A 0%, #25A244 100%)",
+          boxShadow: `0 ${2 * S}px ${10 * S}px rgba(52,199,89,0.45)`,
+          flexShrink: 0,
+          display: "flex", alignItems: "center", justifyContent: "center",
+        }}>
+          {/* Speech bubble */}
+          <div style={{ position: "relative", width: 22 * S, height: 20 * S }}>
+            <div style={{
+              position: "absolute", top: 0, left: 0,
+              width: 22 * S, height: 16 * S,
+              background: "white", borderRadius: 5 * S, opacity: 0.95,
+            }} />
+            <div style={{
+              position: "absolute", bottom: 0, left: 4 * S,
+              width: 0, height: 0,
+              borderLeft: `${5 * S}px solid transparent`,
+              borderTop: `${6 * S}px solid white`,
+              opacity: 0.95,
+            }} />
           </div>
-          <span style={{
-            fontFamily: "'Noto Sans TC','PingFang TC',sans-serif",
-            fontSize: 18, fontWeight: 500,
-            color: "rgba(255,255,255,0.45)", flex: 1,
-          }}>訊息</span>
-          <span style={{
-            fontFamily: "'Noto Sans TC','PingFang TC',sans-serif",
-            fontSize: 15, color: "rgba(255,255,255,0.30)",
-          }}>剛剛</span>
         </div>
 
-        {/* Sender / label */}
-        <div style={{
-          fontFamily: "'Noto Sans TC','PingFang TC',sans-serif",
-          fontSize: 22, fontWeight: 700,
-          color: "rgba(255,255,255,0.88)", marginBottom: 6,
-        }}>{c.label}</div>
-
-        {/* Message body — typewriter */}
-        <div style={{
-          fontFamily: "'Noto Sans TC','PingFang TC',sans-serif",
-          fontSize: 34, fontWeight: 800,
-          color: "#ffffff", lineHeight: 1.35,
-          whiteSpace: "pre-wrap" as const,
-          letterSpacing: "-0.02em",
-        }}>
-          {displayText}
-          {Math.floor(charsVisible) < c.text.length && (
+        {/* Text content */}
+        <div style={{ flex: 1, minWidth: 0 }}>
+          {/* App name + timestamp */}
+          <div style={{
+            display: "flex", justifyContent: "space-between", alignItems: "center",
+            marginBottom: 3 * S,
+          }}>
             <span style={{
-              display: "inline-block", width: 2, height: "0.85em",
-              background: "rgba(255,255,255,0.7)", marginLeft: 3,
-              verticalAlign: "text-bottom",
-              opacity: localF % 16 < 8 ? 1 : 0,
-            }} />
-          )}
+              fontFamily: "-apple-system,'SF Pro Text','PingFang TC',system-ui,sans-serif",
+              fontSize: fontBase, fontWeight: 600,
+              color: "rgba(255,255,255,0.45)", letterSpacing: "0.01em",
+            }}>iMessage</span>
+            <span style={{
+              fontFamily: "-apple-system,'SF Pro Text',system-ui,sans-serif",
+              fontSize: fontBase, color: "rgba(255,255,255,0.3)",
+            }}>now</span>
+          </div>
+
+          {/* Sender name */}
+          <div style={{
+            fontFamily: "-apple-system,'SF Pro Text','PingFang TC',system-ui,sans-serif",
+            fontSize: fontSender, fontWeight: 700,
+            color: "rgba(255,255,255,0.92)",
+            marginBottom: 2 * S, letterSpacing: "-0.01em",
+            whiteSpace: "nowrap" as const, overflow: "hidden", textOverflow: "ellipsis",
+          }}>{c.sender}</div>
+
+          {/* Message body — typewriter */}
+          <div style={{
+            fontFamily: "-apple-system,'SF Pro Text','PingFang TC',system-ui,sans-serif",
+            fontSize: fontBody, fontWeight: 400,
+            color: "rgba(255,255,255,0.60)",
+            lineHeight: 1.45, letterSpacing: "-0.005em",
+            minHeight: fontBody * 1.45,
+          }}>{displayText}{cursor}</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SVG Supplemental Animations
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Two-node horizontal flow: [A] → [B] — draws arrow then fades out */
+const SVGFlow2: React.FC<{ startFrame: number; nodeA: string; nodeB: string; label?: string }> = ({ startFrame, nodeA, nodeB, label = "外包" }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const f = frame - startFrame;
+  if (f < 0 || f > 200) return null;
+  const fadeIn  = interpolate(f, [0, 12], [0, 1], clamp);
+  const fadeOut = interpolate(f, [150, 200], [1, 0], clamp);
+  const opacity = Math.min(fadeIn, fadeOut);
+  const progress = spring({ frame: f, fps, config: { damping: 22, stiffness: 80 } });
+  const arrowW = interpolate(progress, [0, 1], [0, 140], clamp);
+  const nodeScale = spring({ frame: Math.max(0, f), fps, config: { damping: 20, stiffness: 110 } });
+  return (
+    <div style={{ position: "absolute", bottom: SUBTITLE_H + 32, left: "50%", transform: "translateX(-50%)", opacity, zIndex: 20, pointerEvents: "none" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
+        <div style={{
+          background: "rgba(124,255,178,0.12)", border: "1.5px solid rgba(124,255,178,0.4)",
+          borderRadius: 14, padding: "18px 30px",
+          fontFamily: "'Noto Sans TC',sans-serif", fontSize: 30, fontWeight: 700, color: C.primary,
+          transform: `scale(${nodeScale})`,
+          boxShadow: "0 0 18px rgba(124,255,178,0.15)",
+        }}>{nodeA}</div>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: arrowW, overflow: "hidden" }}>
+          <span style={{ fontFamily: "'Noto Sans TC',sans-serif", fontSize: 20, color: C.muted, marginBottom: 2 }}>{label}</span>
+          <div style={{ width: "100%", height: 2, background: C.primary, position: "relative" }}>
+            <div style={{ position: "absolute", right: -1, top: -5, width: 0, height: 0, borderTop: "6px solid transparent", borderBottom: "6px solid transparent", borderLeft: `10px solid ${C.primary}` }} />
+          </div>
+        </div>
+        <div style={{
+          background: "rgba(124,255,178,0.12)", border: "1.5px solid rgba(124,255,178,0.4)",
+          borderRadius: 14, padding: "18px 30px",
+          fontFamily: "'Noto Sans TC',sans-serif", fontSize: 30, fontWeight: 700, color: C.primary,
+          transform: `scale(${Math.min(1, Math.max(0, interpolate(f, [8, 20], [0, 1], clamp)))})`,
+          boxShadow: "0 0 18px rgba(124,255,178,0.15)",
+        }}>{nodeB}</div>
+      </div>
+    </div>
+  );
+};
+
+/** Time comparison bar chart: tall red bar vs tiny green bar */
+const SVGTimeBar: React.FC<{ startFrame: number; labelA: string; labelB: string; tagline?: string }> = ({ startFrame, labelA, labelB, tagline }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const f = frame - startFrame;
+  if (f < 0 || f > 230) return null;
+  const fadeOut = interpolate(f, [185, 230], [1, 0], clamp);
+  const progressA = spring({ frame: Math.max(0, f - 5), fps, config: { damping: 22, stiffness: 60 } });
+  const progressB = spring({ frame: Math.max(0, f - 25), fps, config: { damping: 22, stiffness: 60 } });
+  const barAH = interpolate(progressA, [0, 1], [0, 130], clamp);
+  const barBH = interpolate(progressB, [0, 1], [0, 14], clamp);
+  const labelFade = interpolate(f, [30, 50], [0, 1], clamp);
+  return (
+    <div style={{
+      position: "absolute", bottom: SUBTITLE_H + 28, right: 140,
+      opacity: fadeOut, zIndex: 20, pointerEvents: "none",
+      background: "rgba(0,0,0,0.75)", backdropFilter: "blur(12px)",
+      WebkitBackdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.08)",
+      borderRadius: 18, padding: "20px 28px",
+    }}>
+      <div style={{ display: "flex", alignItems: "flex-end", gap: 24 }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+          <div style={{ width: 52, height: barAH, background: "rgba(255,80,80,0.6)", borderRadius: "6px 6px 0 0", border: "1px solid rgba(255,80,80,0.3)" }} />
+          <span style={{ fontFamily: "'Noto Sans TC',sans-serif", fontSize: 18, color: "rgba(255,120,120,0.85)", opacity: labelFade, textAlign: "center", maxWidth: 80 }}>{labelA}</span>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+          <div style={{ width: 52, height: barBH, background: "rgba(124,255,178,0.7)", borderRadius: "6px 6px 0 0", border: "1px solid rgba(124,255,178,0.4)" }} />
+          <span style={{ fontFamily: "'Noto Sans TC',sans-serif", fontSize: 18, color: C.primary, opacity: labelFade, textAlign: "center", maxWidth: 80 }}>{labelB}</span>
+        </div>
+      </div>
+      {tagline && (
+        <div style={{ fontFamily: "'Space Mono',monospace", fontSize: 18, color: C.primary, opacity: labelFade, marginTop: 10, textAlign: "center" }}>{tagline}</div>
+      )}
+    </div>
+  );
+};
+
+/** Chat-bubble diagram: YOU → AI */
+const SVGChatFlow: React.FC<{ startFrame: number }> = ({ startFrame }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const f = frame - startFrame;
+  if (f < 0 || f > 210) return null;
+  const fadeOut = interpolate(f, [165, 210], [1, 0], clamp);
+  const leftScale = spring({ frame: Math.max(0, f), fps, config: { damping: 22, stiffness: 100 } });
+  const rightScale = spring({ frame: Math.max(0, f - 18), fps, config: { damping: 22, stiffness: 100 } });
+  const arrowOp = interpolate(f, [15, 35], [0, 1], clamp);
+  return (
+    <div style={{
+      position: "absolute", bottom: SUBTITLE_H + 28, right: 80,
+      opacity: fadeOut, zIndex: 20, pointerEvents: "none",
+      background: "rgba(0,0,0,0.78)", backdropFilter: "blur(14px)",
+      WebkitBackdropFilter: "blur(14px)", border: "1px solid rgba(124,255,178,0.15)",
+      borderRadius: 20, padding: "20px 24px",
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <div style={{
+          background: "rgba(124,255,178,0.1)", border: "1px solid rgba(124,255,178,0.3)",
+          borderRadius: 14, padding: "12px 18px", transform: `scale(${leftScale})`,
+          maxWidth: 200,
+        }}>
+          <div style={{ fontFamily: "'Noto Sans TC',sans-serif", fontSize: 18, color: C.muted, marginBottom: 4 }}>你說</div>
+          <div style={{ fontFamily: "'Noto Sans TC',sans-serif", fontSize: 22, color: C.text, lineHeight: 1.4 }}>我想要一個旅遊投票頁面</div>
+        </div>
+        <div style={{ opacity: arrowOp, fontSize: 28, color: C.primary }}>→</div>
+        <div style={{
+          background: "rgba(124,255,178,0.14)", border: "1px solid rgba(124,255,178,0.4)",
+          borderRadius: 14, padding: "12px 18px", transform: `scale(${rightScale})`,
+          textAlign: "center",
+        }}>
+          <div style={{ fontFamily: "'Space Mono',monospace", fontSize: 22, color: C.primary, marginBottom: 6 }}>AI</div>
+          <div style={{ fontFamily: "'Noto Sans TC',sans-serif", fontSize: 28, color: "#7cffb2" }}>✓ 完成</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/** 甲方/乙方 role diagram */
+const SVGRoleDiagram: React.FC<{ startFrame: number }> = ({ startFrame }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const f = frame - startFrame;
+  if (f < 0 || f > 240) return null;
+  const fadeOut = interpolate(f, [195, 240], [1, 0], clamp);
+  const leftScale = spring({ frame: Math.max(0, f), fps, config: { damping: 22, stiffness: 100 } });
+  const rightScale = spring({ frame: Math.max(0, f - 12), fps, config: { damping: 22, stiffness: 100 } });
+  const arrowOp = interpolate(f, [10, 28], [0, 1], clamp);
+  return (
+    <div style={{
+      position: "absolute", bottom: SUBTITLE_H + 28, right: 80,
+      opacity: fadeOut, zIndex: 20, pointerEvents: "none",
+      background: "rgba(0,0,0,0.80)", backdropFilter: "blur(14px)",
+      WebkitBackdropFilter: "blur(14px)", border: "1px solid rgba(124,255,178,0.15)",
+      borderRadius: 20, padding: "20px 28px",
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+        <div style={{
+          background: "rgba(124,255,178,0.1)", border: "1px solid rgba(124,255,178,0.35)",
+          borderRadius: 14, padding: "14px 22px", transform: `scale(${leftScale})`, textAlign: "center",
+        }}>
+          <div style={{ fontFamily: "'Noto Sans TC',sans-serif", fontSize: 18, color: C.muted, marginBottom: 4 }}>你</div>
+          <div style={{ fontFamily: "'Noto Sans TC',sans-serif", fontSize: 26, color: C.primary, fontWeight: 700 }}>甲方</div>
+          <div style={{ fontFamily: "'Noto Sans TC',sans-serif", fontSize: 18, color: C.muted }}>需求提出者</div>
+        </div>
+        <div style={{ opacity: arrowOp, textAlign: "center" }}>
+          <div style={{ fontFamily: "'Noto Sans TC',sans-serif", fontSize: 20, color: C.muted, marginBottom: 4 }}>需求</div>
+          <div style={{ fontSize: 24, color: C.primary }}>⇄</div>
+          <div style={{ fontFamily: "'Noto Sans TC',sans-serif", fontSize: 20, color: C.muted, marginTop: 4 }}>程式</div>
+        </div>
+        <div style={{
+          background: "rgba(124,255,178,0.1)", border: "1px solid rgba(124,255,178,0.35)",
+          borderRadius: 14, padding: "14px 22px", transform: `scale(${rightScale})`, textAlign: "center",
+        }}>
+          <div style={{ fontFamily: "'Noto Sans TC',sans-serif", fontSize: 18, color: C.muted, marginBottom: 4 }}>AI</div>
+          <div style={{ fontFamily: "'Noto Sans TC',sans-serif", fontSize: 26, color: C.primary, fontWeight: 700 }}>乙方</div>
+          <div style={{ fontFamily: "'Noto Sans TC',sans-serif", fontSize: 18, color: C.muted }}>工程師</div>
         </div>
       </div>
     </div>
@@ -290,39 +536,6 @@ const BgOrbs: React.FC = () => {
         pointerEvents: "none",
       }} />
     </>
-  );
-};
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Speaker Lottie — bottom-right corner circle
-// ─────────────────────────────────────────────────────────────────────────────
-const AVATAR_SIZE   = 200;
-const AVATAR_RIGHT  = 40;
-const AVATAR_BOTTOM = 40;
-
-const AvatarOverlay: React.FC = () => {
-  const frame  = useCurrentFrame();
-  const fadeIn = interpolate(frame, [0, 20], [0, 1], clamp);
-
-  return (
-    <div style={{
-      position: "absolute",
-      bottom: AVATAR_BOTTOM,
-      right: AVATAR_RIGHT,
-      width: AVATAR_SIZE,
-      height: AVATAR_SIZE,
-      borderRadius: "50%",
-      overflow: "hidden",
-      border: "3px solid rgba(124,255,178,0.6)",
-      boxShadow: "0 0 20px rgba(124,255,178,0.25), 0 4px 16px rgba(0,0,0,0.6)",
-      opacity: fadeIn,
-      zIndex: 20,
-    }}>
-      <Lottie
-        animationData={speakingData}
-        style={{ width: "100%", height: "100%" }}
-      />
-    </div>
   );
 };
 
@@ -405,16 +618,14 @@ const SceneHero: React.FC = () => {
   const sub   = useFadeUp(75);
 
   const CALLOUTS_HERO: Callout[] = [
-    { from: 133, to: 300,  label: "很多人的感受", text: "「寫程式」，感覺離我很遠",    side: "right", yPct: 0.28 },
-    { from: 302, to: 516,  label: "好消息",       text: "零技術背景，也可以",           side: "right", yPct: 0.22 },
-    { from: 518, to: 836,  label: "關鍵",         text: "靠 AI 的幫助，讓電腦替你做事", side: "right", yPct: 0.55 },
-    { from: 838, to: 1140, label: "本章主題",     text: "寫程式，到底是什麼",           side: "right", yPct: 0.38 },
+    { from: 520, to: 730, sender: "完全零基礎的我", text: "原來不用寫程式也能讓電腦幫我做事？" },
   ];
 
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
       <BgOrbs />
       <ProgressBar progressPct={2} />
+      <SceneScroller>
       <div style={{
         position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
@@ -447,8 +658,8 @@ const SceneHero: React.FC = () => {
           </div>
         </div>
       </div>
+      </SceneScroller>
       {CALLOUTS_HERO.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS_HERO} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -462,15 +673,14 @@ const SceneSection01Card1: React.FC = () => {
   const cardHL = useFocusHighlight(30);
 
   const CALLOUTS: Callout[] = [
-    { from: 150, to: 508,  label: "核心概念", text: "把人要做的事，外包給電腦",      side: "right", yPct: 0.3 },
-    { from: 510, to: 628,  label: "正式名稱", text: "自動化",                         side: "right", yPct: 0.4 },
-    { from: 630, to: 1118, label: "條件",     text: "固定步驟，電腦可執行",           side: "right", yPct: 0.3 },
+    { from: 490, to: 700, sender: "學員", text: "原來這就叫做自動化！工作上步驟固定的事都能交給電腦？" },
   ];
 
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
       <BgOrbs />
       <ProgressBar progressPct={10} />
+      <SceneScroller>
       <div style={{
         position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
@@ -487,8 +697,9 @@ const SceneSection01Card1: React.FC = () => {
           </Card>
         </div>
       </div>
+      <SVGFlow2 startFrame={341} nodeA="人工作" nodeB="電腦執行" label="外包" />
+      </SceneScroller>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -500,18 +711,18 @@ const SceneSection01Analogy: React.FC = () => {
   const header    = useFadeUp(15);
   const card      = useFadeUp(25);
   const cardHL    = useFocusHighlight(25);
-  const analogy   = useFadeUp(397);
-  const analogyHL = useFocusHighlight(397);
+  const analogy   = useFadeUp(50);
+  const analogyHL = useFocusHighlight(50);
 
   const CALLOUTS: Callout[] = [
-    { from: 407, to: 888,  label: "比喻",   text: "訓練，永不出錯的助手",   side: "right", yPct: 0.35 },
-    { from: 890, to: 1148, label: "關鍵",   text: "說清楚規則，剩下交給他", side: "right", yPct: 0.4 },
+    { from: 878, to: 984, sender: "非工程師朋友", text: "規則說清楚，剩下交給它？聽起來超簡單！" },
   ];
 
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
       <BgOrbs />
       <ProgressBar progressPct={15} />
+      <SceneScroller>
       <div style={{
         position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
@@ -535,8 +746,8 @@ const SceneSection01Analogy: React.FC = () => {
           </AnalogyBox>
         </div>
       </div>
+      </SceneScroller>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -545,55 +756,60 @@ const SceneSection01Analogy: React.FC = () => {
 // SCENE 4 — Section 01 Card 2: 廣義vs狹義 (segment 2.3)
 // ─────────────────────────────────────────────────────────────────────────────
 const SceneSection01Card2: React.FC = () => {
-  const header    = useFadeUp(15);
-  const card1     = useFadeUp(25);
-  const card1HL   = useFocusHighlight(25);
-  const analogy   = useFadeUp(35);
-  const analogyHL = useFocusHighlight(35);
-  const card2     = useFadeUp(200);
-  const card2HL   = useFocusHighlight(200);
+  const header  = useFadeUp(15);
+  const broad   = useFadeUp(30);
+  const broadHL = useFocusHighlight(30);
+  const narrow  = useFadeUp(671);  // VTT 00:22.380 when narrator says "但狹義的寫程式"
+  const narrowHL = useFocusHighlight(671);
 
   const CALLOUTS: Callout[] = [
-    { from: 210, to: 688,  label: "廣義來說", text: "試算表公式，也是寫程式",         side: "right", yPct: 0.3 },
-    { from: 690, to: 1377, label: "狹義來說", text: "正規程式語言：網頁・App・智慧家電", side: "right", yPct: 0.45 },
+    { from: 529, to: 749, sender: "業務同仁", text: "等等⋯我每天用的 Excel 公式就是寫程式？！" },
   ];
 
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
       <BgOrbs />
       <ProgressBar progressPct={20} />
+      <SceneScroller>
       <div style={{
         position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
         overflow: "hidden", zIndex: 10,
       }}>
-        <div style={{ paddingTop: 56 }}>
+        <div style={{ paddingTop: 48 }}>
           <SectionHeader num="01" title="寫程式，究竟是什麼？" fadeStyle={header} />
-          <Card fadeStyle={card1} highlightStyle={card1HL}>
-            <strong style={{ color: C.text }}>寫程式的本質，就是把「人要做的事」轉交給電腦去執行。</strong>
-            <br />
-            這件事有個更正式的名字，叫做{" "}
-            <span style={{ color: C.primary, fontWeight: 700 }}>自動化</span>
-            。
-          </Card>
-          <AnalogyBox label="一句話理解" fadeStyle={analogy} highlightStyle={analogyHL}>
-            寫程式，就像是訓練一個永遠不會出錯的助手。說清楚規則，剩下交給它。
-          </AnalogyBox>
+          {/* 廣義 */}
           <div style={{
             background: C.surface, border: `1px solid ${C.border}`,
-            borderRadius: 22, padding: "36px 44px", marginBottom: 20, ...card2, ...card2HL,
+            borderRadius: 22, padding: "28px 40px", marginBottom: 16,
+            ...broad, ...broadHL,
           }}>
-            <p style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", fontSize: 36, color: C.muted, lineHeight: 1.8, margin: 0 }}>
-              廣義來說，試算表裡的公式也算是一種「寫程式」——每一條公式就是給電腦的一道指令，告訴它「用這個規則算出結果」。
-              <br /><br />
-              但狹義的「程式」，指的是用正規的程式語言，寫出我們日常生活中會用到的各種軟體：
-              <span style={{ color: C.primary, fontWeight: 700 }}>你正在瀏覽的網頁、手機裡的各種 App，甚至是家裡各種智慧家電的控制系統</span>……這些東西背後，都是程式在運作。
+            <div style={{
+              fontFamily: "'Space Mono',monospace", fontSize: 18, color: C.primary,
+              letterSpacing: "0.06em", marginBottom: 8,
+            }}>廣義</div>
+            <p style={{ fontFamily: "'Noto Sans TC','PingFang TC',sans-serif", fontSize: 34, color: C.muted, lineHeight: 1.7, margin: 0 }}>
+              試算表裡的公式也算是一種「寫程式」——每一條公式就是給電腦的一道指令，告訴它「用這個規則算出結果」。
+            </p>
+          </div>
+          {/* 狹義 */}
+          <div style={{
+            background: C.surface, border: `1px solid ${C.border}`,
+            borderRadius: 22, padding: "28px 40px", marginBottom: 16,
+            ...narrow, ...narrowHL,
+          }}>
+            <div style={{
+              fontFamily: "'Space Mono',monospace", fontSize: 18, color: C.muted,
+              letterSpacing: "0.06em", marginBottom: 8,
+            }}>狹義</div>
+            <p style={{ fontFamily: "'Noto Sans TC','PingFang TC',sans-serif", fontSize: 34, color: C.muted, lineHeight: 1.7, margin: 0 }}>
+              正規的程式語言，用來建出我們日常生活中用到的各種軟體：<span style={{ color: C.primary, fontWeight: 700 }}>網頁、App、智慧家電的控制系統</span>……背後都是程式在運作。
             </p>
           </div>
         </div>
       </div>
+      </SceneScroller>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -610,17 +826,15 @@ const SceneSection02Intro: React.FC = () => {
   const case3  = useFadeUp(1910);
 
   const CALLOUTS: Callout[] = [
-    { from: 120,  to: 838,  label: "關鍵問題",  text: "這跟我，有什麼關係？",        side: "right", yPct: 0.3  },
-    { from: 840,  to: 1438, label: "情境一",    text: "大量重複的工作",              side: "right", yPct: 0.4  },
-    { from: 1440, to: 1978, label: "情境二",    text: "手動輸入，容易失誤",            side: "right", yPct: 0.35 },
-    { from: 1980, to: 2638, label: "情境三",    text: "定期收集，整合資訊",            side: "right", yPct: 0.4  },
-    { from: 2640, to: 2779, label: "結論",      text: "適合交給小幫手執行",          side: "right", yPct: 0.3  },
+    { from: 1108, to: 1308, sender: "行政助理小美", text: "每週整理報表超花時間，原來我最需要這個！" },
+    { from: 1560, to: 1790, sender: "業務主管", text: "手動輸入 CRM 常打錯，這問題可以解決？" },
   ];
 
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
       <BgOrbs />
       <ProgressBar progressPct={28} />
+      <SceneScroller>
       <div style={{
         position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
@@ -663,8 +877,8 @@ const SceneSection02Intro: React.FC = () => {
           </div>
         </div>
       </div>
+      </SceneScroller>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -673,44 +887,76 @@ const SceneSection02Intro: React.FC = () => {
 // SCENE 6 — Section 02 Usecases: 具體場景 (segment 3.1)
 // ─────────────────────────────────────────────────────────────────────────────
 const SceneSection02Usecases: React.FC = () => {
-  const header    = useFadeUp(15);
-  const analogy   = useFadeUp(25);
-  const analogyHL = useFocusHighlight(25);
-  const scene2    = useFadeUp(1790);
-  const scene3    = useFadeUp(2810);
+  const header  = useFadeUp(15);
+  const card1   = useFadeUp(25);
+  const card1HL = useFocusHighlight(25);
+  const card2   = useFadeUp(1342);  // VTT 00:44.720 — narrator starts CSV scenario
+  const card2HL = useFocusHighlight(1342);
+  const card3   = useFadeUp(2221);  // VTT 01:14.020 — narrator starts price tracker
+  const card3HL = useFocusHighlight(2221);
 
   const CALLOUTS: Callout[] = [
-    { from: 1039, to: 1847, label: "場景一",    text: "200 封信，一次送出",       side: "right", yPct: 0.3 },
-    { from: 1849, to: 2867, label: "場景二",    text: "兩小時縮短到幾秒",         side: "right", yPct: 0.4 },
-    { from: 2869, to: 3257, label: "場景三",    text: "每天早上，自動通知降價",   side: "right", yPct: 0.35 },
-    { from: 3259, to: 3414, label: "現在就能做到", text: "AI 時代，都可以實現",   side: "right", yPct: 0.3 },
+    { from:  654, to:  904, sender: "行銷專員",  text: "200封邀請信我都是一封一封寄的⋯" },
+    { from: 2400, to: 2650, sender: "電商賣家",  text: "我追蹤競品價格都靠手動，原來可以自動化！" },
+    { from: 3210, to: 3460, sender: "同事小明",  text: "聽起來很夢幻⋯但真的可以做到嗎？" },
   ];
 
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
       <BgOrbs />
       <ProgressBar progressPct={38} />
+      <SceneScroller>
       <div style={{
         position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
         overflow: "hidden", zIndex: 10,
       }}>
-        <div style={{ paddingTop: 56 }}>
+        <div style={{ paddingTop: 40 }}>
           <SectionHeader num="02" title="非工程師，可以用寫程式做什麼？" fadeStyle={header} />
-          <AnalogyBox label="具體例子" fadeStyle={analogy} highlightStyle={analogyHL}>
-            <strong style={{ color: "#ffffff" }}>場景一：</strong>你負責活動行銷，每次寄邀請信都要開 Excel、一行一行複製姓名改稱謂、一封一封手動寄出。
-            寫一個自動寄信程式，就能讓電腦替你把 200 封個人化的信件，在指定時間一次送出。
-            <br /><br />
-            <strong style={{ color: "#ffffff", ...scene2 as any }}>場景二：</strong>你每個月要從四、五個不同的系統下載 CSV 報表、手動合併再計算業績。
-            一個自動合併報表的小程式，能讓這件事從兩小時縮短到幾秒鐘。
-            <br /><br />
-            <strong style={{ color: "#ffffff", ...scene3 as any }}>場景三：</strong>你想追蹤某個電商平台上特定商品的價格變化。
-            寫一個定時抓取資料的程式，每天早上自動通知你，不用手動一次次重新整理頁面。
-          </AnalogyBox>
+          {/* Scenario cards — appear progressively as narrator tells each story */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            <div style={{
+              background: C.surface2, border: `1px solid ${C.border}`,
+              borderRadius: 18, padding: "24px 32px",
+              ...card1, ...card1HL,
+            }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+                <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 18, color: C.primary }}>📧  場景一</span>
+              </div>
+              <p style={{ fontFamily: "'Noto Sans TC',sans-serif", fontSize: 30, color: C.muted, lineHeight: 1.65, margin: 0 }}>
+                你負責活動行銷，需要發送 200 封個人化邀請信。寫一個自動寄信程式，讓電腦在指定時間<strong style={{ color: C.text }}>一次送出全部</strong>。
+              </p>
+            </div>
+            <div style={{
+              background: C.surface2, border: `1px solid ${C.border}`,
+              borderRadius: 18, padding: "24px 32px",
+              ...card2, ...card2HL,
+            }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+                <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 18, color: C.primary }}>📊  場景二</span>
+              </div>
+              <p style={{ fontFamily: "'Noto Sans TC',sans-serif", fontSize: 30, color: C.muted, lineHeight: 1.65, margin: 0 }}>
+                每月要手動合併多份 CSV 報表，費時兩小時。一個自動合併程式，能讓這件事<strong style={{ color: C.text }}>縮短到幾秒鐘</strong>。
+              </p>
+            </div>
+            <div style={{
+              background: C.surface2, border: `1px solid ${C.border}`,
+              borderRadius: 18, padding: "24px 32px",
+              ...card3, ...card3HL,
+            }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+                <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 18, color: C.primary }}>🔔  場景三</span>
+              </div>
+              <p style={{ fontFamily: "'Noto Sans TC',sans-serif", fontSize: 30, color: C.muted, lineHeight: 1.65, margin: 0 }}>
+                想追蹤電商商品的價格變化。一個定時抓取資料的程式，<strong style={{ color: C.text }}>每天早上自動通知你降價</strong>，不用手動重新整理頁面。
+              </p>
+            </div>
+          </div>
         </div>
       </div>
+      <SVGTimeBar startFrame={1350} labelA="手動合併 2 小時" labelB="自動化 幾秒" tagline="120× 更快" />
+      </SceneScroller>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -719,66 +965,56 @@ const SceneSection02Usecases: React.FC = () => {
 // SCENE 7 — Section 02 Leisure + Quiz (segment 3.2)
 // ─────────────────────────────────────────────────────────────────────────────
 const SceneSection02LeisureQuiz: React.FC = () => {
-  const header = useFadeUp(15);
-  const card   = useFadeUp(25);
-  const cardHL = useFocusHighlight(25);
-  const quiz   = useFadeUp(1280);
+  const header   = useFadeUp(15);
+  const intro    = useFadeUp(25);
+  const idea1    = useFadeUp(640);   // VTT ~00:21 旅遊投票
+  const idea2    = useFadeUp(940);   // VTT ~00:31 隨機晚餐
+  const idea3    = useFadeUp(1040);  // VTT 00:34.560 食譜頁面
 
   const CALLOUTS: Callout[] = [
-    { from: 210,  to: 1288, label: "寫程式的另一面", text: "生活樂趣，提升品質",    side: "right", yPct: 0.3 },
-    { from: 1290, to: 1566, label: "你的 idea",       text: "懂得跟 AI 溝通，就能實現", side: "right", yPct: 0.45 },
+    { from: 860, to: 1090, sender: "朋友 Emily", text: "那個旅遊投票頁面我也想做一個！" },
+  ];
+
+  const ideas = [
+    { icon: "✈️", text: "讓朋友投票旅遊偏好的頁面", style: idea1 },
+    { icon: "🎲", text: "隨機決定今天晚餐吃什麼的小工具", style: idea2 },
+    { icon: "📖", text: "收集你喜歡食譜的個人頁面", style: idea3 },
   ];
 
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
       <BgOrbs />
       <ProgressBar progressPct={45} />
+      <SceneScroller>
       <div style={{
         position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
         overflow: "hidden", zIndex: 10,
       }}>
-        <div style={{ paddingTop: 56 }}>
+        <div style={{ paddingTop: 40 }}>
           <SectionHeader num="02" title="非工程師，可以用寫程式做什麼？" fadeStyle={header} />
-          <Card fadeStyle={card} highlightStyle={cardHL}>
-            除了提升工作效率，<strong style={{ color: C.text }}>寫程式這件事，其實也可以成為一種生活樂趣，甚至提升你的生活品質。</strong>
-            <br /><br />
-            你腦袋裡有沒有一些有趣的點子，一直很想做，卻不知道怎麼執行？
-            比如說，做一個讓朋友填寫「旅遊類型是 P 人還是 J 人」的投票頁面；
-            或是一個可以隨機幫你決定今天晚餐吃什麼的小工具；
-            甚至是一個收集你喜歡食譜的個人頁面——
-            <br /><br />
-            這些，現在只要你有這些有趣的 idea，同時懂得如何跟 AI 有效溝通，<strong style={{ color: C.text }}>通通都可以透過 AI 幫你實現。</strong>
+          <Card fadeStyle={intro}>
+            除了工作效率，<strong style={{ color: C.text }}>寫程式也可以是一種生活樂趣。</strong>
+            {" "}只要有有趣的 idea，懂得跟 AI 有效溝通，通通都可以透過 AI 幫你實現！
           </Card>
-
-          {/* Quiz box */}
-          <div style={{
-            border: "2px dashed rgba(255,209,102,0.3)", borderRadius: 16,
-            padding: "28px 32px", marginBottom: 20,
-            background: "rgba(255,209,102,0.03)", ...quiz,
-          }}>
-            <div style={{
-              fontFamily: "'Space Mono', monospace", fontSize: 18, fontWeight: 700,
-              color: C.yellow, letterSpacing: "0.08em",
-              textTransform: "uppercase" as const, marginBottom: 14,
-              display: "flex", alignItems: "center", gap: 8,
-            }}>
-              <div style={{ width: 6, height: 6, background: C.yellow, borderRadius: 1, boxShadow: "0 0 6px #ffd166" }} />
-              想一想
-            </div>
-            <p style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", color: C.muted, fontSize: 26, lineHeight: 1.7, margin: 0 }}>
-              回想一下你最近一週的工作或日常生活，有沒有哪件事讓你覺得「這也太重複了吧」？
-            </p>
-            <ul style={{ paddingLeft: 20, marginTop: 12 }}>
-              {["那件事有固定的步驟嗎？", "每次做的時候，流程幾乎都一樣嗎？", "如果有個助手可以幫你做，你會想把它交出去嗎？"].map((q, i) => (
-                <li key={i} style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", color: C.muted, fontSize: 24, marginBottom: 8 }}>{q}</li>
-              ))}
-            </ul>
+          {/* Idea cards — progressive reveal */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            {ideas.map((idea, i) => (
+              <div key={i} style={{
+                display: "flex", alignItems: "center", gap: 20,
+                background: C.surface2, border: `1px solid ${C.border}`,
+                borderRadius: 16, padding: "20px 28px",
+                ...idea.style,
+              }}>
+                <span style={{ fontSize: 36, flexShrink: 0 }}>{idea.icon}</span>
+                <p style={{ fontFamily: "'Noto Sans TC',sans-serif", fontSize: 32, color: C.muted, lineHeight: 1.55, margin: 0 }}>{idea.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
+      </SceneScroller>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -792,16 +1028,14 @@ const SceneSection03AICoding: React.FC = () => {
   const cardHL = useFocusHighlight(30);
 
   const CALLOUTS: Callout[] = [
-    { from:    0, to:  928, label: "神燈精靈", text: "AI 幫我們，實現困難的事",     side: "right", yPct: 0.3 },
-    { from:  930, to: 1168, label: "AI Coding", text: "AI 輔助程式設計",          side: "right", yPct: 0.4 },
-    { from: 1170, to: 2008, label: "定義",      text: "AI 產生，部分或全部程式碼",  side: "right", yPct: 0.35 },
-    { from: 2010, to: 2338, label: "效率",      text: "每行手打 → AI 生成",         side: "right", yPct: 0.3 },
+    { from: 1202, to: 1432, sender: "非工程師朋友", text: "工程師以前要自己寫每一行？聽起來超累的" },
   ];
 
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
       <BgOrbs />
       <ProgressBar progressPct={55} />
+      <SceneScroller>
       <div style={{
         position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
@@ -817,8 +1051,8 @@ const SceneSection03AICoding: React.FC = () => {
           </Card>
         </div>
       </div>
+      </SceneScroller>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -832,14 +1066,14 @@ const SceneSection03VibeCoding: React.FC = () => {
   const cardHL = useFocusHighlight(25);
 
   const CALLOUTS: Callout[] = [
-    { from:   0, to:  628, label: "Vibe", text: "輕鬆，靠感覺",              side: "right", yPct: 0.3 },
-    { from: 630, to: 1065, label: "Vibe Coding", text: "完全不碰程式碼",   side: "right", yPct: 0.4 },
+    { from: 447, to: 647, sender: "完全零基礎的我", text: "靠感覺寫程式？！這個我可以！" },
   ];
 
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
       <BgOrbs />
       <ProgressBar progressPct={60} />
+      <SceneScroller>
       <div style={{
         position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
@@ -855,35 +1089,32 @@ const SceneSection03VibeCoding: React.FC = () => {
           </Card>
         </div>
       </div>
+      <SVGChatFlow startFrame={515} />
+      </SceneScroller>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// SCENE 10 — Section 03 Analogy: 實際感覺 (segment 4.3)
+// SCENE 10a — Section 03 Analogy A: 甲方/乙方 + 旅遊表單描述 (segment 4.3a, 865f)
 // ─────────────────────────────────────────────────────────────────────────────
-const SceneSection03Analogy: React.FC = () => {
+const SceneSection03Analogy_A: React.FC = () => {
   const header    = useFadeUp(15);
   const card      = useFadeUp(25);
   const cardHL    = useFocusHighlight(25);
   const analogy   = useFadeUp(228);
   const analogyHL = useFocusHighlight(228);
-  const card2     = useFadeUp(1310);
-  const card2HL   = useFocusHighlight(1310);
 
   const CALLOUTS: Callout[] = [
-    { from:  238, to:  904, label: "你是甲方",  text: "需求提出者，AI 是工程師",       side: "right", yPct: 0.3 },
-    { from:  906, to: 1703, label: "用說的就行", text: "描述需求，AI 建出成品",          side: "right", yPct: 0.4 },
-    { from: 1705, to: 1974, label: "修改也一樣", text: "「把背景換成藍色」",           side: "right", yPct: 0.35 },
-    { from: 1976, to: 2196, label: "全程",       text: "不需要寫任何一行程式碼",       side: "right", yPct: 0.3 },
+    { from: 535, to: 765, sender: "學員 Jason", text: "AI不會嫌我改太多次嗎？不會叫我加費用？" },
   ];
 
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
       <BgOrbs />
       <ProgressBar progressPct={65} />
+      <SceneScroller>
       <div style={{
         position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
@@ -899,21 +1130,94 @@ const SceneSection03Analogy: React.FC = () => {
             你只要說「我要一個可以讓朋友填寫旅遊偏好的表單頁面」，AI 就去把整個東西做出來。
             你不需要懂它是怎麼建的，也不用看程式碼長什麼樣子。
           </AnalogyBox>
+        </div>
+      </div>
+      <SVGRoleDiagram startFrame={217} />
+      </SceneScroller>
+      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
+    </AbsoluteFill>
+  );
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SCENE 10b — Section 03 Analogy B: 修改示範 (segment 4.3b, 1083f)
+// ─────────────────────────────────────────────────────────────────────────────
+const SceneSection03Analogy_B: React.FC = () => {
+  const header    = useFadeUp(15);
+  const card      = useFadeUp(25);
+  const cardHL    = useFocusHighlight(25);
+  const card2     = useFadeUp(30);
+  const card2HL   = useFocusHighlight(30);
+
+  const CALLOUTS: Callout[] = [
+    { from: 700, to: 930, sender: "設計師朋友", text: "改背景顏色只要用說的？我設計師要失業了啦" },
+  ];
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: C.bg }}>
+      <BgOrbs />
+      <ProgressBar progressPct={65} />
+      <SceneScroller>
+      <div style={{
+        position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
+        left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
+        overflow: "hidden", zIndex: 10,
+      }}>
+        <div style={{ paddingTop: 56 }}>
+          <SectionHeader num="03" title="Vibe Coding 是什麼？" fadeStyle={header} />
+          <Card fadeStyle={card} highlightStyle={cardHL}>
+            <span style={{ color: C.primary, fontWeight: 700 }}>Vibe Coding</span>：完全靠描述和對話來驅動 AI 產出程式，自己完全不碰程式碼的開發方式。
+          </Card>
           <div style={{
             background: C.surface, border: `1px solid ${C.border}`,
             borderRadius: 22, padding: "24px 36px", marginBottom: 20, ...card2, ...card2HL,
           }}>
             <p style={{ fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif", fontSize: 28, color: C.muted, lineHeight: 1.7, margin: 0 }}>
-              實際體驗 Vibe Coding 的感覺是這樣的：你用自然語言（中文就行）描述你想要什麼，
-              例如「我想要一個可以讓朋友填寫旅遊偏好的表單頁面，整體設計是可愛風格，提交之後要顯示一個『謝謝填寫』的畫面」，AI 工具就會直接產出一個可以用的成品。
-              如果不滿意某個地方，繼續在對話框說「把背景換成藍色」、「把按鈕的文字改得更可愛一點」，AI 就會幫你修改。
+              如果你對這個乙方做出來的結果有任何不滿意的地方，你也可以直接跟他說，請他修改。
+              他不會對你有任何的怨言，也不會叫你要加費用。
+              <br /><br />
+              例如，你想要把背景換成藍色的，或者是把按鈕的文字改得更可愛一點——這些都可以直接請 AI 幫你做修改。
               <strong style={{ color: C.text }}> 全程不需要手打任何一行程式碼。</strong>
             </p>
           </div>
         </div>
       </div>
+      </SceneScroller>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
+    </AbsoluteFill>
+  );
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SCENE 10c — Section 03 Analogy C: 就叫做 Vibe Coding (segment 4.3c, 240f)
+// ─────────────────────────────────────────────────────────────────────────────
+const SceneSection03Analogy_C: React.FC = () => {
+  const header = useFadeUp(15);
+  const card   = useFadeUp(25);
+  const cardHL = useFocusHighlight(25);
+
+  const CALLOUTS: Callout[] = [] as Callout[];
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: C.bg }}>
+      <BgOrbs />
+      <ProgressBar progressPct={68} />
+      <SceneScroller>
+      <div style={{
+        position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
+        left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
+        overflow: "hidden", zIndex: 10,
+      }}>
+        <div style={{ paddingTop: 56 }}>
+          <SectionHeader num="03" title="Vibe Coding 是什麼？" fadeStyle={header} />
+          <Card fadeStyle={card} highlightStyle={cardHL}>
+            像這種全程只靠描述、靠對話，來驅動 AI 產出程式的方法，我們就叫做{" "}
+            <span style={{ color: C.primary, fontWeight: 700 }}>Vibe Coding</span>。
+          </Card>
+        </div>
+      </div>
+      </SceneScroller>
+      {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
     </AbsoluteFill>
   );
 };
@@ -925,18 +1229,23 @@ const SceneSection04VibeTraits: React.FC = () => {
   const header  = useFadeUp(15);
   const intro   = useFadeUp(25);
   const introHL = useFocusHighlight(25);
-  const table   = useFadeUp(305);
+  const tableHeader = useFadeUp(305);
+  const row1 = useFadeUp(340);
+  const row2 = useFadeUp(520);
+  const row3 = useFadeUp(720);
+  const row4 = useFadeUp(960);
+  const row5 = useFadeUp(1220);
+  const rowStyles = [row1, row2, row3, row4, row5];
 
   const CALLOUTS: Callout[] = [
-    { from:  315, to:  643, label: "人工介入比例", text: "Vibe Coding，非常低",         side: "right", yPct: 0.3 },
-    { from:  645, to: 1112, label: "好處",         text: "不需學任何程式知識",         side: "right", yPct: 0.4 },
-    { from: 1114, to: 1371, label: "壞處",         text: "複雜需求，難精準達成",          side: "right", yPct: 0.35 },
+    { from: 857, to: 1087, sender: "學員", text: "做出來有成就感這點最重要，讓我繼續學！" },
   ];
 
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
       <BgOrbs />
       <ProgressBar progressPct={72} />
+      <SceneScroller>
       <div style={{
         position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
@@ -947,10 +1256,10 @@ const SceneSection04VibeTraits: React.FC = () => {
           <Card fadeStyle={intro} highlightStyle={introHL}>
             這兩種方式都是 AI 輔助開發，但<strong style={{ color: C.text }}>人工介入的程度</strong>不同，適合的使用情境也有所差異。
           </Card>
-          {/* Compare table — Vibe column highlighted */}
+          {/* Compare table — row-by-row appearance */}
           <div style={{
             background: C.surface, border: `1px solid ${C.border}`,
-            borderRadius: 22, overflow: "hidden", marginBottom: 20, ...table,
+            borderRadius: 22, overflow: "hidden", marginBottom: 20, ...tableHeader,
           }}>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <thead>
@@ -968,7 +1277,7 @@ const SceneSection04VibeTraits: React.FC = () => {
                   ["限制",     "複雜需求難以精準達成，卡關時不容易解決", "需要投入一點學習時間"],
                   ["適合誰",   "初學者、想快速驗證創意的人",          "想穩定產出可用作品的人"],
                 ].map(([label, vibe, ai], i) => (
-                  <tr key={i} style={{ borderBottom: i < 4 ? `1px solid ${C.border}` : "none" }}>
+                  <tr key={i} style={{ borderBottom: i < 4 ? `1px solid ${C.border}` : "none", ...rowStyles[i] }}>
                     <td style={{ padding: "20px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 26, fontWeight: 700, color: C.text }}>{label}</td>
                     <td style={{ padding: "20px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 26, color: C.primary, verticalAlign: "top" }}>{vibe}</td>
                     <td style={{ padding: "20px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 26, color: "#cccccc", verticalAlign: "top" }}>{ai}</td>
@@ -979,8 +1288,8 @@ const SceneSection04VibeTraits: React.FC = () => {
           </div>
         </div>
       </div>
+      </SceneScroller>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -993,14 +1302,14 @@ const SceneSection04AITraits: React.FC = () => {
   const table  = useFadeUp(200);
 
   const CALLOUTS: Callout[] = [
-    { from: 210, to: 718, label: "AI Coding", text: "有 Vibe 成分，更精準引導",    side: "right", yPct: 0.3 },
-    { from: 720, to: 934, label: "優勢",      text: "遇問題，有能力排查",          side: "right", yPct: 0.4 },
+    { from: 489, to: 689, sender: "有點基礎的學員", text: "所以學一點程式概念，AI就能更聽我的話？" },
   ];
 
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
       <BgOrbs />
       <ProgressBar progressPct={78} />
+      <SceneScroller>
       <div style={{
         position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
@@ -1039,8 +1348,8 @@ const SceneSection04AITraits: React.FC = () => {
           </div>
         </div>
       </div>
+      </SceneScroller>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -1056,10 +1365,9 @@ const SceneSection04Path: React.FC = () => {
   const quiz   = useFadeUp(2530);
 
   const CALLOUTS: Callout[] = [
-    { from:  150, to: 1048, label: "建議路徑",  text: "先從 Vibe Coding 開始",       side: "right", yPct: 0.3 },
-    { from: 1050, to: 1738, label: "進階",      text: "學 AI Coding 核心知識",        side: "right", yPct: 0.4 },
-    { from: 1740, to: 2428, label: "不用成為",  text: "工程師，基本核心觀念就夠",       side: "right", yPct: 0.35 },
-    { from: 2430, to: 3224, label: "核心觀念",  text: "學基本核心觀念，就夠了",         side: "right", yPct: 0.3 },
+    { from:  585, to:  835, sender: "緊張的學員",    text: "用嘴巴就能做出東西？！那我現在就想試試！" },
+    { from: 1685, to: 1915, sender: "怕學程式的朋友", text: "看到一堆英文就頭皮發麻，這個說法我懂" },
+    { from: 2585, to: 2835, sender: "學員",          text: "只要核心觀念，就能跟AI合作？我辦得到！" },
   ];
 
   const steps = [
@@ -1072,6 +1380,7 @@ const SceneSection04Path: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
       <BgOrbs />
       <ProgressBar progressPct={85} />
+      <SceneScroller>
       <div style={{
         position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
@@ -1126,8 +1435,8 @@ const SceneSection04Path: React.FC = () => {
           </div>
         </div>
       </div>
+      </SceneScroller>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -1145,9 +1454,8 @@ const SceneTakeaway: React.FC = () => {
   const item5  = useFadeUp(1418);
 
   const CALLOUTS: Callout[] = [
-    { from:  123, to: 1982, label: "回顧",   text: "本章重點，整理",                   side: "right", yPct: 0.3 },
-    { from: 1984, to: 2336, label: "下一章", text: "最好上手、最值得優先學習的工具",    side: "right", yPct: 0.4 },
-    { from: 2338, to: 2422, label: "我們",   text: "下個章節見",                        side: "right", yPct: 0.35 },
+    { from:  623, to:  873, sender: "完課的學員", text: "重複、易錯、要收集資料——我三個都中了！" },
+    { from: 1823, to: 2073, sender: "學員",      text: "下一單元：哪個AI工具最適合新手？我等不及了！" },
   ];
 
   const items = [
@@ -1162,6 +1470,7 @@ const SceneTakeaway: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
       <BgOrbs />
       <ProgressBar progressPct={95} />
+      <SceneScroller>
       <div style={{
         position: "absolute", top: NAV_H, bottom: SUBTITLE_H,
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
@@ -1205,16 +1514,16 @@ const SceneTakeaway: React.FC = () => {
           </div>
         </div>
       </div>
+      </SceneScroller>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// FullVideo — chains all 14 segments
+// Scene map for first 9 segments (1.1 through 4.2)
 // ─────────────────────────────────────────────────────────────────────────────
-const SCENES = [
+const SCENES_9 = [
   SceneHero,
   SceneSection01Card1,
   SceneSection01Analogy,
@@ -1224,7 +1533,10 @@ const SCENES = [
   SceneSection02LeisureQuiz,
   SceneSection03AICoding,
   SceneSection03VibeCoding,
-  SceneSection03Analogy,
+];
+
+// Scene map for tail segments (5.1 through 6.1)
+const SCENES_TAIL = [
   SceneSection04VibeTraits,
   SceneSection04AITraits,
   SceneSection04Path,
@@ -1237,13 +1549,51 @@ export const FullVideo: React.FC = () => {
       {/* BGM — plays through the whole video */}
       <Audio src={staticFile("audio/course_background_music.wav")} volume={0.10} loop />
 
-      {SEGMENTS.map((seg, i) => {
-        const SceneComponent = SCENES[i];
+      {/* Segments 1.1 through 4.2 */}
+      {SEG_9.map((seg, i) => {
+        const SceneComponent = SCENES_9[i];
         return (
-          <Sequence key={seg.id} from={SEG_STARTS[i]} durationInFrames={seg.frames}>
-            {/* Speaker audio — normalized to -16 LUFS */}
+          <Sequence key={seg.id} from={SEG_9_STARTS[i]} durationInFrames={seg.frames}>
             <Audio src={staticFile(`audio/${seg.file}`)} volume={1.0} />
-            {/* Visual scene */}
+            <SceneComponent />
+          </Sequence>
+        );
+      })}
+
+      {/* 4.3a — narration up to "謝謝填寫的畫面" */}
+      <Sequence from={F_43A_START} durationInFrames={865}>
+        <Audio src={staticFile("audio/0-1_4.3a.wav")} volume={1.0} />
+        <SceneSection03Analogy_A />
+      </Sequence>
+
+      {/* MP4 #1 — 旅遊偏好的表單頁面 demo */}
+      <Sequence from={F_MP4_1_START} durationInFrames={1677}>
+        <SceneMediaInsert src="travel-form-v1.mp4" />
+      </Sequence>
+
+      {/* 4.3b — narration about modifications */}
+      <Sequence from={F_43B_START} durationInFrames={1083}>
+        <Audio src={staticFile("audio/0-1_4.3b.wav")} volume={1.0} />
+        <SceneSection03Analogy_B />
+      </Sequence>
+
+      {/* MP4 #2 — 旅遊偏好的表單頁面_改顏色 demo */}
+      <Sequence from={F_MP4_2_START} durationInFrames={813}>
+        <SceneMediaInsert src="travel-form-v2.mp4" />
+      </Sequence>
+
+      {/* 4.3c — concluding "就叫做 Vibe Coding" */}
+      <Sequence from={F_43C_START} durationInFrames={240}>
+        <Audio src={staticFile("audio/0-1_4.3c.wav")} volume={1.0} />
+        <SceneSection03Analogy_C />
+      </Sequence>
+
+      {/* Segments 5.1 through 6.1 */}
+      {TAIL_SEGS.map((seg, i) => {
+        const SceneComponent = SCENES_TAIL[i];
+        return (
+          <Sequence key={seg.id} from={TAIL_STARTS[i]} durationInFrames={seg.frames}>
+            <Audio src={staticFile(`audio/${seg.file}`)} volume={1.0} />
             <SceneComponent />
           </Sequence>
         );
@@ -1251,5 +1601,3 @@ export const FullVideo: React.FC = () => {
     </AbsoluteFill>
   );
 };
-
-export { TOTAL_FRAMES };

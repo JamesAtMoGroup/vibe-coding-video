@@ -4,6 +4,8 @@ import { Video30s } from "./Video30s";
 import { Intro2s } from "./Intro2s";
 import { FullVideo, TOTAL_FRAMES } from "./FullVideo";
 import { FullVideo02, TOTAL_FRAMES_02 } from "./FullVideo02";
+import { FullVideo03, TOTAL_FRAMES_03 } from "./FullVideo03";
+import { FullVideo04, TOTAL_FRAMES_04 } from "./FullVideo04";
 
 const FPS = 30;
 
@@ -45,6 +47,24 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={TOTAL_FRAMES_02}
         width={1920}
         height={1080}
+      />
+      {/* CH 0-3 完整影片 — 20 個音頻段落 (~22.8 分鐘) */}
+      <Composition
+        id="FullVideo03"
+        component={FullVideo03}
+        fps={FPS}
+        durationInFrames={TOTAL_FRAMES_03}
+        width={3840}
+        height={2160}
+      />
+      {/* CH 1-1 完整影片 — 11 個音頻段落 (~13.7 分鐘) */}
+      <Composition
+        id="FullVideo04"
+        component={FullVideo04}
+        fps={FPS}
+        durationInFrames={TOTAL_FRAMES_04}
+        width={3840}
+        height={2160}
       />
     </>
   );

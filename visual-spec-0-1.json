@@ -1,0 +1,486 @@
+{
+  "chapter": "0-1",
+  "_notes": {
+    "frame_rate": 30,
+    "global_accumulation": "Segments accumulate in order; all from_frame/to_frame are global. See prompt for segment starts.",
+    "callout_sender_field": "Maps to c.label in FullVideo.tsx (the bold sender name above message text)",
+    "anim_types_available": ["progressive_append","scroll","row_by_row","static","typewriter"],
+    "supp_anim_types": ["svg_topology","svg_flowchart","svg_bar_chart","svg_comparison","svg_highlight","svg_analogy_diagram"]
+  },
+
+  "sections": [
+
+    {
+      "segment_id": "1.1",
+      "scene": "SceneIntro",
+      "global_start": 0,
+      "global_end": 1144,
+      "slide_animation": "static",
+      "slide_animation_note": "Opening title card. Content is a single hero statement ('AI 時代，寫程式不再是工程師的專利') plus the chapter title. Static is appropriate — the narrator introduces himself and the course at an easy pace; no list to build, content fits in one screen.",
+      "supplemental_animations": [],
+      "callouts": [
+        {
+          "from_frame": 520,
+          "to_frame": 730,
+          "sender": "完全零基礎的我",
+          "text": "原來不用寫程式也能讓電腦幫我做事？",
+          "_timing_note": "~17s into seg 1.1, right after narrator says '靠著AI的幫助讓電腦幫你完成各種事情' (VTT 00:17–00:23). Callout delivers the 'aha' that even non-coders can benefit."
+        }
+      ]
+    },
+
+    {
+      "segment_id": "2.1",
+      "scene": "SceneSection02A",
+      "global_start": 1144,
+      "global_end": 2168,
+      "slide_animation": "typewriter",
+      "slide_animation_note": "Core definition slide: '寫程式 = 把人要做的事外包給電腦'. A single punchy sentence types out character-by-character for dramatic emphasis, then the word '自動化' appears as a highlighted label. Typewriter reinforces the 'one clear idea' feel the script intentionally builds here.",
+      "supplemental_animations": [
+        {
+          "trigger_vtt_time": "00:11.380",
+          "segment_id": "2.1",
+          "type": "svg_flowchart",
+          "description": "Two-node flow: [人工作] → (外包) → [電腦執行]. Minimal horizontal arrow diagram. Nodes are pill-shaped with glassmorphism fill (#7cffb2 tint). Arrow animates drawing left-to-right over ~20f. Appears when narrator says '把人要做的事情外包去給電腦執行'.",
+          "duration_frames": 150,
+          "_global_trigger_frame": 1484
+        }
+      ],
+      "callouts": [
+        {
+          "from_frame": 1750,
+          "to_frame": 1950,
+          "sender": "同事小明",
+          "text": "所以 Excel 公式也算寫程式？",
+          "_timing_note": "Late in segment 2.1 (~18s), after the automation concept is established. The callout plants the question the narrator will answer in segment 2.3, keeping audience curious."
+        }
+      ]
+    },
+
+    {
+      "segment_id": "2.2",
+      "scene": "SceneSection02B",
+      "global_start": 2168,
+      "global_end": 3171,
+      "slide_animation": "static",
+      "slide_animation_note": "Analogy slide: '就像訓練一個永不疲憊的助手'. Single visual metaphor block. Content is short (one comparison) and narrator speaks at normal pace. Static keeps focus on the spoken analogy rather than competing animations.",
+      "supplemental_animations": [
+        {
+          "trigger_vtt_time": "00:00.000",
+          "segment_id": "2.2",
+          "type": "svg_analogy_diagram",
+          "description": "Side-by-side: LEFT = person at desk with stack of papers labeled '手動整理文件' (muted, slow); RIGHT = robot/gear icon labeled '程式小幫手' (bright #7cffb2, instant). Both enclosed in rounded cards. A checkmark badge appears on the right card after ~30f. Mirrors the '排文件蓋編號' analogy the narrator tells at VTT 00:00.",
+          "duration_frames": 300,
+          "_global_trigger_frame": 2168
+        }
+      ],
+      "callouts": [
+        {
+          "from_frame": 2700,
+          "to_frame": 2900,
+          "sender": "非工程師朋友",
+          "text": "規則說清楚，剩下交給它？聽起來超簡單！",
+          "_timing_note": "~16s into seg 2.2 (VTT 00:26–00:32), right after narrator says '你只需要跟這個小幫手把規則說清楚'. Callout expresses a relatable beginner's optimism."
+        }
+      ]
+    },
+
+    {
+      "segment_id": "2.3",
+      "scene": "SceneSection02C",
+      "global_start": 3171,
+      "global_end": 4492,
+      "slide_animation": "svg_comparison",
+      "slide_animation_note": "Two-column comparison: LEFT = '廣義的寫程式' (Excel 公式, 試算表), RIGHT = '狹義的寫程式' (正規程式語言, App, 網頁). Row-by-row reveal matches the narrator's pacing as he contrasts broad vs. narrow definitions.",
+      "supplemental_animations": [
+        {
+          "trigger_vtt_time": "00:30.140",
+          "segment_id": "2.3",
+          "type": "svg_topology",
+          "description": "Three-node radial diagram: central node '程式' with three spokes pointing to '網頁' (browser icon), 'App' (phone icon), '智慧家電' (home icon). Nodes appear one-by-one (30f apart) as narrator lists examples (VTT 00:30–00:43). Uses glassmorphism cards with #7cffb2 connector lines.",
+          "duration_frames": 180,
+          "_global_trigger_frame": 4075
+        }
+      ],
+      "callouts": [
+        {
+          "from_frame": 3700,
+          "to_frame": 3920,
+          "sender": "業務同仁",
+          "text": "等等⋯我每天用的 Excel 公式就是寫程式？！",
+          "_timing_note": "~16s into seg 2.3 (VTT 00:14–00:17), right after narrator confirms Excel formulas count as programming. Delivers the 'mind blown' moment for non-technical viewers."
+        }
+      ]
+    },
+
+    {
+      "segment_id": "3.0",
+      "scene": "SceneSection03Intro",
+      "global_start": 4492,
+      "global_end": 7146,
+      "slide_animation": "progressive_append",
+      "slide_animation_note": "Three-scenario checklist: (1) 大量重複工作, (2) 手動輸入易出錯, (3) 資訊收集整理. Items appear one by one as narrator enumerates them (VTT ~00:25–01:14). Progressive append matches the deliberate 'does this apply to YOU?' rhetorical structure.",
+      "supplemental_animations": [
+        {
+          "trigger_vtt_time": "00:25.160",
+          "segment_id": "3.0",
+          "type": "svg_highlight",
+          "description": "Green glow pulse highlights checklist item 1 ('大量重複工作') when it appears. Glow fades over ~45f, then reappears briefly at item 2 and 3 sequentially. Reinforces 'this is about you' moment.",
+          "duration_frames": 90,
+          "_global_trigger_frame": 5247
+        },
+        {
+          "trigger_vtt_time": "01:15.700",
+          "segment_id": "3.0",
+          "type": "svg_bar_chart",
+          "description": "Simple horizontal bar: '手動處理 2hr' (long, red-tinted) vs '自動化 幾秒' (very short, #7cffb2). Bars animate growing from left. Appears when narrator summarizes who should use automation (VTT ~01:15). Gives a concrete efficiency visual before the examples section.",
+          "duration_frames": 180,
+          "_global_trigger_frame": 6967
+        }
+      ],
+      "callouts": [
+        {
+          "from_frame": 5600,
+          "to_frame": 5800,
+          "sender": "行政助理小美",
+          "text": "每週整理報表超花時間，原來我最需要這個！",
+          "_timing_note": "~37s into seg 3.0 (VTT ~00:35), after narrator describes repetitive work scenario. Persona is relatable to office workers."
+        },
+        {
+          "from_frame": 6500,
+          "to_frame": 6730,
+          "sender": "業務主管",
+          "text": "手動輸入 CRM 常打錯，這問題可以解決？",
+          "_timing_note": "~67s into seg 3.0 (VTT ~01:04), after narrator mentions manual input / error scenario. Two callouts in this long segment (2654f) to maintain engagement."
+        }
+      ]
+    },
+
+    {
+      "segment_id": "3.1",
+      "scene": "SceneSection03Analogy_A",
+      "global_start": 7146,
+      "global_end": 10740,
+      "slide_animation": "progressive_append",
+      "slide_animation_note": "Three concrete use-case cards: (1) 自動寄信 200封, (2) 自動合併CSV報表 2hr→幾秒, (3) 定時抓取商品價格. Each card appears as narrator tells its story. Progressive append is critical here — the three examples are the emotional core of Section 3.",
+      "supplemental_animations": [
+        {
+          "trigger_vtt_time": "00:36.560",
+          "segment_id": "3.1",
+          "type": "svg_flowchart",
+          "description": "Email automation flow: [試算表 200筆資料] → [AI程式] → [200封個人化信件 ✓]. Horizontal pipeline with animated arrows. Green checkmark pulses at end. Triggered when narrator says '讓AI幫你寫一個自動寄信的程式' (VTT 00:36).",
+          "duration_frames": 240,
+          "_global_trigger_frame": 8242
+        },
+        {
+          "trigger_vtt_time": "00:57.020",
+          "segment_id": "3.1",
+          "type": "svg_bar_chart",
+          "description": "Time comparison: [手動合併 120分鐘] (tall red bar) vs [程式自動合併 <1分鐘] (tiny green bar). Bars animate from baseline up. '120x 更快' label appears above green bar after grow completes. Triggered when narrator says '將原本需要兩個小時的工作時間縮短成幾秒鐘' (VTT ~01:01).",
+          "duration_frames": 210,
+          "_global_trigger_frame": 8857
+        },
+        {
+          "trigger_vtt_time": "01:32.620",
+          "segment_id": "3.1",
+          "type": "svg_flowchart",
+          "description": "Price tracker flow: [每天早上 6:00] → [定時程式] → [電商網頁] → [商品降價通知 📱]. Nodes appear left-to-right. Phone notification icon pulses at end. Triggered at '這種時候我們就可以寫一個定時抓取資料的程式' (VTT 01:32).",
+          "duration_frames": 210,
+          "_global_trigger_frame": 9738
+        }
+      ],
+      "callouts": [
+        {
+          "from_frame": 7800,
+          "to_frame": 8050,
+          "sender": "行銷專員",
+          "text": "200封邀請信我都是一封一封寄的⋯",
+          "_timing_note": "~19s into seg 3.1 (VTT ~00:19), while narrator describes the email scenario. Persona mirrors the exact scenario being described."
+        },
+        {
+          "from_frame": 9200,
+          "to_frame": 9430,
+          "sender": "電商賣家",
+          "text": "我追蹤競品價格都靠手動，原來可以自動化！",
+          "_timing_note": "~62s into seg 3.1 (VTT ~01:14), after price tracker scenario is introduced. Reinforces real-world relatability."
+        },
+        {
+          "from_frame": 10200,
+          "to_frame": 10440,
+          "sender": "同事小明",
+          "text": "聽起來很夢幻⋯但真的可以做到嗎？",
+          "_timing_note": "~95s into seg 3.1 (VTT ~01:47), right when narrator says '是不是聽起來很夢幻很遙不可及啊'. Mirrors the narrator's rhetorical question."
+        }
+      ]
+    },
+
+    {
+      "segment_id": "3.2",
+      "scene": "SceneSection03Analogy_B",
+      "global_start": 10740,
+      "global_end": 12298,
+      "slide_animation": "progressive_append",
+      "slide_animation_note": "Fun use-cases list: 旅遊偏好投票頁面, 隨機晚餐工具, 收集食譜個人頁面. Items appear one by one with playful icons. This is the 'aspirational fun' segment — progressive reveal keeps it light and surprising.",
+      "supplemental_animations": [
+        {
+          "trigger_vtt_time": "00:21.660",
+          "segment_id": "3.2",
+          "type": "svg_analogy_diagram",
+          "description": "Three 'idea bubble' cards arranged in a row, each with a small icon: ✈️ 旅遊投票頁面 | 🎲 隨機晚餐工具 | 📖 食譜收集頁面. Cards pop in (scale 0→1 spring) one at a time at ~30f intervals. Glassmorphism fill. Triggered at VTT 00:21 when narrator lists the three ideas.",
+          "duration_frames": 240,
+          "_global_trigger_frame": 11390
+        }
+      ],
+      "callouts": [
+        {
+          "from_frame": 11500,
+          "to_frame": 11730,
+          "sender": "朋友 Emily",
+          "text": "那個旅遊投票頁面我也想做一個！",
+          "_timing_note": "~35s into seg 3.2 (VTT ~00:34), as narrator finishes listing fun use-cases. Light, aspirational callout that matches the segment's encouraging tone."
+        }
+      ]
+    },
+
+    {
+      "segment_id": "4.1",
+      "scene": "SceneSection04A",
+      "global_start": 12298,
+      "global_end": 14603,
+      "slide_animation": "row_by_row",
+      "slide_animation_note": "Comparison table: AI Coding vs Vibe Coding initial introduction. Two rows appear one at a time as narrator defines each term. Row-by-row suits the 'let me tell you about these two' structure before the detailed breakdown in 5.1/5.2.",
+      "supplemental_animations": [
+        {
+          "trigger_vtt_time": "00:29.660",
+          "segment_id": "4.1",
+          "type": "svg_comparison",
+          "description": "Two cards side-by-side: LEFT = 'AI Coding' with subtext '工程師 + AI 協作，部分或全部程式碼由AI生成'; RIGHT = 'Vibe Coding' with subtext '完全靠自然語言，不碰程式碼'. Both cards fade in simultaneously when narrator introduces the two terms at VTT 00:29. Cards use #7cffb2 top border accent.",
+          "duration_frames": 180,
+          "_global_trigger_frame": 13187
+        }
+      ],
+      "callouts": [
+        {
+          "from_frame": 13500,
+          "to_frame": 13730,
+          "sender": "非工程師朋友",
+          "text": "工程師以前要自己寫每一行？聽起來超累的",
+          "_timing_note": "~96s into seg 4.1 (VTT ~01:02), when narrator says '以前每一行程式碼都必須自己手動撰寫'. Humanizes the engineer's old workflow."
+        }
+      ]
+    },
+
+    {
+      "segment_id": "4.2",
+      "scene": "SceneSection04B",
+      "global_start": 14603,
+      "global_end": 15665,
+      "slide_animation": "typewriter",
+      "slide_animation_note": "Vibe Coding definition slide. The core phrase '靠感覺，靠 feel 來寫程式' types out dramatically. Then subtitle '完全用自然語言，不碰任何程式碼' fades in. Typewriter here creates an 'aha reveal' moment matching the narrator's excited tone (script note: '語氣可以帶一點興奮感').",
+      "supplemental_animations": [
+        {
+          "trigger_vtt_time": "00:17.160",
+          "segment_id": "4.2",
+          "type": "svg_analogy_diagram",
+          "description": "Chat bubble diagram: LEFT bubble (YOU) = '我想要一個旅遊投票頁面，可愛風格' in plain Chinese; ARROW → RIGHT bubble (AI) = code symbol + '✓ 完成'. Conveys 'natural language in → working code out' visually. Triggered at VTT 00:17 when narrator explains '完全用自然語言去跟AI說你想要做什麼'.",
+          "duration_frames": 180,
+          "_global_trigger_frame": 15118
+        }
+      ],
+      "callouts": [
+        {
+          "from_frame": 15050,
+          "to_frame": 15250,
+          "sender": "完全零基礎的我",
+          "text": "靠感覺寫程式？！這個我可以！",
+          "_timing_note": "~27s into seg 4.2 (VTT ~00:26), right after narrator defines Vibe Coding as '靠感覺靠feel來寫程式'. Delivers the motivational spike the segment is designed to create."
+        }
+      ]
+    },
+
+    {
+      "segment_id": "4.3",
+      "scene": "SceneSection04C_MediaChain",
+      "global_start": 15665,
+      "global_end": 20343,
+      "slide_animation": "static",
+      "slide_animation_note": "This segment is a media chain (4.3a → MP4#1 → 4.3b → MP4#2 → 4.3c). The spoken parts (a/b/c) use static slides showing the 甲方/乙方 metaphor diagram and modification dialogue. MP4 inserts are full-screen screen recordings — no slide animation needed during those.",
+      "supplemental_animations": [
+        {
+          "trigger_vtt_time": "00:07.240",
+          "segment_id": "4.3",
+          "type": "svg_analogy_diagram",
+          "description": "甲方/乙方 role diagram: LEFT card = '你 (甲方/需求方)' with speech bubble icon; RIGHT card = 'AI (乙方/工程師)' with code bracket icon. Connected by bidirectional arrow labeled '需求 ↔ 程式'. Appears at VTT 00:07 (4.3a) when narrator introduces the analogy. Cards use glassmorphism with #7cffb2 accent.",
+          "duration_frames": 210,
+          "_global_trigger_frame": 15882
+        },
+        {
+          "trigger_vtt_time": "00:54.720",
+          "segment_id": "4.3",
+          "type": "svg_highlight",
+          "description": "Green glow highlights the word '例如' or the modification request text on the slide when narrator says '例如，你想要把背景換成藍色' (VTT 00:54 in 4.3b part, roughly at seg 4.3b ~00:04). Signals: this is an example of revision dialogue.",
+          "duration_frames": 90,
+          "_global_trigger_frame": 19247
+        }
+      ],
+      "callouts": [
+        {
+          "from_frame": 16200,
+          "to_frame": 16430,
+          "sender": "學員 Jason",
+          "text": "AI不會嫌我改太多次嗎？不會叫我加費用？",
+          "_timing_note": "~31s into seg 4.3a (VTT ~00:31 in 4.3a), when narrator describes the AI乙方 who won't complain or charge extra. Relatable anxiety from a first-time 甲方."
+        },
+        {
+          "from_frame": 19600,
+          "to_frame": 19830,
+          "sender": "設計師朋友",
+          "text": "改背景顏色只要用說的？我設計師要失業了啦",
+          "_timing_note": "In seg 4.3b (~30s, VTT ~00:57), after narrator gives the '換成藍色' example. Humorous reaction, light tone matching the whimsical example."
+        }
+      ]
+    },
+
+    {
+      "segment_id": "5.1",
+      "scene": "SceneSection05A",
+      "global_start": 20343,
+      "global_end": 21961,
+      "slide_animation": "row_by_row",
+      "slide_animation_note": "Vibe Coding pros & cons comparison. Two sections: ✅ 好處 (3 items) and ⚠️ 壞處 (2 items). Rows reveal one at a time as narrator states each point. Row-by-row matches the deliberate enumeration structure in the script.",
+      "supplemental_animations": [
+        {
+          "trigger_vtt_time": "00:20.000",
+          "segment_id": "5.1",
+          "type": "svg_comparison",
+          "description": "Two-column card: LEFT = '好處' column with green check items (不需學程式, 說話就能寫程式, 上手容易有成就感); RIGHT = '壞處' column with yellow warning items (複雜需求難精準, 遇到卡關難解決). Rows appear in both columns simultaneously as narrator enumerates. Triggered at VTT 00:20 when narrator begins listing pros.",
+          "duration_frames": 270,
+          "_global_trigger_frame": 20943
+        }
+      ],
+      "callouts": [
+        {
+          "from_frame": 21200,
+          "to_frame": 21430,
+          "sender": "學員",
+          "text": "做出來有成就感這點最重要，讓我繼續學！",
+          "_timing_note": "~51s into seg 5.1 (VTT ~00:29), after narrator mentions the 'sense of achievement'. Amplifies the motivational payoff the narrator is building toward."
+        }
+      ]
+    },
+
+    {
+      "segment_id": "5.2",
+      "scene": "SceneSection05B",
+      "global_start": 21961,
+      "global_end": 22815,
+      "slide_animation": "progressive_append",
+      "slide_animation_note": "AI Coding characteristics: (1) 帶有Vibe Coding成分但不依賴feel, (2) 可運用技術知識更精準引導AI, (3) 能自己排查問題. Items appear one by one. Progressive append works here because the script lists 3 distinct, additive properties.",
+      "supplemental_animations": [
+        {
+          "trigger_vtt_time": "00:06.460",
+          "segment_id": "5.2",
+          "type": "svg_comparison",
+          "description": "Sliding spectrum bar: left end = 'Vibe Coding (全靠feel)' in soft green; right end = 'AI Coding (技術引導)' in bright #7cffb2. A marker slides toward the right as narrator explains AI Coding adds technical knowledge. Appears at VTT 00:06 when narrator says 'AI Coding 不強調完全跟著直覺走'.",
+          "duration_frames": 150,
+          "_global_trigger_frame": 22155
+        }
+      ],
+      "callouts": [
+        {
+          "from_frame": 22450,
+          "to_frame": 22650,
+          "sender": "有點基礎的學員",
+          "text": "所以學一點程式概念，AI就能更聽我的話？",
+          "_timing_note": "~22s into seg 5.2 (VTT ~00:22), after narrator says '運用一些程式相關的技術知識來更精準引導AI'. Perfect articulation of the value prop for going from Vibe to AI Coding."
+        }
+      ]
+    },
+
+    {
+      "segment_id": "5.3",
+      "scene": "SceneSection05C",
+      "global_start": 22815,
+      "global_end": 25977,
+      "slide_animation": "progressive_append",
+      "slide_animation_note": "Recommended learning path: Step 1 → Vibe Coding (先解決小痛點), Step 2 → AI Coding (想做更複雜的事), Step 3 → 掌握核心觀念 (不需變工程師). Three steps appear one by one, matching narrator's encouraging 'step by step' tone. This is the action plan viewers take away.",
+      "supplemental_animations": [
+        {
+          "trigger_vtt_time": "00:05.240",
+          "segment_id": "5.3",
+          "type": "svg_flowchart",
+          "description": "Three-step learning roadmap: [STEP 1: Vibe Coding 解決小問題] → [STEP 2: 建立成就感] → [STEP 3: AI Coding 更精準]. Each node is a rounded card with step number badge. Arrows animate drawing between nodes at ~40f intervals. Triggered at VTT 00:05 when narrator says '先從Vibe Coding開始入手'. Primary color #7cffb2 for nodes, muted gray for connector text.",
+          "duration_frames": 300,
+          "_global_trigger_frame": 22972
+        },
+        {
+          "trigger_vtt_time": "00:49.260",
+          "segment_id": "5.3",
+          "type": "svg_highlight",
+          "description": "Green glow highlight on the phrase '不是要你變成工程師' (or the corresponding slide element) when narrator says '我們的目標不是要你變成工程師' (VTT 00:58). Reassurance moment — highlight draws attention to this liberating statement.",
+          "duration_frames": 120,
+          "_global_trigger_frame": 24292
+        }
+      ],
+      "callouts": [
+        {
+          "from_frame": 23400,
+          "to_frame": 23650,
+          "sender": "緊張的學員",
+          "text": "用嘴巴就能做出東西？！那我現在就想試試！",
+          "_timing_note": "~19s into seg 5.3 (VTT ~00:19), when narrator describes the Vibe Coding achievement feeling. Peak motivational moment in the video."
+        },
+        {
+          "from_frame": 24500,
+          "to_frame": 24730,
+          "sender": "怕學程式的朋友",
+          "text": "看到一堆英文就頭皮發麻，這個說法我懂",
+          "_timing_note": "~79s into seg 5.3 (VTT ~00:53), when narrator acknowledges '看到那一串密密麻麻的英文就頭皮發麻背脊發涼'. Mirrors the exact phrase — creates a 'he gets me' moment."
+        },
+        {
+          "from_frame": 25400,
+          "to_frame": 25650,
+          "sender": "學員",
+          "text": "只要核心觀念，就能跟AI合作？我辦得到！",
+          "_timing_note": "~131s into seg 5.3 (VTT ~01:22), when narrator says '只要掌握一些基本的核心觀念，你就可以更好的跟AI做協作'. Closes the arc with confidence."
+        }
+      ]
+    },
+
+    {
+      "segment_id": "6.1",
+      "scene": "SceneTakeaway",
+      "global_start": 25977,
+      "global_end": 28375,
+      "slide_animation": "progressive_append",
+      "slide_animation_note": "Five-point summary recap: ①寫程式=自動化 ②最佳場景(重複/易錯/收集) ③AI Coding定義 ④Vibe Coding定義 ⑤學習路徑建議. Points appear one by one as narrator reads them. Progressive append is mandatory here — the script explicitly enumerates '第一個⋯第二個⋯' etc., and each beat should land before the next appears.",
+      "supplemental_animations": [
+        {
+          "trigger_vtt_time": "00:35.300",
+          "segment_id": "6.1",
+          "type": "svg_flowchart",
+          "description": "Mini learning path recap diagram: [你現在] → [Vibe Coding 入門] → [AI Coding 進階] → [神燈精靈自由運用]. Compact horizontal flow, appears when narrator says '先用Vibe Coding去解決一個小問題藉此建立信心' (VTT 00:35). Acts as a visual bookend to the Step 1-2-3 flowchart from seg 5.3.",
+          "duration_frames": 240,
+          "_global_trigger_frame": 27027
+        }
+      ],
+      "callouts": [
+        {
+          "from_frame": 26600,
+          "to_frame": 26850,
+          "sender": "完課的學員",
+          "text": "重複、易錯、要收集資料——我三個都中了！",
+          "_timing_note": "~31s into seg 6.1 (VTT ~00:22), when narrator summarizes the three automation-worthy scenarios. A gratifying 'that's me!' moment for the target audience."
+        },
+        {
+          "from_frame": 27800,
+          "to_frame": 28050,
+          "sender": "學員",
+          "text": "下一單元：哪個AI工具最適合新手？我等不及了！",
+          "_timing_note": "~121s into seg 6.1 (VTT ~01:07), when narrator previews the next chapter topic. Creates anticipation — the perfect send-off callout for the final segment."
+        }
+      ]
+    }
+
+  ]
+}
