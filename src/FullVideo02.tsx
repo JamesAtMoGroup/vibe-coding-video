@@ -11,8 +11,6 @@ import {
   Img,
   Video,
 } from "remotion";
-import { Lottie } from "@remotion/lottie";
-import speakingData from "./speaking-animation.json";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Design System — exact match to (N)ch0-2.html CSS variables
@@ -54,13 +52,22 @@ const SEGMENTS = [
   { id: "6.1", file: "0.2_6.1.wav", frames: 1836 }, // 60.84s
 ] as const;
 
-// Cumulative start frames
+// Cumulative start frames (audio-only, before MP4 insert offset)
 const SEG_STARTS = SEGMENTS.reduce((acc, seg, i) => {
   acc.push(i === 0 ? 0 : acc[i - 1] + SEGMENTS[i - 1].frames);
   return acc;
 }, [] as number[]);
 
-const TOTAL_FRAMES_02 = SEG_STARTS[SEGMENTS.length - 1] + SEGMENTS[SEGMENTS.length - 1].frames;
+// Full-screen MP4 insert between segments 3 (0.2_3.2) and 4 (0.2_3.3)
+const MP4_INSERT_IDX = 3;   // after segment index 3
+const MP4_FRAMES     = 150; // 5s × 30fps
+
+// Effective start frames accounting for the MP4 insert
+const EFFECTIVE_STARTS = SEG_STARTS.map((s, i) =>
+  i > MP4_INSERT_IDX ? s + MP4_FRAMES : s
+);
+
+const TOTAL_FRAMES_02 = EFFECTIVE_STARTS[SEGMENTS.length - 1] + SEGMENTS[SEGMENTS.length - 1].frames;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // useFadeUp
@@ -284,28 +291,6 @@ const BgOrbs: React.FC = () => {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Speaker Lottie — bottom-right corner circle
-// ─────────────────────────────────────────────────────────────────────────────
-const AvatarOverlay: React.FC = () => {
-  const frame  = useCurrentFrame();
-  const fadeIn = interpolate(frame, [0, 20], [0, 1], clamp);
-  return (
-    <div style={{
-      position: "absolute",
-      bottom: 40, right: 40,
-      width: 200, height: 200,
-      borderRadius: "50%",
-      overflow: "hidden",
-      border: "3px solid rgba(124,255,178,0.6)",
-      boxShadow: "0 0 20px rgba(124,255,178,0.25), 0 4px 16px rgba(0,0,0,0.6)",
-      opacity: fadeIn, zIndex: 20,
-    }}>
-      <Lottie animationData={speakingData} style={{ width: "100%", height: "100%" }} />
-    </div>
-  );
-};
-
-// ─────────────────────────────────────────────────────────────────────────────
 // Section Header helper
 // ─────────────────────────────────────────────────────────────────────────────
 const SectionHeader: React.FC<{ num: string; title: string; fadeStyle: React.CSSProperties }> = ({
@@ -314,7 +299,7 @@ const SectionHeader: React.FC<{ num: string; title: string; fadeStyle: React.CSS
   <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24, ...fadeStyle }}>
     <span style={{
       fontFamily: "'Space Mono', monospace",
-      fontSize: 22, color: C.primary,
+      fontSize: 18, color: C.primary,
       background: "rgba(124,255,178,0.08)",
       border: `1px solid ${C.border}`,
       padding: "6px 14px", borderRadius: 99,
@@ -322,7 +307,7 @@ const SectionHeader: React.FC<{ num: string; title: string; fadeStyle: React.CSS
     }}>{num}</span>
     <h2 style={{
       fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif",
-      fontSize: 52, fontWeight: 700,
+      fontSize: 42, fontWeight: 700,
       letterSpacing: "-0.01em",
       color: C.text, margin: 0,
     }}>{title}</h2>
@@ -338,12 +323,12 @@ const Card: React.FC<{
 }> = ({ children, fadeStyle = {}, highlightStyle = {}, marginBottom = 20 }) => (
   <div style={{
     background: C.surface, border: `1px solid ${C.border}`,
-    borderRadius: 22, padding: "36px 44px", marginBottom,
+    borderRadius: 22, padding: "26px 36px", marginBottom,
     ...fadeStyle, ...highlightStyle,
   }}>
     <p style={{
       fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif",
-      fontSize: 36, color: C.muted, lineHeight: 1.8, margin: 0,
+      fontSize: 28, color: C.muted, lineHeight: 1.8, margin: 0,
     }}>
       {children}
     </p>
@@ -357,13 +342,13 @@ const AnalogyBox: React.FC<{
 }> = ({ label, children, fadeStyle = {}, highlightStyle = {}, marginBottom = 20 }) => (
   <div style={{
     background: C.primaryLight, borderLeft: `4px solid ${C.primary}`,
-    borderRadius: "0 16px 16px 0", padding: "32px 38px", marginBottom,
+    borderRadius: "0 16px 16px 0", padding: "22px 30px", marginBottom,
     ...fadeStyle, ...highlightStyle,
   }}>
     <div style={{
       fontFamily: "'Space Mono', monospace", fontSize: 18, fontWeight: 700,
       color: C.primary, letterSpacing: "0.08em",
-      textTransform: "uppercase" as const, marginBottom: 10,
+      textTransform: "uppercase" as const, marginBottom: 8,
       display: "flex", alignItems: "center", gap: 8,
     }}>
       <div style={{ width: 6, height: 6, background: C.primary, borderRadius: 1, flexShrink: 0, boxShadow: "0 0 6px #7cffb2" }} />
@@ -371,7 +356,7 @@ const AnalogyBox: React.FC<{
     </div>
     <p style={{
       fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif",
-      fontSize: 34, color: "#c8ffe0", lineHeight: 1.75, margin: 0,
+      fontSize: 26, color: "#c8ffe0", lineHeight: 1.75, margin: 0,
     }}>
       {children}
     </p>
@@ -394,11 +379,11 @@ const ToolCard: React.FC<{
 }> = ({
   toolLabel, toolName, toolNameColor, borderColor,
   description, tags,
-  fadeStyle = {}, highlightStyle = {}, marginBottom = 24,
+  fadeStyle = {}, highlightStyle = {}, marginBottom = 16,
 }) => (
   <div style={{
     background: C.surface, border: `1px solid ${C.border}`,
-    borderRadius: 22, padding: "32px 36px 32px 40px", marginBottom,
+    borderRadius: 22, padding: "20px 28px 20px 32px", marginBottom,
     position: "relative", overflow: "hidden",
     ...fadeStyle, ...highlightStyle,
   }}>
@@ -410,20 +395,20 @@ const ToolCard: React.FC<{
     }} />
     {/* Tool label */}
     <div style={{
-      fontFamily: "'Space Mono', monospace", fontSize: 18, fontWeight: 700,
+      fontFamily: "'Space Mono', monospace", fontSize: 16, fontWeight: 700,
       color: C.muted, letterSpacing: "0.1em",
       textTransform: "uppercase" as const, marginBottom: 6,
     }}>{toolLabel}</div>
     {/* Tool name */}
     <div style={{
       fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif",
-      fontSize: 32, fontWeight: 900, color: toolNameColor,
-      letterSpacing: "-0.01em", marginBottom: 20,
+      fontSize: 26, fontWeight: 900, color: toolNameColor,
+      letterSpacing: "-0.01em", marginBottom: 14,
     }}>{toolName}</div>
     {/* Description */}
     <div style={{
       fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif",
-      fontSize: 28, color: C.muted, lineHeight: 1.75, marginBottom: 20,
+      fontSize: 22, color: C.muted, lineHeight: 1.75, marginBottom: 14,
     }}>{description}</div>
     {/* Tags */}
     <div style={{ display: "flex", flexWrap: "wrap" as const, gap: 8 }}>
@@ -431,7 +416,7 @@ const ToolCard: React.FC<{
         const hc = tag.highlightColor || C.primary;
         return (
           <span key={i} style={{
-            fontSize: 20, padding: "4px 14px", borderRadius: 99, fontWeight: 500,
+            fontSize: 18, padding: "4px 14px", borderRadius: 99, fontWeight: 500,
             background: tag.highlighted ? `rgba(${hc === C.primary ? "124,255,178" : hc === C.yellow ? "255,209,102" : "124,255,178"},0.1)` : "rgba(255,255,255,0.05)",
             color: tag.highlighted ? hc : C.muted,
             border: tag.highlighted ? `1px solid ${hc}40` : "1px solid rgba(255,255,255,0.08)",
@@ -495,14 +480,16 @@ const FlowDiagram: React.FC<{ fadeStyle?: React.CSSProperties }> = ({ fadeStyle 
 const UsecaseList: React.FC<{
   items: Array<{ icon: string; title: string; desc: string }>;
   fadeStyle?: React.CSSProperties;
+  itemStyles?: React.CSSProperties[];
   marginBottom?: number;
-}> = ({ items, fadeStyle = {}, marginBottom = 20 }) => (
+}> = ({ items, fadeStyle = {}, itemStyles, marginBottom = 20 }) => (
   <div style={{ display: "flex", flexDirection: "column" as const, gap: 12, marginBottom, ...fadeStyle }}>
     {items.map((item, i) => (
       <div key={i} style={{
         display: "flex", alignItems: "flex-start", gap: 16,
         background: C.surface2, border: `1px solid ${C.border}`,
-        borderRadius: 12, padding: "18px 22px",
+        borderRadius: 12, padding: "14px 18px",
+        ...(itemStyles?.[i] ?? {}),
       }}>
         <div style={{
           fontFamily: "'Space Mono', monospace", fontSize: 20, fontWeight: 700,
@@ -513,7 +500,7 @@ const UsecaseList: React.FC<{
         }}>{item.icon}</div>
         <div style={{
           fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif",
-          fontSize: 26, color: C.muted, lineHeight: 1.65,
+          fontSize: 22, color: C.muted, lineHeight: 1.65,
         }}>
           <strong style={{ color: C.text }}>{item.title}</strong>
           {"　"}
@@ -600,7 +587,6 @@ const SceneHero: React.FC = () => {
         </div>
       </div>
       {CALLOUTS_HERO.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS_HERO} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -610,6 +596,8 @@ const SceneHero: React.FC = () => {
 // Section 01: 為什麼只需要3個工具？— 3 cards + analogy
 // ─────────────────────────────────────────────────────────────────────────────
 const SceneSection01: React.FC = () => {
+  const frame = useCurrentFrame();
+  const scrollY = interpolate(frame, [1398, 1498], [0, 100], clamp);
   const header    = useFadeUp(15);
   const card1     = useFadeUp(25);
   const card1HL   = useFocusHighlight(25);
@@ -635,7 +623,7 @@ const SceneSection01: React.FC = () => {
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
         overflow: "hidden", zIndex: 10,
       }}>
-        <div style={{ paddingTop: 40 }}>
+        <div style={{ paddingTop: 40, transform: `translateY(-${scrollY}px)` }}>
           <SectionHeader num="01" title="為什麼只需要 3 個工具？" fadeStyle={header} />
           <Card fadeStyle={card1} highlightStyle={card1HL}>
             剛開始接觸 AI 寫程式，最容易踩的坑就是<strong style={{ color: C.text }}>在工具上面花太多時間</strong>——每個工具都想試、每個比較文章都想看，結果反而遲遲沒有動手。
@@ -653,7 +641,6 @@ const SceneSection01: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -669,8 +656,10 @@ const SceneSection02Intro: React.FC = () => {
   const flow    = useFadeUp(180);
 
   const CALLOUTS: Callout[] = [
-    { from: 270, to:  720, label: "辦公自動化", text: "這組合，幾乎全搞定" },
-    { from: 720, to: 1200, label: "分工邏輯",   text: "AI 生成，Apps Script 執行" },
+    // 00:30.460 = f914 — 講者說「需要有一個執行的環境」
+    { from: 930, to: 1175, label: "關鍵觀念", text: "程式碼需要執行環境才能跑起來" },
+    // 00:38.960 = f1169 — Apps Script 正式介紹
+    { from: 1185, to: 1320, label: "Apps Script", text: "入門者最適合的執行環境" },
   ];
 
   return (
@@ -692,32 +681,24 @@ const SceneSection02Intro: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// AppsScriptInset — 5s screen recording overlay (bottom-right)
+// SceneMP4AppsScript — full-screen insert (5s, between 3.2 and 3.3)
 // ─────────────────────────────────────────────────────────────────────────────
-const AppsScriptInset: React.FC = () => {
+const SceneMP4AppsScript: React.FC = () => {
   const frame = useCurrentFrame();
-  const opacity = interpolate(frame, [0, 15, 135, 150], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const W = 660, H = Math.round(660 * 1438 / 2936);
+  const opacity = interpolate(frame, [0, 15, MP4_FRAMES - 15, MP4_FRAMES], [0, 1, 1, 0], clamp);
   return (
-    <div style={{
-      position: "absolute",
-      right: 48, bottom: SUBTITLE_H + 24,
-      width: W, height: H,
-      borderRadius: 18,
-      overflow: "hidden",
-      opacity,
-      boxShadow: "0 8px 40px rgba(0,0,0,0.6)",
-      border: "2px solid rgba(124,255,178,0.4)",
-      zIndex: 50,
-    }}>
-      <Video src={staticFile("video/apps-script-location.mov")} style={{ width: "100%", height: "100%" }} />
-    </div>
+    <AbsoluteFill style={{ backgroundColor: "#000", opacity }}>
+      <Video
+        src={staticFile("video/apps-script-location.mov")}
+        style={{ width: "100%", height: "100%", objectFit: "contain" }}
+        volume={1}
+      />
+    </AbsoluteFill>
   );
 };
 
@@ -726,17 +707,32 @@ const AppsScriptInset: React.FC = () => {
 // Tool 1a + 1b cards + usecase list
 // ─────────────────────────────────────────────────────────────────────────────
 const SceneSection02Tools: React.FC = () => {
+  const frame = useCurrentFrame();
+  // Scroll starts when usecases section comes into view (~51.7s = frame 1551)
+  const scrollY = interpolate(frame, [1500, 1620], [0, 160], clamp);
   const header    = useFadeUp(15);
   const tool1a    = useFadeUp(25);
   const tool1aHL  = useFocusHighlight(25);
   const tool1b    = useFadeUp(360);
   const tool1bHL  = useFocusHighlight(360);
-  const usecases  = useFadeUp(720);
+  // Usecases: each item appears when lecturer first mentions it (VTT-synced)
+  // 00:51.700 → f1551: "舉些例子來說"
+  // 00:53.160 → f1595: 批次寄信
+  // 01:02.120 → f1864: 報表多合一
+  // 01:10.560 → f2117: 批次轉檔
+  // 01:21.160 → f2435: 簡單網頁
+  const uc1 = useFadeUp(1595);
+  const uc2 = useFadeUp(1864);
+  const uc3 = useFadeUp(2117);
+  const uc4 = useFadeUp(2435);
 
   const CALLOUTS: Callout[] = [
-    { from:  105, to:  720, label: "聊天式 AI",   text: "生成程式碼，需要執行環境" },
-    { from:  720, to: 1590, label: "Apps Script", text: "免費、免安裝，Google 帳號即可" },
-    { from: 1578, to: 2730, label: "實際用途",    text: "批次寄信、合併報表、批次轉檔" },
+    // 3.2 opens with Apps Script intro — f105 ≈ 3.5s (right after name is introduced)
+    { from:  105, to:  720, label: "Apps Script", text: "Google 提供，完全免費" },
+    // 00:24.080 = f722 — 講者說「如果你有用到 Google 服務」
+    { from:  725, to: 1545, label: "最佳執行環境", text: "有 Google 帳號就能用" },
+    // 00:51.700 = f1551 — 講者說「舉些例子來說」
+    { from: 1560, to: 2730, label: "實際用途",    text: "批次寄信、合併報表、批次轉檔" },
   ];
 
   const usecaseItems = [
@@ -755,7 +751,7 @@ const SceneSection02Tools: React.FC = () => {
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
         overflow: "hidden", zIndex: 10,
       }}>
-        <div style={{ paddingTop: 40 }}>
+        <div style={{ paddingTop: 40, transform: `translateY(-${scrollY}px)` }}>
           <SectionHeader num="02" title="工具一：聊天式 AI ＋ Google Apps Script" fadeStyle={header} />
           <ToolCard
             toolLabel="工具 1a"
@@ -797,15 +793,13 @@ const SceneSection02Tools: React.FC = () => {
             fadeStyle={tool1b}
             highlightStyle={tool1bHL}
           />
-          <UsecaseList items={usecaseItems} fadeStyle={usecases} />
+          <UsecaseList
+            items={usecaseItems}
+            itemStyles={[uc1, uc2, uc3, uc4]}
+          />
         </div>
       </div>
-      {/* Apps Script location screen recording — appears with callout at frame 720 */}
-      <Sequence from={720} durationInFrames={150}>
-        <AppsScriptInset />
-      </Sequence>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -820,8 +814,10 @@ const SceneSection02Quiz: React.FC = () => {
   const quiz    = useFadeUp(120);
 
   const CALLOUTS: Callout[] = [
-    { from: 500, to:  930, label: "流程回顧", text: "告訴 AI → 複製 → 貼上，完成" },
-    { from: 980, to: 1320, label: "想一想",   text: "你最常做的重複操作？" },
+    // 00:25.400 = f762 — 講者說「所以流程上就會是這樣」
+    { from: 775, to: 1200, label: "流程回顧", text: "告訴 AI → 複製 → 貼上，完成" },
+    // 00:40.500 = f1215 — 講者說「所以你的任務很單純」
+    { from: 1230, to: 1420, label: "你的任務", text: "明確告訴 AI，複製貼上" },
   ];
 
   const usecaseItems = [
@@ -846,7 +842,7 @@ const SceneSection02Quiz: React.FC = () => {
           <QuizBox fadeStyle={quiz}>
             <p style={{
               fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif",
-              color: C.muted, fontSize: 26, lineHeight: 1.7, margin: 0,
+              color: C.muted, fontSize: 22, lineHeight: 1.7, margin: 0,
             }}>
               你目前工作中有用到 Google 試算表、Gmail 或 Google 文件嗎？
               {"　"}如果有，想想看你最常在這些工具上做的<strong style={{ color: C.text }}>重複性操作</strong>是什麼——那很可能就是你第一個可以自動化的任務。
@@ -855,7 +851,6 @@ const SceneSection02Quiz: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -891,7 +886,6 @@ const SceneSection03Intro: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -945,7 +939,6 @@ const SceneSection03Tool: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -962,7 +955,7 @@ const SceneSection03Analogy: React.FC = () => {
   const analogyHL = useFocusHighlight(90);
 
   const CALLOUTS: Callout[] = [
-    { from: 219, to:  486, label: "適合情境",   text: "讀取本機、網頁應用、外掛" },
+    { from: 370, to:  486, label: "適合情境",   text: "讀取本機、網頁應用、外掛" },
     { from: 486, to:  756, label: "批次轉 GIF", text: "本機格式轉換，超出雲端範圍" },
     { from: 756, to: 1000, label: "複雜應用",   text: "帳號登入、資料儲存" },
   ];
@@ -1003,7 +996,6 @@ const SceneSection03Analogy: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -1047,7 +1039,6 @@ const SceneSection04Intro: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -1057,14 +1048,24 @@ const SceneSection04Intro: React.FC = () => {
 // Compare table + quiz
 // ─────────────────────────────────────────────────────────────────────────────
 const SceneSection04Table: React.FC = () => {
+  const frame   = useCurrentFrame();
   const header  = useFadeUp(15);
   const analogy = useFadeUp(20);
-  const table   = useFadeUp(90);
-  const quiz    = useFadeUp(240);
+  // Table header appears at frame 90; rows appear progressively every ~100f
+  const tableHeader = useFadeUp(90);
+  const row0 = useFadeUp(90);
+  const row1 = useFadeUp(180);
+  const row2 = useFadeUp(270);
+  const row3 = useFadeUp(380);
+  const row4 = useFadeUp(500);
+  const rowStyles = [row0, row1, row2, row3, row4];
+  // Scroll to reveal quiz box after table is fully shown
+  const scrollY = interpolate(frame, [620, 740], [0, 200], clamp);
+  const quiz    = useFadeUp(640);
 
   const CALLOUTS: Callout[] = [
     { from: 129, to: 420, label: "費用",     text: "Apps Script 完全免費" },
-    { from: 567, to: 980, label: "入門成本", text: "零成本就能開始學習" },
+    { from: 900, to: 980, label: "入門成本", text: "零成本就能開始學習" },
   ];
 
   const tableRows = [
@@ -1084,32 +1085,35 @@ const SceneSection04Table: React.FC = () => {
         left: Math.round((1920 - CONTAINER_W) / 2), width: CONTAINER_W,
         overflow: "hidden", zIndex: 10,
       }}>
-        <div style={{ paddingTop: 40 }}>
+        <div style={{ paddingTop: 40, transform: `translateY(-${scrollY}px)` }}>
           <SectionHeader num="04" title="怎麼決定用哪個工具？" fadeStyle={header} />
           <AnalogyBox label="選工具最重要的原則" fadeStyle={analogy} marginBottom={16}>
             <strong style={{ color: "#ffffff" }}>Simple is the best.</strong>
             {"　"}能用簡單的方法解決，就不要用複雜的。
           </AnalogyBox>
 
-          {/* Compare table */}
+          {/* Compare table — header + rows appear progressively */}
           <div style={{
             background: C.surface, border: `1px solid ${C.border}`,
-            borderRadius: 22, overflow: "hidden", marginBottom: 16, ...table,
+            borderRadius: 22, overflow: "hidden", marginBottom: 16, ...tableHeader,
           }}>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <thead>
                 <tr style={{ borderBottom: `2px solid ${C.border}` }}>
-                  <th style={{ padding: "22px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 28, textAlign: "left", color: C.muted, width: "16%" }}></th>
-                  <th style={{ padding: "22px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 28, textAlign: "left", color: C.primary, width: "42%" }}>聊天式 AI ＋ Apps Script</th>
-                  <th style={{ padding: "22px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 28, textAlign: "left", color: C.primary, width: "42%" }}>AI 整合式編輯器</th>
+                  <th style={{ padding: "22px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 22, textAlign: "left", color: C.muted, width: "16%" }}></th>
+                  <th style={{ padding: "22px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 22, textAlign: "left", color: C.primary, width: "42%" }}>聊天式 AI ＋ Apps Script</th>
+                  <th style={{ padding: "22px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 22, textAlign: "left", color: C.primary, width: "42%" }}>AI 整合式編輯器</th>
                 </tr>
               </thead>
               <tbody>
                 {tableRows.map(([label, colA, colB], i) => (
-                  <tr key={i} style={{ borderBottom: i < 4 ? `1px solid ${C.border}` : "none" }}>
-                    <td style={{ padding: "20px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 26, fontWeight: 700, color: C.text }}>{label}</td>
-                    <td style={{ padding: "20px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 26, color: "#c8ffe0", verticalAlign: "top" }}>{colA}</td>
-                    <td style={{ padding: "20px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 26, color: C.primary, verticalAlign: "top" }}>{colB}</td>
+                  <tr key={i} style={{
+                    borderBottom: i < 4 ? `1px solid ${C.border}` : "none",
+                    ...rowStyles[i],
+                  }}>
+                    <td style={{ padding: "20px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 20, fontWeight: 700, color: C.text }}>{label}</td>
+                    <td style={{ padding: "20px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 20, color: "#c8ffe0", verticalAlign: "top" }}>{colA}</td>
+                    <td style={{ padding: "20px 28px", fontFamily: "'Noto Sans TC', sans-serif", fontSize: 20, color: C.primary, verticalAlign: "top" }}>{colB}</td>
                   </tr>
                 ))}
               </tbody>
@@ -1119,7 +1123,7 @@ const SceneSection04Table: React.FC = () => {
           <QuizBox fadeStyle={quiz}>
             <p style={{
               fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif",
-              color: C.muted, fontSize: 26, lineHeight: 1.7, margin: 0,
+              color: C.muted, fontSize: 22, lineHeight: 1.7, margin: 0,
             }}>
               回想一下你上一章想到的那個「想自動化的任務」——它跟 Google 文件、試算表或 Gmail 有關嗎？還是它需要做一些 Google 服務做不到的事？
               {"　"}試著用這個問題，幫自己決定從哪個工具開始入手。
@@ -1128,7 +1132,6 @@ const SceneSection04Table: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -1205,7 +1208,7 @@ const SceneSection05Takeaway: React.FC = () => {
                 <li key={i} style={{
                   display: "flex", alignItems: "flex-start", gap: 12,
                   fontFamily: "'Noto Sans TC', 'PingFang TC', sans-serif",
-                  fontSize: 28, color: C.text, lineHeight: 1.5, ...item.style,
+                  fontSize: 24, color: C.text, lineHeight: 1.5, ...item.style,
                 }}>
                   <div style={{
                     background: C.primary, color: "#000000",
@@ -1222,7 +1225,6 @@ const SceneSection05Takeaway: React.FC = () => {
         </div>
       </div>
       {CALLOUTS.map((c, i) => <CalloutCard key={i} c={c} allCallouts={CALLOUTS} />)}
-      <AvatarOverlay />
     </AbsoluteFill>
   );
 };
@@ -1253,7 +1255,7 @@ export const FullVideo02: React.FC = () => {
       {SEGMENTS.map((seg, i) => {
         const SceneComponent = SCENES[i];
         return (
-          <Sequence key={seg.id} from={SEG_STARTS[i]} durationInFrames={seg.frames}>
+          <Sequence key={seg.id} from={EFFECTIVE_STARTS[i]} durationInFrames={seg.frames}>
             {/* Speaker audio — normalized to -16 LUFS */}
             <Audio src={staticFile(`audio/${seg.file}`)} volume={1.0} />
             {/* Visual scene */}
@@ -1261,6 +1263,14 @@ export const FullVideo02: React.FC = () => {
           </Sequence>
         );
       })}
+
+      {/* Full-screen MP4 insert: Apps Script location screen recording (5s) */}
+      <Sequence
+        from={EFFECTIVE_STARTS[MP4_INSERT_IDX] + SEGMENTS[MP4_INSERT_IDX].frames}
+        durationInFrames={MP4_FRAMES}
+      >
+        <SceneMP4AppsScript />
+      </Sequence>
     </AbsoluteFill>
   );
 };
