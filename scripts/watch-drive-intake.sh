@@ -28,7 +28,7 @@ while true; do
     # 檢查 Drive 子資料夾內是否有 READY 檔案
     has_ready=$(rclone lsf "gdrive:${ch}" \
       --drive-root-folder-id "$INTAKE_ID" \
-      --files-only 2>/dev/null | grep -c "^READY$" || echo 0)
+      --files-only 2>/dev/null | grep -ci "^READY" || echo 0)
     [ "$has_ready" -eq 0 ] && continue
 
     # 立刻建立本機 marker，防止下次 poll 重複觸發（雙重保險）
@@ -49,7 +49,7 @@ while true; do
     # 刪除 Drive 上的 READY（best-effort，marker 才是主要防護）
     rclone delete "gdrive:${ch}" \
       --drive-root-folder-id "$INTAKE_ID" \
-      --include "READY" 2>/dev/null && \
+      --include "READY*" 2>/dev/null && \
       echo "[intake-watch] ✅ Drive READY 已刪除" || \
       echo "[intake-watch] ⚠️  Drive READY 刪除失敗（marker 仍有效）"
 
