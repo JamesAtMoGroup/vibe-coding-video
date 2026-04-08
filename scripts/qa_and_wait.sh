@@ -110,7 +110,7 @@ echo "在對話中說「通過」或用 iMessage 回覆，即可開始 render"
 while true; do
   if [ -f "$FLAG_FILE" ]; then
     echo "✅ iMessage 通過 → 開始 render"
-    kill $POLL_PID 2>/dev/null
+    kill $POLL_PID 2>/dev/null || true
     exit 0
   fi
   sleep 5
