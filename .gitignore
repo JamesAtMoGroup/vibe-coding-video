@@ -3,6 +3,11 @@ out/
 .DS_Store
 *.log
 
-# Large audio source files — stored locally in ~/Downloads/Vibe Coding 剪輯/
+# Source materials — 大型素材，存 local + Google Drive，不進 git
+chapters/
+assets/
+speaking.lottie
 public/audio/*.wav
+public/video/
+public/travel-form-v*.mp4
 public/avatar/
