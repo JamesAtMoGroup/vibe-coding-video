@@ -8,20 +8,39 @@
 
 ```
 ━━━ Phase 1 — 並行（互相獨立） ━━━
-  Audio Agent        → 只剪開頭空白（`silenceremove=start_periods=1:start_threshold=-50dB`），不做任何其他處理
-  Script Agent       → 讀 chapters/{N}/章節{N}_逐字講稿.txt
-                        列出所有 **備注** 區塊（使用相關素材 + 呈現方式）
 
-━━━ Phase 2 — Visual Concept Agent（MANDATORY，Phase 1 完成後才可開始） ━━━
+  Audio Agent（所有 segment，依副檔名處理）
+    .wav / .mp3 → ffmpeg silenceremove（剪開頭空白）+ loudnorm 正規化
+                  輸出：*-normalized.wav / *-normalized.mp3
+    .mp4 / .mov → ffmpeg 正規化音軌（-af loudnorm -c:v copy，影像不動）
+                  輸出：*-normalized.mp4 / *-normalized.mov
+    ⚠️ 所有格式都必須做音量正規化，不可跳過
+
+  Whisper Agent（Audio Agent 完成後，對所有 normalized 檔案跑）
+    輸入：chapters/{N}/{N} 音檔/*-normalized.*
+    輸出：對應的 *-normalized.vtt（存回同一資料夾）
+    ⚠️ 不管是音檔或影片，都必須有 VTT 才能進行後續規劃
+    語言設定：zh，輸出格式：vtt
+
+  Script Agent（與 Audio/Whisper 並行）
+    讀 chapters/{N}/章節{N}_逐字講稿.txt
+    列出所有 **備注** 區塊（使用相關素材 + 呈現方式）
+    輸出：chapters/{N}/script-analysis-{N}.json
+
+━━━ Phase 2 — VTT 校正（Phase 1 全部完成後） ━━━
+  對照逐字講稿校正所有 .vtt（繁簡字、的/得/地、專有名詞）
+  ⚠️ VTT 是時間軸基礎，校正後才能進行 Visual Concept
+
+━━━ Phase 3 — Visual Concept Agent（Phase 2 完成後，MANDATORY） ━━━
   ⚠️ Director 不得跳過此 Phase。跳過是影片品質低落的根本原因。
+  讀校正後的 VTT（取得精確時間軸）+ 逐字講稿備注
   輸出：chapters/{N}/visual-spec-{N}.json
   職責（見下方 Visual Concept Agent 規格）
 
-━━━ Phase 3 — VTT（per-segment VTT 已存在於 chapters/{N}/{N} 音檔/*.vtt） ━━━
-  ⚠️ 不需要跑 Whisper — 個別 .vtt 已在音檔資料夾中
-  對照逐字講稿校正每個 .vtt（繁簡字、的/得/地、專有名詞）
-
-━━━ Phase 4 — Scene Dev（Phase 2 + Phase 3 完成後才可開始） ━━━
+━━━ Phase 4 — Scene Dev（Phase 3 完成後才可開始） ━━━
+  依 segment 副檔名決定 TSX 實作方式：
+    .wav / .mp3 → Remotion 動畫 scene（現有做法）
+    .mp4 / .mov → OffthreadVideo + overlay scene（字卡、動畫、字幕疊加）
   Scene Dev Agent 讀 visual-spec.json + VTT + 講稿，實作 TSX
   所有幀號來自 VTT：global_frame = seconds × 30
   local_frame = global_frame - scene_start_frame
@@ -42,13 +61,15 @@
   }
   ✅ 此檔案是 HTML Agent 的唯一比對依據，不可省略
 
-━━━ Phase 5 — Preview + QA（Scene Dev 完成後） ━━━
-  Step 1: npm run dev → 開啟 http://localhost:3000
-  Step 2: 告知 James 在瀏覽器預覽
-  Step 3: 等待明確核准（「ok render」、「通過」、「go ahead」）— 未收到核准絕對不可 render
-  Step 4: Director 收到核准後自動啟動 QA Agent
-  QA 發 iMessage 報告 → 等待「通過」
-  任何 ❌ → Fix Agent → 重做 QA
+━━━ Phase 5 — QA → Preview → 核准（Scene Dev 完成後） ━━━
+  Step 1: npm run dev 啟動
+  Step 2: QA Agent 自動執行，發 iMessage QA 報告
+          任何 ❌ → Fix Agent → 重做 QA（James 不介入）
+  Step 3: ✅ QA 全過後，才通知 James
+          iMessage：「CH{N} QA 通過，請開瀏覽器預覽 http://localhost:3000」
+          自動 open http://localhost:3000
+  Step 4: 等待 James 明確核准（「通過」、「ok render」、「go ahead」）
+          ⚠️ 未收到核准絕對不可 render
 
 ━━━ Phase 6 — Render + Post-render（QA 通過後） ━━━
   Step 1: Render
