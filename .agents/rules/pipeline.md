@@ -26,6 +26,22 @@
   所有幀號來自 VTT：global_frame = seconds × 30
   local_frame = global_frame - scene_start_frame
 
+  ⚠️ TSX 完成後必須同時輸出 scene-map-{N}.json（HTML 生成的依據）
+  格式：
+  {
+    "source_html": "chapters/{N}/(N)ch{N}.html",
+    "scenes": [
+      {
+        "scene_id": "Scene11Hero",
+        "section_id": "section-id-in-source-html",  // 對應 (N)ch{N}.html 的 id 或標題
+        "content_summary": "這個 scene 展示的核心文字內容",
+        "assets": ["素材A.png", "素材B.mov"],        // 依逐字稿備注順序
+        "seg": "1.1"
+      }
+    ]
+  }
+  ✅ 此檔案是 HTML Agent 的唯一比對依據，不可省略
+
 ━━━ Phase 5 — Preview + QA（Scene Dev 完成後） ━━━
   Step 1: npm run dev → 開啟 http://localhost:3000
   Step 2: 告知 James 在瀏覽器預覽
@@ -44,12 +60,51 @@
     輸出：out/CH{N}-{章節標題}/CH{N}-{章節標題}-subtitles.vtt
 
   Step 3: 生成 HTML 課程頁（Render 完立即執行）
-    對照影片 slide 內容輸出靜態 HTML
-    使用相同 design token（C.bg, C.primary, C.surface，字型）
-    ⚠️ 無 logo bar、無頂部固定圖片
     輸出：out/CH{N}-{章節標題}/CH{N}-{章節標題}.html
 
-  Step 4: 上傳 Google Drive（三個檔案都存在後）
+    【三方交叉比對】HTML Agent 必須同時讀以下三個來源，缺一不可：
+    ① chapters/{N}/(N)ch{N}.html       → 原始課程頁設計（結構、樣式、section 順序）
+    ② chapters/{N}/scene-map-{N}.json  → Scene Dev 輸出的 scene↔section 對應表
+    ③ chapters/{N}/章節{N}_逐字講稿.txt → 所有 **備注** 區塊（assets 清單與順序）
+
+    比對邏輯：
+    - 以 ① 的 section 結構為骨架
+    - 用 ② 確認每個 section 對應哪個 scene、有哪些內容元素
+    - 用 ③ 確認 assets 清單、順序、及插入位置
+    - 三方有衝突時：② > ③ > ①（scene-map 最權威，因為是最終實作）
+
+    ── HTML 必須遵守的規則 ──────────────────────────────────
+    ❌ 禁止：logo bar、頂部固定圖片、課程主影片 embed（video-wrap）
+    ✅ 必須：sticky progress bar（position:sticky; top:0）— 樣式見下方
+
+    【Sticky Progress Bar 規格】（每個 HTML 頁一致）
+    CSS（放在 <style> 中）：
+      .progress-bar-wrap {
+        position: sticky; top: 0;
+        background: rgba(10,10,10,0.92);
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        z-index: 100; padding: 14px 24px;
+        border-bottom: 1px solid rgba(124,255,194,0.14);
+      }
+      .progress-track { height:3px; background:rgba(255,255,255,0.06); border-radius:99px; overflow:hidden; }
+      .progress-fill  { height:100%; width:{N}%; background:#7cffc2; border-radius:99px; box-shadow:0 0 8px rgba(124,255,194,0.5); }
+    HTML（在 <body> 最上方，page-wrap 之外）：
+      <div class="progress-bar-wrap">
+        <div class="progress-track"><div class="progress-fill"></div></div>
+      </div>
+    ⚠️ progress-fill width = 該章節在整體課程中的百分比（依章節序號決定）
+
+    【Assets 規則】
+    - 課程逐字講稿中有 **備注：使用相關素材** → 生成 HTML 的同時，必須把素材複製到 out/CH{N}-{章節標題}/assets/
+    - 素材來源：chapters/{N}/{N} 影片製作相關素材/ 或 public/assets/{N}/
+    - 素材順序依逐字講稿中出現的順序排列（❌ 不可自行排序）
+    - 圖片（PNG/JPG）→ 用 <img> + 點擊開啟原圖（target="_blank"）
+    - 影片（mp4/mov）→ 用 <video controls> player（❌ 不用下載連結）
+    - HTML 中路徑一律用相對路徑：./assets/{檔名}
+    - 放置位置：在 HTML 最後一個內容 section 之後、takeaway/next-box 之前
+    ──────────────────────────────────────────────────────────
+
+  Step 4: 上傳 Google Drive（mp4 + vtt + html + assets/ 都存在後）
     使用 rclone（已設定 gdrive: remote，不需另外 auth）
     目標 Folder ID：1jt_nkySWqs_iGBVUARVDW053DA6pOlJY
     ```bash
@@ -61,11 +116,12 @@
     ```
     ✅ rclone 自動跳過已存在且相同的檔案（冪等，可重跑）
 
-  ✅ 章節完成條件（四項都完成才算完成）：
+  ✅ 章節完成條件（以下都完成才算完成）：
     - CH{N}-{章節標題}.mp4
     - CH{N}-{章節標題}-subtitles.vtt
     - CH{N}-{章節標題}.html
-    - Google Drive 已上傳（Drive folder ID 記錄在 progress.md）
+    - assets/（有素材才需要；無素材章節可無此資料夾）
+    - Google Drive 已上傳（含 assets/ 子資料夾）
 ```
 
 ---
