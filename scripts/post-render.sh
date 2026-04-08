@@ -4,7 +4,7 @@
 
 set -e
 
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:$HOME/Library/Python/3.9/bin:$PATH"
 
 CHAPTER="${1:?Usage: $0 <chapter-id>  e.g. 1-2}"
 PROJECT="/Users/jamesshih/Projects/vibe-coding-video"
