@@ -82,7 +82,7 @@ chapters/{N}/
 ━━━ Phase 4 — Scene Dev（Phase 3 完成後才可開始） ━━━
   依 segment 副檔名決定 TSX 實作方式：
     .wav / .mp3 → Remotion 動畫 scene（現有做法）
-    .mp4 / .mov → OffthreadVideo + overlay scene（字卡、動畫、字幕疊加）
+    .mp4 / .mov → 整段影片 scene（規格見下方「整段影片 Scene 規格」）
   Scene Dev Agent 讀 visual-spec.json + VTT + 講稿，實作 TSX
   所有幀號來自 VTT：global_frame = seconds × 30
   local_frame = global_frame - scene_start_frame
@@ -237,6 +237,71 @@ Phase 1 Script Agent 輸出後，Visual Concept Agent 讀：
   ]
 }
 ```
+
+---
+
+## 整段影片 Scene 規格（segment 為 .mp4 / .mov 時）
+
+當一個 segment 的主素材是影片（.mp4 / .mov），Scene Dev Agent **必須**依照以下規格實作，不得自行發揮。
+
+### 版面
+
+```
+畫面高度 2160px
+├── NAV_H = 144px        ← 頂部 progress bar（不可被影片蓋住）
+├── VIDEO 區域 = 1696px  ← 2160 - 144 - 320
+└── SUBTITLE_H = 320px   ← 底部字幕保留區（不可被影片蓋住）
+```
+
+```tsx
+// 影片尺寸：填滿 VIDEO 區域，不超出上下邊界
+<OffthreadVideo
+  src={staticFile("影片檔名.mp4")}
+  style={{
+    position: "absolute",
+    top: NAV_H,           // 144px，緊貼 navbar 下方
+    left: 0,
+    width: W,             // 3840px，滿寬
+    height: H - NAV_H - SUBTITLE_H,  // 1696px
+    objectFit: "cover",
+  }}
+/>
+```
+
+### 規則
+
+- ❌ **禁止任何 overlay 動畫**（無 motion graphics、無 supplemental animations、無 flow diagram）
+- ❌ **禁止字幕疊加在影片上**（字幕另外輸出 .vtt，不 burn-in）
+- ✅ **iMessage 字卡**：依逐字稿 `**備注**` 的 VTT 幀號觸發，樣式與 audio segment 完全相同（top-right 堆疊，spring 滑入）
+- ✅ **Progress bar**（navbar）照常顯示在頂部
+- ✅ **影片播放音軌**：OffthreadVideo 預設播放影片自帶音軌（即講者旁白），不另外加 `<Audio>`
+
+### Visual Concept Agent 對應輸出
+
+當 segment 為影片時，`visual-spec.json` 該段落格式如下：
+
+```json
+{
+  "id": "3.1",
+  "scene": "Scene31ScreenRec",
+  "type": "video_segment",
+  "slide_animation": null,
+  "supplemental_animations": [],
+  "callouts": [
+    {
+      "trigger_text": "觸發字卡的逐字稿文字",
+      "vtt_sec": 12.5,
+      "vtt_frame": 375,
+      "sender": "James",
+      "text": "字卡內容"
+    }
+  ]
+}
+```
+
+- `type: "video_segment"` 是 Scene Dev Agent 判斷要用整段影片規格的唯一依據
+- `supplemental_animations` 必須為空陣列（不填內容）
+- `callouts` 依逐字稿備注決定，無備注則為空陣列
 
 ---
 
