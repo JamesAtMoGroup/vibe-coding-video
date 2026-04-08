@@ -4,6 +4,36 @@
 
 ---
 
+## 素材進件流程（Pipeline 觸發前）
+
+### Google Drive Intake
+- **Intake 資料夾 ID**：`1XdvF9lI_Rcklr4KxvKpDNAC4L6QiwHnz`（vibe-coding-intake）
+- 協作者在 intake 資料夾下建立子資料夾 `{chapter-id}/`，上傳完所有素材後放 READY 檔案
+- `watch-drive-intake.sh` 每 120 秒 poll 一次，偵測到 READY 後自動 sync → 觸發 `start-chapter.sh`
+
+### 本機章節資料夾結構（sync 後）
+```
+chapters/{N}/
+├── (N)ch{N}.html              ← 原始課程頁設計（HTML Agent 三方比對來源 ①）
+├── {N} 音檔/                  ← 音檔資料夾（命名有空格，shell 中必須加引號）
+│   ├── {seg}.wav / .mp3 / .mp4 / .mov
+├── {N} 影片製作相關素材/        ← assets 來源（HTML Agent 複製到 out/assets/）
+├── 章節{N}_逐字講稿.txt        ← agents 讀這個（.txt）
+└── 章節{N}_逐字講稿.docx       ← 若協作者提供 docx，start-chapter.sh 自動轉成 .txt
+```
+
+### 逐字稿格式
+- agents 一律讀 `章節{N}_逐字講稿.txt`
+- 若 sync 後只有 `.docx`，`start-chapter.sh` 會自動用 python-docx 轉成 `.txt`
+- agents **不需要**、也**不應該**自行讀 `.docx`
+
+### READY 檔案規則
+- 檔名開頭為 `READY`（不論副檔名：`READY`、`READY.rtf`、`READY.txt` 都有效）
+- sync 完成後 READY 會從 Drive 刪除，防止重複觸發
+- 本機同時建立 `/tmp/vibe-intake-{N}` marker 作為雙重防護
+
+---
+
 ## Phase 順序（嚴格執行，不可跳過、不可重排）
 
 ```
