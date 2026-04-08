@@ -10,6 +10,7 @@ CHAPTER_DIR="${PROJECT}/chapters/${CHAPTER}"
 AUDIO_DIR="${CHAPTER_DIR}/${CHAPTER} 音檔"
 SCRIPTS="${PROJECT}/scripts"
 LOCK="/tmp/vibe-lock-${CHAPTER}"
+INTAKE_MARKER="/tmp/vibe-intake-${CHAPTER}"
 SEND="$HOME/.claude/scripts/imessage_send.sh"
 WAIT="$HOME/.claude/scripts/imessage_wait_approval.sh"
 
@@ -32,7 +33,7 @@ MEDIA_COUNT=$(ls "${AUDIO_DIR}/"*.wav "${AUDIO_DIR}/"*.mp3 "${AUDIO_DIR}/"*.mp4 
 
 if [ $ERRORS -ne 0 ]; then
   "$SEND" "❌ CH${CHAPTER} 素材不完整，製作中止。請確認逐字稿與音檔。"
-  rm -f "$LOCK"
+  rm -f "$LOCK" "$INTAKE_MARKER"
   exit 1
 fi
 
@@ -194,7 +195,7 @@ kill $DEV_PID 2>/dev/null
 
 if [ $APPROVE_EXIT -ne 0 ]; then
   "$SEND" "⏰ CH${CHAPTER} 等待逾時，製作中止"
-  rm -f "$LOCK"
+  rm -f "$LOCK" "$INTAKE_MARKER"
   exit 1
 fi
 
@@ -206,6 +207,6 @@ echo "[Phase 5] ✅ James 核准，進入 render"
 bash "${SCRIPTS}/post-render.sh" "$CHAPTER"
 
 # 清理
-rm -f "$LOCK"
+rm -f "$LOCK" "$INTAKE_MARKER"
 rm -f "${CHAPTER_DIR}/START"
 echo "[start] ── CH${CHAPTER} 全部完成 $(date) ──"
