@@ -36,7 +36,7 @@ check() {
 }
 
 # --- Audio ---
-CHAPTER_DIR="${PROJECT}/chapters/CH${CHAPTER}"
+CHAPTER_DIR="${PROJECT}/chapters/${CHAPTER}"
 AUDIO_ORIG=$(ls "${CHAPTER_DIR}"/*.wav 2>/dev/null | head -1)
 [ -n "$AUDIO_ORIG" ] && check "原始音檔" "ok" || check "原始音檔" "找不到 WAV"
 
