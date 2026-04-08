@@ -1,6 +1,7 @@
 #!/bin/bash
 # start-chapter.sh — 驗證章節素材完整後，執行完整製作流程（背景）
 # Usage: start-chapter.sh <chapter-id>  e.g. 1-2
+# 每個 Phase 有 skip 機制：輸出已存在則跳過，支援斷線重啟
 
 set -e
 
@@ -15,6 +16,12 @@ LOCK="/tmp/vibe-lock-${CHAPTER}"
 INTAKE_MARKER="/tmp/vibe-intake-${CHAPTER}"
 SEND="$HOME/.claude/scripts/imessage_send.sh"
 WAIT="$HOME/.claude/scripts/imessage_wait_approval.sh"
+
+# Phase marker 檔案（完成一個 Phase 就建立，重啟時 skip）
+MARKER_P1="${CHAPTER_DIR}/.phase1-done"
+MARKER_P2="${CHAPTER_DIR}/.phase2-done"
+MARKER_P3="${CHAPTER_DIR}/.phase3-done"
+MARKER_P4="${CHAPTER_DIR}/.phase4-done"
 
 # ── 防止重複觸發 ──────────────────────────────────────────
 if [ -f "$LOCK" ]; then
@@ -43,7 +50,6 @@ fi
 
 [ -f "$TRANSCRIPT_TXT" ] || { echo "❌ 找不到逐字講稿（.txt 或 .docx）"; ERRORS=1; }
 
-# 音檔資料夾需有任意格式的音檔或影片
 MEDIA_COUNT=$(ls "${AUDIO_DIR}/"*.wav "${AUDIO_DIR}/"*.mp3 "${AUDIO_DIR}/"*.mp4 "${AUDIO_DIR}/"*.mov 2>/dev/null | wc -l)
 [ "$MEDIA_COUNT" -gt 0 ] || { echo "❌ 找不到任何音檔或影片（wav/mp3/mp4/mov）"; ERRORS=1; }
 
@@ -59,72 +65,84 @@ echo "[start] ✅ 素材驗證通過"
 cd "$PROJECT"
 
 # ═══════════════════════════════════════════════════════════
-# Phase 1-A — Audio 正規化（ffmpeg，所有格式）
+# Phase 1 — Audio 正規化 + Whisper + Script Agent
 # ═══════════════════════════════════════════════════════════
-echo "[Phase 1] Audio 正規化..."
+if [ -f "$MARKER_P1" ]; then
+  echo "[Phase 1] ⏭️  已完成，跳過"
+else
+  echo "[Phase 1] Audio 正規化..."
 
-for f in "${AUDIO_DIR}/"*.wav "${AUDIO_DIR}/"*.mp3; do
-  [ -f "$f" ] || continue
-  base="${f%.*}"; ext="${f##*.}"
-  out="${base}-normalized.${ext}"
-  echo "  → $(basename "$f")"
-  ffmpeg -i "$f" \
-    -af "silenceremove=start_periods=1:start_threshold=-50dB,loudnorm" \
-    "$out" -y -loglevel error
-done
-
-for f in "${AUDIO_DIR}/"*.mp4 "${AUDIO_DIR}/"*.mov; do
-  [ -f "$f" ] || continue
-  base="${f%.*}"; ext="${f##*.}"
-  out="${base}-normalized.${ext}"
-  echo "  → $(basename "$f")"
-  ffmpeg -i "$f" \
-    -af loudnorm -c:v copy \
-    "$out" -y -loglevel error
-done
-
-echo "[Phase 1] ✅ Audio 正規化完成"
-
-# ═══════════════════════════════════════════════════════════
-# Phase 1-B — Whisper（所有 normalized 檔案）
-# 與 Script Agent 並行
-# ═══════════════════════════════════════════════════════════
-echo "[Phase 1] Whisper + Script Agent（並行）..."
-
-# Whisper（背景）
-(
-  for f in "${AUDIO_DIR}/"*-normalized.*; do
+  for f in "${AUDIO_DIR}/"*.wav "${AUDIO_DIR}/"*.mp3; do
     [ -f "$f" ] || continue
-    ext="${f##*.}"
-    echo "  [Whisper] $(basename "$f")"
-    case "$ext" in
-      wav|mp3)
-        whisper "$f" --language zh --output_format vtt \
-          --output_dir "${AUDIO_DIR}" --word_timestamps False || \
-          echo "  [Whisper] ⚠️ $(basename "$f") 失敗，繼續下一個"
-        ;;
-      mp4|mov)
-        # 抽音軌再跑 Whisper，VTT 存回同資料夾
-        tmp_audio="/tmp/vibe_whisper_${CHAPTER}_$(basename "${f%.*}").wav"
-        ffmpeg -i "$f" -vn -ar 16000 "$tmp_audio" -y -loglevel error
-        whisper "$tmp_audio" --language zh --output_format vtt \
-          --output_dir "${AUDIO_DIR}" --word_timestamps False || \
-          echo "  [Whisper] ⚠️ $(basename "$f") 失敗，繼續下一個"
-        # 重命名 VTT 對應回影片檔名
-        vtt_name="${AUDIO_DIR}/$(basename "${f%.*}").vtt"
-        tmp_vtt="${AUDIO_DIR}/$(basename "${tmp_audio%.*}").vtt"
-        [ -f "$tmp_vtt" ] && mv "$tmp_vtt" "$vtt_name"
-        rm -f "$tmp_audio"
-        ;;
-    esac
+    base="${f%.*}"; ext="${f##*.}"
+    out="${base}-normalized.${ext}"
+    if [ -f "$out" ]; then
+      echo "  → $(basename "$f") (skip, 已存在)"
+      continue
+    fi
+    echo "  → $(basename "$f")"
+    ffmpeg -i "$f" \
+      -af "silenceremove=start_periods=1:start_threshold=-50dB,loudnorm" \
+      "$out" -y -loglevel error
   done
-  echo "[Phase 1] ✅ Whisper 完成"
-) &
-WHISPER_PID=$!
 
-# Script Agent（背景）
-(
-  claude --dangerously-skip-permissions -p "
+  for f in "${AUDIO_DIR}/"*.mp4 "${AUDIO_DIR}/"*.mov; do
+    [ -f "$f" ] || continue
+    base="${f%.*}"; ext="${f##*.}"
+    out="${base}-normalized.${ext}"
+    if [ -f "$out" ]; then
+      echo "  → $(basename "$f") (skip, 已存在)"
+      continue
+    fi
+    echo "  → $(basename "$f")"
+    ffmpeg -i "$f" \
+      -af loudnorm -c:v copy \
+      "$out" -y -loglevel error
+  done
+
+  echo "[Phase 1] ✅ Audio 正規化完成"
+  echo "[Phase 1] Whisper + Script Agent（並行）..."
+
+  # Whisper（背景）
+  (
+    for f in "${AUDIO_DIR}/"*-normalized.*; do
+      [ -f "$f" ] || continue
+      ext="${f##*.}"
+      vtt_out="${f%.*}.vtt"
+      if [ -f "$vtt_out" ]; then
+        echo "  [Whisper] $(basename "$f") (skip, VTT 已存在)"
+        continue
+      fi
+      echo "  [Whisper] $(basename "$f")"
+      case "$ext" in
+        wav|mp3)
+          whisper "$f" --language zh --output_format vtt \
+            --output_dir "${AUDIO_DIR}" --word_timestamps False || \
+            echo "  [Whisper] ⚠️ $(basename "$f") 失敗，繼續下一個"
+          ;;
+        mp4|mov)
+          tmp_audio="/tmp/vibe_whisper_${CHAPTER}_$(basename "${f%.*}").wav"
+          ffmpeg -i "$f" -vn -ar 16000 "$tmp_audio" -y -loglevel error
+          whisper "$tmp_audio" --language zh --output_format vtt \
+            --output_dir "${AUDIO_DIR}" --word_timestamps False || \
+            echo "  [Whisper] ⚠️ $(basename "$f") 失敗，繼續下一個"
+          vtt_name="${AUDIO_DIR}/$(basename "${f%.*}").vtt"
+          tmp_vtt="${AUDIO_DIR}/$(basename "${tmp_audio%.*}").vtt"
+          [ -f "$tmp_vtt" ] && mv "$tmp_vtt" "$vtt_name"
+          rm -f "$tmp_audio"
+          ;;
+      esac
+    done
+    echo "[Phase 1] ✅ Whisper 完成"
+  ) &
+  WHISPER_PID=$!
+
+  # Script Agent（背景）— skip 如果 script-analysis 已存在
+  (
+    if [ -f "${CHAPTER_DIR}/script-analysis-${CHAPTER}.json" ]; then
+      echo "[Phase 1] ⏭️  Script Agent skip（script-analysis 已存在）"
+    else
+      claude --dangerously-skip-permissions -p "
 你是 Script Agent。讀 .agents/rules/pipeline.md。
 讀 chapters/${CHAPTER}/章節${CHAPTER}_逐字講稿.txt。
 列出所有 **備注** 區塊（使用相關素材 + 呈現方式）。
@@ -132,55 +150,72 @@ WHISPER_PID=$!
 格式：{ \"segments\": [ { \"seg\": \"1.1\", \"assets\": [], \"presentation\": \"\" } ] }
 完成後輸出「DONE」。
 "
-  echo "[Phase 1] ✅ Script Agent 完成"
-) &
-SCRIPT_PID=$!
+      echo "[Phase 1] ✅ Script Agent 完成"
+    fi
+  ) &
+  SCRIPT_PID=$!
 
-# 等待兩者都完成
-wait $WHISPER_PID
-wait $SCRIPT_PID
-echo "[Phase 1] ✅ 全部完成"
+  wait $WHISPER_PID
+  wait $SCRIPT_PID
+  echo "[Phase 1] ✅ 全部完成"
+  touch "$MARKER_P1"
+fi
 
 # ═══════════════════════════════════════════════════════════
-# Phase 2 — VTT 校正（Whisper 完成後才能跑）
+# Phase 2 — VTT 校正
 # ═══════════════════════════════════════════════════════════
-echo "[Phase 2] VTT 校正..."
-claude --dangerously-skip-permissions -p "
+if [ -f "$MARKER_P2" ]; then
+  echo "[Phase 2] ⏭️  已完成，跳過"
+else
+  echo "[Phase 2] VTT 校正..."
+  claude --dangerously-skip-permissions -p "
 你是 VTT Agent。讀 .agents/rules/pipeline.md Phase 2 規則。
 讀 ${AUDIO_DIR}/ 下所有 .vtt 檔。
 對照 chapters/${CHAPTER}/章節${CHAPTER}_逐字講稿.txt 校正（繁簡字、的/得/地、專有名詞）。
 直接修改原 .vtt 檔案。完成後輸出「DONE」。
 "
-echo "[Phase 2] ✅ VTT 校正完成"
+  echo "[Phase 2] ✅ VTT 校正完成"
+  touch "$MARKER_P2"
+fi
 
 # ═══════════════════════════════════════════════════════════
-# Phase 3 — Visual Concept Agent（有了 VTT 時間軸才能規劃）
+# Phase 3 — Visual Concept Agent
 # ═══════════════════════════════════════════════════════════
-echo "[Phase 3] Visual Concept..."
-claude --dangerously-skip-permissions -p "
+if [ -f "$MARKER_P3" ]; then
+  echo "[Phase 3] ⏭️  已完成，跳過"
+else
+  echo "[Phase 3] Visual Concept..."
+  claude --dangerously-skip-permissions -p "
 你是 Visual Concept Agent。讀 .agents/rules/pipeline.md Phase 3 規格。
 讀 chapters/${CHAPTER}/章節${CHAPTER}_逐字講稿.txt、script-analysis-${CHAPTER}.json、
 以及 ${AUDIO_DIR}/ 的所有校正後 .vtt（取得精確時間軸）。
 輸出 chapters/${CHAPTER}/visual-spec-${CHAPTER}.json。
 完成後輸出「DONE」。
 "
-echo "[Phase 3] ✅ Visual Concept 完成"
+  echo "[Phase 3] ✅ Visual Concept 完成"
+  touch "$MARKER_P3"
+fi
 
 # ═══════════════════════════════════════════════════════════
-# Phase 4 — Scene Dev（TSX + scene-map）
+# Phase 4 — Scene Dev
 # ═══════════════════════════════════════════════════════════
-echo "[Phase 4] Scene Dev..."
-claude --dangerously-skip-permissions -p "
+if [ -f "$MARKER_P4" ]; then
+  echo "[Phase 4] ⏭️  已完成，跳過"
+else
+  echo "[Phase 4] Scene Dev..."
+  claude --dangerously-skip-permissions -p "
 你是 Scene Dev Agent。讀 .agents/rules/pipeline.md Phase 4 規格。
 讀 chapters/${CHAPTER}/visual-spec-${CHAPTER}.json + 校正後 VTT + 逐字講稿，實作 TSX。
 依 segment 副檔名決定實作方式：
   wav/mp3 → Remotion 動畫 scene
-  mp4/mov → OffthreadVideo + overlay scene（字卡、動畫、字幕疊加）
+  mp4/mov → 整段影片 scene（規格見 pipeline.md「整段影片 Scene 規格」）
 同時輸出 chapters/${CHAPTER}/scene-map-${CHAPTER}.json（HTML Agent 的比對依據）。
 所有幀號來自 VTT（global_frame = seconds × 30）。
 完成後輸出「DONE」。
 "
-echo "[Phase 4] ✅ Scene Dev 完成"
+  echo "[Phase 4] ✅ Scene Dev 完成"
+  touch "$MARKER_P4"
+fi
 
 # ═══════════════════════════════════════════════════════════
 # Phase 5 — QA → James 預覽 → 核准
@@ -190,7 +225,6 @@ npm run dev &
 DEV_PID=$!
 sleep 8
 
-# QA 自動跑（失敗 → Fix → 重做，James 不介入）
 bash "${SCRIPTS}/qa_and_wait.sh" "$CHAPTER"
 QA_EXIT=$?
 
@@ -201,7 +235,6 @@ if [ $QA_EXIT -ne 0 ]; then
   exit 1
 fi
 
-# QA 通過 → 通知 James 預覽
 "$SEND" "✅ CH${CHAPTER} QA 全過，請開瀏覽器預覽後回覆「通過」開始 render"
 open "http://localhost:3000"
 
@@ -224,7 +257,8 @@ echo "[Phase 5] ✅ James 核准，進入 render"
 # ═══════════════════════════════════════════════════════════
 bash "${SCRIPTS}/post-render.sh" "$CHAPTER"
 
-# 清理
+# 清理（含 phase markers）
 rm -f "$LOCK" "$INTAKE_MARKER"
+rm -f "$MARKER_P1" "$MARKER_P2" "$MARKER_P3" "$MARKER_P4"
 rm -f "${CHAPTER_DIR}/START"
 echo "[start] ── CH${CHAPTER} 全部完成 $(date) ──"
