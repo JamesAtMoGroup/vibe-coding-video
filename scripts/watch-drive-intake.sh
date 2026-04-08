@@ -16,6 +16,18 @@ while true; do
     --drive-root-folder-id "$INTAKE_ID" \
     --dirs-only 2>/dev/null | sed 's|/$||')
 
+  # 一次只跑一個 chapter — 若有任何 lock 存在，本輪跳過所有觸發
+  any_running=0
+  for lock_check in /tmp/vibe-lock-*; do
+    [ -f "$lock_check" ] && any_running=1 && break
+  done
+
+  if [ $any_running -eq 1 ]; then
+    echo "[intake-watch] ⏳ 有章節製作中，本輪跳過觸發"
+    sleep 120
+    continue
+  fi
+
   for ch in $chapters; do
     lock="/tmp/vibe-lock-${ch}"
     intake_marker="/tmp/vibe-intake-${ch}"
@@ -57,10 +69,12 @@ while true; do
     fi
 
     # 觸發製作流程（背景執行，log 存 /tmp/vibe-ch{N}.log）
+    # 一次只跑一個 — 觸發後立即 break，下次 poll 再檢查是否有下一個
     bash "${SCRIPTS}/start-chapter.sh" "$ch" \
       >> "/tmp/vibe-ch${ch}.log" 2>&1 &
 
-    echo "[intake-watch] ✅ CH${ch} 製作流程已啟動 (PID $!)"
+    echo "[intake-watch] ✅ CH${ch} 製作流程已啟動 (PID $!)，等待完成後再觸發下一個"
+    break
   done
 
   sleep 120
