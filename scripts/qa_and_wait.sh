@@ -77,7 +77,7 @@ MSG="🎬 Vibe Coding CH${CHAPTER} QA Report
 $(echo -e "$REPORT")
 結果：${PASS}/${TOTAL} 通過
 
-請回覆「通過」開始 render，或「不通過」中止"
+回覆「通過」確認 QA，系統會開瀏覽器讓你預覽後再 render"
 
 # Remove old flag
 rm -f "$FLAG_FILE"
