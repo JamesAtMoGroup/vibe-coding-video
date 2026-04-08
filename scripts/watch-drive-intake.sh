@@ -45,12 +45,16 @@ while true; do
 
     echo "[intake-watch] ✅ CH${ch} sync 完成"
 
-    # 刪除 Drive 上的 READY（best-effort，marker 才是主要防護）
-    rclone delete "gdrive:${ch}" \
+    # 刪除 Drive 上的 READY（找出實際檔名再用 deletefile）
+    ready_file=$(rclone lsf "gdrive:${ch}" \
       --drive-root-folder-id "$INTAKE_ID" \
-      --include "READY*" 2>/dev/null && \
-      echo "[intake-watch] ✅ Drive READY 已刪除" || \
-      echo "[intake-watch] ⚠️  Drive READY 刪除失敗（marker 仍有效）"
+      --files-only 2>/dev/null | grep -i "^READY" | head -1 | tr -d '\r')
+    if [ -n "$ready_file" ]; then
+      rclone deletefile "gdrive:${ch}/${ready_file}" \
+        --drive-root-folder-id "$INTAKE_ID" 2>/dev/null && \
+        echo "[intake-watch] ✅ Drive ${ready_file} 已刪除" || \
+        echo "[intake-watch] ⚠️  Drive READY 刪除失敗（marker 仍有效）"
+    fi
 
     # 觸發製作流程（背景執行，log 存 /tmp/vibe-ch{N}.log）
     bash "${SCRIPTS}/start-chapter.sh" "$ch" \
