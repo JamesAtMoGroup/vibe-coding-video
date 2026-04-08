@@ -25,7 +25,21 @@ echo "[start] ── CH${CHAPTER} 製作開始 $(date) ──"
 
 # ── 驗證素材（VTT 由 Whisper 生成，不需事先存在）─────────
 ERRORS=0
-[ -f "${CHAPTER_DIR}/章節${CHAPTER}_逐字講稿.txt" ] || { echo "❌ 找不到逐字講稿"; ERRORS=1; }
+TRANSCRIPT_TXT="${CHAPTER_DIR}/章節${CHAPTER}_逐字講稿.txt"
+TRANSCRIPT_DOCX="${CHAPTER_DIR}/章節${CHAPTER}_逐字講稿.docx"
+
+# 若只有 .docx，自動轉成 .txt（agents 只讀 .txt）
+if [ ! -f "$TRANSCRIPT_TXT" ] && [ -f "$TRANSCRIPT_DOCX" ]; then
+  echo "[start] .docx 偵測到，轉換為 .txt..."
+  python3 -c "
+from docx import Document
+doc = Document('${TRANSCRIPT_DOCX}')
+text = '\n'.join(p.text for p in doc.paragraphs)
+open('${TRANSCRIPT_TXT}', 'w', encoding='utf-8').write(text)
+" && echo "[start] ✅ docx → txt 完成" || { echo "❌ docx 轉換失敗（請確認 python-docx 已安裝：pip install python-docx）"; ERRORS=1; }
+fi
+
+[ -f "$TRANSCRIPT_TXT" ] || { echo "❌ 找不到逐字講稿（.txt 或 .docx）"; ERRORS=1; }
 
 # 音檔資料夾需有任意格式的音檔或影片
 MEDIA_COUNT=$(ls "${AUDIO_DIR}/"*.wav "${AUDIO_DIR}/"*.mp3 "${AUDIO_DIR}/"*.mp4 "${AUDIO_DIR}/"*.mov 2>/dev/null | wc -l)
