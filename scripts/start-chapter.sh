@@ -61,7 +61,7 @@ cd "$PROJECT"
 # ═══════════════════════════════════════════════════════════
 echo "[Phase 1] Audio 正規化..."
 
-for f in "${AUDIO_DIR}/"*.wav "${AUDIO_DIR}/"*.mp3 2>/dev/null; do
+for f in "${AUDIO_DIR}/"*.wav "${AUDIO_DIR}/"*.mp3; do
   [ -f "$f" ] || continue
   base="${f%.*}"; ext="${f##*.}"
   out="${base}-normalized.${ext}"
@@ -71,7 +71,7 @@ for f in "${AUDIO_DIR}/"*.wav "${AUDIO_DIR}/"*.mp3 2>/dev/null; do
     "$out" -y -loglevel error
 done
 
-for f in "${AUDIO_DIR}/"*.mp4 "${AUDIO_DIR}/"*.mov 2>/dev/null; do
+for f in "${AUDIO_DIR}/"*.mp4 "${AUDIO_DIR}/"*.mov; do
   [ -f "$f" ] || continue
   base="${f%.*}"; ext="${f##*.}"
   out="${base}-normalized.${ext}"
