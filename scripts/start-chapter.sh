@@ -74,6 +74,8 @@ else
 
   for f in "${AUDIO_DIR}/"*.wav "${AUDIO_DIR}/"*.mp3; do
     [ -f "$f" ] || continue
+    # 跳過已經是 normalized 的檔案（避免重複正規化）
+    [[ "$f" == *"-normalized."* ]] && continue
     base="${f%.*}"; ext="${f##*.}"
     out="${base}-normalized.${ext}"
     if [ -f "$out" ]; then
@@ -88,6 +90,8 @@ else
 
   for f in "${AUDIO_DIR}/"*.mp4 "${AUDIO_DIR}/"*.mov; do
     [ -f "$f" ] || continue
+    # 跳過已經是 normalized 的檔案
+    [[ "$f" == *"-normalized."* ]] && continue
     base="${f%.*}"; ext="${f##*.}"
     out="${base}-normalized.${ext}"
     if [ -f "$out" ]; then
