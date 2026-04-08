@@ -40,7 +40,7 @@ while true; do
     mkdir -p "$local_dir"
     rclone sync "gdrive:${ch}" "$local_dir" \
       --drive-root-folder-id "$INTAKE_ID" \
-      --exclude "READY" \
+      --exclude "READY*" \
       --progress 2>&1 | tail -3
 
     echo "[intake-watch] ✅ CH${ch} sync 完成"
