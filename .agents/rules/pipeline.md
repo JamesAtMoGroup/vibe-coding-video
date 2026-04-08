@@ -4,6 +4,18 @@
 
 ---
 
+## ⚠️ LaunchAgent 環境注意事項
+
+所有由 LaunchAgent 觸發的 shell script（`start-chapter.sh`、`post-render.sh`）**必須在開頭加上：**
+
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+原因：LaunchAgent 不繼承使用者的 shell 環境，`claude`、`whisper`、`ffmpeg` 等指令若只在 `.zshrc` 設定 PATH，LaunchAgent 內會找不到（`command not found`）。
+
+---
+
 ## 素材進件流程（Pipeline 觸發前）
 
 ### Google Drive Intake
