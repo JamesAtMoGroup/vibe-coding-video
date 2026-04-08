@@ -100,14 +100,16 @@ echo "[Phase 1] Whisper + Script Agent（並行）..."
     case "$ext" in
       wav|mp3)
         whisper "$f" --language zh --output_format vtt \
-          --output_dir "${AUDIO_DIR}" --word_timestamps False 2>/dev/null
+          --output_dir "${AUDIO_DIR}" --word_timestamps False || \
+          echo "  [Whisper] ⚠️ $(basename "$f") 失敗，繼續下一個"
         ;;
       mp4|mov)
         # 抽音軌再跑 Whisper，VTT 存回同資料夾
         tmp_audio="/tmp/vibe_whisper_${CHAPTER}_$(basename "${f%.*}").wav"
         ffmpeg -i "$f" -vn -ar 16000 "$tmp_audio" -y -loglevel error
         whisper "$tmp_audio" --language zh --output_format vtt \
-          --output_dir "${AUDIO_DIR}" --word_timestamps False 2>/dev/null
+          --output_dir "${AUDIO_DIR}" --word_timestamps False || \
+          echo "  [Whisper] ⚠️ $(basename "$f") 失敗，繼續下一個"
         # 重命名 VTT 對應回影片檔名
         vtt_name="${AUDIO_DIR}/$(basename "${f%.*}").vtt"
         tmp_vtt="${AUDIO_DIR}/$(basename "${tmp_audio%.*}").vtt"
