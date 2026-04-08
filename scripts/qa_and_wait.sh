@@ -37,22 +37,32 @@ check() {
 
 # --- Audio ---
 CHAPTER_DIR="${PROJECT}/chapters/${CHAPTER}"
-AUDIO_ORIG=$(ls "${CHAPTER_DIR}"/*.wav 2>/dev/null | head -1)
-[ -n "$AUDIO_ORIG" ] && check "原始音檔" "ok" || check "原始音檔" "找不到 WAV"
+AUDIO_DIR="${CHAPTER_DIR}/${CHAPTER} 音檔"
+AUDIO_ORIG=$(ls "${AUDIO_DIR}/"*.wav "${AUDIO_DIR}/"*.mp3 "${AUDIO_DIR}/"*.mp4 "${AUDIO_DIR}/"*.mov 2>/dev/null | grep -v "\-normalized\." | head -1)
+[ -n "$AUDIO_ORIG" ] && check "原始音檔" "ok" || check "原始音檔" "找不到音檔"
 
 # --- VTT ---
-VTT=$(ls "${CHAPTER_DIR}"/*.vtt 2>/dev/null | head -1)
-[ -n "$VTT" ] && check "字幕 VTT" "ok" || check "字幕 VTT" "找不到 VTT"
+VTT_COUNT=$(ls "${AUDIO_DIR}/"*.vtt 2>/dev/null | wc -l | tr -d ' ')
+[ "$VTT_COUNT" -gt 0 ] && check "字幕 VTT (${VTT_COUNT} 個)" "ok" || check "字幕 VTT" "找不到 VTT"
 
-# --- Scenes file (TSX) ---
-SCENES_FILE=$(ls "${PROJECT}/src/"*"${CHAPTER//-/_}"*".tsx" 2>/dev/null | head -1)
-[ -n "$SCENES_FILE" ] && check "Scenes TSX" "ok" || check "Scenes TSX" "找不到對應 TSX"
+# --- scene-map (Scene Dev 完成的依據) ---
+SCENE_MAP="${CHAPTER_DIR}/scene-map-${CHAPTER}.json"
+[ -f "$SCENE_MAP" ] && check "scene-map.json" "ok" || check "scene-map.json" "找不到（Scene Dev 未完成）"
+
+# --- visual-spec ---
+VISUAL_SPEC="${CHAPTER_DIR}/visual-spec-${CHAPTER}.json"
+[ -f "$VISUAL_SPEC" ] && check "visual-spec.json" "ok" || check "visual-spec.json" "找不到（Visual Concept 未完成）"
 
 # --- Output MP4 ---
-OUT_MP4="${PROJECT}/out/CH${CHAPTER//-/}/CH${CHAPTER}-complete.mp4"
-if [ -f "$OUT_MP4" ]; then
-  SIZE=$(du -sh "$OUT_MP4" | cut -f1)
-  check "Output MP4 (${SIZE})" "ok"
+OUT_DIR=$(ls -d "${PROJECT}/out/CH${CHAPTER}-"* 2>/dev/null | head -1)
+if [ -n "$OUT_DIR" ]; then
+  OUT_MP4=$(ls "${OUT_DIR}/"*.mp4 2>/dev/null | head -1)
+  if [ -n "$OUT_MP4" ]; then
+    SIZE=$(du -sh "$OUT_MP4" | cut -f1)
+    check "Output MP4 (${SIZE})" "ok"
+  else
+    check "Output MP4" "尚未 render"
+  fi
 else
   check "Output MP4" "尚未 render"
 fi
