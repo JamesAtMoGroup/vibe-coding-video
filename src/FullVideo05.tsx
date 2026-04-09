@@ -236,7 +236,7 @@ const ProgressBar: React.FC<{ progressPct?: number }> = ({ progressPct = 28 }) =
         justifyContent: "space-between",
         alignItems: "center",
         fontFamily: "'Space Mono', monospace",
-        fontSize: 16 * S,
+        fontSize: 20 * S,
         color: C.muted,
         letterSpacing: "0.05em",
         marginBottom: 8 * S,
@@ -245,7 +245,7 @@ const ProgressBar: React.FC<{ progressPct?: number }> = ({ progressPct = 28 }) =
           src={staticFile("aischool-logo.webp")}
           style={{ height: 22 * S, width: "auto", mixBlendMode: "screen", opacity: 0.9 }}
         />
-        <span style={{ fontSize: 14 * S, color: C.muted }}>CH 1-2</span>
+        <span style={{ fontSize: 20 * S, color: C.muted }}>CH 1-2</span>
       </div>
       <div style={{ height: 3 * S, background: "rgba(255,255,255,0.06)", borderRadius: 99, overflow: "hidden" }}>
         <div style={{
@@ -273,7 +273,7 @@ const SectionHeader: React.FC<{ num: string; title: string; startFrame: number }
       <div style={{ display: "flex", alignItems: "center", gap: 16 * S }}>
         <span style={{
           fontFamily: "'Space Mono', monospace",
-          fontSize: 16 * S, color: C.primary,
+          fontSize: 20 * S, color: C.primary,
           background: "rgba(124,255,178,0.1)",
           border: "1px solid rgba(124,255,178,0.3)",
           padding: `${6 * S}px ${16 * S}px`, borderRadius: 99,
@@ -334,7 +334,7 @@ const TipBox: React.FC<{
     ...fadeStyle,
   }}>
     <div style={{
-      fontFamily: "'Space Mono', monospace", fontSize: 16 * S, fontWeight: 700,
+      fontFamily: "'Space Mono', monospace", fontSize: 20 * S, fontWeight: 700,
       color: C.primary, letterSpacing: "0.08em",
       textTransform: "uppercase" as const, marginBottom: 10 * S,
       display: "flex", alignItems: "center", gap: 8 * S,
@@ -371,7 +371,7 @@ const ElementBadge: React.FC<{
     }}>
       <span style={{
         fontFamily: "'Space Mono', monospace",
-        fontSize: 14 * S, fontWeight: 700,
+        fontSize: 20 * S, fontWeight: 700,
         color: badgeColor,
         background: isRequired ? "rgba(124,255,178,0.15)" : "rgba(255,209,102,0.15)",
         border: `1px solid ${borderColor}`,
@@ -729,7 +729,7 @@ const ComparisonDiagramSVG: React.FC<{ startFrame: number }> = ({ startFrame }) 
             }}>
               <span style={{
                 fontFamily: "'Space Mono', monospace",
-                fontSize: 16 * S, color: C.primary,
+                fontSize: 20 * S, color: C.primary,
                 background: "rgba(124,255,178,0.12)",
                 borderRadius: 99, padding: `${4 * S}px ${12 * S}px`,
                 whiteSpace: "nowrap" as const,
@@ -821,7 +821,7 @@ const HighlightDiagramSVG: React.FC<{ startFrame: number }> = ({ startFrame }) =
             <div style={{ fontSize: 36 * S, marginBottom: 10 * S }}>{item.icon}</div>
             <div style={{
               fontFamily: "'Space Mono', monospace",
-              fontSize: 16 * S, color: C.primary,
+              fontSize: 20 * S, color: C.primary,
               letterSpacing: "0.06em", marginBottom: 8 * S,
             }}>{item.label}</div>
             <div style={{
@@ -938,7 +938,7 @@ const ExpectFlowSVG: React.FC<{ startFrame: number }> = ({ startFrame }) => {
               }}>{node.label}</div>
               <div style={{
                 fontFamily: "'Space Mono', monospace",
-                fontSize: 16 * S, color: C.muted,
+                fontSize: 20 * S, color: C.muted,
               }}>{node.sub}</div>
             </div>
             {i < nodes.length - 1 && (
@@ -1071,7 +1071,7 @@ const Scene11Opening: React.FC<{ dur: number }> = ({ dur }) => {
         <div style={{ ...card2Style, marginBottom: 20 * S }}>
           <div style={{
             fontFamily: "'Space Mono', monospace",
-            fontSize: 14 * S, color: C.primary,
+            fontSize: 20 * S, color: C.primary,
             letterSpacing: "0.1em", textTransform: "uppercase" as const,
             marginBottom: 12 * S,
             display: "flex", alignItems: "center", gap: 8 * S,
@@ -1272,7 +1272,7 @@ const Scene31FuzzyCmd: React.FC<{ dur: number }> = ({ dur }) => {
           marginBottom: 20 * S, ...scenarioStyle,
         }}>
           <div style={{
-            fontFamily: "'Space Mono', monospace", fontSize: 16 * S,
+            fontFamily: "'Space Mono', monospace", fontSize: 20 * S,
             color: C.yellow, letterSpacing: "0.08em", marginBottom: 10 * S,
           }}>情境假設</div>
           <p style={{
@@ -1383,7 +1383,7 @@ const Scene32ClearCmd: React.FC<{ dur: number }> = ({ dur }) => {
           boxShadow: "0 0 30px rgba(124,255,178,0.1)",
         }}>
           <div style={{
-            fontFamily: "'Space Mono', monospace", fontSize: 16 * S,
+            fontFamily: "'Space Mono', monospace", fontSize: 20 * S,
             color: C.primary, marginBottom: 14 * S,
           }}>✅ 清楚指令</div>
           {[
@@ -1397,7 +1397,7 @@ const Scene32ClearCmd: React.FC<{ dur: number }> = ({ dur }) => {
               <div key={i} style={{ marginBottom: 14 * S, opacity: itemOpacity }}>
                 <span style={{
                   fontFamily: "'Space Mono', monospace",
-                  fontSize: 14 * S, color: C.primary,
+                  fontSize: 20 * S, color: C.primary,
                   background: "rgba(124,255,178,0.12)",
                   border: `1px solid rgba(124,255,178,0.3)`,
                   borderRadius: 6 * S,
@@ -1420,7 +1420,7 @@ const Scene32ClearCmd: React.FC<{ dur: number }> = ({ dur }) => {
           opacity: interpolate(frame, [520, 548], [0, 1], clamp),
         }}>
           <div style={{
-            fontFamily: "'Space Mono', monospace", fontSize: 16 * S,
+            fontFamily: "'Space Mono', monospace", fontSize: 20 * S,
             color: C.muted, marginBottom: 12 * S,
           }}>三份報名表（三個管道）</div>
           {/* Row 1: Sheet A + B */}
@@ -1468,42 +1468,55 @@ const Scene32ClearCmd: React.FC<{ dur: number }> = ({ dur }) => {
           </p>
         </div>
 
-        {/* Merged + duplicate images — 68.3s=2049f */}
-        <div style={{
-          opacity: interpolate(frame, [2020, 2049], [0, 1], clamp),
-          marginBottom: 20 * S,
-        }}>
-          <div style={{
-            fontFamily: "'Space Mono', monospace", fontSize: 16 * S,
-            color: C.muted, marginBottom: 12 * S,
-          }}>合併後的成果</div>
-          <div style={{ display: "flex", gap: 20 * S }}>
-            {[
-              { file: "合併報名表.png", label: "合併名單" },
-              { file: "重複報名紀錄.png", label: "重複記錄" },
-            ].map((item, i) => {
-              const styles = [merged1Style, merged2Style];
-              return (
-                <div key={i} style={{ flex: 1, ...styles[i] }}>
-                  <Img
-                    src={staticFile(`assets/1-2/${item.file}`)}
-                    style={{
-                      width: "100%", borderRadius: 12 * S,
-                      border: `1px solid ${C.border}`,
-                    }}
-                  />
-                  <div style={{
-                    fontFamily: "'Space Mono', monospace",
-                    fontSize: 14 * S, color: C.muted,
-                    textAlign: "center" as const, marginTop: 8 * S,
-                  }}>{item.label}</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
       </SceneWrap>
+
+      {/* 合併後的成果 overlay — 68.3s=2049f
+          Positioned outside SceneWrap to avoid overflow:hidden + subtitle clipping.
+          Covers safe zone (NAV_H → H-SUBTITLE_H) as a full-area result reveal. */}
+      <div style={{
+        position: "absolute",
+        top: NAV_H, left: 0, right: 0,
+        height: H - NAV_H - SUBTITLE_H,
+        background: C.bg,
+        display: "flex", flexDirection: "column" as const,
+        alignItems: "center", justifyContent: "center",
+        padding: `${24 * S}px ${80 * S}px`,
+        opacity: interpolate(frame, [2020, 2049], [0, 1], clamp),
+        zIndex: 15,
+        pointerEvents: "none" as const,
+      }}>
+        <div style={{
+          fontFamily: "'Space Mono', monospace", fontSize: 22 * S,
+          color: C.primary, marginBottom: 20 * S,
+          letterSpacing: "0.08em",
+        }}>✅ 合併後的成果</div>
+        <div style={{ display: "flex", gap: 32 * S, width: "100%", flex: 1, minHeight: 0 }}>
+          {([
+            { file: "合併報名表.png", label: "合併名單", fadeStyle: merged1Style },
+            { file: "重複報名紀錄.png", label: "重複記錄", fadeStyle: merged2Style },
+          ] as Array<{ file: string; label: string; fadeStyle: React.CSSProperties }>).map((item) => (
+            <div key={item.file} style={{ flex: 1, display: "flex", flexDirection: "column" as const, minHeight: 0, ...item.fadeStyle }}>
+              <Img
+                src={staticFile(`assets/1-2/${item.file}`)}
+                style={{
+                  width: "100%", flex: 1, minHeight: 0,
+                  objectFit: "contain" as const, objectPosition: "top center",
+                  borderRadius: 16 * S,
+                  border: `1px solid ${C.border}`,
+                  boxShadow: "0 0 40px rgba(124,255,178,0.1)",
+                }}
+              />
+              <div style={{
+                fontFamily: "'Space Mono', monospace",
+                fontSize: 20 * S, color: C.muted,
+                textAlign: "center" as const, marginTop: 12 * S,
+                flexShrink: 0,
+              }}>{item.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <CalloutLayer callouts={callouts} />
     </SceneFade>
   );
@@ -1558,7 +1571,7 @@ const Scene41Status: React.FC<{ dur: number }> = ({ dur }) => {
                 }}>
                   <span style={{
                     fontFamily: "'Space Mono', monospace",
-                    fontSize: 12 * S, color: item.color,
+                    fontSize: 18 * S, color: item.color,
                     background: item.type === "必填" ? "rgba(124,255,178,0.15)" : "rgba(255,209,102,0.15)",
                     borderRadius: 99, padding: `${3 * S}px ${8 * S}px`,
                   }}>{item.type}</span>
@@ -1639,7 +1652,7 @@ const Scene42PainPoint: React.FC<{ dur: number }> = ({ dur }) => {
         }}>
           <div style={{
             fontFamily: "'Space Mono', monospace",
-            fontSize: 16 * S, color: C.red, marginBottom: 8 * S,
+            fontSize: 20 * S, color: C.red, marginBottom: 8 * S,
           }}>⚠ 常見錯誤</div>
           <p style={{
             fontFamily: "'Noto Sans TC','PingFang TC',sans-serif",
@@ -1704,7 +1717,7 @@ const Scene43Expectation: React.FC<{ dur: number }> = ({ dur }) => {
         }}>
           <div style={{
             fontFamily: "'Space Mono', monospace",
-            fontSize: 16 * S, color: C.yellow, marginBottom: 8 * S,
+            fontSize: 20 * S, color: C.yellow, marginBottom: 8 * S,
           }}>⚠ 常見問題</div>
           <p style={{
             fontFamily: "'Noto Sans TC','PingFang TC',sans-serif",
@@ -1735,7 +1748,7 @@ const Scene43Expectation: React.FC<{ dur: number }> = ({ dur }) => {
         }}>
           <div style={{
             fontFamily: "'Space Mono', monospace",
-            fontSize: 16 * S, color: C.primary,
+            fontSize: 20 * S, color: C.primary,
             letterSpacing: "0.08em", marginBottom: 16 * S,
           }}>三個必填元素</div>
           <div style={{ display: "flex", gap: 20 * S, justifyContent: "space-around" }}>
@@ -1747,7 +1760,7 @@ const Scene43Expectation: React.FC<{ dur: number }> = ({ dur }) => {
                 }}>{label}</div>
                 <div style={{
                   fontFamily: "'Space Mono', monospace",
-                  fontSize: 14 * S, color: C.muted, marginTop: 4 * S,
+                  fontSize: 20 * S, color: C.muted, marginTop: 4 * S,
                 }}>REQUIRED</div>
               </div>
             ))}
@@ -1799,7 +1812,7 @@ const Scene44Checklist: React.FC<{ dur: number }> = ({ dur }) => {
           ...hiddenStyle,
         }}>
           <div style={{
-            fontFamily: "'Space Mono', monospace", fontSize: 16 * S, fontWeight: 700,
+            fontFamily: "'Space Mono', monospace", fontSize: 20 * S, fontWeight: 700,
             color: C.primary, marginBottom: 10 * S,
           }}>🔍 隱藏好處</div>
           <p style={{
@@ -1937,7 +1950,7 @@ const Scene46DataSample: React.FC<{ dur: number }> = ({ dur }) => {
         }}>
           <div style={{
             fontFamily: "'Space Mono', monospace",
-            fontSize: 14 * S, color: C.primary, marginBottom: 12 * S,
+            fontSize: 20 * S, color: C.primary, marginBottom: 12 * S,
           }}>怎麼貼？</div>
           {[
             { icon: "1", text: "只貼標題列 + 一兩列資料（不需要全部）" },
@@ -1957,7 +1970,7 @@ const Scene46DataSample: React.FC<{ dur: number }> = ({ dur }) => {
                   display: "flex", alignItems: "center", justifyContent: "center",
                   flexShrink: 0,
                   fontFamily: "'Space Mono', monospace",
-                  fontSize: 14 * S, fontWeight: 700, color: C.bg,
+                  fontSize: 20 * S, fontWeight: 700, color: C.bg,
                 }}>{item.icon}</span>
                 <span style={{
                   fontFamily: "'Noto Sans TC','PingFang TC',sans-serif",
@@ -1976,7 +1989,7 @@ const Scene46DataSample: React.FC<{ dur: number }> = ({ dur }) => {
           fontFamily: "'Space Mono', monospace",
           fontSize: 20 * S, color: C.primary, lineHeight: 1.8,
         }}>
-          <div style={{ color: C.muted, fontSize: 14 * S, marginBottom: 8 * S }}>範例（直接貼上即可）</div>
+          <div style={{ color: C.muted, fontSize: 20 * S, marginBottom: 8 * S }}>範例（直接貼上即可）</div>
           姓名	Email	電話	報名時間<br />
           王小明	ming@example.com	0912345678	2024-03-01 10:30<br />
           李美華	hua@example.com	0987654321	2024-03-01 11:00
@@ -2173,7 +2186,7 @@ const Scene61Closing: React.FC<{ dur: number }> = ({ dur }) => {
                 display: "flex", alignItems: "center", justifyContent: "center",
                 flexShrink: 0,
                 fontFamily: "'Space Mono', monospace",
-                fontSize: 14 * S, fontWeight: 700, color: C.primary,
+                fontSize: 20 * S, fontWeight: 700, color: C.primary,
               }}>{item.num}</span>
               <p style={{
                 fontFamily: "'Noto Sans TC','PingFang TC',sans-serif",
@@ -2194,7 +2207,7 @@ const Scene61Closing: React.FC<{ dur: number }> = ({ dur }) => {
         }}>
           <div style={{
             fontFamily: "'Space Mono', monospace",
-            fontSize: 14 * S, color: C.primary,
+            fontSize: 20 * S, color: C.primary,
             letterSpacing: "0.1em", marginBottom: 10 * S,
           }}>NEXT CHAPTER</div>
           <p style={{
