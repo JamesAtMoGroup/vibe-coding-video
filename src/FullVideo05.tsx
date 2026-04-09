@@ -1350,7 +1350,6 @@ const Scene32ClearCmd: React.FC<{ dur: number }> = ({ dur }) => {
   const frame = useCurrentFrame();
   const cardStyle  = useFadeUp(20);
   const cmdStyle   = useFadeUpElastic(60);
-  const concStyle  = useFadeUp(1700);
 
   const callouts: Callout[] = [
     { from: 60,   to: 400,  sender: "講師", text: "同樣需求，換個方式說——所有問號提前回答" },
@@ -1454,18 +1453,6 @@ const Scene32ClearCmd: React.FC<{ dur: number }> = ({ dur }) => {
               }}>管道 3</div>
             </div>
           </div>
-        </div>
-
-        {/* Conclusion text */}
-        <div style={{ ...concStyle, marginBottom: 20 * S }}>
-          <p style={{
-            fontFamily: "'Noto Sans TC','PingFang TC',sans-serif",
-            fontSize: 26 * S, color: C.muted, lineHeight: 1.7, margin: 0,
-          }}>
-            你會發現，第二個版本裡，
-            <strong style={{ color: C.text }}>所有 AI 可能會出現的問題，都被你提前回答了</strong>。
-            AI 收到的是完整任務說明，直接產出，不需要通靈。
-          </p>
         </div>
 
       </SceneWrap>
