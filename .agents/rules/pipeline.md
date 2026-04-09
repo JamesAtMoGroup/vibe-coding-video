@@ -513,7 +513,9 @@ SVG 有 viewBox → SVG 座標單位 1 = S 個螢幕像素
 | 內文 / 卡片正文 | `24 * S` | `26–28 * S` |
 | 說明 / desc / 副文字 | `22 * S` | `26 * S` |
 | 標籤 / 圖片說明 / 小註 | `18 * S` | `20 * S` |
-| 絕對底線 | `16 * S` | — 不可再小 |
+| 絕對底線 | **`18 * S`** | — 低於此值一律拒絕 |
+
+> ⚠️ CH1-2 驗證結果：`12*S`/`14*S`/`16*S` 在 3840×2160 畫面上全部肉眼不易閱讀，已全部升至 `18*S` 以上。此底線不可妥協。
 
 ⚠️ **HighlightPulse 繼承 fontSize**：`HighlightPulse` 本身不設字體大小，完全繼承父容器。
 若獨立使用（非在段落文字中 inline），**父容器必須明確設定 `fontSize`**：
@@ -552,11 +554,13 @@ SVG 有 viewBox → SVG 座標單位 1 = S 個螢幕像素
 - 禁止「影片置中」素材放在 SceneWrap 內（用 AbsoluteFill root level）
 - **禁止 CalloutCard / CalloutLayer 放在 SceneWrap 內** — SceneWrap 有 `overflow:hidden` + `translateY(scroll)` 導致 callout 被截斷且位置錯誤。必須用 `<CalloutLayer callouts={callouts} />` 放在 SceneWrap **外面**（SceneFade 內的 AbsoluteFill）
 - **禁止 HighlightPulse 在獨立容器中不設 fontSize（繼承預設 16px 在 4K 看不見）**
+- **禁止 fontSize < 18*S — CH1-2 實測：12/14/16*S 全部太小，絕對底線是 18*S**
 - **禁止圖片 ≤ 300*S（600px）— 4K 畫面無法閱讀內容**
 - **禁止 3 張圖片水平並排（每張 33%≈1000px，spreadsheet 細字看不清）— 必須用 2+1 排列**
 - **禁止 4 張以上圖片水平並排（超出容器寬度）— 必須用 2×2 grid**
 - **禁止 viewBox SVG 內用 `fontSize="N"`（string 屬性）或 `fontSize={N * S}`（雙重縮放）— 必須用 `fontSize={N}` 且 N = 目標px / S**
 - **禁止動畫容器高度超過安全區（H - NAV_H - SUBTITLE_H = 1696px）— 超出的 motion graphic 必須改為緊湊 flex-wrap 格式**
+- **禁止場景尾段的補充圖放在 SceneWrap 內（scroll 不夠深時被字幕區截斷）— 必須用 position:absolute 置於 SceneWrap 外的 overlay**
 - **禁止 scroll trigger 晚於要顯示的內容 startFrame（內容出現時已被截斷）**
 - **禁止用 volume mute 替代 audio delay（旁白開頭被靜默跳過）**
 
@@ -579,7 +583,11 @@ SVG 有 viewBox → SVG 座標單位 1 = S 個螢幕像素
 - [ ] 4+ 圖片同時出現 → 確認用 2×2 grid 而非水平並排
 - [ ] scroll trigger 幀號 < 最後一張圖開始出現的幀號（scroll 先到位）
 - [ ] 每個 HighlightPulse 獨立容器有明確 `fontSize`
-- [ ] fontSize 無低於 18*S 的值（grep `fontSize: [0-9]* \* S` 確認）
+- [ ] fontSize 無低於 18*S 的值 — **必須執行 grep 確認**：
+  ```bash
+  grep -n "fontSize: [0-9]\{1,2\} \* S" src/FullVideo*.tsx
+  # 任何出現 10–17 * S 的值都必須修正到至少 18 * S
+  ```
 - [ ] viewBox SVG 內所有 `<text>` fontSize 為 JSX 數值 `{N}`，N = 目標px/S（56px=28, 64px=32, 80px=40）
 - [ ] 任何 motion graphic 容器高度 ≤ 1696px（不得超出安全區）
 
@@ -646,11 +654,14 @@ SVG 有 viewBox → SVG 座標單位 1 = S 個螢幕像素
 ### 素材規格
 | 項目 | 規格 |
 |------|------|
-| 圖片最小尺寸 | `320 * S × 210 * S` |
-| 4+ 圖片 | 2×2 grid，不水平並排 |
+| 圖片最小尺寸 | `400 * S` 寬（800px），建議 420–520 * S |
+| 2 張圖 | 各 `flex: 1`（50%） |
+| 3 張圖 | 2+1 排列：上排 2 張各 50%，下排 1 張居中 50%（❌ 禁止 3 欄並排） |
+| 4+ 圖 | 2×2 grid，不水平並排 |
 | 影片嵌入 | `width: "100%"` |
 | 「影片置中」素材 | AbsoluteFill root，zIndex:999，淡入 18f / 淡出 18f |
 | 影片檔名 | ASCII only（中文造成 URL encoding 失敗） |
+| 場景底部補充圖（long scene 尾段） | **AbsoluteFill overlay（position:absolute, top:NAV_H, height:H-NAV_H-SUBTITLE_H），不放在 SceneWrap 內** — SceneWrap 的 overflow:hidden + scroll 會截斷底部圖片 |
 
 ### Callout 規格
 | 項目 | 規格 |
