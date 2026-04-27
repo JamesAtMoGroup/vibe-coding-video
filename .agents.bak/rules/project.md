@@ -133,10 +133,10 @@ label: 18*S Space Mono, body: 26*S, bullets: 24*S
 
 ```ts
 // Dimensions (base × S)
-const NOTIF_W       = 290 * S;   // 580px  card width
+const NOTIF_W       = 420 * S;   // 840px  card width
 const NOTIF_TOP     = 12  * S;   // 24px   below nav
 const NOTIF_RIGHT   = 20  * S;   // 40px   from right edge
-const NOTIF_SLOT    = 148 * S;   // 296px  vertical space per card
+const NOTIF_SLOT    = 200 * S;   // 400px  vertical space per card (push-down distance)
 const FADE_OUT_F    = 50;        // 1.67s  fade after .to
 
 // Visual
@@ -204,9 +204,11 @@ useFadeUpElastic(startFrame)
 
 | Asset | Path |
 |-------|------|
-| Script | `chapters/{CH}/章節{CH}_逐字講稿.pages` |
-| Raw audio | `chapters/{CH}/{CH} 音檔/` |
-| Video assets | `chapters/{CH}/{CH} 影片製作相關素材/` |
-| Output video | `out/CH{N}/CH{N}-complete.mp4` |
-| Output VTT | `out/CH{N}/CH{N}-subtitles.vtt` |
-| Main TSX | `src/FullVideo03.tsx` (current) |
+| Script (agents read .txt) | `chapters/{CH}/章節{CH}_逐字講稿.txt` |
+| Raw audio/video | `chapters/{CH}/{CH} 音檔/` (space + chapter prefix in folder name) |
+| Image/video assets | `chapters/{CH}/{CH} 影片製作相關素材/` |
+| HTML slide design | `chapters/{CH}/({CH})ch{CH}.html` |
+| Output video | `out/CH{N}-{章節標題}/CH{N}-{章節標題}.mp4` |
+| Output VTT | `out/CH{N}-{章節標題}/CH{N}-{章節標題}-subtitles.vtt` |
+| Output HTML | `out/CH{N}-{章節標題}/CH{N}-{章節標題}.html` |
+| Current TSX | `src/FullVideoXX.tsx` — check `src/Root.tsx` for actual filename |

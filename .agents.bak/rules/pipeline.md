@@ -68,11 +68,12 @@ chapters/{N}/
 ━━━ Phase 1 — 並行（互相獨立） ━━━
 
   Audio Agent（所有 segment，依副檔名處理）
-    .wav / .mp3 → ffmpeg silenceremove（剪開頭空白）+ loudnorm 正規化
+    .wav / .mp3 → ffmpeg silenceremove（剪開頭空白）
                   輸出：*-normalized.wav / *-normalized.mp3
-    .mp4 / .mov → ffmpeg 正規化音軌（-af loudnorm -c:v copy，影像不動）
+    .mp4 / .mov → ffmpeg silenceremove 音軌（-c:v copy 保留影像）
                   輸出：*-normalized.mp4 / *-normalized.mov
-    ⚠️ 所有格式都必須做音量正規化，不可跳過
+    ⚠️ 只剪開頭靜音，不做任何音量調整（loudnorm / EQ / denoise 全部禁止）
+    ⚠️ James 自行處理音質，pipeline 不介入
 
   Whisper Agent（Audio Agent 完成後，對所有 normalized 檔案跑）
     輸入：chapters/{N}/{N} 音檔/*-normalized.*
@@ -131,7 +132,8 @@ chapters/{N}/
 
 ━━━ Phase 6 — Render + Post-render（QA 通過後） ━━━
   Step 1: Render
-    npx remotion render FullVideo04 "out/CH{N}-{章節標題}/CH{N}-{章節標題}.mp4" --codec=h264
+    # Composition ID matches the export name in Root.tsx (e.g. FullVideo06 for CH 1-3)
+    npx remotion render FullVideo{XX} "out/CH{N}-{章節標題}/CH{N}-{章節標題}.mp4" --codec=h264
 
   Step 2: 合併 VTT（Render 完立即執行）
     讀取 chapters/{N}/{N} 音檔/*.vtt，加上 SEG_STARTS[i] / 30 的時間偏移
@@ -325,21 +327,28 @@ Phase 1 Script Agent 輸出後，Visual Concept Agent 讀：
 
 **只做一件事：剪掉開頭的空白片段。不做任何其他調整。**
 
-James 自行處理音質（音量、清晰度）後再提供檔案。不需要也不可以做 normalize、denoise、EQ、compression。
+James 自行處理音質（音量、清晰度、EQ）後再提供檔案。
+**禁止：normalize（loudnorm）、denoise、EQ、compression。**
 
 ```bash
 # 唯一允許的操作：trim 開頭靜音
 ffmpeg -i input.wav \
   -af "silenceremove=start_periods=1:start_threshold=-50dB" \
-  output-trimmed.wav -y
+  output-normalized.wav -y
+
+# 影片（保留影像，只處理音軌）：
+ffmpeg -i input.mp4 \
+  -af "silenceremove=start_periods=1:start_threshold=-50dB" \
+  -c:v copy output-normalized.mp4 -y
 ```
 
-**音檔位置：** `chapters/{N}/{N} 音檔/`（注意空格與章節前綴）
+**音檔位置（注意：資料夾名稱有空格 + 章節前綴）：**
 ```bash
 # 正確路徑（一定要加引號處理空格）：
-ffmpeg -i "chapters/1-1/1-1 音檔/1-1_1.1.wav" ...
-# 錯誤：chapters/1-1/1-1音檔/  ← 缺空格
-# 錯誤：chapters/1-1/音檔/      ← 缺章節前綴
+ffmpeg -i "chapters/1-3/1-3 音檔/1-3_1.1.wav" ...
+# ❌ 錯誤：chapters/1-3/1-3音檔/  ← 缺空格
+# ❌ 錯誤：chapters/1-3/音檔/      ← 缺章節前綴
+# ❌ 錯誤：chapters/1-3/1-3_音檔/ ← 底線而非空格
 ```
 
 ---

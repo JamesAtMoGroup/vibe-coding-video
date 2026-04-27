@@ -25,16 +25,20 @@
 **Asset structure:**
 ```
 chapters/{chapter}/
-  章節{chapter}_逐字講稿.pages    ← script
-  {chapter} 音檔/                 ← raw audio
-  {chapter} 影片製作相關素材/      ← video assets
+  章節{chapter}_逐字講稿.txt      ← agents read THIS (not .pages or .docx)
+  {chapter} 音檔/                 ← audio + video files (NOTE: folder name has space + chapter prefix)
+  {chapter} 影片製作相關素材/      ← image/video assets referenced in 備注
+  ({chapter})ch{chapter}.html     ← original HTML slide design
 ```
 
-**Output:**
+**Output (no -complete suffix, no date suffix):**
 ```
-out/CH{N}-{章節標題}/CH{N}-{章節標題}.mp4
-out/CH{N}-{章節標題}/CH{N}-{章節標題}-subtitles.vtt
-# Example: out/CH0-3-寫程式的 7 大流程與 AI 溝通技巧/CH0-3-寫程式的 7 大流程與 AI 溝通技巧.mp4
+out/CH{N}-{章節標題}/
+  CH{N}-{章節標題}.mp4
+  CH{N}-{章節標題}-subtitles.vtt
+  CH{N}-{章節標題}.html
+  assets/     ← only if 備注 has 使用相關素材
+# Example: out/CH1-1-價值與風險：問題值得解決嗎？有無資安風險？/CH1-1-價值與風險：問題值得解決嗎？有無資安風險？.mp4
 ```
 
 ---
@@ -65,27 +69,42 @@ If maxScroll ≤ 0 → no scroll, set scrollY = 0
 
 | Role | Job |
 |------|-----|
-| **Director** | Read AGENTS.md + rules + progress.md first. Dispatch sub-agents. Enforce QA gate before render. |
-| **Audio Agent** | ffmpeg normalize (-16 LUFS, NO denoise). Output frame count. |
-| **Transcription Agent** | Whisper VTT + script verification + audio split |
-| **Scene Dev Agent** | Write/edit TSX in `src/FullVideo03.tsx`. Must read rules/project.md first. |
-| **QA Agent** | Checklist verification. Report to Director (NOT James). iMessage report. Wait "通過". |
-| **Render Agent** | Only after QA all passes. |
-| **Asset Agent** | Verify audio files in `chapters/{N}/audio/`, match to script `**備注**` entries |
-| **HTML Analysis Agent** | Parse HTML slides → extract audio timestamps |
+| **Director** | Read AGENTS.md + rules + progress.md first. Dispatch sub-agents. Enforce QA gate before render. Never ask James between phases — run QA and proceed automatically. |
+| **Audio Agent** | ffmpeg trim silence only (`silenceremove=start_periods=1:start_threshold=-50dB`). NO normalize, NO denoise. |
+| **Transcription Agent** | Whisper VTT (zh) + Traditional Chinese correction (OpenCC) + script cross-check |
+| **Visual Concept Agent** | Read corrected VTT + script 備注 → output `visual-spec-{N}.json`. MANDATORY before Scene Dev. |
+| **Scene Dev Agent** | Write/edit `src/FullVideoXX.tsx` (check Root.tsx for current file). Must read rules/project.md + visual-spec first. |
+| **QA Agent** | Checklist verification. Report to Director (NOT James). iMessage report. |
+| **Fix Agent** | Spawned by Director when QA fails. Fix → re-QA before proceeding. |
+| **Render Agent** | Only after QA passes AND James approves preview in Remotion Studio. |
+| **Asset Agent** | Verify audio/video files in `chapters/{N}/{N} 音檔/`, match to script `**備注**` entries |
+| **HTML Analysis Agent** | Parse HTML slides → extract timestamps, support Visual Concept Agent |
 
 ### QA Gate (mandatory, Director enforces)
 
 ```
-Scene Dev complete
+Phase 1 (Audio + Whisper + Script) — all parallel
+  ↓
+Phase 2 — VTT Traditional Chinese correction
+  ↓
+Phase 3 — Visual Concept Agent → visual-spec-{N}.json
+  ↓
+Phase 4 — Scene Dev Agent → FullVideoXX.tsx
   ↓
 Director IMMEDIATELY spawns QA Agent (no James signal needed)
   ↓
-QA all ✅ → iMessage report → wait "通過" → Render Agent
-QA has ❌ → Director assigns Fix Agent → redo QA → all ✅ then notify
+QA all ✅ → iMessage: "CH{N} QA 通過，請開瀏覽器預覽 http://localhost:3000"
+           → open localhost:3000
+           → WAIT for James explicit approval ("通過" / "ok render" / "go ahead")
+QA has ❌ → Director assigns Fix Agent → redo QA → all ✅ then notify James
+  ↓
+James approves → Render Agent starts
 ```
 
-**FORBIDDEN:** Notify James "完成了" or show preview BEFORE QA passes.
+**FORBIDDEN:**
+- Ask James "要繼續嗎？" between Phase 1→2→3→4
+- Render before James approves preview
+- Notify James "完成了" before QA passes
 
 ---
 
@@ -102,12 +121,10 @@ QA has ❌ → Director assigns Fix Agent → redo QA → all ✅ then notify
 - **CSS transitions FORBIDDEN** — all animation via `useCurrentFrame()` + `spring()` / `interpolate()`
 - **Visual quality standard** — every scene must pass the 7-point checklist in `rules/pipeline.md` (SceneFade, WordReveal, accent line, staggered flows, ProgressItem sub-stagger, BgOrbs pulse, summary left-border)
 - **Tailwind animation classes FORBIDDEN**
-- **Audio:** -16 LUFS only, NO denoise (James corrects manually)
+- **Audio:** Trim leading silence ONLY (`silenceremove`). NO normalize, NO denoise — James corrects manually
 
 ---
 
 ## Current Chapter State
 
 See `progress.md` for live state. Do not assume from memory — always read the file.
-
-**CH 0-1:** `out/CH0-1/CH0-1-complete.mp4` — complete (check progress.md for latest)
