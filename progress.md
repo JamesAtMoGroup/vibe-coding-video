@@ -7,11 +7,15 @@
 
 ## 章節狀態總覽
 
-| 章節 | 狀態 | 備註 |
-|------|------|------|
-| CH 0-1 | ✅ 完成 | mp4 + vtt + html 已輸出 |
-| CH 0-2 | ✅ 完成 | mp4 + vtt 已輸出（html 未確認） |
-| CH 1-1 | ✅ 完成 | mp4 + vtt + html 已輸出，Google Drive 已上傳 |
+| 章節 | 狀態 | TSX | Drive |
+|------|------|-----|-------|
+| CH 0-1 | ✅ 完成 | FullVideo.tsx | ✅ 已上傳 |
+| CH 0-2 | ✅ 完成 | FullVideo02.tsx | ✅ 已上傳 |
+| CH 0-3 | ✅ 完成 | FullVideo03.tsx | ✅ 已上傳 |
+| CH 1-1 | ✅ 完成 | FullVideo04.tsx | ✅ 已上傳 |
+| CH 1-2 | ✅ 完成 | FullVideo05.tsx | ✅ 已上傳 |
+| CH 1-3 | ✅ 完成 | FullVideo06.tsx | ✅ 已上傳 |
+| CH 1-4 | ✅ 完成 | FullVideo07.tsx | ✅ 已上傳 |
 
 ---
 
