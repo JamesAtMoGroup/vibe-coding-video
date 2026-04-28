@@ -7,7 +7,7 @@ out/
 chapters/
 assets/
 speaking.lottie
-public/audio/*.wav
+public/audio/**
 public/video/
 public/travel-form-v*.mp4
 public/avatar/
