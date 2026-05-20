@@ -53,25 +53,25 @@ const SEG_DURATIONS = [1426, 2541, 2412, 5320, 4139, 2936];
 // ─────────────────────────────────────────────────────────────────────────────
 // Global Callouts (from spec, global frame = scene_start_frame + local_frame)
 // ─────────────────────────────────────────────────────────────────────────────
-type Callout = { from: number; to: number; sender: string; text: string };
+type Callout = { from: number; to: number; text: string };
 
 const CALLOUT_DURATION = 100; // 100 frames visible
 
 const GLOBAL_CALLOUTS: Callout[] = [
   // Scene 0.1 — local 1079 → global 1079
-  { from: 1079,  to: 1079 + CALLOUT_DURATION,  sender: "James", text: "跳過解法設計，常常做到一半就翻車" },
+  { from: 1079,  to: 1079 + CALLOUT_DURATION,  text: "跳過解法設計，常常做到一半就翻車" },
   // Scene 1.1 — local 1382 → global 1426 + 1382 = 2808
-  { from: 2808,  to: 2808 + CALLOUT_DURATION,  sender: "James", text: "選錯交通＝寫錯方向，代價是時間" },
+  { from: 2808,  to: 2808 + CALLOUT_DURATION,  text: "選錯交通＝寫錯方向，代價是時間" },
   // Scene 2.1 — local 2196 → global 3967 + 2196 = 6163
-  { from: 6163,  to: 6163 + CALLOUT_DURATION,  sender: "James", text: "方向你來把，細節 AI 包辦" },
+  { from: 6163,  to: 6163 + CALLOUT_DURATION,  text: "方向你來把，細節 AI 包辦" },
   // Scene 3.1 — local 4042 → global 6379 + 4042 = 10421
-  { from: 10421, to: 10421 + CALLOUT_DURATION, sender: "James", text: "別慌，今天先有印象就好" },
+  { from: 10421, to: 10421 + CALLOUT_DURATION, text: "別慌，今天先有印象就好" },
   // Scene 4.1 — local 1774 → global 11699 + 1774 = 13473
-  { from: 13473, to: 13473 + CALLOUT_DURATION, sender: "James", text: "AI 要的是溝通，不是規格書" },
+  { from: 13473, to: 13473 + CALLOUT_DURATION, text: "AI 要的是溝通，不是規格書" },
   // Scene 4.1 — local 4060 → global 11699 + 4060 = 15759
-  { from: 15759, to: 15759 + CALLOUT_DURATION, sender: "James", text: "用一個問題篩掉 80% 的學習焦慮" },
+  { from: 15759, to: 15759 + CALLOUT_DURATION, text: "用一個問題篩掉 80% 的學習焦慮" },
   // Scene 5.1 — local 2846 → global 15838 + 2846 = 18684
-  { from: 18684, to: 18684 + 90,               sender: "James", text: "下一單元：工程師思維，切換解題策略" },
+  { from: 18684, to: 18684 + 90,               text: "下一單元：工程師思維，切換解題策略" },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -404,7 +404,6 @@ const CalloutCard: React.FC<{ c: Callout; allCallouts: Callout[] }> = ({ c, allC
             <span style={{ fontFamily: "-apple-system,'SF Pro Text','PingFang TC',system-ui,sans-serif", fontSize: fontBase, fontWeight: 600, color: "rgba(255,255,255,0.92)" }}>iMessage</span>
             <span style={{ fontFamily: "-apple-system,'SF Pro Text',system-ui,sans-serif", fontSize: fontBase - 2 * S, color: "rgba(255,255,255,0.45)" }}>now</span>
           </div>
-          <div style={{ fontFamily: "-apple-system,'SF Pro Text','PingFang TC',system-ui,sans-serif", fontSize: fontBase, fontWeight: 600, color: "rgba(255,255,255,0.92)", marginBottom: 3 * S }}>{c.sender}</div>
           <div style={{ fontFamily: "-apple-system,'SF Pro Text','PingFang TC',system-ui,sans-serif", fontSize: fontBody, color: "rgba(255,255,255,0.6)", lineHeight: 1.4 }}>{displayText}</div>
         </div>
       </div>
@@ -476,6 +475,8 @@ const Scene01Open: React.FC<{ callouts: Callout[] }> = ({ callouts }) => {
   // Definition card
   const defStyle = useFadeUpElastic(defStart);
 
+  // Header (badge/title/desc) fade-out as the centered concept reveals take over
+  const headerFade = interpolate(frame, [heroStart - 30, heroStart], [1, 0], clamp);
   // Recap chips fade-out as hero appears
   const recapFade = interpolate(frame, [heroStart - 20, heroStart + 20], [1, 0], clamp);
   // Hero fades when flow appears
@@ -490,13 +491,13 @@ const Scene01Open: React.FC<{ callouts: Callout[] }> = ({ callouts }) => {
         <ProgressBar progressPct={28} />
         <SceneWrap>
           {/* Chapter badge */}
-          <div style={{ display: "flex", alignItems: "center", gap: 16 * S, marginBottom: 24 * S, ...subtitleStyle }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 16 * S, marginBottom: 24 * S, ...subtitleStyle, opacity: subtitleStyle.opacity * headerFade }}>
             <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 20 * S, color: C.primary, border: `1px solid ${C.primary}`, padding: `${4 * S}px ${14 * S}px`, borderRadius: 99, letterSpacing: "0.05em", textShadow: "0 0 10px rgba(124,255,178,0.4)" }}>CH 2-1</span>
             <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 18 * S, color: C.muted, background: "rgba(255,255,255,0.04)", border: `1px solid rgba(255,255,255,0.08)`, padding: `${4 * S}px ${12 * S}px`, borderRadius: 99 }}>SDLC 第三步</span>
           </div>
 
           {/* Title */}
-          <div style={{ marginBottom: 28 * S, ...titleStyle }}>
+          <div style={{ marginBottom: 28 * S, ...titleStyle, opacity: titleStyle.opacity * headerFade }}>
             <h1 style={{ fontFamily: "'Noto Sans TC','PingFang TC',sans-serif", fontSize: 60 * S, fontWeight: 900, lineHeight: 1.2, letterSpacing: "-0.02em", color: C.text, margin: 0 }}>
               先別寫程式：<br />
               <span style={{ color: C.primary }}>思考不同解法，選一條最可行的路</span>
@@ -504,7 +505,7 @@ const Scene01Open: React.FC<{ callouts: Callout[] }> = ({ callouts }) => {
           </div>
 
           {/* Desc */}
-          <p style={{ fontFamily: "'Noto Sans TC','PingFang TC',sans-serif", fontSize: 26 * S, color: C.muted, lineHeight: 1.7, maxWidth: 1100 * S, marginBottom: 36 * S, ...descStyle }}>
+          <p style={{ fontFamily: "'Noto Sans TC','PingFang TC',sans-serif", fontSize: 26 * S, color: C.muted, lineHeight: 1.7, maxWidth: 1100 * S, marginBottom: 36 * S, ...descStyle, opacity: descStyle.opacity * headerFade }}>
             上一章把現況、痛點、期待都說清楚了，這一章我們進入解法設計：在動手前，先選對路。
           </p>
 
@@ -696,14 +697,16 @@ const Scene11Concept: React.FC<{ callouts: Callout[] }> = ({ callouts }) => {
         <BgOrbs />
         <ProgressBar progressPct={42} />
         <SceneWrap>
-          <SectionHeader num="01" title="解法設計：選一條最可行的路" startFrame={0} />
+          <div style={{ opacity: transportFade }}>
+            <SectionHeader num="01" title="解法設計：選一條最可行的路" startFrame={0} />
+          </div>
 
-          <Card fadeStyle={descStyle} marginBottom={32 * S}>
+          <Card fadeStyle={{ ...descStyle, opacity: descStyle.opacity * transportFade }} marginBottom={32 * S}>
             想像你要去一個地方<span style={{ color: C.primary, fontWeight: 700 }}>開會</span>——交通工具有很多種，但<span style={{ color: C.primary, fontWeight: 700 }}>最適合的那一條路</span>只有一條。寫程式也一樣。
           </Card>
 
           {/* Destination pin — top center */}
-          <div style={{ display: "flex", justifyContent: "center", marginBottom: 32 * S, ...pinStyle, transform: `${pinStyle.transform} scale(${pinPulse})` }}>
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: 32 * S, ...pinStyle, transform: `${pinStyle.transform} scale(${pinPulse})`, opacity: pinStyle.opacity * transportFade }}>
             <div style={{
               display: "flex", alignItems: "center", gap: 18 * S,
               background: "rgba(124,255,178,0.08)", border: `1.5px solid rgba(124,255,178,0.4)`,

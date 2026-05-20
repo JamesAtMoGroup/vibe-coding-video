@@ -16,6 +16,35 @@
 | CH 1-2 | ✅ 完成 | FullVideo05.tsx | ✅ 已上傳 |
 | CH 1-3 | ✅ 完成 | FullVideo06.tsx | ✅ 已上傳 |
 | CH 1-4 | ✅ 完成 | FullVideo07.tsx | ✅ 已上傳 |
+| CH 2-1 | ✅ 完成 | FullVideo08.tsx | ✅ 已上傳 + 已上線 |
+
+---
+
+## CH 2-1 — ✅ 完成（先別寫程式：思考不同解法，選一條最可行的路）
+
+**TSX：** `src/FullVideo08.tsx`（6 場景，SEG_STARTS_08，TOTAL_FRAMES_08=18774）
+**Render：** `out/CH2-1-…/CH2-1-….mp4`（4K 3840×2160 / 30fps / 10:25 / 60.3 MB）2026-05-20
+**線上：** https://n8ncourse.zeabur.app/vibecoding/lecture8/
+
+### 已完成
+- [x] Phase 1 音檔正規化（6 段：0.1/1.1/2.1/3.1/4.1/5.1）
+- [x] Phase 2 VTT + 繁中校正（6 個 .vtt）
+- [x] Phase 3 `visual-spec-2-1.json`
+- [x] Phase 4 FullVideo08.tsx + Root.tsx 註冊 + 音檔複製 public/audio/2-1/
+- [x] **重疊修正**：Scene01Open（badge/title/desc 加 headerFade 淡出）+ Scene11Concept（header/card/pin 套 transportFade 淡出）—— absolute overlay 不再壓在未淡出的 in-flow 內容上
+- [x] **iMessage 字卡移除 sender 列**（含資料層 scrub，不再出現 "James"）
+- [x] **Premortem QA**：17 幀 settled 取樣全 6 場景目視通過（無重疊 / 安全區內 / 字卡無姓名）
+- [x] James 預覽核准 → Render
+- [x] VTT 合併（260 cues）+ HTML 課程頁
+- [x] Drive 上傳（`1jt...`/CH2-1-…，folder ID `1pbdKR5xOXimJJT5evq7hvF1SRGf-X_bH`）
+- [x] n8ncourse 上線（lecture8，courses.json + lecture8/ 都 200 確認）
+
+### n8ncourse 上架方式：手動（不靠自動 sync）
+James 2026-05-20 決定：不需要自動 sync，每支新章節用 `n8ncourse/.github/scripts/build_lecture_local.py`
+手動產 lecture 頁 + push main（CH2-1 = lecture8 已照此上線）。流程見 pipeline.md Step 7。
+
+### ⚠️ 待 James 決定（非急）
+- **CH 1-3 / CH 1-4 已上架影片仍含 "James" 字卡**：FullVideo06 / FullVideo07 的 callout 還是 `sender:"James"`。是否補修重出。
 
 ---
 
