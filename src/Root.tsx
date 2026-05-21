@@ -11,6 +11,7 @@ import { FullVideo06, TOTAL_FRAMES_06 } from "./FullVideo06";
 import { FullVideo07, TOTAL_FRAMES_07 } from "./FullVideo07";
 import { FullVideo08, TOTAL_FRAMES_08 } from "./FullVideo08";
 import { FullVideo09, TOTAL_FRAMES_09 } from "./FullVideo09";
+import { FullVideo09b, TOTAL_FRAMES_09B } from "./FullVideo09b";
 
 const FPS = 30;
 
@@ -113,6 +114,15 @@ export const RemotionRoot: React.FC = () => {
         component={FullVideo09}
         fps={FPS}
         durationInFrames={TOTAL_FRAMES_09}
+        width={3840}
+        height={2160}
+      />
+      {/* CH 2-2 新 motion 系統（aischool 官網對齊）— A/B 對比用 */}
+      <Composition
+        id="FullVideo09b"
+        component={FullVideo09b}
+        fps={FPS}
+        durationInFrames={TOTAL_FRAMES_09B}
         width={3840}
         height={2160}
       />
