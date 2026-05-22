@@ -17,6 +17,29 @@
 | CH 1-3 | ✅ 完成 | FullVideo06.tsx | ✅ 已上傳 |
 | CH 1-4 | ✅ 完成 | FullVideo07.tsx | ✅ 已上傳 |
 | CH 2-1 | ✅ 完成 | FullVideo08.tsx | ✅ 已上傳 + 已上線 |
+| CH 2-2 | ✅ 完成（**v2 motion 系統**）| FullVideo09b.tsx | ✅ 已上傳 + 上線 |
+
+---
+
+## CH 2-2 — ✅ 完成（工程師解題思維：Top-Down vs Bottom-Up）
+
+**TSX：** `src/FullVideo09b.tsx`（8 場景，SEG_STARTS_09B，TOTAL_FRAMES_09B=20769）
+**Render：** `out/CH2-2-工程師解題思維：Top-Down vs Bottom-Up/…mp4`（4K 3840×2160 / 30fps / 11:32 / 181 MB）2026-05-22
+**字幕：** `…-subtitles.vtt`（277 cues，已過稽核：簡→繁 0、時間軸單調 0 問題、整副→整幅 + 精準的→精準地）
+
+### ⭐ 這是 v2「aischool 官網對齊 Motion System」的參考實作
+James 2026-05-21 審核通過新視覺標準（見 `.agents/rules/pipeline.md`「v2 品質基準」+ `project.md`「v2 Tokens」+ skill）。
+- 先有 `FullVideo09`（舊系統），A/B 後 James 選 `FullVideo09b`（新系統）為正式版。兩支都在 Root.tsx 註冊（09 留作對照）。
+- 新系統重點：官網 token（#09090f / Syne / 中性框）、語意色（TD=綠 / BU=橘）、動畫化教材三角＋tree、版型輪替（發光卡只給 finale）、禁粗體 accent、元素語意唯一（單一進度條 + 短 tick 底線）、連續動畫感、學生接受度 premortem。
+- HTML 課程頁**維持原本形式**（影片升級≠HTML 升級，James 要求）。
+
+### 已完成
+- [x] VTT 規格稽核（8 段 + 合併 277 cues，0 問題）
+- [x] FullVideo09b 全 8 場景 + 動畫化教材圖 + monoline icon + 真 logo
+- [x] Premortem 抽幀 QA（含學生接受度維度）全綠
+- [x] James A/B 預覽核准 09b
+- [x] Render（181 MB）+ VTT 合併 + HTML（原形式）
+- [x] v2 系統 codify 進 pipeline.md / project.md / SKILL.md / memory
 
 ---
 
