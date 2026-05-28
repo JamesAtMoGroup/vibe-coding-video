@@ -1,0 +1,1209 @@
+{
+  "SEG_STARTS": {
+    "0.1": 0,
+    "1.1": 1026,
+    "2.1": 3568,
+    "2.2": 8200,
+    "3.1": 10559,
+    "4.1": 11940
+  },
+  "TOTAL_FRAMES": 13674,
+  "FPS": 30,
+  "cues": {
+    "0.1": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 0.0,
+        "global_frame": 0,
+        "end_frame": 30,
+        "text": "哈囉大家"
+      },
+      {
+        "local_sec": 1.0,
+        "global_sec": 1.0,
+        "global_frame": 30,
+        "end_frame": 150,
+        "text": "在上個單元我們已經聊過了關於跟AI協作的時候"
+      },
+      {
+        "local_sec": 5.0,
+        "global_sec": 5.0,
+        "global_frame": 150,
+        "end_frame": 210,
+        "text": "可以使用的兩種解題思維"
+      },
+      {
+        "local_sec": 7.0,
+        "global_sec": 7.0,
+        "global_frame": 210,
+        "end_frame": 270,
+        "text": "Top-Down 和 Bottom-Up"
+      },
+      {
+        "local_sec": 9.0,
+        "global_sec": 9.0,
+        "global_frame": 270,
+        "end_frame": 360,
+        "text": "在這個單元我們要來聊的事情是"
+      },
+      {
+        "local_sec": 12.0,
+        "global_sec": 12.0,
+        "global_frame": 360,
+        "end_frame": 420,
+        "text": "在真的開始動手寫程式之前"
+      },
+      {
+        "local_sec": 14.0,
+        "global_sec": 14.0,
+        "global_frame": 420,
+        "end_frame": 480,
+        "text": "有一件事情必須先決定好"
+      },
+      {
+        "local_sec": 16.0,
+        "global_sec": 16.0,
+        "global_frame": 480,
+        "end_frame": 510,
+        "text": "是什麼呢?"
+      },
+      {
+        "local_sec": 17.0,
+        "global_sec": 17.0,
+        "global_frame": 510,
+        "end_frame": 630,
+        "text": "就是你的程式到底要在哪裡運行"
+      },
+      {
+        "local_sec": 21.0,
+        "global_sec": 21.0,
+        "global_frame": 630,
+        "end_frame": 720,
+        "text": "這件事情其實比很多人想的都還要重要"
+      },
+      {
+        "local_sec": 24.0,
+        "global_sec": 24.0,
+        "global_frame": 720,
+        "end_frame": 780,
+        "text": "因為根據不同的平台"
+      },
+      {
+        "local_sec": 26.0,
+        "global_sec": 26.0,
+        "global_frame": 780,
+        "end_frame": 870,
+        "text": "你所需要的程式碼可能會是完全不同的東西"
+      },
+      {
+        "local_sec": 29.0,
+        "global_sec": 29.0,
+        "global_frame": 870,
+        "end_frame": 990,
+        "text": "所以就讓我們先從這個問題開始說起吧"
+      }
+    ],
+    "1.1": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 34.2,
+        "global_frame": 1026,
+        "end_frame": 1089,
+        "text": "那為什麼要先選平台呢?"
+      },
+      {
+        "local_sec": 2.12,
+        "global_sec": 36.32,
+        "global_frame": 1089,
+        "end_frame": 1167,
+        "text": "舉個例子來說,你應該都有遇過"
+      },
+      {
+        "local_sec": 4.72,
+        "global_sec": 38.92,
+        "global_frame": 1167,
+        "end_frame": 1255,
+        "text": "當你要在電腦上面下載一個軟體的時候"
+      },
+      {
+        "local_sec": 7.64,
+        "global_sec": 41.84,
+        "global_frame": 1255,
+        "end_frame": 1317,
+        "text": "下載的頁面通常會提供"
+      },
+      {
+        "local_sec": 9.72,
+        "global_sec": 43.92,
+        "global_frame": 1317,
+        "end_frame": 1407,
+        "text": "macOS 版和 Windows 版讓你去做選擇"
+      },
+      {
+        "local_sec": 12.72,
+        "global_sec": 46.92,
+        "global_frame": 1407,
+        "end_frame": 1502,
+        "text": "或者是你在下載一個手機App的時候"
+      },
+      {
+        "local_sec": 15.88,
+        "global_sec": 50.08,
+        "global_frame": 1502,
+        "end_frame": 1555,
+        "text": "就會依照你的手機型號"
+      },
+      {
+        "local_sec": 17.64,
+        "global_sec": 51.84,
+        "global_frame": 1555,
+        "end_frame": 1634,
+        "text": "會分成iOS版本跟Android版本"
+      },
+      {
+        "local_sec": 20.28,
+        "global_sec": 54.48,
+        "global_frame": 1634,
+        "end_frame": 1725,
+        "text": "那這兩個版本會是完全不同的地方"
+      },
+      {
+        "local_sec": 23.32,
+        "global_sec": 57.52,
+        "global_frame": 1725,
+        "end_frame": 1768,
+        "text": "再來就算是買遊戲"
+      },
+      {
+        "local_sec": 24.76,
+        "global_sec": 58.96,
+        "global_frame": 1768,
+        "end_frame": 1819,
+        "text": "可能也會分哪一個主機"
+      },
+      {
+        "local_sec": 26.44,
+        "global_sec": 60.64,
+        "global_frame": 1819,
+        "end_frame": 1892,
+        "text": "譬如說Switch或是PS5"
+      },
+      {
+        "local_sec": 28.88,
+        "global_sec": 63.08,
+        "global_frame": 1892,
+        "end_frame": 1987,
+        "text": "不同的主機版本就會有不同的下載程式"
+      },
+      {
+        "local_sec": 32.04,
+        "global_sec": 66.24,
+        "global_frame": 1987,
+        "end_frame": 2031,
+        "text": "會這樣分得這麼仔細"
+      },
+      {
+        "local_sec": 33.52,
+        "global_sec": 67.72,
+        "global_frame": 2031,
+        "end_frame": 2114,
+        "text": "是因為這些平台的背後運行的程式碼"
+      },
+      {
+        "local_sec": 36.28,
+        "global_sec": 70.48,
+        "global_frame": 2114,
+        "end_frame": 2187,
+        "text": "基本上就是完全不同的東西"
+      },
+      {
+        "local_sec": 38.72,
+        "global_sec": 72.92,
+        "global_frame": 2187,
+        "end_frame": 2222,
+        "text": "所謂的平台"
+      },
+      {
+        "local_sec": 39.88,
+        "global_sec": 74.08,
+        "global_frame": 2222,
+        "end_frame": 2341,
+        "text": "其實就是指你的程式最終會在哪一個環境下被使用"
+      },
+      {
+        "local_sec": 43.84,
+        "global_sec": 78.04,
+        "global_frame": 2341,
+        "end_frame": 2456,
+        "text": "而不同的環境就會需要不同的程式語言和寫法"
+      },
+      {
+        "local_sec": 47.68,
+        "global_sec": 81.88,
+        "global_frame": 2456,
+        "end_frame": 2572,
+        "text": "所以在一開始就先確認好是很重要的事情喔"
+      },
+      {
+        "local_sec": 51.56,
+        "global_sec": 85.76,
+        "global_frame": 2572,
+        "end_frame": 2628,
+        "text": "舉個生活上的例子來說"
+      },
+      {
+        "local_sec": 53.4,
+        "global_sec": 87.6,
+        "global_frame": 2628,
+        "end_frame": 2691,
+        "text": "假設你今天要做一道料理"
+      },
+      {
+        "local_sec": 55.52,
+        "global_sec": 89.72,
+        "global_frame": 2691,
+        "end_frame": 2728,
+        "text": "你可以用氣炸鍋"
+      },
+      {
+        "local_sec": 56.8,
+        "global_sec": 91.0,
+        "global_frame": 2730,
+        "end_frame": 2756,
+        "text": "可以用電鍋"
+      },
+      {
+        "local_sec": 57.68,
+        "global_sec": 91.88,
+        "global_frame": 2756,
+        "end_frame": 2800,
+        "text": "也可以用烤箱"
+      },
+      {
+        "local_sec": 59.16,
+        "global_sec": 93.36,
+        "global_frame": 2800,
+        "end_frame": 2842,
+        "text": "你的食材會是一樣的"
+      },
+      {
+        "local_sec": 60.56,
+        "global_sec": 94.76,
+        "global_frame": 2842,
+        "end_frame": 2953,
+        "text": "但是料理的時間和步驟卻完全的不同"
+      },
+      {
+        "local_sec": 64.24,
+        "global_sec": 98.44,
+        "global_frame": 2953,
+        "end_frame": 3063,
+        "text": "所以如果一開始不先確認手邊到底有哪些設備的話"
+      },
+      {
+        "local_sec": 67.92,
+        "global_sec": 102.12,
+        "global_frame": 3063,
+        "end_frame": 3138,
+        "text": "就會沒有辦法順利地完成你的料理"
+      },
+      {
+        "local_sec": 70.4,
+        "global_sec": 104.6,
+        "global_frame": 3138,
+        "end_frame": 3200,
+        "text": "那當然寫程式也是一樣"
+      },
+      {
+        "local_sec": 72.48,
+        "global_sec": 106.68,
+        "global_frame": 3200,
+        "end_frame": 3248,
+        "text": "不先確認平台的話"
+      },
+      {
+        "local_sec": 74.08,
+        "global_sec": 108.28,
+        "global_frame": 3248,
+        "end_frame": 3351,
+        "text": "AI 就會不知道到底要給你哪一種程式碼"
+      },
+      {
+        "local_sec": 77.52,
+        "global_sec": 111.72,
+        "global_frame": 3351,
+        "end_frame": 3406,
+        "text": "那這個時候你可能會想說"
+      },
+      {
+        "local_sec": 79.36,
+        "global_sec": 113.56,
+        "global_frame": 3406,
+        "end_frame": 3499,
+        "text": "好 我知道決定平台這件事情很重要了"
+      },
+      {
+        "local_sec": 82.44,
+        "global_sec": 116.64,
+        "global_frame": 3499,
+        "end_frame": 3566,
+        "text": "那到底有哪一些平台呢"
+      }
+    ],
+    "2.1": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 118.933,
+        "global_frame": 3568,
+        "end_frame": 3611,
+        "text": "常見的平台類型"
+      },
+      {
+        "local_sec": 1.44,
+        "global_sec": 120.373,
+        "global_frame": 3611,
+        "end_frame": 3703,
+        "text": "除了一般我們會想到的電腦跟手機之外"
+      },
+      {
+        "local_sec": 4.52,
+        "global_sec": 123.453,
+        "global_frame": 3703,
+        "end_frame": 3802,
+        "text": "其實還有很多你可能沒有想到的選項喔"
+      },
+      {
+        "local_sec": 7.8,
+        "global_sec": 126.733,
+        "global_frame": 3802,
+        "end_frame": 3880,
+        "text": "那我們先來看幾個比較常見的"
+      },
+      {
+        "local_sec": 10.4,
+        "global_sec": 129.333,
+        "global_frame": 3880,
+        "end_frame": 3937,
+        "text": "第一個是桌機的程式"
+      },
+      {
+        "local_sec": 12.32,
+        "global_sec": 131.253,
+        "global_frame": 3937,
+        "end_frame": 4000,
+        "text": "這個就是安裝在你的電腦上面"
+      },
+      {
+        "local_sec": 14.4,
+        "global_sec": 133.333,
+        "global_frame": 4000,
+        "end_frame": 4079,
+        "text": "可以直接點開執行的那種程式"
+      },
+      {
+        "local_sec": 17.04,
+        "global_sec": 135.973,
+        "global_frame": 4079,
+        "end_frame": 4186,
+        "text": "像是你可能會在電腦裡面下載Line的程式"
+      },
+      {
+        "local_sec": 20.6,
+        "global_sec": 139.533,
+        "global_frame": 4186,
+        "end_frame": 4241,
+        "text": "或者是Discord的程式"
+      },
+      {
+        "local_sec": 22.44,
+        "global_sec": 141.373,
+        "global_frame": 4241,
+        "end_frame": 4284,
+        "text": "在桌機的程式上面"
+      },
+      {
+        "local_sec": 23.88,
+        "global_sec": 142.813,
+        "global_frame": 4284,
+        "end_frame": 4391,
+        "text": "Windows 跟 macOS 就會是兩套完全不同的系統"
+      },
+      {
+        "local_sec": 27.44,
+        "global_sec": 146.373,
+        "global_frame": 4391,
+        "end_frame": 4490,
+        "text": "所以桌機程式通常也需要分開進行開發"
+      },
+      {
+        "local_sec": 30.76,
+        "global_sec": 149.693,
+        "global_frame": 4490,
+        "end_frame": 4551,
+        "text": "那再來第二個是手機的App"
+      },
+      {
+        "local_sec": 32.8,
+        "global_sec": 151.733,
+        "global_frame": 4551,
+        "end_frame": 4618,
+        "text": "這個大家應該會比較熟悉一點"
+      },
+      {
+        "local_sec": 35.0,
+        "global_sec": 153.933,
+        "global_frame": 4618,
+        "end_frame": 4734,
+        "text": "那基本上 iOS 跟 Android 也是兩套獨立的環境"
+      },
+      {
+        "local_sec": 38.88,
+        "global_sec": 157.813,
+        "global_frame": 4734,
+        "end_frame": 4861,
+        "text": "所以在App上面通常都也是會需要分開獨立的去開發"
+      },
+      {
+        "local_sec": 43.12,
+        "global_sec": 162.053,
+        "global_frame": 4861,
+        "end_frame": 4920,
+        "text": "那第三個是網頁"
+      },
+      {
+        "local_sec": 45.08,
+        "global_sec": 164.013,
+        "global_frame": 4920,
+        "end_frame": 4961,
+        "text": "網頁的話比較特別"
+      },
+      {
+        "local_sec": 46.44,
+        "global_sec": 165.373,
+        "global_frame": 4961,
+        "end_frame": 5023,
+        "text": "因為它是用瀏覽器打開的"
+      },
+      {
+        "local_sec": 48.52,
+        "global_sec": 167.453,
+        "global_frame": 5023,
+        "end_frame": 5099,
+        "text": "在電腦跟手機上面都可以用"
+      },
+      {
+        "local_sec": 51.04,
+        "global_sec": 169.973,
+        "global_frame": 5099,
+        "end_frame": 5153,
+        "text": "所以它不需要另外安裝"
+      },
+      {
+        "local_sec": 52.84,
+        "global_sec": 171.773,
+        "global_frame": 5153,
+        "end_frame": 5278,
+        "text": "但是在網頁上面其實又可以細分成幾種類型"
+      },
+      {
+        "local_sec": 57.0,
+        "global_sec": 175.933,
+        "global_frame": 5278,
+        "end_frame": 5326,
+        "text": "一種叫做Website"
+      },
+      {
+        "local_sec": 58.6,
+        "global_sec": 177.533,
+        "global_frame": 5326,
+        "end_frame": 5387,
+        "text": "也就是一般說的網站"
+      },
+      {
+        "local_sec": 60.64,
+        "global_sec": 179.573,
+        "global_frame": 5387,
+        "end_frame": 5474,
+        "text": "Website會比較偏向是品牌形象的頁面"
+      },
+      {
+        "local_sec": 63.56,
+        "global_sec": 182.493,
+        "global_frame": 5474,
+        "end_frame": 5520,
+        "text": "或者是電商頁面"
+      },
+      {
+        "local_sec": 65.08,
+        "global_sec": 184.013,
+        "global_frame": 5520,
+        "end_frame": 5588,
+        "text": "會比較重視資訊的呈現"
+      },
+      {
+        "local_sec": 67.36,
+        "global_sec": 186.293,
+        "global_frame": 5588,
+        "end_frame": 5650,
+        "text": "那另外一種叫做WebApp"
+      },
+      {
+        "local_sec": 69.4,
+        "global_sec": 188.333,
+        "global_frame": 5650,
+        "end_frame": 5713,
+        "text": "也就是網頁的應用程式"
+      },
+      {
+        "local_sec": 71.52,
+        "global_sec": 190.453,
+        "global_frame": 5713,
+        "end_frame": 5855,
+        "text": "給人使用的感覺會更像是把桌機的軟體搬進去瀏覽器裡面"
+      },
+      {
+        "local_sec": 76.24,
+        "global_sec": 195.173,
+        "global_frame": 5855,
+        "end_frame": 5957,
+        "text": "舉例來說像是Canva、Notion、Figma"
+      },
+      {
+        "local_sec": 79.64,
+        "global_sec": 198.573,
+        "global_frame": 5957,
+        "end_frame": 6024,
+        "text": "其實都是屬於WebApp的類別"
+      },
+      {
+        "local_sec": 91.0,
+        "global_sec": 209.933,
+        "global_frame": 6298,
+        "end_frame": 6360,
+        "text": "那這個時候你可能會想說"
+      },
+      {
+        "local_sec": 93.08,
+        "global_sec": 212.013,
+        "global_frame": 6360,
+        "end_frame": 6450,
+        "text": "咦?那手機上的網頁跟電腦上的網頁"
+      },
+      {
+        "local_sec": 96.08,
+        "global_sec": 215.013,
+        "global_frame": 6450,
+        "end_frame": 6522,
+        "text": "用的是同一份程式碼嗎?"
+      },
+      {
+        "local_sec": 98.48,
+        "global_sec": 217.413,
+        "global_frame": 6522,
+        "end_frame": 6593,
+        "text": "有的時候它們其實會是分開的"
+      },
+      {
+        "local_sec": 100.84,
+        "global_sec": 219.773,
+        "global_frame": 6593,
+        "end_frame": 6648,
+        "text": "一個是Desktop Web"
+      },
+      {
+        "local_sec": 102.68,
+        "global_sec": 221.613,
+        "global_frame": 6648,
+        "end_frame": 6702,
+        "text": "另外一個是Mobile Web"
+      },
+      {
+        "local_sec": 104.48,
+        "global_sec": 223.413,
+        "global_frame": 6702,
+        "end_frame": 6764,
+        "text": "但很多的廠商會為了省事"
+      },
+      {
+        "local_sec": 106.56,
+        "global_sec": 225.493,
+        "global_frame": 6764,
+        "end_frame": 6840,
+        "text": "所以會選擇使用同一套程式碼"
+      },
+      {
+        "local_sec": 109.08,
+        "global_sec": 228.013,
+        "global_frame": 6840,
+        "end_frame": 6942,
+        "text": "然後讓網頁可以自動的根據螢幕大小去調整"
+      },
+      {
+        "local_sec": 112.48,
+        "global_sec": 231.413,
+        "global_frame": 6942,
+        "end_frame": 7030,
+        "text": "而這種方式我們就叫做RWD"
+      },
+      {
+        "local_sec": 115.44,
+        "global_sec": 234.373,
+        "global_frame": 7031,
+        "end_frame": 7092,
+        "text": "也就是 Responsive Web Design"
+      },
+      {
+        "local_sec": 117.48,
+        "global_sec": 236.413,
+        "global_frame": 7092,
+        "end_frame": 7132,
+        "text": "響應式設計"
+      },
+      {
+        "local_sec": 118.8,
+        "global_sec": 237.733,
+        "global_frame": 7132,
+        "end_frame": 7213,
+        "text": "使用這樣的方式就可以讓同一份程式碼"
+      },
+      {
+        "local_sec": 121.52,
+        "global_sec": 240.453,
+        "global_frame": 7213,
+        "end_frame": 7306,
+        "text": "同時的去適應桌機還有手機的版本"
+      },
+      {
+        "local_sec": 124.6,
+        "global_sec": 243.533,
+        "global_frame": 7306,
+        "end_frame": 7411,
+        "text": "舉例來說你可以在瀏覽器上面搜尋 YouTube"
+      },
+      {
+        "local_sec": 128.12,
+        "global_sec": 247.053,
+        "global_frame": 7411,
+        "end_frame": 7484,
+        "text": "然後按右鍵進入檢查模式"
+      },
+      {
+        "local_sec": 130.56,
+        "global_sec": 249.493,
+        "global_frame": 7484,
+        "end_frame": 7570,
+        "text": "然後打開切換裝置工具列"
+      },
+      {
+        "local_sec": 133.4,
+        "global_sec": 252.333,
+        "global_frame": 7570,
+        "end_frame": 7660,
+        "text": "快捷鍵的話你可以按Ctrl Shift加M"
+      },
+      {
+        "local_sec": 136.4,
+        "global_sec": 255.333,
+        "global_frame": 7660,
+        "end_frame": 7771,
+        "text": "Mac 同學的話可以把 Ctrl 改成 Command 就可以了"
+      },
+      {
+        "local_sec": 140.12,
+        "global_sec": 259.053,
+        "global_frame": 7771,
+        "end_frame": 7841,
+        "text": "打開之後你可以在右上角的地方"
+      },
+      {
+        "local_sec": 142.44,
+        "global_sec": 261.373,
+        "global_frame": 7841,
+        "end_frame": 7907,
+        "text": "去切換不同的尺寸裝置"
+      },
+      {
+        "local_sec": 144.64,
+        "global_sec": 263.573,
+        "global_frame": 7907,
+        "end_frame": 7978,
+        "text": "在切換的時候你就可以觀察到"
+      },
+      {
+        "local_sec": 147.0,
+        "global_sec": 265.933,
+        "global_frame": 7978,
+        "end_frame": 8054,
+        "text": "網頁的排版會稍微有點不一樣"
+      },
+      {
+        "local_sec": 149.56,
+        "global_sec": 268.493,
+        "global_frame": 8054,
+        "end_frame": 8159,
+        "text": "這就是為了配合不同的裝置所做的響應式設計"
+      }
+    ],
+    "2.2": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 273.333,
+        "global_frame": 8200,
+        "end_frame": 8299,
+        "text": "除了剛剛所提到的桌機、手機還有網頁"
+      },
+      {
+        "local_sec": 3.32,
+        "global_sec": 276.653,
+        "global_frame": 8299,
+        "end_frame": 8376,
+        "text": "其實還有其他常見的使用平台喔"
+      },
+      {
+        "local_sec": 6.66,
+        "global_sec": 279.993,
+        "global_frame": 8399,
+        "end_frame": 8476,
+        "text": "第四個要給你介紹的是瀏覽器的外掛"
+      },
+      {
+        "local_sec": 9.48,
+        "global_sec": 282.813,
+        "global_frame": 8484,
+        "end_frame": 8599,
+        "text": "也就是可以安裝在Chrome或是Edge這些瀏覽器上面的小工具"
+      },
+      {
+        "local_sec": 13.82,
+        "global_sec": 287.153,
+        "global_frame": 8614,
+        "end_frame": 8706,
+        "text": "你有沒有用過翻譯的外掛或者是截圖工具"
+      },
+      {
+        "local_sec": 16.9,
+        "global_sec": 290.233,
+        "global_frame": 8706,
+        "end_frame": 8753,
+        "text": "甚至是廣告的封鎖器啊"
+      },
+      {
+        "local_sec": 18.68,
+        "global_sec": 292.013,
+        "global_frame": 8760,
+        "end_frame": 8814,
+        "text": "這些其實都是瀏覽器的外掛"
+      },
+      {
+        "local_sec": 21.24,
+        "global_sec": 294.573,
+        "global_frame": 8837,
+        "end_frame": 8952,
+        "text": "其實早期的外掛幾乎都是非官方甚至是不合法的"
+      },
+      {
+        "local_sec": 25.34,
+        "global_sec": 298.673,
+        "global_frame": 8960,
+        "end_frame": 9060,
+        "text": "是當時這些技術的高手強行去修改瀏覽器"
+      },
+      {
+        "local_sec": 28.88,
+        "global_sec": 302.213,
+        "global_frame": 9066,
+        "end_frame": 9128,
+        "text": "才能在上面掛上額外的功能"
+      },
+      {
+        "local_sec": 31.2,
+        "global_sec": 304.533,
+        "global_frame": 9136,
+        "end_frame": 9243,
+        "text": "但隨著客製化的需求越來越多各大的瀏覽器"
+      },
+      {
+        "local_sec": 35.04,
+        "global_sec": 308.373,
+        "global_frame": 9251,
+        "end_frame": 9312,
+        "text": "才開始提供合法的外掛機制"
+      },
+      {
+        "local_sec": 37.6,
+        "global_sec": 310.933,
+        "global_frame": 9328,
+        "end_frame": 9435,
+        "text": "所以現在Chrome跟Edge其實是用同一套的標準"
+      },
+      {
+        "local_sec": 41.68,
+        "global_sec": 315.013,
+        "global_frame": 9450,
+        "end_frame": 9496,
+        "text": "開發者可以做一個外掛"
+      },
+      {
+        "local_sec": 43.48,
+        "global_sec": 316.813,
+        "global_frame": 9504,
+        "end_frame": 9573,
+        "text": "基本上就可以橫跨兩個瀏覽器使用"
+      },
+      {
+        "local_sec": 46.04,
+        "global_sec": 319.373,
+        "global_frame": 9581,
+        "end_frame": 9611,
+        "text": "方便很多"
+      },
+      {
+        "local_sec": 48.34,
+        "global_sec": 321.673,
+        "global_frame": 9650,
+        "end_frame": 9727,
+        "text": "第五個是通訊軟體的 Bot"
+      },
+      {
+        "local_sec": 51.42,
+        "global_sec": 324.753,
+        "global_frame": 9742,
+        "end_frame": 9903,
+        "text": "像 Line、Discord、Slack 這類的通訊軟體其實也可以被視為是一種平台"
+      },
+      {
+        "local_sec": 56.94,
+        "global_sec": 330.273,
+        "global_frame": 9908,
+        "end_frame": 9977,
+        "text": "你可以在裡面建立自動化的Bot"
+      },
+      {
+        "local_sec": 59.5,
+        "global_sec": 332.833,
+        "global_frame": 9985,
+        "end_frame": 10070,
+        "text": "把行事曆、待辦清單或是外部服務"
+      },
+      {
+        "local_sec": 62.62,
+        "global_sec": 335.953,
+        "global_frame": 10078,
+        "end_frame": 10155,
+        "text": "像是線上的預約系統串進聊天室"
+      },
+      {
+        "local_sec": 65.68,
+        "global_sec": 339.013,
+        "global_frame": 10170,
+        "end_frame": 10331,
+        "text": "讓 Bot 幫你自動提醒今天的行程、翻譯訊息,甚至回覆常見的問題"
+      },
+      {
+        "local_sec": 71.58,
+        "global_sec": 344.913,
+        "global_frame": 10347,
+        "end_frame": 10424,
+        "text": "那像這樣類型的通訊軟體的機器人"
+      },
+      {
+        "local_sec": 74.4,
+        "global_sec": 347.733,
+        "global_frame": 10432,
+        "end_frame": 10508,
+        "text": "功能上面其實比大家想像的還要多"
+      }
+    ],
+    "3.1": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 351.967,
+        "global_frame": 10559,
+        "end_frame": 10626,
+        "text": "在單元的這一開始我們有提到"
+      },
+      {
+        "local_sec": 2.24,
+        "global_sec": 354.207,
+        "global_frame": 10626,
+        "end_frame": 10698,
+        "text": "我們在開始動手寫程式之前"
+      },
+      {
+        "local_sec": 4.64,
+        "global_sec": 356.607,
+        "global_frame": 10698,
+        "end_frame": 10800,
+        "text": "必須先決定好程式到底要在哪裡運行"
+      },
+      {
+        "local_sec": 8.04,
+        "global_sec": 360.007,
+        "global_frame": 10800,
+        "end_frame": 10847,
+        "text": "因為不同平台的背後"
+      },
+      {
+        "local_sec": 9.6,
+        "global_sec": 361.567,
+        "global_frame": 10847,
+        "end_frame": 10914,
+        "text": "跑的是不同的程式語言"
+      },
+      {
+        "local_sec": 11.84,
+        "global_sec": 363.807,
+        "global_frame": 10914,
+        "end_frame": 10989,
+        "text": "你雖然不需要親自去學習這些語言"
+      },
+      {
+        "local_sec": 14.36,
+        "global_sec": 366.327,
+        "global_frame": 10989,
+        "end_frame": 11078,
+        "text": "但你要知道自己的目標平台到底是什麼"
+      },
+      {
+        "local_sec": 17.32,
+        "global_sec": 369.287,
+        "global_frame": 11078,
+        "end_frame": 11149,
+        "text": "你就可以給 AI 更精準的關鍵字"
+      },
+      {
+        "local_sec": 19.68,
+        "global_sec": 371.647,
+        "global_frame": 11149,
+        "end_frame": 11202,
+        "text": "讓 AI 更準確地幫你"
+      },
+      {
+        "local_sec": 21.44,
+        "global_sec": 373.407,
+        "global_frame": 11202,
+        "end_frame": 11280,
+        "text": "在對話的時候也比較不容易跑偏"
+      },
+      {
+        "local_sec": 24.04,
+        "global_sec": 376.007,
+        "global_frame": 11280,
+        "end_frame": 11341,
+        "text": "答案也比較不容易離題"
+      },
+      {
+        "local_sec": 26.08,
+        "global_sec": 378.047,
+        "global_frame": 11341,
+        "end_frame": 11415,
+        "text": "但這個時候你可能會想說"
+      },
+      {
+        "local_sec": 28.56,
+        "global_sec": 380.527,
+        "global_frame": 11415,
+        "end_frame": 11459,
+        "text": "那接下來呢"
+      },
+      {
+        "local_sec": 30.0,
+        "global_sec": 381.967,
+        "global_frame": 11459,
+        "end_frame": 11508,
+        "text": "我知道我有這些平台"
+      },
+      {
+        "local_sec": 31.64,
+        "global_sec": 383.607,
+        "global_frame": 11508,
+        "end_frame": 11545,
+        "text": "但我要怎麼知道"
+      },
+      {
+        "local_sec": 32.88,
+        "global_sec": 384.847,
+        "global_frame": 11545,
+        "end_frame": 11652,
+        "text": "每個平台到底對應了什麼樣的程式語言呢"
+      },
+      {
+        "local_sec": 36.44,
+        "global_sec": 388.407,
+        "global_frame": 11652,
+        "end_frame": 11713,
+        "text": "這個問題就會是下個單元"
+      },
+      {
+        "local_sec": 38.48,
+        "global_sec": 390.447,
+        "global_frame": 11713,
+        "end_frame": 11769,
+        "text": "我們所要學習的重點"
+      },
+      {
+        "local_sec": 40.36,
+        "global_sec": 392.327,
+        "global_frame": 11769,
+        "end_frame": 11847,
+        "text": "我們會跟你分享這些常見的平台"
+      },
+      {
+        "local_sec": 42.96,
+        "global_sec": 394.927,
+        "global_frame": 11847,
+        "end_frame": 11939,
+        "text": "跟它最適合使用的程式語言到底是什麼"
+      }
+    ],
+    "4.1": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 398.0,
+        "global_frame": 11940,
+        "end_frame": 12074,
+        "text": "在那之前先一樣快速的幫你複習一下這個單元的重點"
+      },
+      {
+        "local_sec": 4.48,
+        "global_sec": 402.48,
+        "global_frame": 12074,
+        "end_frame": 12158,
+        "text": "第一個重點是在開始寫程式之前"
+      },
+      {
+        "local_sec": 7.28,
+        "global_sec": 405.28,
+        "global_frame": 12158,
+        "end_frame": 12272,
+        "text": "必須先決定你的程式要跑在哪一個平台上面"
+      },
+      {
+        "local_sec": 11.08,
+        "global_sec": 409.08,
+        "global_frame": 12272,
+        "end_frame": 12349,
+        "text": "不同的平台會需要不同的程式碼"
+      },
+      {
+        "local_sec": 13.64,
+        "global_sec": 411.64,
+        "global_frame": 12349,
+        "end_frame": 12481,
+        "text": "知道自己的目標平台就可以給 AI 更精準的關鍵字"
+      },
+      {
+        "local_sec": 18.04,
+        "global_sec": 416.04,
+        "global_frame": 12481,
+        "end_frame": 12528,
+        "text": "讓對話不容易跑偏"
+      },
+      {
+        "local_sec": 19.6,
+        "global_sec": 417.6,
+        "global_frame": 12528,
+        "end_frame": 12585,
+        "text": "答案也比較不容易離題"
+      },
+      {
+        "local_sec": 21.52,
+        "global_sec": 419.52,
+        "global_frame": 12585,
+        "end_frame": 12674,
+        "text": "所以這一步是很重要不能跳過的部分喔"
+      },
+      {
+        "local_sec": 24.48,
+        "global_sec": 422.48,
+        "global_frame": 12674,
+        "end_frame": 12730,
+        "text": "第二點是常見的平台"
+      },
+      {
+        "local_sec": 26.36,
+        "global_sec": 424.36,
+        "global_frame": 12730,
+        "end_frame": 12835,
+        "text": "包括了桌機的程式、手機 App、網頁"
+      },
+      {
+        "local_sec": 29.84,
+        "global_sec": 427.84,
+        "global_frame": 12835,
+        "end_frame": 12925,
+        "text": "瀏覽器外掛以及通訊軟體的 Bot"
+      },
+      {
+        "local_sec": 32.84,
+        "global_sec": 430.84,
+        "global_frame": 12925,
+        "end_frame": 12978,
+        "text": "每一個都是不同的環境"
+      },
+      {
+        "local_sec": 34.6,
+        "global_sec": 432.6,
+        "global_frame": 12978,
+        "end_frame": 13054,
+        "text": "都會有自己各自的開發方式"
+      },
+      {
+        "local_sec": 37.16,
+        "global_sec": 435.16,
+        "global_frame": 13054,
+        "end_frame": 13125,
+        "text": "第三個會是網頁這個平台"
+      },
+      {
+        "local_sec": 39.52,
+        "global_sec": 437.52,
+        "global_frame": 13125,
+        "end_frame": 13207,
+        "text": "它會細分成 Website 跟 Web App"
+      },
+      {
+        "local_sec": 42.24,
+        "global_sec": 440.24,
+        "global_frame": 13207,
+        "end_frame": 13320,
+        "text": "手機版跟桌機版有的時候也會分開進行開發"
+      },
+      {
+        "local_sec": 46.0,
+        "global_sec": 444.0,
+        "global_frame": 13320,
+        "end_frame": 13432,
+        "text": "但比較常是使用RWD響應式設計的方式"
+      },
+      {
+        "local_sec": 49.76,
+        "global_sec": 447.76,
+        "global_frame": 13432,
+        "end_frame": 13519,
+        "text": "來去讓網頁自動適應不同的螢幕"
+      },
+      {
+        "local_sec": 52.64,
+        "global_sec": 450.64,
+        "global_frame": 13519,
+        "end_frame": 13594,
+        "text": "好,那以上就是這個單元的內容"
+      },
+      {
+        "local_sec": 55.16,
+        "global_sec": 453.16,
+        "global_frame": 13594,
+        "end_frame": 13626,
+        "text": "我們就到這邊"
+      },
+      {
+        "local_sec": 56.2,
+        "global_sec": 454.2,
+        "global_frame": 13626,
+        "end_frame": 13672,
+        "text": "那就下個單元見囉"
+      }
+    ]
+  }
+}
