@@ -13,6 +13,7 @@ import {
   Img,
 } from "remotion";
 import { loadFont as loadSyne } from "@remotion/google-fonts/Syne";
+import { CursorSpotlightLayer, VideoFit, SpotlightCue } from "./components/CursorSpotlight";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // FullVideo10 — CH 2-3「先決定平台：手機、電腦、網頁⋯⋯我會在哪裡用這個程式？」
@@ -73,6 +74,7 @@ const GLOBAL_CALLOUTS: Callout[] = [
   { from: 3880,  to: 3880 + CALLOUT_DURATION, text: "三大平台：桌機 / 手機 / 網頁" },
   { from: 5713,  to: 5713 + CALLOUT_DURATION, text: "Web App = 桌機軟體搬進瀏覽器" },
   { from: 6942,  to: 6942 + CALLOUT_DURATION, text: "RWD：一份程式碼，所有螢幕都長對" },
+  { from: 7570,  to: 7570 + 220,              text: "老師口誤！開檢查的快捷鍵是 Ctrl+Shift+I（Mac: ⌘+⌥+I）" },
   { from: 9136,  to: 9136 + CALLOUT_DURATION, text: "外掛 = 客製化你的瀏覽器" },
   { from: 9985,  to: 9985 + CALLOUT_DURATION, text: "Bot = 在聊天室裡的小程式" },
   { from: 11202, to: 11202 + CALLOUT_DURATION, text: "關鍵字 = AI 給對程式碼的 GPS" },
@@ -649,6 +651,22 @@ const Scene21PlatformsAndRWD: React.FC<{ callouts: Callout[] }> = ({ callouts })
                   }}
                 />
               </Sequence>
+              {/* CursorSpotlight: 標出講者提到的「裝置尺寸切換」UI 元素 + 排版變化 */}
+              <CursorSpotlightLayer
+                fit={{
+                  nativeW: 2940, nativeH: 1438,
+                  containerLeft: 0, containerTop: 0,
+                  containerW: W, containerH: H - NAV_H - SUBTITLE_H,
+                  objectFit: "contain",
+                }}
+                cues={[
+                  // 講者說「切換不同尺寸裝置」(02:22) → 圈裝置選單 dropdown
+                  { from: 4273, to: 4423, vx: 240, vy: 80, radius: 70 * S, label: "這裡切換尺寸 ↑", labelPos: "bottom", accent: C.orange },
+                  // 講者說「觀察到網頁排版會稍微有點不一樣」(02:27) → 圈內容區
+                  { from: 4462, to: 4622, vx: 360, vy: 600, radius: 220 * S, label: "排版自動跟著變", labelPos: "top", accent: C.orange },
+                ]}
+                S={S}
+              />
               {/* small bottom-left label */}
               <div style={{ position: "absolute", left: 32 * S, bottom: 28 * S, fontFamily: MONO, fontSize: 22 * S, color: C.faint, letterSpacing: "0.12em", background: "rgba(9,9,15,0.65)", border: `1px solid ${C.border}`, borderRadius: 8 * S, padding: `${8 * S}px ${14 * S}px`, backdropFilter: "blur(8px)" }}>
                 <Disp style={{ color: C.orange }}>RWD</Disp> · YouTube 響應式示範

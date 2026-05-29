@@ -18,6 +18,31 @@
 | CH 1-4 | ✅ 完成 | FullVideo07.tsx | ✅ 已上傳 |
 | CH 2-1 | ✅ 完成 | FullVideo08.tsx | ✅ 已上傳 + 已上線 |
 | CH 2-2 | ✅ 完成（**v2 motion 系統**）| FullVideo09b.tsx | ✅ 已上傳 + 上線 |
+| CH 2-3 | ✅ 完成（**v2 motion + CursorSpotlight**）| FullVideo10.tsx | ✅ 已上傳 + 上線 |
+
+---
+
+## CH 2-3 — ✅ 完成（先決定平台：手機、電腦、網頁⋯⋯我會在哪裡用這個程式？）
+
+**TSX：** `src/FullVideo10.tsx`（6 場景，SEG_STARTS_10=[0,1026,3568,8200,10559,11940]，TOTAL_FRAMES_10=13674）
+**Render：** `out/CH2-3-…/CH2-3-…-2026-05-29.mp4`（4K 3840×2160 / 30fps / 7:36 / 134 MB）2026-05-29
+**字幕：** `…-subtitles.vtt`（169 cues，已過 Phase 2 三步稽核：opencc s2tw + vtt-audit + 講稿 high-recall 比對；末 cue 07:35.76 ≈ mp4 455.85s）
+**線上：** https://n8ncourse.zeabur.app/vibecoding/lecture10/
+
+### 新系統 / 元件（首發）
+- **CursorSpotlight** — `src/components/CursorSpotlight.tsx`，video-aware overlay 自動算 objectFit:contain 座標映射（vx, vy → canvas px）。CH 2-3 RWD demo 加 2 個 spotlight cue 標出「裝置切換 dropdown」「排版自動變」。memory `feedback_cursor_spotlight_system.md` + pipeline.md SOP 段已 codify。
+- **OffthreadVideo inner Sequence 鐵律** — `<OffthreadVideo>` 必包 `<Sequence from={X}>` 才會從 video time 0 開始放（CH 2-3 首踩；現已在 pipeline.md 寫死）。memory `feedback_offthreadvideo_inner_sequence.md`。
+
+### 已完成
+- [x] Phase 1 音檔正規化（6 段：0.1/1.1/2.1/2.2/3.1/4.1，總 7:36）
+- [x] Phase 2 VTT + 三步稽核（Whisper medium + opencc s2tw + 講稿 high-recall + 末段「Crtl→Ctrl / command→Command」一致性修正；6 段 169 cues 合併）
+- [x] Phase 3 `visual-spec-2-3.json`（6 場景 6 種骨架版型輪替，發光大卡 only Scene 4.1 finale）
+- [x] Phase 4 FullVideo10.tsx（1106 行，6 scene + RWD 全幕影片 + CursorSpotlight + 9 callout 含「Ctrl+Shift+M 口誤更正」）+ Root.tsx 註冊 + 音檔/影片複製
+- [x] Phase 5 Premortem 25 幀抽幀（v2 motion 鐵律全綠，含 RWD video 動態驗證 SHA 不同）+ Studio 預覽 James 核准
+- [x] Phase 6 Render（135 MB / 38 min CPU）+ VTT 合併（169 cues + SEG_STARTS offset）+ HTML 課程頁
+- [x] Drive 上傳（folder ID `1E0ly_3_8CwZEhvSM_RqSw7bLKN3dIIt6`，3 檔 128 MB）
+- [x] n8ncourse 上架 lecture10（HTTP 200 ✓；courses.json zeabur 重部署中）
+- [x] LINE bot 知識庫同步（sync-vibe-to-bot.sh CH2-3，IPO audit log 已記錄，24h 內補審批）
 
 ---
 
