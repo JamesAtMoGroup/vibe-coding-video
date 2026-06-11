@@ -19,6 +19,45 @@
 | CH 2-1 | ✅ 完成 | FullVideo08.tsx | ✅ 已上傳 + 已上線 |
 | CH 2-2 | ✅ 完成（**v2 motion 系統**）| FullVideo09b.tsx | ✅ 已上傳 + 上線 |
 | CH 2-3 | ✅ 完成（**v2 motion + CursorSpotlight**）| FullVideo10.tsx | ✅ 已上傳 + 上線 |
+| CH 2-4 | ✅ 完成（**15 scene 純動畫 + 新 SOP HTML 三方比對**）| FullVideo11.tsx | ✅ 已上傳 + 上線 |
+
+---
+
+## CH 2-4 — ✅ 完成（程式語言——每個平台都有最適合它的語言）
+
+**TSX：** `src/FullVideo11.tsx`（15 場景，SEG_STARTS_11=[0,1504,3280,6174,7585,9898,11097,14349,15235,16297,17629,19811,21676,23643,25019]，TOTAL_FRAMES_11=28003）
+**Render：** `out/CH2-4-…/CH2-4-…-2026-06-11.mp4`（4K 3840×2160 / 30fps / **15:33** / 263 MB）2026-06-11
+**字幕：** `…-subtitles.vtt`（370 cues，LLM-based 校正 + opencc s2tw + 臺→台 + 大小寫統一；末 cue 15:33.367 ≈ mp4 933.48s）
+**線上：** https://n8ncourse.zeabur.app/vibecoding/lecture11/
+
+### 新 SOP 首發
+- **VTT 校正** 改用 `vtt-correct-against-script.sh`（LLM-based fuzzy alignment with Claude Sonnet）取代手動 vtt-align-audit.py，效率高（15 段 ~16 分鐘 vs 老法 1+ 小時）
+- **HTML 三方交叉比對**：① `(N)ch2-4.html`（原始 4 個 h2 sections 骨架）② `scene-map-2-4.json`（15 scene ↔ section mapping）③ 講稿備注（0 assets 純動畫）
+- **新 progress bar** 用 `#7cffc2`（取代 `#7cffb2`）
+- **`scene-map-{N}.json`** 新交付物（Scene Dev 必輸出，HTML Agent 三方比對的②）
+
+### 教學內容（15 scene / 6 sections / 8 大類比）
+- S0 開場（FearBlock「對未知的恐懼」3 條 → punchline「認識 = 打破恐懼第一步」）
+- S1 為什麼認識 + 腦袋空空 vs 指揮官對照
+- S2 **網頁御三家**（HTML 橘骨架 / CSS 紫衣服 / JS 黃大腦）+ 購物網舉例 + **老婆餅沒有老婆**（Java ≠ JS）+ TypeScript family tree
+- S3 **前端後端**（餐廳服務生 vs 廚房）+ 演唱會搶票 + Umbrella tree + **wifi 關掉判斷法**
+- S4 **語言地圖 6 平台**（Web 三本柱 / iOS Swift / Android Kotlin / 跨平台 RN+Flutter / 桌面 Electron / 後端 Python/Node）+ Framework「蓋房子用結構圖」+ Python/Node.js 新手首推 +「劉姥姥逛大觀園」
+- S5 finale 5 條 takeaway + 發光大卡
+
+### 已完成
+- [x] Phase 1 音檔正規化（15 段 → SEG_STARTS_11/TOTAL_FRAMES_11=28003 / total 15.55 min）
+- [x] Phase 2 VTT LLM-based 校正 + opencc s2tw + 臺→台 + iOS/Android 大小寫統一 + 刪 LLM 評論污染（3.4/4.3）+ 時間軸單調 0 violation
+- [x] Phase 3 `visual-spec-2-4.json` 完整 15 scene 設計（語意色 HTML橘/CSS紫/JS黃/前端綠/後端橘/Framework紫/Java紅）+ `script-analysis-2-4.json` + `2-4-cues.json`
+- [x] Phase 4 FullVideo11.tsx (1739 行，15 scene + Audio Sequences + BGM 0.10) + scene-map-2-4.json + Root.tsx 註冊 + package.json build:2-4 + 音檔複製
+- [x] Phase 5 Premortem 抽幀 25 frames，含 Scene 0.1 fix 後 6 frame 重抽（修了 hero overflow + items stagger + punchline sync 講者音檔）
+- [x] Phase 6 Render（263 MB / 45 min CPU）+ VTT 合併（370 cues + SEG_STARTS offset）+ HTML 三方比對生成
+- [x] Drive 上傳（folder ID `1Ot1oBWKFxofPcnUPywyt5r5lsOWsjl6T`，3 檔 251 MB）
+- [x] n8ncourse 上架 lecture11（HTTP 200 ✓ + courses.json CH2-4 確認）
+- [x] LINE bot 知識庫手動同步（sync-vibe-to-bot.sh 已不在，改手動 cp + INDEX.md update + commit + push）
+
+### 中途踩坑
+- **磁碟 ENOSPC**：首次 render 跑到 19306/28003 (69%) 因磁碟 9.1 GB 不足崩。砍 Downloads 重複 mp4 5.5 GB 後重 render；macOS 背景 cleanup 把 free 升到 50+ GB，第二次順利
+- **Scene 0.1 設計問題（James 抓出）**：原版 50 秒場景後半 17 秒視覺凍結 + punchline 被 SUBTITLE_H 切掉。修法 = 條件渲染（DOM 收縮）+ 中央構圖 + items stagger 拉長對齊講者節奏 + punchline 推到 F1080（對齊「認識 = 打破恐懼第一步」音檔點）
 
 ---
 

@@ -7,7 +7,8 @@
     "render": "remotion render Video30s \"out/sample-30s.mp4\" --codec=h264",
     "render:CH0-3": "remotion render FullVideo03 \"out/CH0-3-寫程式的 7 大流程與 AI 溝通技巧/CH0-3-寫程式的 7 大流程與 AI 溝通技巧.mp4\" --codec=h264",
     "render:CH1-1": "remotion render FullVideo04 \"out/CH1-1-價值與風險：問題值得解決嗎？有無資安風險？/CH1-1-價值與風險：問題值得解決嗎？有無資安風險？.mp4\" --codec=h264",
-    "build:2-3": "remotion render FullVideo10 \"out/CH2-3-先決定平台：手機、電腦、網頁⋯⋯我會在哪裡用這個程式？/CH2-3-先決定平台：手機、電腦、網頁⋯⋯我會在哪裡用這個程式？-$(date +%F).mp4\" --codec h264"
+    "build:2-3": "remotion render FullVideo10 \"out/CH2-3-先決定平台：手機、電腦、網頁⋯⋯我會在哪裡用這個程式？/CH2-3-先決定平台：手機、電腦、網頁⋯⋯我會在哪裡用這個程式？-$(date +%F).mp4\" --codec h264",
+    "build:2-4": "remotion render FullVideo11 \"out/CH2-4-程式語言——每個平台都有最適合它的語言/CH2-4-程式語言——每個平台都有最適合它的語言-$(date +%F).mp4\" --codec h264"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.0",
