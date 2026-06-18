@@ -20,6 +20,40 @@
 | CH 2-2 | ✅ 完成（**v2 motion 系統**）| FullVideo09b.tsx | ✅ 已上傳 + 上線 |
 | CH 2-3 | ✅ 完成（**v2 motion + CursorSpotlight**）| FullVideo10.tsx | ✅ 已上傳 + 上線 |
 | CH 2-4 | ✅ 完成（**15 scene 純動畫 + 新 SOP HTML 三方比對**）| FullVideo11.tsx | ✅ 已上傳 + 上線 |
+| CH 2-5 | ✅ 完成（**11 scene + Scene 0.1 中央構圖修正 CH 2-4 教訓**）| FullVideo12.tsx | ✅ 已上傳 + 上線 |
+
+---
+
+## CH 2-5 — ✅ 完成（前端、後端——網頁的外表與內在）
+
+**TSX：** `src/FullVideo12.tsx`（11 場景，SEG_STARTS_12=[0,705,3109,4623,6756,8669,10931,12354,14037,15457,16969]，TOTAL_FRAMES_12=20220）
+**Render：** `out/CH2-5-…/CH2-5-…-2026-06-18.mp4`（4K 3840×2160 / 30fps / **11:14** / 206 MB）2026-06-18
+**字幕：** `…-subtitles.vtt`（291 cues，LLM 校正 + 臺→台 + 安卓→Android + 刪 LLM 評論污染；末 cue 11:12.113 ≈ mp4 674.05s）
+**線上：** https://n8ncourse.zeabur.app/vibecoding/lecture12/
+
+### Scene 0.1 修正 CH 2-4 教訓
+- 24s 短開場 hero **中央構圖** + 大字「前端、後端」+ 5 段 connector + **3 個問題 stagger 跨整段**（防止凍結空白）
+- Premortem F300 + F600 兩幀都驗收 — 視覺持續變化、無凍結
+- 完美避開 CH 2-4 0.1 失敗（hero overflow + 後半 17s 靜止）
+
+### 教學內容（11 scene / 5 sections / 8 經典類比）
+- S0 開場：上集回顧 + 這集 3 個問題（前端怎麼運作？後端怎麼運作？前後端怎麼溝通？）
+- S1 **Web 前端 = 下載到手邊的迷你 App**（極輕量 + 跨裝置）+ UI 設計師 vs 工程師交付設計稿
+- S2 **Web 後端 = 24h 大腦**（中央 server + 4 客戶端衛星 marching dash）+ 兩大任務（業務邏輯紫 / 資料庫黃 + **書架類比**）
+- S3 **請求—回應**（Gmail 6 步驟綠橘交替流程）+ 503 Error 紅警 + Cache 對照
+- S4 **「下載到手邊 → 任何人都可能修改」紅 punchline** + **電商 $1000 → $10 篡改衝擊** + 後端必須重新驗證
+- S5 finale 5 條 takeaway（綠/橘/綠/紅/紫）+ **發光大卡「API — 前後端的橋樑」下集預告**
+
+### 已完成
+- [x] Phase 1 音檔正規化（11 段，total 11.23 min / 20220f）+ Script Agent inline (script-analysis-2-5.json)
+- [x] Phase 2 VTT LLM 校正 + 臺→台 + 安卓→Android + 刪 1.2 末尾 LLM 評論 + 0 時間軸 violation
+- [x] Phase 3 visual-spec-2-5.json + processed/2-5-cues.json（291 cues with global_frame）
+- [x] Phase 4 FullVideo12.tsx (1383 行 / 11 scene) + scene-map-2-5.json + Root + package.json build:2-5 + 音檔複製
+- [x] Phase 5 Premortem 抽幀 19/19 frames PASS（特別驗 Scene 0.1 F300/F600 中央構圖無凍結）
+- [x] Phase 6 Render（206 MB / 31 min CPU）+ VTT 合併（291 cues + SEG_STARTS offset）+ HTML 三方比對生成
+- [x] Drive 上傳（folder `13sRC0sghSZFvek1CKLa6IKK6CcZWpoPN`，3 檔 196 MB）
+- [x] n8ncourse 上架 lecture12（HTTP 200 ✓）
+- [x] LINE bot 知識庫手動同步（cp + INDEX update + git commit + push to GitHub）
 
 ---
 
