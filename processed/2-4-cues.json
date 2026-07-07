@@ -1,0 +1,2643 @@
+{
+  "SEG_STARTS": {
+    "0.1": 0,
+    "1.1": 1504,
+    "2.1": 3280,
+    "2.2": 6174,
+    "2.3": 7585,
+    "2.4": 9898,
+    "3.1": 11097,
+    "3.2": 14349,
+    "3.3": 15235,
+    "3.4": 16297,
+    "4.1": 17629,
+    "4.2": 19811,
+    "4.3": 21676,
+    "4.4": 23643,
+    "5.1": 25019
+  },
+  "TOTAL_FRAMES": 28003,
+  "FPS": 30,
+  "cues": {
+    "0.1": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 0.0,
+        "global_frame": 0,
+        "end_frame": 27,
+        "text": "哈囉大家"
+      },
+      {
+        "local_sec": 0.92,
+        "global_sec": 0.92,
+        "global_frame": 27,
+        "end_frame": 55,
+        "text": "在上個單元"
+      },
+      {
+        "local_sec": 1.84,
+        "global_sec": 1.84,
+        "global_frame": 55,
+        "end_frame": 157,
+        "text": "我們已經聊過關於先決定平台的重要性"
+      },
+      {
+        "local_sec": 5.24,
+        "global_sec": 5.24,
+        "global_frame": 157,
+        "end_frame": 266,
+        "text": "因為這會決定你到底需要什麼樣的程式碼"
+      },
+      {
+        "local_sec": 8.88,
+        "global_sec": 8.88,
+        "global_frame": 266,
+        "end_frame": 294,
+        "text": "在這個單元"
+      },
+      {
+        "local_sec": 9.8,
+        "global_sec": 9.8,
+        "global_frame": 294,
+        "end_frame": 363,
+        "text": "我們就來帶你快速認識一下"
+      },
+      {
+        "local_sec": 12.12,
+        "global_sec": 12.12,
+        "global_frame": 363,
+        "end_frame": 499,
+        "text": "不同平台通常會用什麼程式語言來寫"
+      },
+      {
+        "local_sec": 16.64,
+        "global_sec": 16.64,
+        "global_frame": 499,
+        "end_frame": 542,
+        "text": "在過去的經驗中"
+      },
+      {
+        "local_sec": 18.08,
+        "global_sec": 18.08,
+        "global_frame": 542,
+        "end_frame": 644,
+        "text": "我們發現在推廣 AI 寫程式的時候"
+      },
+      {
+        "local_sec": 21.48,
+        "global_sec": 21.48,
+        "global_frame": 644,
+        "end_frame": 684,
+        "text": "遇到最大的阻礙"
+      },
+      {
+        "local_sec": 22.8,
+        "global_sec": 22.8,
+        "global_frame": 684,
+        "end_frame": 802,
+        "text": "就是大家對程式碼有一種對於未知的恐懼"
+      },
+      {
+        "local_sec": 26.76,
+        "global_sec": 26.76,
+        "global_frame": 802,
+        "end_frame": 886,
+        "text": "當你看到一大堆英文字母夾雜著符號"
+      },
+      {
+        "local_sec": 29.56,
+        "global_sec": 29.56,
+        "global_frame": 886,
+        "end_frame": 1000,
+        "text": "很多人第一個反應就是生理上的抗拒"
+      },
+      {
+        "local_sec": 33.36,
+        "global_sec": 33.36,
+        "global_frame": 1000,
+        "end_frame": 1078,
+        "text": "而且完全不知道從哪裡開始看"
+      },
+      {
+        "local_sec": 35.96,
+        "global_sec": 35.96,
+        "global_frame": 1078,
+        "end_frame": 1125,
+        "text": "但其實我跟你說"
+      },
+      {
+        "local_sec": 37.52,
+        "global_sec": 37.52,
+        "global_frame": 1125,
+        "end_frame": 1238,
+        "text": "你只要對常見的程式語言有一個基本的認識"
+      },
+      {
+        "local_sec": 41.28,
+        "global_sec": 41.28,
+        "global_frame": 1238,
+        "end_frame": 1327,
+        "text": "就可以打破你對於程式語言的刻板印象"
+      },
+      {
+        "local_sec": 44.24,
+        "global_sec": 44.24,
+        "global_frame": 1327,
+        "end_frame": 1424,
+        "text": "畢竟人都會對於未知的部分而感到恐懼"
+      },
+      {
+        "local_sec": 47.48,
+        "global_sec": 47.48,
+        "global_frame": 1424,
+        "end_frame": 1502,
+        "text": "所以認識他們就是打破恐懼的第一步喔"
+      }
+    ],
+    "1.1": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 50.13,
+        "global_frame": 1504,
+        "end_frame": 1570,
+        "text": "那在上個單元我們有提到"
+      },
+      {
+        "local_sec": 2.2,
+        "global_sec": 52.33,
+        "global_frame": 1570,
+        "end_frame": 1637,
+        "text": "知道了哪些常見的平台之後"
+      },
+      {
+        "local_sec": 4.44,
+        "global_sec": 54.57,
+        "global_frame": 1637,
+        "end_frame": 1705,
+        "text": "接下來就是要知道每個平台"
+      },
+      {
+        "local_sec": 6.72,
+        "global_sec": 56.85,
+        "global_frame": 1705,
+        "end_frame": 1763,
+        "text": "對應的是什麼語言？"
+      },
+      {
+        "local_sec": 8.64,
+        "global_sec": 58.77,
+        "global_frame": 1763,
+        "end_frame": 1861,
+        "text": "才有辦法跟 AI 做更精準的溝通"
+      },
+      {
+        "local_sec": 11.92,
+        "global_sec": 62.05,
+        "global_frame": 1861,
+        "end_frame": 1890,
+        "text": "除此之外"
+      },
+      {
+        "local_sec": 12.88,
+        "global_sec": 63.01,
+        "global_frame": 1890,
+        "end_frame": 1949,
+        "text": "在學習這個單元的時候"
+      },
+      {
+        "local_sec": 14.84,
+        "global_sec": 64.97,
+        "global_frame": 1949,
+        "end_frame": 2048,
+        "text": "我希望你的學習視角是能幫助你"
+      },
+      {
+        "local_sec": 19.8,
+        "global_sec": 69.93,
+        "global_frame": 2098,
+        "end_frame": 2162,
+        "text": "在看到一大堆程式碼的時候"
+      },
+      {
+        "local_sec": 21.96,
+        "global_sec": 72.09,
+        "global_frame": 2162,
+        "end_frame": 2216,
+        "text": "先不感到恐懼"
+      },
+      {
+        "local_sec": 23.76,
+        "global_sec": 73.89,
+        "global_frame": 2216,
+        "end_frame": 2255,
+        "text": "再來如果未來"
+      },
+      {
+        "local_sec": 25.04,
+        "global_sec": 75.17,
+        "global_frame": 2255,
+        "end_frame": 2321,
+        "text": "你在做稍微深入一點的學習"
+      },
+      {
+        "local_sec": 27.24,
+        "global_sec": 77.37,
+        "global_frame": 2321,
+        "end_frame": 2380,
+        "text": "你就可以知道哪些地方"
+      },
+      {
+        "local_sec": 29.2,
+        "global_sec": 79.33,
+        "global_frame": 2380,
+        "end_frame": 2417,
+        "text": "你可以自己調整"
+      },
+      {
+        "local_sec": 30.44,
+        "global_sec": 80.57,
+        "global_frame": 2417,
+        "end_frame": 2498,
+        "text": "哪些地方最好不要亂動"
+      },
+      {
+        "local_sec": 33.16,
+        "global_sec": 83.29,
+        "global_frame": 2498,
+        "end_frame": 2527,
+        "text": "這樣未來"
+      },
+      {
+        "local_sec": 34.12,
+        "global_sec": 84.25,
+        "global_frame": 2527,
+        "end_frame": 2582,
+        "text": "你就不用連一個小小的修改"
+      },
+      {
+        "local_sec": 35.96,
+        "global_sec": 86.09,
+        "global_frame": 2582,
+        "end_frame": 2654,
+        "text": "都要浪費一次和 AI 的對話額度"
+      },
+      {
+        "local_sec": 38.36,
+        "global_sec": 88.49,
+        "global_frame": 2654,
+        "end_frame": 2712,
+        "text": "可以有能力自己動手修改"
+      },
+      {
+        "local_sec": 40.28,
+        "global_sec": 90.41,
+        "global_frame": 2712,
+        "end_frame": 2798,
+        "text": "而且這樣其實還比較快"
+      },
+      {
+        "local_sec": 43.16,
+        "global_sec": 93.29,
+        "global_frame": 2798,
+        "end_frame": 2828,
+        "text": "所以說白了"
+      },
+      {
+        "local_sec": 44.16,
+        "global_sec": 94.29,
+        "global_frame": 2828,
+        "end_frame": 2896,
+        "text": "這個單元帶你認識程式語言"
+      },
+      {
+        "local_sec": 46.4,
+        "global_sec": 96.53,
+        "global_frame": 2896,
+        "end_frame": 2950,
+        "text": "不是為了讓你去寫程式"
+      },
+      {
+        "local_sec": 48.2,
+        "global_sec": 98.33,
+        "global_frame": 2950,
+        "end_frame": 3011,
+        "text": "也不是要你把語言背起來"
+      },
+      {
+        "local_sec": 50.24,
+        "global_sec": 100.37,
+        "global_frame": 3011,
+        "end_frame": 3086,
+        "text": "而是讓你在和 AI 協作的時候"
+      },
+      {
+        "local_sec": 52.76,
+        "global_sec": 102.89,
+        "global_frame": 3086,
+        "end_frame": 3151,
+        "text": "更像一個有概念的指揮官"
+      },
+      {
+        "local_sec": 54.92,
+        "global_sec": 105.05,
+        "global_frame": 3151,
+        "end_frame": 3193,
+        "text": "而不是一個腦袋空空的"
+      },
+      {
+        "local_sec": 56.32,
+        "global_sec": 106.45,
+        "global_frame": 3193,
+        "end_frame": 3253,
+        "text": "站在旁邊全靠 AI 支配你"
+      }
+    ],
+    "2.1": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 109.33,
+        "global_frame": 3280,
+        "end_frame": 3359,
+        "text": "好，前面做了那麼多心理建設之後"
+      },
+      {
+        "local_sec": 2.64,
+        "global_sec": 111.97,
+        "global_frame": 3359,
+        "end_frame": 3432,
+        "text": "接下來我們要正式開始囉！"
+      },
+      {
+        "local_sec": 5.08,
+        "global_sec": 114.41,
+        "global_frame": 3432,
+        "end_frame": 3542,
+        "text": "那首先我們就先從最多人會接觸到的平台"
+      },
+      {
+        "local_sec": 8.76,
+        "global_sec": 118.09,
+        "global_frame": 3542,
+        "end_frame": 3598,
+        "text": "網頁開始說起。"
+      },
+      {
+        "local_sec": 10.6,
+        "global_sec": 119.93,
+        "global_frame": 3598,
+        "end_frame": 3683,
+        "text": "你打開瀏覽器看到的任何一個網頁，"
+      },
+      {
+        "local_sec": 13.44,
+        "global_sec": 122.77,
+        "global_frame": 3683,
+        "end_frame": 3792,
+        "text": "背後都是由三種語言共同組成的，"
+      },
+      {
+        "local_sec": 17.08,
+        "global_sec": 126.41,
+        "global_frame": 3792,
+        "end_frame": 3870,
+        "text": "我們叫它「網頁御三家」："
+      },
+      {
+        "local_sec": 19.68,
+        "global_sec": 129.01,
+        "global_frame": 3870,
+        "end_frame": 3977,
+        "text": "分別是HTML、CSS，和JavaScript。"
+      },
+      {
+        "local_sec": 23.24,
+        "global_sec": 132.57,
+        "global_frame": 3977,
+        "end_frame": 4063,
+        "text": "它們各司其職，缺一不可。"
+      },
+      {
+        "local_sec": 26.12,
+        "global_sec": 135.45,
+        "global_frame": 4063,
+        "end_frame": 4108,
+        "text": "那它們各自到底"
+      },
+      {
+        "local_sec": 27.6,
+        "global_sec": 136.93,
+        "global_frame": 4108,
+        "end_frame": 4187,
+        "text": "負責什麼呢？"
+      },
+      {
+        "local_sec": 30.24,
+        "global_sec": 139.57,
+        "global_frame": 4187,
+        "end_frame": 4252,
+        "text": "首先是HTML。"
+      },
+      {
+        "local_sec": 32.4,
+        "global_sec": 141.73,
+        "global_frame": 4252,
+        "end_frame": 4343,
+        "text": "HTML負責的是結構和內容——"
+      },
+      {
+        "local_sec": 35.44,
+        "global_sec": 144.77,
+        "global_frame": 4343,
+        "end_frame": 4447,
+        "text": "也就是說，這個頁面上有哪些東西、"
+      },
+      {
+        "local_sec": 38.92,
+        "global_sec": 148.25,
+        "global_frame": 4447,
+        "end_frame": 4482,
+        "text": "順序怎麼排。"
+      },
+      {
+        "local_sec": 40.08,
+        "global_sec": 149.41,
+        "global_frame": 4482,
+        "end_frame": 4608,
+        "text": "像是標題、段落、按鈕、導覽列，"
+      },
+      {
+        "local_sec": 44.28,
+        "global_sec": 153.61,
+        "global_frame": 4608,
+        "end_frame": 4702,
+        "text": "這些都是HTML在定義的。"
+      },
+      {
+        "local_sec": 47.4,
+        "global_sec": 156.73,
+        "global_frame": 4702,
+        "end_frame": 4790,
+        "text": "他就有點像是你在捏一個角色的時候，"
+      },
+      {
+        "local_sec": 50.36,
+        "global_sec": 159.69,
+        "global_frame": 4790,
+        "end_frame": 4872,
+        "text": "會先決定好角色的骨架。"
+      },
+      {
+        "local_sec": 53.08,
+        "global_sec": 162.41,
+        "global_frame": 4872,
+        "end_frame": 4943,
+        "text": "然後是CSS。"
+      },
+      {
+        "local_sec": 55.44,
+        "global_sec": 164.77,
+        "global_frame": 4943,
+        "end_frame": 5027,
+        "text": "CSS負責的是外觀和樣式——"
+      },
+      {
+        "local_sec": 58.24,
+        "global_sec": 167.57,
+        "global_frame": 5027,
+        "end_frame": 5117,
+        "text": "顏色是什麼、字體大小、"
+      },
+      {
+        "local_sec": 61.24,
+        "global_sec": 170.57,
+        "global_frame": 5117,
+        "end_frame": 5207,
+        "text": "間距怎麼設、版面長什麼樣子，"
+      },
+      {
+        "local_sec": 64.24,
+        "global_sec": 173.57,
+        "global_frame": 5207,
+        "end_frame": 5291,
+        "text": "這些都是CSS在控制的，"
+      },
+      {
+        "local_sec": 67.04,
+        "global_sec": 176.37,
+        "global_frame": 5291,
+        "end_frame": 5396,
+        "text": "就像是決定角色的皮膚"
+      },
+      {
+        "local_sec": 70.56,
+        "global_sec": 179.89,
+        "global_frame": 5396,
+        "end_frame": 5491,
+        "text": "是黑的還是白的，"
+      },
+      {
+        "local_sec": 73.72,
+        "global_sec": 183.05,
+        "global_frame": 5491,
+        "end_frame": 5557,
+        "text": "衣服要穿什麼。"
+      },
+      {
+        "local_sec": 75.92,
+        "global_sec": 185.25,
+        "global_frame": 5557,
+        "end_frame": 5602,
+        "text": "最後是JavaScript。"
+      },
+      {
+        "local_sec": 77.4,
+        "global_sec": 186.73,
+        "global_frame": 5602,
+        "end_frame": 5689,
+        "text": "JavaScript負責的是行為和互動"
+      },
+      {
+        "local_sec": 80.32,
+        "global_sec": 189.65,
+        "global_frame": 5689,
+        "end_frame": 5746,
+        "text": "以及邏輯控制——"
+      },
+      {
+        "local_sec": 82.2,
+        "global_sec": 191.53,
+        "global_frame": 5746,
+        "end_frame": 5812,
+        "text": "當使用者做了某個操作之後，"
+      },
+      {
+        "local_sec": 84.44,
+        "global_sec": 193.77,
+        "global_frame": 5813,
+        "end_frame": 5873,
+        "text": "畫面要發生什麼變化、"
+      },
+      {
+        "local_sec": 86.44,
+        "global_sec": 195.77,
+        "global_frame": 5873,
+        "end_frame": 5917,
+        "text": "資料要怎麼更新，"
+      },
+      {
+        "local_sec": 87.92,
+        "global_sec": 197.25,
+        "global_frame": 5917,
+        "end_frame": 5986,
+        "text": "都是它在處理的。"
+      },
+      {
+        "local_sec": 90.2,
+        "global_sec": 199.53,
+        "global_frame": 5986,
+        "end_frame": 6065,
+        "text": "你可以把它想像成角色的大腦，"
+      },
+      {
+        "local_sec": 92.84,
+        "global_sec": 202.17,
+        "global_frame": 6065,
+        "end_frame": 6172,
+        "text": "決定什麼時候做什麼事情。"
+      }
+    ],
+    "2.2": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 205.8,
+        "global_frame": 6174,
+        "end_frame": 6212,
+        "text": "舉個例子來說"
+      },
+      {
+        "local_sec": 1.28,
+        "global_sec": 207.08,
+        "global_frame": 6212,
+        "end_frame": 6273,
+        "text": "假設你打開一個購物網站"
+      },
+      {
+        "local_sec": 3.32,
+        "global_sec": 209.12,
+        "global_frame": 6273,
+        "end_frame": 6350,
+        "text": "瀏覽器怎麼知道哪個是標題"
+      },
+      {
+        "local_sec": 5.88,
+        "global_sec": 211.68,
+        "global_frame": 6350,
+        "end_frame": 6381,
+        "text": "哪個是副標"
+      },
+      {
+        "local_sec": 6.92,
+        "global_sec": 212.72,
+        "global_frame": 6381,
+        "end_frame": 6427,
+        "text": "哪個是輸入欄位"
+      },
+      {
+        "local_sec": 8.44,
+        "global_sec": 214.24,
+        "global_frame": 6427,
+        "end_frame": 6519,
+        "text": "那就是透過HTML標記的"
+      },
+      {
+        "local_sec": 11.52,
+        "global_sec": 217.32,
+        "global_frame": 6519,
+        "end_frame": 6611,
+        "text": "再來瀏覽器怎麼知道畫面要長什麼樣子"
+      },
+      {
+        "local_sec": 14.58,
+        "global_sec": 220.38,
+        "global_frame": 6611,
+        "end_frame": 6642,
+        "text": "用什麼顏色"
+      },
+      {
+        "local_sec": 15.62,
+        "global_sec": 221.42,
+        "global_frame": 6642,
+        "end_frame": 6680,
+        "text": "什麼字體"
+      },
+      {
+        "local_sec": 16.9,
+        "global_sec": 222.7,
+        "global_frame": 6680,
+        "end_frame": 6765,
+        "text": "那就是透過CSS定義的"
+      },
+      {
+        "local_sec": 19.72,
+        "global_sec": 225.52,
+        "global_frame": 6765,
+        "end_frame": 6788,
+        "text": "最後"
+      },
+      {
+        "local_sec": 20.48,
+        "global_sec": 226.28,
+        "global_frame": 6788,
+        "end_frame": 6849,
+        "text": "你按下購買的按鈕之後"
+      },
+      {
+        "local_sec": 22.52,
+        "global_sec": 228.32,
+        "global_frame": 6849,
+        "end_frame": 6903,
+        "text": "頁面要跳轉到下一步"
+      },
+      {
+        "local_sec": 24.32,
+        "global_sec": 230.12,
+        "global_frame": 6903,
+        "end_frame": 7003,
+        "text": "或者跳出一個結帳的視窗"
+      },
+      {
+        "local_sec": 27.64,
+        "global_sec": 233.44,
+        "global_frame": 7003,
+        "end_frame": 7065,
+        "text": "那就是JavaScript負責的"
+      },
+      {
+        "local_sec": 29.9,
+        "global_sec": 235.7,
+        "global_frame": 7071,
+        "end_frame": 7132,
+        "text": "所以所謂的網頁御三家"
+      },
+      {
+        "local_sec": 31.96,
+        "global_sec": 237.76,
+        "global_frame": 7132,
+        "end_frame": 7163,
+        "text": "其實就是指"
+      },
+      {
+        "local_sec": 32.98,
+        "global_sec": 238.78,
+        "global_frame": 7163,
+        "end_frame": 7232,
+        "text": "HTML建立結構"
+      },
+      {
+        "local_sec": 35.28,
+        "global_sec": 241.08,
+        "global_frame": 7232,
+        "end_frame": 7301,
+        "text": "CSS決定外觀"
+      },
+      {
+        "local_sec": 37.58,
+        "global_sec": 243.38,
+        "global_frame": 7301,
+        "end_frame": 7371,
+        "text": "JavaScript控制互動"
+      },
+      {
+        "local_sec": 39.9,
+        "global_sec": 245.7,
+        "global_frame": 7371,
+        "end_frame": 7440,
+        "text": "三者缺一不可"
+      },
+      {
+        "local_sec": 42.2,
+        "global_sec": 248.0,
+        "global_frame": 7440,
+        "end_frame": 7531,
+        "text": "他們會共同組成了你打開瀏覽器時"
+      },
+      {
+        "local_sec": 45.26,
+        "global_sec": 251.06,
+        "global_frame": 7531,
+        "end_frame": 7578,
+        "text": "看到的所有東西喔"
+      }
+    ],
+    "2.3": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 252.83,
+        "global_frame": 7585,
+        "end_frame": 7623,
+        "text": "那這邊，"
+      },
+      {
+        "local_sec": 1.28,
+        "global_sec": 254.11,
+        "global_frame": 7623,
+        "end_frame": 7715,
+        "text": "我還想跟你分享一個很多人都會搞混的事情，"
+      },
+      {
+        "local_sec": 4.86,
+        "global_sec": 257.69,
+        "global_frame": 7730,
+        "end_frame": 7799,
+        "text": "剛剛聽到 JavaScript 的時候，"
+      },
+      {
+        "local_sec": 7.16,
+        "global_sec": 259.99,
+        "global_frame": 7799,
+        "end_frame": 7861,
+        "text": "有些人可能會問"
+      },
+      {
+        "local_sec": 9.48,
+        "global_sec": 262.31,
+        "global_frame": 7869,
+        "end_frame": 7930,
+        "text": "「那我以前聽過的 Java 是不是"
+      },
+      {
+        "local_sec": 11.78,
+        "global_sec": 264.61,
+        "global_frame": 7938,
+        "end_frame": 8007,
+        "text": "就是 JavaScript 的簡稱啊？」"
+      },
+      {
+        "local_sec": 14.6,
+        "global_sec": 267.43,
+        "global_frame": 8023,
+        "end_frame": 8045,
+        "text": "但其實"
+      },
+      {
+        "local_sec": 15.62,
+        "global_sec": 268.45,
+        "global_frame": 8053,
+        "end_frame": 8153,
+        "text": "Java 和 JavaScript 是完全不一樣的東西。"
+      },
+      {
+        "local_sec": 19.2,
+        "global_sec": 272.03,
+        "global_frame": 8161,
+        "end_frame": 8237,
+        "text": "很多剛開始接觸程式的人，"
+      },
+      {
+        "local_sec": 21.76,
+        "global_sec": 274.59,
+        "global_frame": 8237,
+        "end_frame": 8299,
+        "text": "會以為這兩個語言一樣，"
+      },
+      {
+        "local_sec": 23.8,
+        "global_sec": 276.63,
+        "global_frame": 8299,
+        "end_frame": 8414,
+        "text": "或者是覺得它們可能有點親屬關係。"
+      },
+      {
+        "local_sec": 27.84,
+        "global_sec": 280.67,
+        "global_frame": 8420,
+        "end_frame": 8504,
+        "text": "但其實，它們是沒有血緣關係的，"
+      },
+      {
+        "local_sec": 30.66,
+        "global_sec": 283.49,
+        "global_frame": 8504,
+        "end_frame": 8566,
+        "text": "就像老婆餅裡面"
+      },
+      {
+        "local_sec": 32.72,
+        "global_sec": 285.55,
+        "global_frame": 8566,
+        "end_frame": 8612,
+        "text": "沒有老婆是一樣的概念。"
+      },
+      {
+        "local_sec": 35.02,
+        "global_sec": 287.85,
+        "global_frame": 8635,
+        "end_frame": 8681,
+        "text": "那所以 Java 是什麼呢？"
+      },
+      {
+        "local_sec": 36.8,
+        "global_sec": 289.63,
+        "global_frame": 8689,
+        "end_frame": 8773,
+        "text": "Java 是另一個系統的程式語言，"
+      },
+      {
+        "local_sec": 39.62,
+        "global_sec": 292.45,
+        "global_frame": 8773,
+        "end_frame": 8858,
+        "text": "它的語法比較正式、嚴謹，"
+      },
+      {
+        "local_sec": 42.44,
+        "global_sec": 295.27,
+        "global_frame": 8858,
+        "end_frame": 8927,
+        "text": "有明確的型別和結構，"
+      },
+      {
+        "local_sec": 45.0,
+        "global_sec": 297.83,
+        "global_frame": 8935,
+        "end_frame": 9011,
+        "text": "早年是 Android App 的主力語言。"
+      },
+      {
+        "local_sec": 48.08,
+        "global_sec": 300.91,
+        "global_frame": 9027,
+        "end_frame": 9065,
+        "text": "而 JavaScript 則是"
+      },
+      {
+        "local_sec": 49.36,
+        "global_sec": 302.19,
+        "global_frame": 9065,
+        "end_frame": 9127,
+        "text": "靈活、寬鬆，"
+      },
+      {
+        "local_sec": 51.4,
+        "global_sec": 304.23,
+        "global_frame": 9127,
+        "end_frame": 9188,
+        "text": "專門為瀏覽器而生的。"
+      },
+      {
+        "local_sec": 56.0,
+        "global_sec": 308.83,
+        "global_frame": 9265,
+        "end_frame": 9311,
+        "text": "歷史上，"
+      },
+      {
+        "local_sec": 57.7,
+        "global_sec": 310.53,
+        "global_frame": 9316,
+        "end_frame": 9401,
+        "text": "其實是先有 Java 之後才有 JavaScript，"
+      },
+      {
+        "local_sec": 60.82,
+        "global_sec": 313.65,
+        "global_frame": 9409,
+        "end_frame": 9463,
+        "text": "那為什麼他們名字那麼像，"
+      },
+      {
+        "local_sec": 63.12,
+        "global_sec": 315.95,
+        "global_frame": 9478,
+        "end_frame": 9522,
+        "text": "其實是因為在當時"
+      },
+      {
+        "local_sec": 64.58,
+        "global_sec": 317.41,
+        "global_frame": 9522,
+        "end_frame": 9555,
+        "text": "Java 這個語言"
+      },
+      {
+        "local_sec": 65.68,
+        "global_sec": 318.51,
+        "global_frame": 9555,
+        "end_frame": 9601,
+        "text": "很夯，"
+      },
+      {
+        "local_sec": 67.48,
+        "global_sec": 320.31,
+        "global_frame": 9609,
+        "end_frame": 9726,
+        "text": "所以 JavaScript 才取了一個很像的名字來蹭熱度，"
+      },
+      {
+        "local_sec": 71.88,
+        "global_sec": 324.71,
+        "global_frame": 9741,
+        "end_frame": 9862,
+        "text": "但他們兩者的設計哲學，是完全不同的東西。"
+      }
+    ],
+    "2.4": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 329.93,
+        "global_frame": 9898,
+        "end_frame": 10048,
+        "text": "然後關於 JavaScript 還會有一些人會聯想 TypeScript"
+      },
+      {
+        "local_sec": 5.0,
+        "global_sec": 334.93,
+        "global_frame": 10048,
+        "end_frame": 10081,
+        "text": "你可能會想說"
+      },
+      {
+        "local_sec": 6.12,
+        "global_sec": 336.05,
+        "global_frame": 10081,
+        "end_frame": 10142,
+        "text": "該不會他也是老婆餅裡面"
+      },
+      {
+        "local_sec": 8.16,
+        "global_sec": 338.09,
+        "global_frame": 10142,
+        "end_frame": 10193,
+        "text": "沒有老婆吧？"
+      },
+      {
+        "local_sec": 9.84,
+        "global_sec": 339.77,
+        "global_frame": 10193,
+        "end_frame": 10229,
+        "text": "但其實不是！"
+      },
+      {
+        "local_sec": 11.04,
+        "global_sec": 340.97,
+        "global_frame": 10229,
+        "end_frame": 10362,
+        "text": "TypeScript 你可以理解成是更嚴謹一點的 JavaScript"
+      },
+      {
+        "local_sec": 15.48,
+        "global_sec": 345.41,
+        "global_frame": 10362,
+        "end_frame": 10430,
+        "text": "所以他們其實是有親戚"
+      },
+      {
+        "local_sec": 17.76,
+        "global_sec": 347.69,
+        "global_frame": 10430,
+        "end_frame": 10499,
+        "text": "TypeScript 它多了型別的規範"
+      },
+      {
+        "local_sec": 20.04,
+        "global_sec": 349.97,
+        "global_frame": 10499,
+        "end_frame": 10568,
+        "text": "讓程式碼的結構更清晰"
+      },
+      {
+        "local_sec": 22.36,
+        "global_sec": 352.29,
+        "global_frame": 10568,
+        "end_frame": 10627,
+        "text": "適合比較大型的專案"
+      },
+      {
+        "local_sec": 24.32,
+        "global_sec": 354.25,
+        "global_frame": 10627,
+        "end_frame": 10703,
+        "text": "或者多人一起協作的情境。"
+      },
+      {
+        "local_sec": 26.84,
+        "global_sec": 356.77,
+        "global_frame": 10703,
+        "end_frame": 10800,
+        "text": "TypeScript 在這幾年越來越流行"
+      },
+      {
+        "local_sec": 30.08,
+        "global_sec": 360.01,
+        "global_frame": 10800,
+        "end_frame": 10865,
+        "text": "AI 也很擅長寫它。"
+      },
+      {
+        "local_sec": 32.24,
+        "global_sec": 362.17,
+        "global_frame": 10865,
+        "end_frame": 10949,
+        "text": "但一樣你不需要特別去學它"
+      },
+      {
+        "local_sec": 35.04,
+        "global_sec": 364.97,
+        "global_frame": 10949,
+        "end_frame": 10999,
+        "text": "只要知道它存在"
+      },
+      {
+        "local_sec": 36.72,
+        "global_sec": 366.65,
+        "global_frame": 10999,
+        "end_frame": 11042,
+        "text": "未來在遇到的時候"
+      },
+      {
+        "local_sec": 38.16,
+        "global_sec": 368.09,
+        "global_frame": 11042,
+        "end_frame": 11095,
+        "text": "不會讓你自己嚇到就好了。"
+      }
+    ],
+    "3.1": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 369.9,
+        "global_frame": 11097,
+        "end_frame": 11173,
+        "text": "好,在瞭解完了網頁御三家之後"
+      },
+      {
+        "local_sec": 2.56,
+        "global_sec": 372.46,
+        "global_frame": 11173,
+        "end_frame": 11250,
+        "text": "在繼續介紹其他的平台之前"
+      },
+      {
+        "local_sec": 5.12,
+        "global_sec": 375.02,
+        "global_frame": 11250,
+        "end_frame": 11311,
+        "text": "我想先帶你認識兩個"
+      },
+      {
+        "local_sec": 7.16,
+        "global_sec": 377.06,
+        "global_frame": 11311,
+        "end_frame": 11350,
+        "text": "很重要的概念"
+      },
+      {
+        "local_sec": 8.44,
+        "global_sec": 378.34,
+        "global_frame": 11350,
+        "end_frame": 11427,
+        "text": "就是前端跟後端"
+      },
+      {
+        "local_sec": 11.0,
+        "global_sec": 380.9,
+        "global_frame": 11427,
+        "end_frame": 11496,
+        "text": "你在過往應該或多或少都會聽到"
+      },
+      {
+        "local_sec": 13.32,
+        "global_sec": 383.22,
+        "global_frame": 11496,
+        "end_frame": 11550,
+        "text": "類似像這樣的名詞"
+      },
+      {
+        "local_sec": 15.1,
+        "global_sec": 385.0,
+        "global_frame": 11550,
+        "end_frame": 11626,
+        "text": "那因為這兩個名詞在接下來的學習裡面"
+      },
+      {
+        "local_sec": 17.66,
+        "global_sec": 387.56,
+        "global_frame": 11626,
+        "end_frame": 11673,
+        "text": "你會一直不停的看到"
+      },
+      {
+        "local_sec": 19.2,
+        "global_sec": 389.1,
+        "global_frame": 11673,
+        "end_frame": 11711,
+        "text": "而且會遇到他們"
+      },
+      {
+        "local_sec": 20.48,
+        "global_sec": 390.38,
+        "global_frame": 11711,
+        "end_frame": 11765,
+        "text": "所以提前搞清楚他們"
+      },
+      {
+        "local_sec": 22.28,
+        "global_sec": 392.18,
+        "global_frame": 11765,
+        "end_frame": 11811,
+        "text": "才有辦法真的理解說"
+      },
+      {
+        "local_sec": 23.8,
+        "global_sec": 393.7,
+        "global_frame": 11811,
+        "end_frame": 11857,
+        "text": "為什麼不同的平台"
+      },
+      {
+        "local_sec": 25.34,
+        "global_sec": 395.24,
+        "global_frame": 11857,
+        "end_frame": 11926,
+        "text": "會要使用不同的語言喔"
+      },
+      {
+        "local_sec": 27.64,
+        "global_sec": 397.54,
+        "global_frame": 11926,
+        "end_frame": 12016,
+        "text": "那所以前端和後端到底是什麼呢"
+      },
+      {
+        "local_sec": 30.66,
+        "global_sec": 400.56,
+        "global_frame": 12016,
+        "end_frame": 12047,
+        "text": "簡單來說"
+      },
+      {
+        "local_sec": 31.68,
+        "global_sec": 401.58,
+        "global_frame": 12047,
+        "end_frame": 12143,
+        "text": "只要任何一個可以連上網路的應用程式"
+      },
+      {
+        "local_sec": 34.88,
+        "global_sec": 404.78,
+        "global_frame": 12143,
+        "end_frame": 12231,
+        "text": "背後通常都可以分為前端跟後端"
+      },
+      {
+        "local_sec": 37.8,
+        "global_sec": 407.7,
+        "global_frame": 12231,
+        "end_frame": 12305,
+        "text": "當你打開App或是網頁的時候"
+      },
+      {
+        "local_sec": 40.28,
+        "global_sec": 410.18,
+        "global_frame": 12305,
+        "end_frame": 12348,
+        "text": "你所看到的畫面"
+      },
+      {
+        "local_sec": 41.72,
+        "global_sec": 411.62,
+        "global_frame": 12348,
+        "end_frame": 12377,
+        "text": "點擊的按鈕"
+      },
+      {
+        "local_sec": 42.68,
+        "global_sec": 412.58,
+        "global_frame": 12377,
+        "end_frame": 12414,
+        "text": "輸入的表單"
+      },
+      {
+        "local_sec": 43.92,
+        "global_sec": 413.82,
+        "global_frame": 12414,
+        "end_frame": 12459,
+        "text": "甚至是點擊之後"
+      },
+      {
+        "local_sec": 45.4,
+        "global_sec": 415.3,
+        "global_frame": 12459,
+        "end_frame": 12498,
+        "text": "畫面怎麼變化"
+      },
+      {
+        "local_sec": 46.72,
+        "global_sec": 416.62,
+        "global_frame": 12498,
+        "end_frame": 12565,
+        "text": "這些在你眼前發生的事情"
+      },
+      {
+        "local_sec": 48.96,
+        "global_sec": 418.86,
+        "global_frame": 12565,
+        "end_frame": 12616,
+        "text": "我們都會稱為前端"
+      },
+      {
+        "local_sec": 50.64,
+        "global_sec": 420.54,
+        "global_frame": 12616,
+        "end_frame": 12670,
+        "text": "也會叫做客戶端"
+      },
+      {
+        "local_sec": 52.44,
+        "global_sec": 422.34,
+        "global_frame": 12670,
+        "end_frame": 12735,
+        "text": "前端的話不只是畫面本身喔"
+      },
+      {
+        "local_sec": 54.6,
+        "global_sec": 424.5,
+        "global_frame": 12735,
+        "end_frame": 12819,
+        "text": "它也包含了讓畫面可以互動的邏輯"
+      },
+      {
+        "local_sec": 57.4,
+        "global_sec": 427.3,
+        "global_frame": 12819,
+        "end_frame": 12893,
+        "text": "例如說按鈕點擊之後的反應"
+      },
+      {
+        "local_sec": 59.88,
+        "global_sec": 429.78,
+        "global_frame": 12893,
+        "end_frame": 12934,
+        "text": "表單的檢查"
+      },
+      {
+        "local_sec": 61.24,
+        "global_sec": 431.14,
+        "global_frame": 12934,
+        "end_frame": 13013,
+        "text": "或者是資料更新時候的畫面的變化"
+      },
+      {
+        "local_sec": 63.88,
+        "global_sec": 433.78,
+        "global_frame": 13013,
+        "end_frame": 13074,
+        "text": "都會是前端的範疇喔"
+      },
+      {
+        "local_sec": 65.92,
+        "global_sec": 435.82,
+        "global_frame": 13074,
+        "end_frame": 13105,
+        "text": "而在幕後"
+      },
+      {
+        "local_sec": 66.96,
+        "global_sec": 436.86,
+        "global_frame": 13105,
+        "end_frame": 13168,
+        "text": "有一整套系統在運作"
+      },
+      {
+        "local_sec": 69.04,
+        "global_sec": 438.94,
+        "global_frame": 13168,
+        "end_frame": 13240,
+        "text": "負責接收前端傳來的請求"
+      },
+      {
+        "local_sec": 71.44,
+        "global_sec": 441.34,
+        "global_frame": 13240,
+        "end_frame": 13272,
+        "text": "處理資料"
+      },
+      {
+        "local_sec": 72.52,
+        "global_sec": 442.42,
+        "global_frame": 13272,
+        "end_frame": 13317,
+        "text": "和資料庫互動"
+      },
+      {
+        "local_sec": 74.0,
+        "global_sec": 443.9,
+        "global_frame": 13317,
+        "end_frame": 13393,
+        "text": "並且再把結果回傳給前端"
+      },
+      {
+        "local_sec": 76.56,
+        "global_sec": 446.46,
+        "global_frame": 13393,
+        "end_frame": 13468,
+        "text": "這一整塊我們就會稱為是後端"
+      },
+      {
+        "local_sec": 79.04,
+        "global_sec": 448.94,
+        "global_frame": 13468,
+        "end_frame": 13528,
+        "text": "也就是伺服器端"
+      },
+      {
+        "local_sec": 81.04,
+        "global_sec": 450.94,
+        "global_frame": 13528,
+        "end_frame": 13625,
+        "text": "所以你可以把它想像成是一個分工合作的關係"
+      },
+      {
+        "local_sec": 84.28,
+        "global_sec": 454.18,
+        "global_frame": 13625,
+        "end_frame": 13689,
+        "text": "前端負責跟使用者互動"
+      },
+      {
+        "local_sec": 86.4,
+        "global_sec": 456.3,
+        "global_frame": 13689,
+        "end_frame": 13769,
+        "text": "後端負責資料處理和邏輯"
+      },
+      {
+        "local_sec": 89.08,
+        "global_sec": 458.98,
+        "global_frame": 13769,
+        "end_frame": 13860,
+        "text": "兩者之間會不斷的來回溝通"
+      },
+      {
+        "local_sec": 92.12,
+        "global_sec": 462.02,
+        "global_frame": 13860,
+        "end_frame": 13920,
+        "text": "那以生活上的例子來說"
+      },
+      {
+        "local_sec": 94.12,
+        "global_sec": 464.02,
+        "global_frame": 13920,
+        "end_frame": 13987,
+        "text": "前端就像是餐廳的服務生"
+      },
+      {
+        "local_sec": 96.36,
+        "global_sec": 466.26,
+        "global_frame": 13987,
+        "end_frame": 14029,
+        "text": "你所看到的菜單"
+      },
+      {
+        "local_sec": 97.76,
+        "global_sec": 467.66,
+        "global_frame": 14029,
+        "end_frame": 14052,
+        "text": "點餐"
+      },
+      {
+        "local_sec": 98.52,
+        "global_sec": 468.42,
+        "global_frame": 14052,
+        "end_frame": 14095,
+        "text": "還有上菜的整個過程"
+      },
+      {
+        "local_sec": 99.96,
+        "global_sec": 469.86,
+        "global_frame": 14095,
+        "end_frame": 14135,
+        "text": "都是前端"
+      },
+      {
+        "local_sec": 101.28,
+        "global_sec": 471.18,
+        "global_frame": 14135,
+        "end_frame": 14195,
+        "text": "後端的部分則會是廚房"
+      },
+      {
+        "local_sec": 103.28,
+        "global_sec": 473.18,
+        "global_frame": 14195,
+        "end_frame": 14269,
+        "text": "就會是負責真正的把食物做出來"
+      },
+      {
+        "local_sec": 105.76,
+        "global_sec": 475.66,
+        "global_frame": 14269,
+        "end_frame": 14329,
+        "text": "處理訂單的部分"
+      }
+    ],
+    "3.2": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 478.3,
+        "global_frame": 14349,
+        "end_frame": 14418,
+        "text": "舉個實際網頁上面的例子來說"
+      },
+      {
+        "local_sec": 2.56,
+        "global_sec": 480.86,
+        "global_frame": 14425,
+        "end_frame": 14526,
+        "text": "假設你在一個線上買演唱會的網站上面去搶票"
+      },
+      {
+        "local_sec": 6.4,
+        "global_sec": 484.7,
+        "global_frame": 14541,
+        "end_frame": 14587,
+        "text": "你在頁面上面選位置"
+      },
+      {
+        "local_sec": 8.2,
+        "global_sec": 486.5,
+        "global_frame": 14594,
+        "end_frame": 14617,
+        "text": "填寫資料"
+      },
+      {
+        "local_sec": 9.22,
+        "global_sec": 487.52,
+        "global_frame": 14625,
+        "end_frame": 14694,
+        "text": "這些都會是前端在處理的部分"
+      },
+      {
+        "local_sec": 12.04,
+        "global_sec": 490.34,
+        "global_frame": 14710,
+        "end_frame": 14740,
+        "text": "但你有沒有想過"
+      },
+      {
+        "local_sec": 13.32,
+        "global_sec": 491.62,
+        "global_frame": 14748,
+        "end_frame": 14825,
+        "text": "為什麼同一張票不會同時被兩個人買走呢"
+      },
+      {
+        "local_sec": 16.38,
+        "global_sec": 494.68,
+        "global_frame": 14840,
+        "end_frame": 14925,
+        "text": "這個把關的工作其實就是後端在執行的喔"
+      },
+      {
+        "local_sec": 19.72,
+        "global_sec": 498.02,
+        "global_frame": 14940,
+        "end_frame": 14986,
+        "text": "所以總結來說"
+      },
+      {
+        "local_sec": 21.5,
+        "global_sec": 499.8,
+        "global_frame": 14994,
+        "end_frame": 15078,
+        "text": "前端就是讓你看得見操作得了的部分"
+      },
+      {
+        "local_sec": 24.58,
+        "global_sec": 502.88,
+        "global_frame": 15086,
+        "end_frame": 15209,
+        "text": "而後端就是讓資料不會出錯而且不重複的部分喔"
+      }
+    ],
+    "3.3": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 507.83,
+        "global_frame": 15235,
+        "end_frame": 15350,
+        "text": "那講到這邊懂得舉一反三的你可能會問說"
+      },
+      {
+        "local_sec": 3.84,
+        "global_sec": 511.67,
+        "global_frame": 15350,
+        "end_frame": 15449,
+        "text": "那手機App呢?手機App也是前端嗎?"
+      },
+      {
+        "local_sec": 7.16,
+        "global_sec": 514.99,
+        "global_frame": 15449,
+        "end_frame": 15511,
+        "text": "以狹義上的定義來說"
+      },
+      {
+        "local_sec": 9.2,
+        "global_sec": 517.03,
+        "global_frame": 15511,
+        "end_frame": 15603,
+        "text": "前端這個詞通常會專指Web前端"
+      },
+      {
+        "local_sec": 12.28,
+        "global_sec": 520.11,
+        "global_frame": 15603,
+        "end_frame": 15657,
+        "text": "也就是瀏覽器的部分"
+      },
+      {
+        "local_sec": 14.08,
+        "global_sec": 521.91,
+        "global_frame": 15657,
+        "end_frame": 15741,
+        "text": "而手機上的iOS App和Android App"
+      },
+      {
+        "local_sec": 16.9,
+        "global_sec": 524.73,
+        "global_frame": 15741,
+        "end_frame": 15795,
+        "text": "我們會合稱它叫做App"
+      },
+      {
+        "local_sec": 18.68,
+        "global_sec": 526.51,
+        "global_frame": 15795,
+        "end_frame": 15841,
+        "text": "或者是客戶端"
+      },
+      {
+        "local_sec": 20.22,
+        "global_sec": 528.05,
+        "global_frame": 15841,
+        "end_frame": 15964,
+        "text": "或是你把Web前端加上App全部加在一起"
+      },
+      {
+        "local_sec": 24.32,
+        "global_sec": 532.15,
+        "global_frame": 15964,
+        "end_frame": 16018,
+        "text": "也可以統稱為客戶端"
+      },
+      {
+        "local_sec": 26.12,
+        "global_sec": 533.95,
+        "global_frame": 16018,
+        "end_frame": 16072,
+        "text": "但其實廣義上來說"
+      },
+      {
+        "local_sec": 28.1,
+        "global_sec": 535.93,
+        "global_frame": 16078,
+        "end_frame": 16170,
+        "text": "大家其實還是很常會把App也叫做前端"
+      },
+      {
+        "local_sec": 31.18,
+        "global_sec": 539.01,
+        "global_frame": 16170,
+        "end_frame": 16239,
+        "text": "所以其實可以不需要分得那麼仔細"
+      },
+      {
+        "local_sec": 33.48,
+        "global_sec": 541.31,
+        "global_frame": 16239,
+        "end_frame": 16293,
+        "text": "知道個大概就可以囉"
+      }
+    ],
+    "3.4": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 543.23,
+        "global_frame": 16297,
+        "end_frame": 16404,
+        "text": "那要怎麼快速的判斷什麼是前端什麼是後端呢"
+      },
+      {
+        "local_sec": 3.84,
+        "global_sec": 547.07,
+        "global_frame": 16412,
+        "end_frame": 16465,
+        "text": "其實有一個很直覺的方法"
+      },
+      {
+        "local_sec": 5.88,
+        "global_sec": 549.11,
+        "global_frame": 16473,
+        "end_frame": 16519,
+        "text": "就是把你的網路給關掉"
+      },
+      {
+        "local_sec": 7.94,
+        "global_sec": 551.17,
+        "global_frame": 16535,
+        "end_frame": 16619,
+        "text": "如果網路關掉之後你還能看到的畫面"
+      },
+      {
+        "local_sec": 11.0,
+        "global_sec": 554.23,
+        "global_frame": 16627,
+        "end_frame": 16665,
+        "text": "那就會是前端的東西"
+      },
+      {
+        "local_sec": 12.54,
+        "global_sec": 555.77,
+        "global_frame": 16673,
+        "end_frame": 16757,
+        "text": "但是如果會需要網路才能操作"
+      },
+      {
+        "local_sec": 15.62,
+        "global_sec": 558.85,
+        "global_frame": 16765,
+        "end_frame": 16788,
+        "text": "像是登入"
+      },
+      {
+        "local_sec": 16.64,
+        "global_sec": 559.87,
+        "global_frame": 16796,
+        "end_frame": 16865,
+        "text": "送出訂單載入新的資料"
+      },
+      {
+        "local_sec": 19.2,
+        "global_sec": 562.43,
+        "global_frame": 16873,
+        "end_frame": 16926,
+        "text": "那就需要仰賴後端的幫忙了"
+      },
+      {
+        "local_sec": 21.24,
+        "global_sec": 564.47,
+        "global_frame": 16934,
+        "end_frame": 17026,
+        "text": "另外其實有一件事情很多人可能會不知道"
+      },
+      {
+        "local_sec": 24.58,
+        "global_sec": 567.81,
+        "global_frame": 17034,
+        "end_frame": 17057,
+        "text": "就是啊"
+      },
+      {
+        "local_sec": 25.6,
+        "global_sec": 568.83,
+        "global_frame": 17065,
+        "end_frame": 17141,
+        "text": "其實不是所有的APP都會需要後端喔"
+      },
+      {
+        "local_sec": 28.66,
+        "global_sec": 571.89,
+        "global_frame": 17156,
+        "end_frame": 17180,
+        "text": "像計算機"
+      },
+      {
+        "local_sec": 29.9,
+        "global_sec": 573.13,
+        "global_frame": 17194,
+        "end_frame": 17278,
+        "text": "PDF的閱讀器或者是轉檔工具之類的"
+      },
+      {
+        "local_sec": 32.98,
+        "global_sec": 576.21,
+        "global_frame": 17286,
+        "end_frame": 17393,
+        "text": "這類程式的邏輯基本上完全是在本機上面執行"
+      },
+      {
+        "local_sec": 36.82,
+        "global_sec": 580.05,
+        "global_frame": 17401,
+        "end_frame": 17455,
+        "text": "沒有網路他們也可以活得很好"
+      },
+      {
+        "local_sec": 39.12,
+        "global_sec": 582.35,
+        "global_frame": 17470,
+        "end_frame": 17563,
+        "text": "所以他們在本質上就只有前端沒有後端"
+      },
+      {
+        "local_sec": 42.46,
+        "global_sec": 585.69,
+        "global_frame": 17570,
+        "end_frame": 17609,
+        "text": "也就是沒有伺服器端喔"
+      }
+    ],
+    "4.1": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 587.63,
+        "global_frame": 17629,
+        "end_frame": 17774,
+        "text": "那我們在前面瞭解完了網頁御三家還有前端跟後端的基本概念之後"
+      },
+      {
+        "local_sec": 5.12,
+        "global_sec": 592.75,
+        "global_frame": 17782,
+        "end_frame": 17944,
+        "text": "我們現在就正式的來把各個平台與他們對應的語言依序介紹一下吧"
+      },
+      {
+        "local_sec": 10.76,
+        "global_sec": 598.39,
+        "global_frame": 17951,
+        "end_frame": 18082,
+        "text": "畢竟我們會需要依照目標的平台來去給AI正確的關鍵字"
+      },
+      {
+        "local_sec": 15.62,
+        "global_sec": 603.25,
+        "global_frame": 18097,
+        "end_frame": 18197,
+        "text": "但在開始前一樣在小小的心理建設下"
+      },
+      {
+        "local_sec": 19.2,
+        "global_sec": 606.83,
+        "global_frame": 18205,
+        "end_frame": 18304,
+        "text": "我們只要記關鍵字就好囉不需要真的把它全部背起來喔"
+      },
+      {
+        "local_sec": 22.78,
+        "global_sec": 610.41,
+        "global_frame": 18312,
+        "end_frame": 18343,
+        "text": "那我們就開始吧"
+      },
+      {
+        "local_sec": 24.58,
+        "global_sec": 612.21,
+        "global_frame": 18366,
+        "end_frame": 18458,
+        "text": "第一個web前端也就是網頁這個平台"
+      },
+      {
+        "local_sec": 28.1,
+        "global_sec": 615.73,
+        "global_frame": 18472,
+        "end_frame": 18503,
+        "text": "我們剛剛已經說過了"
+      },
+      {
+        "local_sec": 29.38,
+        "global_sec": 617.01,
+        "global_frame": 18510,
+        "end_frame": 18671,
+        "text": "主流的語言就會是html,css,javascript網頁的御三家"
+      },
+      {
+        "local_sec": 35.02,
+        "global_sec": 622.65,
+        "global_frame": 18679,
+        "end_frame": 18756,
+        "text": "或者是更嚴謹版本的typescript"
+      },
+      {
+        "local_sec": 37.84,
+        "global_sec": 625.47,
+        "global_frame": 18764,
+        "end_frame": 18910,
+        "text": "那瀏覽器的外掛像是chrome的擴充功能也是屬於web前端的範疇喔"
+      },
+      {
+        "local_sec": 43.2,
+        "global_sec": 630.83,
+        "global_frame": 18925,
+        "end_frame": 19009,
+        "text": "他用的語言其實跟做網頁是一樣的"
+      },
+      {
+        "local_sec": 46.28,
+        "global_sec": 633.91,
+        "global_frame": 19017,
+        "end_frame": 19132,
+        "text": "只是操作的對象不是網頁的內容而是瀏覽器本身"
+      },
+      {
+        "local_sec": 50.38,
+        "global_sec": 638.01,
+        "global_frame": 19140,
+        "end_frame": 19186,
+        "text": "第二個iOS App"
+      },
+      {
+        "local_sec": 52.18,
+        "global_sec": 639.81,
+        "global_frame": 19194,
+        "end_frame": 19255,
+        "text": "iOS的原生語言是Swift"
+      },
+      {
+        "local_sec": 54.48,
+        "global_sec": 642.11,
+        "global_frame": 19263,
+        "end_frame": 19316,
+        "text": "這是蘋果官方主推的語言"
+      },
+      {
+        "local_sec": 56.46,
+        "global_sec": 644.09,
+        "global_frame": 19322,
+        "end_frame": 19407,
+        "text": "在iOS 開發上他的支援度會是最好的"
+      },
+      {
+        "local_sec": 60.04,
+        "global_sec": 647.67,
+        "global_frame": 19430,
+        "end_frame": 19476,
+        "text": "第三個是Android App"
+      },
+      {
+        "local_sec": 61.84,
+        "global_sec": 649.47,
+        "global_frame": 19484,
+        "end_frame": 19553,
+        "text": "Android App的原生語言是Kotlin"
+      },
+      {
+        "local_sec": 64.4,
+        "global_sec": 652.03,
+        "global_frame": 19561,
+        "end_frame": 19607,
+        "text": "他是從java演進過來的"
+      },
+      {
+        "local_sec": 66.2,
+        "global_sec": 653.83,
+        "global_frame": 19615,
+        "end_frame": 19684,
+        "text": "他的語法上會更簡潔更現代"
+      },
+      {
+        "local_sec": 68.76,
+        "global_sec": 656.39,
+        "global_frame": 19691,
+        "end_frame": 19760,
+        "text": "是現在Android 開發的主流語言喔"
+      }
+    ],
+    "4.2": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 660.37,
+        "global_frame": 19811,
+        "end_frame": 19947,
+        "text": "第四個,是跨平台的App,也就是如果你想要做一個App"
+      },
+      {
+        "local_sec": 4.56,
+        "global_sec": 664.93,
+        "global_frame": 19947,
+        "end_frame": 20052,
+        "text": "但不想要iOS和安卓分開去開發怎麼辦呢?"
+      },
+      {
+        "local_sec": 8.04,
+        "global_sec": 668.41,
+        "global_frame": 20052,
+        "end_frame": 20156,
+        "text": "這個時候有兩個關鍵字你可以稍微記一下"
+      },
+      {
+        "local_sec": 11.52,
+        "global_sec": 671.89,
+        "global_frame": 20156,
+        "end_frame": 20270,
+        "text": "一個叫做React Native,它用的語言是JavaScript"
+      },
+      {
+        "local_sec": 15.32,
+        "global_sec": 675.69,
+        "global_frame": 20270,
+        "end_frame": 20405,
+        "text": "寫起來會跟做網頁還蠻像的,開發的速度會比較快"
+      },
+      {
+        "local_sec": 19.8,
+        "global_sec": 680.17,
+        "global_frame": 20405,
+        "end_frame": 20507,
+        "text": "另外一個叫做Flutter,用的語言是Dart"
+      },
+      {
+        "local_sec": 23.2,
+        "global_sec": 683.57,
+        "global_frame": 20507,
+        "end_frame": 20688,
+        "text": "它所做出來的App在滑動感和流暢度來說會比較接近原生系統的感覺喔"
+      },
+      {
+        "local_sec": 29.24,
+        "global_sec": 689.61,
+        "global_frame": 20688,
+        "end_frame": 20862,
+        "text": "那像剛剛提到的React Native和Flutter,它們其實都不是程式語言"
+      },
+      {
+        "local_sec": 35.04,
+        "global_sec": 695.41,
+        "global_frame": 20862,
+        "end_frame": 20924,
+        "text": "它們是框架、Framework"
+      },
+      {
+        "local_sec": 37.12,
+        "global_sec": 697.49,
+        "global_frame": 20924,
+        "end_frame": 21037,
+        "text": "所謂的框架其實就是幫你搭好一個基礎結構的模板"
+      },
+      {
+        "local_sec": 40.88,
+        "global_sec": 701.25,
+        "global_frame": 21037,
+        "end_frame": 21097,
+        "text": "讓你不需要從零開始寫"
+      },
+      {
+        "local_sec": 42.88,
+        "global_sec": 703.25,
+        "global_frame": 21097,
+        "end_frame": 21209,
+        "text": "框架可以幫你把很多共用的部分都先處理好"
+      },
+      {
+        "local_sec": 46.6,
+        "global_sec": 706.97,
+        "global_frame": 21209,
+        "end_frame": 21343,
+        "text": "你只需要在這個基礎之上,專注在你自己想要做的功能就好了"
+      },
+      {
+        "local_sec": 51.08,
+        "global_sec": 711.45,
+        "global_frame": 21343,
+        "end_frame": 21453,
+        "text": "就像是你在蓋房子的時候,如果有現成的結構圖"
+      },
+      {
+        "local_sec": 54.76,
+        "global_sec": 715.13,
+        "global_frame": 21453,
+        "end_frame": 21565,
+        "text": "你就不需要自己去研究骨架,可以直接改造就可以了"
+      },
+      {
+        "local_sec": 58.48,
+        "global_sec": 718.85,
+        "global_frame": 21565,
+        "end_frame": 21674,
+        "text": "以上這樣的好處,就是可以大幅的提升開發的效率"
+      }
+    ],
+    "4.3": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 722.53,
+        "global_frame": 21676,
+        "end_frame": 21772,
+        "text": "再來第五個,會是桌面平台的程式語言"
+      },
+      {
+        "local_sec": 3.22,
+        "global_sec": 725.75,
+        "global_frame": 21772,
+        "end_frame": 21814,
+        "text": "Desktop App"
+      },
+      {
+        "local_sec": 4.6,
+        "global_sec": 727.13,
+        "global_frame": 21814,
+        "end_frame": 21889,
+        "text": "Mac原生用的語言會是Swift"
+      },
+      {
+        "local_sec": 7.1,
+        "global_sec": 729.63,
+        "global_frame": 21889,
+        "end_frame": 21973,
+        "text": "或Windows的原生語言是用C#"
+      },
+      {
+        "local_sec": 9.9,
+        "global_sec": 732.43,
+        "global_frame": 21973,
+        "end_frame": 22021,
+        "text": "但現在比較常見的做法"
+      },
+      {
+        "local_sec": 11.5,
+        "global_sec": 734.03,
+        "global_frame": 22021,
+        "end_frame": 22109,
+        "text": "就用一個叫做Electron的框架來開發"
+      },
+      {
+        "local_sec": 14.46,
+        "global_sec": 736.99,
+        "global_frame": 22109,
+        "end_frame": 22139,
+        "text": "用的語言"
+      },
+      {
+        "local_sec": 15.46,
+        "global_sec": 737.99,
+        "global_frame": 22139,
+        "end_frame": 22219,
+        "text": "用的語言和網頁的預算架是一樣的"
+      },
+      {
+        "local_sec": 18.1,
+        "global_sec": 740.63,
+        "global_frame": 22219,
+        "end_frame": 22289,
+        "text": "而且可以同時跑在Mac和Windows上"
+      },
+      {
+        "local_sec": 20.46,
+        "global_sec": 742.99,
+        "global_frame": 22289,
+        "end_frame": 22378,
+        "text": "所以就不需要分開做兩個版本喔"
+      },
+      {
+        "local_sec": 23.4,
+        "global_sec": 745.93,
+        "global_frame": 22378,
+        "end_frame": 22438,
+        "text": "最後一個就是伺服器端"
+      },
+      {
+        "local_sec": 25.42,
+        "global_sec": 747.95,
+        "global_frame": 22438,
+        "end_frame": 22480,
+        "text": "也就是後端"
+      },
+      {
+        "local_sec": 26.8,
+        "global_sec": 749.33,
+        "global_frame": 22480,
+        "end_frame": 22582,
+        "text": "後端的語言選擇會是最自由的"
+      },
+      {
+        "local_sec": 30.2,
+        "global_sec": 752.73,
+        "global_frame": 22582,
+        "end_frame": 22717,
+        "text": "因為伺服器端是可以安裝任何語言的執行環境"
+      },
+      {
+        "local_sec": 34.7,
+        "global_sec": 757.23,
+        "global_frame": 22717,
+        "end_frame": 22768,
+        "text": "常見的有Node.js"
+      },
+      {
+        "local_sec": 36.4,
+        "global_sec": 758.93,
+        "global_frame": 22768,
+        "end_frame": 22849,
+        "text": "它其實就是JavaScript的伺服器版本"
+      },
+      {
+        "local_sec": 39.1,
+        "global_sec": 761.63,
+        "global_frame": 22849,
+        "end_frame": 22927,
+        "text": "再來是Python還有PHP"
+      },
+      {
+        "local_sec": 41.7,
+        "global_sec": 764.23,
+        "global_frame": 22927,
+        "end_frame": 22993,
+        "text": "那如果說你問我推薦哪一個"
+      },
+      {
+        "local_sec": 43.9,
+        "global_sec": 766.43,
+        "global_frame": 22993,
+        "end_frame": 23035,
+        "text": "對於新手來說"
+      },
+      {
+        "local_sec": 45.3,
+        "global_sec": 767.83,
+        "global_frame": 23035,
+        "end_frame": 23149,
+        "text": "Node.js和Python會是最友善的兩個選擇"
+      },
+      {
+        "local_sec": 49.1,
+        "global_sec": 771.63,
+        "global_frame": 23149,
+        "end_frame": 23200,
+        "text": "Node.js的好處是"
+      },
+      {
+        "local_sec": 50.8,
+        "global_sec": 773.33,
+        "global_frame": 23200,
+        "end_frame": 23263,
+        "text": "JavaScript前後端都會通用"
+      },
+      {
+        "local_sec": 52.9,
+        "global_sec": 775.43,
+        "global_frame": 23263,
+        "end_frame": 23296,
+        "text": "你可以學一個語言"
+      },
+      {
+        "local_sec": 54.0,
+        "global_sec": 776.53,
+        "global_frame": 23296,
+        "end_frame": 23344,
+        "text": "就可以在前後端都使用"
+      },
+      {
+        "local_sec": 55.6,
+        "global_sec": 778.13,
+        "global_frame": 23344,
+        "end_frame": 23383,
+        "text": "還蠻划算的"
+      },
+      {
+        "local_sec": 56.9,
+        "global_sec": 779.43,
+        "global_frame": 23383,
+        "end_frame": 23413,
+        "text": "那Python的話"
+      },
+      {
+        "local_sec": 57.9,
+        "global_sec": 780.43,
+        "global_frame": 23413,
+        "end_frame": 23482,
+        "text": "它的好處是語法非常簡潔"
+      },
+      {
+        "local_sec": 60.2,
+        "global_sec": 782.73,
+        "global_frame": 23482,
+        "end_frame": 23575,
+        "text": "而且幾乎所有AI相關的任務它都可以做到"
+      },
+      {
+        "local_sec": 63.3,
+        "global_sec": 785.83,
+        "global_frame": 23575,
+        "end_frame": 23641,
+        "text": "所以它的綜合能力會是最強的"
+      }
+    ],
+    "4.4": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 788.1,
+        "global_frame": 23643,
+        "end_frame": 23773,
+        "text": "好那以上的話呢就會是常見的平台對應的程式語言"
+      },
+      {
+        "local_sec": 4.86,
+        "global_sec": 792.96,
+        "global_frame": 23788,
+        "end_frame": 23919,
+        "text": "聽了這麼多你是不是覺得自己有點像是劉姥姥在逛大觀園"
+      },
+      {
+        "local_sec": 9.48,
+        "global_sec": 797.58,
+        "global_frame": 23927,
+        "end_frame": 23980,
+        "text": "想說我是誰我在哪"
+      },
+      {
+        "local_sec": 11.78,
+        "global_sec": 799.88,
+        "global_frame": 23996,
+        "end_frame": 24065,
+        "text": "但其實就跟剛剛提醒你的一樣"
+      },
+      {
+        "local_sec": 14.34,
+        "global_sec": 802.44,
+        "global_frame": 24073,
+        "end_frame": 24157,
+        "text": "你不需要把剛剛說的每個語言都背起來"
+      },
+      {
+        "local_sec": 17.4,
+        "global_sec": 805.5,
+        "global_frame": 24165,
+        "end_frame": 24318,
+        "text": "你只需要知道一件事情就是不同的平台會有各自最適合的語言"
+      },
+      {
+        "local_sec": 22.78,
+        "global_sec": 810.88,
+        "global_frame": 24326,
+        "end_frame": 24433,
+        "text": "當你確定的目標平台你就會有一些依稀的印象"
+      },
+      {
+        "local_sec": 26.62,
+        "global_sec": 814.72,
+        "global_frame": 24441,
+        "end_frame": 24526,
+        "text": "記得這個平台好像有特定使用的語言"
+      },
+      {
+        "local_sec": 29.9,
+        "global_sec": 818.0,
+        "global_frame": 24540,
+        "end_frame": 24601,
+        "text": "但你想不起來是哪個語言的時候"
+      },
+      {
+        "local_sec": 32.2,
+        "global_sec": 820.3,
+        "global_frame": 24609,
+        "end_frame": 24639,
+        "text": "其實也沒有關係"
+      },
+      {
+        "local_sec": 33.48,
+        "global_sec": 821.58,
+        "global_frame": 24647,
+        "end_frame": 24693,
+        "text": "你可以再去重新搜尋"
+      },
+      {
+        "local_sec": 35.28,
+        "global_sec": 823.38,
+        "global_frame": 24701,
+        "end_frame": 24808,
+        "text": "看到搜尋結果的時候你就會有印象然後就會想起來了"
+      },
+      {
+        "local_sec": 39.12,
+        "global_sec": 827.22,
+        "global_frame": 24816,
+        "end_frame": 24877,
+        "text": "這會比起你一開始什麼都不知道"
+      },
+      {
+        "local_sec": 41.42,
+        "global_sec": 829.52,
+        "global_frame": 24885,
+        "end_frame": 24985,
+        "text": "要搜尋的時候也不知道從何找起要來得好喔"
+      }
+    ],
+    "5.1": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 833.97,
+        "global_frame": 25019,
+        "end_frame": 25065,
+        "text": "這個單元的內容有點多"
+      },
+      {
+        "local_sec": 1.54,
+        "global_sec": 835.51,
+        "global_frame": 25065,
+        "end_frame": 25172,
+        "text": "所以一樣快速的幫你複習一下這個單元的重點"
+      },
+      {
+        "local_sec": 5.1,
+        "global_sec": 839.07,
+        "global_frame": 25172,
+        "end_frame": 25222,
+        "text": "第一個最重要的是"
+      },
+      {
+        "local_sec": 6.78,
+        "global_sec": 840.75,
+        "global_frame": 25222,
+        "end_frame": 25313,
+        "text": "認識程式語言是讓你不要那麼害怕"
+      },
+      {
+        "local_sec": 9.82,
+        "global_sec": 843.79,
+        "global_frame": 25313,
+        "end_frame": 25402,
+        "text": "畢竟人對於未知的事物會有很多的恐懼"
+      },
+      {
+        "local_sec": 12.78,
+        "global_sec": 846.75,
+        "global_frame": 25402,
+        "end_frame": 25485,
+        "text": "但一旦認識了就不會那麼害怕囉"
+      },
+      {
+        "local_sec": 15.54,
+        "global_sec": 849.51,
+        "global_frame": 25485,
+        "end_frame": 25547,
+        "text": "所以後續再深入學習的時候"
+      },
+      {
+        "local_sec": 17.62,
+        "global_sec": 851.59,
+        "global_frame": 25547,
+        "end_frame": 25641,
+        "text": "你甚至可以知道說哪些地方可以改"
+      },
+      {
+        "local_sec": 20.74,
+        "global_sec": 854.71,
+        "global_frame": 25641,
+        "end_frame": 25707,
+        "text": "哪些地方最好不要亂動"
+      },
+      {
+        "local_sec": 22.94,
+        "global_sec": 856.91,
+        "global_frame": 25707,
+        "end_frame": 25782,
+        "text": "讓你跟AI協作的時候會更有效率"
+      },
+      {
+        "local_sec": 25.46,
+        "global_sec": 859.43,
+        "global_frame": 25782,
+        "end_frame": 25845,
+        "text": "更不容易浪費對話的額度"
+      },
+      {
+        "local_sec": 27.54,
+        "global_sec": 861.51,
+        "global_frame": 25845,
+        "end_frame": 25946,
+        "text": "第二個是你打開瀏覽器所看到的所有網頁"
+      },
+      {
+        "local_sec": 30.92,
+        "global_sec": 864.89,
+        "global_frame": 25946,
+        "end_frame": 26000,
+        "text": "都是由網頁的御三家"
+      },
+      {
+        "local_sec": 32.7,
+        "global_sec": 866.67,
+        "global_frame": 26000,
+        "end_frame": 26137,
+        "text": "HTML、CSS、JavaScript這三個語言所組成的"
+      },
+      {
+        "local_sec": 37.28,
+        "global_sec": 871.25,
+        "global_frame": 26137,
+        "end_frame": 26241,
+        "text": "另外JavaScript跟Java是完全不同的"
+      },
+      {
+        "local_sec": 40.76,
+        "global_sec": 874.73,
+        "global_frame": 26241,
+        "end_frame": 26329,
+        "text": "就像老婆餅裡面沒有老婆是一樣的喔"
+      },
+      {
+        "local_sec": 43.68,
+        "global_sec": 877.65,
+        "global_frame": 26329,
+        "end_frame": 26385,
+        "text": "所以我們不要把它搞混了"
+      },
+      {
+        "local_sec": 45.54,
+        "global_sec": 879.51,
+        "global_frame": 26385,
+        "end_frame": 26476,
+        "text": "第三個是前端負責你看得到的呈現"
+      },
+      {
+        "local_sec": 48.58,
+        "global_sec": 882.55,
+        "global_frame": 26476,
+        "end_frame": 26580,
+        "text": "後端負責幕後的資料處理與邏輯"
+      },
+      {
+        "local_sec": 52.04,
+        "global_sec": 886.01,
+        "global_frame": 26580,
+        "end_frame": 26633,
+        "text": "簡單的判斷方式是"
+      },
+      {
+        "local_sec": 53.82,
+        "global_sec": 887.79,
+        "global_frame": 26633,
+        "end_frame": 26676,
+        "text": "我們把網路關掉"
+      },
+      {
+        "local_sec": 55.24,
+        "global_sec": 889.21,
+        "global_frame": 26676,
+        "end_frame": 26721,
+        "text": "如果還能看到的內容"
+      },
+      {
+        "local_sec": 56.76,
+        "global_sec": 890.73,
+        "global_frame": 26721,
+        "end_frame": 26762,
+        "text": "就會是前端"
+      },
+      {
+        "local_sec": 58.1,
+        "global_sec": 892.07,
+        "global_frame": 26762,
+        "end_frame": 26828,
+        "text": "如果是需要網路才有辦法執行的"
+      },
+      {
+        "local_sec": 60.3,
+        "global_sec": 894.27,
+        "global_frame": 26828,
+        "end_frame": 26880,
+        "text": "那就會屬於後端"
+      },
+      {
+        "local_sec": 62.04,
+        "global_sec": 896.01,
+        "global_frame": 26880,
+        "end_frame": 27004,
+        "text": "第四個是不同的平台會有各自最適合的語言"
+      },
+      {
+        "local_sec": 66.18,
+        "global_sec": 900.15,
+        "global_frame": 27004,
+        "end_frame": 27124,
+        "text": "Web前端就是有HTML、CSS跟JavaScript"
+      },
+      {
+        "local_sec": 70.18,
+        "global_sec": 904.15,
+        "global_frame": 27124,
+        "end_frame": 27175,
+        "text": "iOS 用Swift"
+      },
+      {
+        "local_sec": 71.88,
+        "global_sec": 905.85,
+        "global_frame": 27175,
+        "end_frame": 27228,
+        "text": "Android用Kotlin"
+      },
+      {
+        "local_sec": 73.64,
+        "global_sec": 907.61,
+        "global_frame": 27228,
+        "end_frame": 27334,
+        "text": "後端的新手會首先比較推薦你可以學習Python"
+      },
+      {
+        "local_sec": 77.18,
+        "global_sec": 911.15,
+        "global_frame": 27334,
+        "end_frame": 27457,
+        "text": "再來最後就會是有些平台會利用框架、Framework"
+      },
+      {
+        "local_sec": 81.28,
+        "global_sec": 915.25,
+        "global_frame": 27457,
+        "end_frame": 27510,
+        "text": "來提升開發效率"
+      },
+      {
+        "local_sec": 83.04,
+        "global_sec": 917.01,
+        "global_frame": 27510,
+        "end_frame": 27575,
+        "text": "但框架它其實不是語言"
+      },
+      {
+        "local_sec": 85.26,
+        "global_sec": 919.23,
+        "global_frame": 27576,
+        "end_frame": 27717,
+        "text": "像是React Native、Flutter、Electron都會是框架"
+      },
+      {
+        "local_sec": 89.96,
+        "global_sec": 923.93,
+        "global_frame": 27717,
+        "end_frame": 27791,
+        "text": "好那這個單元我們就到這邊"
+      },
+      {
+        "local_sec": 92.4,
+        "global_sec": 926.37,
+        "global_frame": 27791,
+        "end_frame": 27819,
+        "text": "在下個單元"
+      },
+      {
+        "local_sec": 93.36,
+        "global_sec": 927.33,
+        "global_frame": 27819,
+        "end_frame": 27880,
+        "text": "我們會更深入的再去多瞭解一下"
+      },
+      {
+        "local_sec": 95.38,
+        "global_sec": 929.35,
+        "global_frame": 27880,
+        "end_frame": 27950,
+        "text": "關於前端跟後端的概念"
+      },
+      {
+        "local_sec": 97.7,
+        "global_sec": 931.67,
+        "global_frame": 27950,
+        "end_frame": 28001,
+        "text": "那我們就下個單元見囉"
+      }
+    ]
+  }
+}

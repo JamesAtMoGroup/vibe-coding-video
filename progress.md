@@ -21,6 +21,37 @@
 | CH 2-3 | ✅ 完成（**v2 motion + CursorSpotlight**）| FullVideo10.tsx | ✅ 已上傳 + 上線 |
 | CH 2-4 | ✅ 完成（**15 scene 純動畫 + 新 SOP HTML 三方比對**）| FullVideo11.tsx | ✅ 已上傳 + 上線 |
 | CH 2-5 | ✅ 完成（**11 scene + Scene 0.1 中央構圖修正 CH 2-4 教訓**）| FullVideo12.tsx | ✅ 已上傳 + 上線 |
+| CH 2-6 | ✅ 完成（**11 scene 純動畫 + v2 motion + 語意色 API紫/步驟綠/策略黃/Key紅**）| FullVideo13.tsx | ✅ 已上傳 + 上線 |
+
+---
+
+## CH 2-6 — ✅ 完成（API——跨應用程式、串接時要用的東西）
+
+**TSX：** `src/FullVideo13.tsx`（11 場景，SEG_STARTS_13=[0,787,1764,3679,5905,8897,10979,12000,14539,16317,19479]，TOTAL_FRAMES_13=22731）
+**Render：** `out/CH2-6-…/CH2-6-…-2026-06-25.mp4`（4K 3840×2160 / 30fps / **12:37** / 209 MB）2026-06-25
+**字幕：** `…-subtitles.vtt`（308 cues，LLM 校正 + 臺→台 + 大小寫統一；末 cue 12:37.680 ≈ mp4 757.8s）
+**線上：** https://n8ncourse.zeabur.app/vibecoding/lecture13/
+
+### 教學內容（11 scene / 5 sections）
+- S0 開場：接續 CH 2-5，這集 3 個問題（API 是什麼？怎麼串？API Key 怎麼保管？）
+- S1 **生活中的 API 4 情境**（Google 登入 / 行動支付 / 天氣 App / 表單同步）+ **API 定義「= 橋樑」**（Application Programming Interface / 銀行對帳類比）
+- S2 **API 兩層次**（抽象技術 vs 具體服務）+ Web API 聚焦（本集主角，橘）
+- S3 **串接三步驟**（確認 API Docs → 準備 API Key → 請 AI 一步步生成程式碼 / 神燈精靈）+ 工程師心法「先確認資料串起來」
+- S4 **卡關 3 策略**（搜尋成功案例 / 貼 API 文件給 AI / 貼範例程式碼給 AI）+ 原則「失敗就給更多線索」
+- S5 **API Key 安全**（紅｜Triple「是密碼」×3 + 數千萬美元外洩案例）+ 保管 3 招（隨時撤銷換新 / 開發完移環境變數 / 最小權限+用量上限）
+- finale 4 條 takeaway + 發光大卡下集預告「爬蟲 — 沒 API 時的選擇」（橘）
+
+### 已完成
+- [x] Phase 1–4 音檔正規化（11 段）+ script-analysis-2-6 + visual-spec-2-6 + FullVideo13.tsx（1489 行）+ scene-map-2-6 + Root 註冊 + package.json build:2-6
+- [x] Phase 2 VTT 校正 + processed/2-6-cues.json（308 cues）
+- [x] Phase 5 Premortem 抽幀 + James 核准 → Render（209 MB）2026-06-25
+- [x] Phase 6 VTT 合併（308 cues + SEG_STARTS offset）
+- [x] HTML 三方比對課程頁生成（2026-07-07 補收尾；0 assets 純動畫）
+- [x] Drive 上傳（folder `12FI_EIVEIO2VJJwjhG1pcoGtd4obVHFx`，3 檔）
+- [x] n8ncourse 上架 lecture13（build_lecture_local.py + courses.json + manifest + push）
+- [x] LINE bot 知識庫同步（cp html+vtt + INDEX.md prose 區塊 + commit + push）
+
+> ⚠️ 收尾斷點紀錄：影片 6/25 render 完後 post-render 收尾（HTML/Drive/n8ncourse/bot/commit）擱置到 2026-07-07 才補完；progress.md 一度停在 CH 2-5。
 
 ---
 

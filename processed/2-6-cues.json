@@ -1,0 +1,2197 @@
+{
+  "SEG_STARTS": {
+    "0.1": 0,
+    "1.1": 787,
+    "1.2": 1764,
+    "2.1": 3679,
+    "3.1": 5905,
+    "3.2": 8897,
+    "4.1": 10979,
+    "4.2": 12000,
+    "5.1": 14539,
+    "5.2": 16317,
+    "6.1": 19479
+  },
+  "TOTAL_FRAMES": 22731,
+  "FPS": 30,
+  "cues": {
+    "0.1": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 0.0,
+        "global_frame": 0,
+        "end_frame": 48,
+        "text": "哈囉大家 歡迎回來"
+      },
+      {
+        "local_sec": 1.6,
+        "global_sec": 1.6,
+        "global_frame": 48,
+        "end_frame": 73,
+        "text": "在上個單元"
+      },
+      {
+        "local_sec": 2.44,
+        "global_sec": 2.44,
+        "global_frame": 73,
+        "end_frame": 109,
+        "text": "我們已經瞭解到了"
+      },
+      {
+        "local_sec": 3.64,
+        "global_sec": 3.64,
+        "global_frame": 109,
+        "end_frame": 198,
+        "text": "前端是你看到並且操作的畫面"
+      },
+      {
+        "local_sec": 6.6,
+        "global_sec": 6.6,
+        "global_frame": 198,
+        "end_frame": 274,
+        "text": "後端是負責處理資料和邏輯"
+      },
+      {
+        "local_sec": 9.16,
+        "global_sec": 9.16,
+        "global_frame": 274,
+        "end_frame": 325,
+        "text": "在背後運作的系統"
+      },
+      {
+        "local_sec": 10.84,
+        "global_sec": 10.84,
+        "global_frame": 325,
+        "end_frame": 420,
+        "text": "以及它們之間請求和回應的溝通流程"
+      },
+      {
+        "local_sec": 14.0,
+        "global_sec": 14.0,
+        "global_frame": 420,
+        "end_frame": 453,
+        "text": "在這個單元"
+      },
+      {
+        "local_sec": 15.12,
+        "global_sec": 15.12,
+        "global_frame": 453,
+        "end_frame": 506,
+        "text": "我們就來深入的瞭解一下"
+      },
+      {
+        "local_sec": 16.88,
+        "global_sec": 16.88,
+        "global_frame": 506,
+        "end_frame": 612,
+        "text": "前端究竟是透過什麼來跟後端溝通的"
+      },
+      {
+        "local_sec": 20.4,
+        "global_sec": 20.4,
+        "global_frame": 612,
+        "end_frame": 631,
+        "text": "在這裡"
+      },
+      {
+        "local_sec": 21.04,
+        "global_sec": 21.04,
+        "global_frame": 631,
+        "end_frame": 679,
+        "text": "我們就要來認識一下"
+      },
+      {
+        "local_sec": 22.64,
+        "global_sec": 22.64,
+        "global_frame": 679,
+        "end_frame": 753,
+        "text": "在開發世界裡面非常核心的概念"
+      },
+      {
+        "local_sec": 25.12,
+        "global_sec": 25.12,
+        "global_frame": 753,
+        "end_frame": 784,
+        "text": "叫做API"
+      }
+    ],
+    "1.1": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 26.23,
+        "global_frame": 787,
+        "end_frame": 841,
+        "text": "想請你先回想一下"
+      },
+      {
+        "local_sec": 1.8,
+        "global_sec": 28.03,
+        "global_frame": 841,
+        "end_frame": 923,
+        "text": "過去有沒有曾經用過Google帳號"
+      },
+      {
+        "local_sec": 4.56,
+        "global_sec": 30.79,
+        "global_frame": 923,
+        "end_frame": 973,
+        "text": "登入其他網站呢?"
+      },
+      {
+        "local_sec": 6.2,
+        "global_sec": 32.43,
+        "global_frame": 973,
+        "end_frame": 1027,
+        "text": "或是在結帳的時候"
+      },
+      {
+        "local_sec": 8.0,
+        "global_sec": 34.23,
+        "global_frame": 1027,
+        "end_frame": 1093,
+        "text": "直接選擇使用行動支付"
+      },
+      {
+        "local_sec": 10.2,
+        "global_sec": 36.43,
+        "global_frame": 1093,
+        "end_frame": 1141,
+        "text": "或者是出門之前"
+      },
+      {
+        "local_sec": 11.8,
+        "global_sec": 38.03,
+        "global_frame": 1141,
+        "end_frame": 1184,
+        "text": "打開天氣的APP"
+      },
+      {
+        "local_sec": 13.24,
+        "global_sec": 39.47,
+        "global_frame": 1184,
+        "end_frame": 1276,
+        "text": "確認一下今天的氣溫還有降雨的機率"
+      },
+      {
+        "local_sec": 16.32,
+        "global_sec": 42.55,
+        "global_frame": 1276,
+        "end_frame": 1353,
+        "text": "又或者是你報名的某一場講座"
+      },
+      {
+        "local_sec": 18.88,
+        "global_sec": 45.11,
+        "global_frame": 1353,
+        "end_frame": 1405,
+        "text": "填了一份報名的表單"
+      },
+      {
+        "local_sec": 20.6,
+        "global_sec": 46.83,
+        "global_frame": 1405,
+        "end_frame": 1443,
+        "text": "到現場的時候"
+      },
+      {
+        "local_sec": 21.88,
+        "global_sec": 48.11,
+        "global_frame": 1443,
+        "end_frame": 1528,
+        "text": "工作人員就已經知道你填的所有內容"
+      },
+      {
+        "local_sec": 24.72,
+        "global_sec": 50.95,
+        "global_frame": 1528,
+        "end_frame": 1579,
+        "text": "這些日常生活上的操作"
+      },
+      {
+        "local_sec": 26.4,
+        "global_sec": 52.63,
+        "global_frame": 1579,
+        "end_frame": 1628,
+        "text": "看起來都很理所當然"
+      },
+      {
+        "local_sec": 28.04,
+        "global_sec": 54.27,
+        "global_frame": 1628,
+        "end_frame": 1730,
+        "text": "但其實背後都是靠API在幫你完成的喔"
+      }
+    ],
+    "1.2": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 58.8,
+        "global_frame": 1764,
+        "end_frame": 1837,
+        "text": "所以說 API 到底是什麼呢?"
+      },
+      {
+        "local_sec": 2.44,
+        "global_sec": 61.24,
+        "global_frame": 1837,
+        "end_frame": 1914,
+        "text": "簡單來說 API 就是一座橋樑"
+      },
+      {
+        "local_sec": 5.0,
+        "global_sec": 63.8,
+        "global_frame": 1914,
+        "end_frame": 2008,
+        "text": "它可以讓不同的應用程式之間可以互相說話"
+      },
+      {
+        "local_sec": 8.16,
+        "global_sec": 66.96,
+        "global_frame": 2008,
+        "end_frame": 2055,
+        "text": "互相交換資料"
+      },
+      {
+        "local_sec": 9.72,
+        "global_sec": 68.52,
+        "global_frame": 2055,
+        "end_frame": 2154,
+        "text": "它的全名是 Application Programming Interface"
+      },
+      {
+        "local_sec": 13.0,
+        "global_sec": 71.8,
+        "global_frame": 2154,
+        "end_frame": 2239,
+        "text": "中文會翻作應用程式介面"
+      },
+      {
+        "local_sec": 15.84,
+        "global_sec": 74.64,
+        "global_frame": 2239,
+        "end_frame": 2342,
+        "text": "不過我想翻成中文也很難從字面上的意思去了解"
+      },
+      {
+        "local_sec": 19.28,
+        "global_sec": 78.08,
+        "global_frame": 2342,
+        "end_frame": 2421,
+        "text": "所以大家都直接說 API 就好了"
+      },
+      {
+        "local_sec": 21.92,
+        "global_sec": 80.72,
+        "global_frame": 2421,
+        "end_frame": 2521,
+        "text": "那剛剛有提到說 API 它就像是一個橋樑"
+      },
+      {
+        "local_sec": 25.24,
+        "global_sec": 84.04,
+        "global_frame": 2521,
+        "end_frame": 2595,
+        "text": "它是可以讓兩個原本不認識的系統"
+      },
+      {
+        "local_sec": 27.72,
+        "global_sec": 86.52,
+        "global_frame": 2595,
+        "end_frame": 2672,
+        "text": "可以開始溝通的標準規則"
+      },
+      {
+        "local_sec": 30.28,
+        "global_sec": 89.08,
+        "global_frame": 2672,
+        "end_frame": 2713,
+        "text": "舉個例子來說"
+      },
+      {
+        "local_sec": 31.64,
+        "global_sec": 90.44,
+        "global_frame": 2713,
+        "end_frame": 2816,
+        "text": "假設你今天要去一間從來沒有去過的銀行開戶"
+      },
+      {
+        "local_sec": 35.08,
+        "global_sec": 93.88,
+        "global_frame": 2816,
+        "end_frame": 2858,
+        "text": "你走進去的時候"
+      },
+      {
+        "local_sec": 36.48,
+        "global_sec": 95.28,
+        "global_frame": 2858,
+        "end_frame": 2926,
+        "text": "行員會給你一張開戶的表格"
+      },
+      {
+        "local_sec": 38.76,
+        "global_sec": 97.56,
+        "global_frame": 2926,
+        "end_frame": 3036,
+        "text": "上面會寫著哪些欄位需要填寫、格式是什麼"
+      },
+      {
+        "local_sec": 42.4,
+        "global_sec": 101.2,
+        "global_frame": 3036,
+        "end_frame": 3164,
+        "text": "而這張表格就是你和銀行之間的交換資料的標準"
+      },
+      {
+        "local_sec": 46.68,
+        "global_sec": 105.48,
+        "global_frame": 3164,
+        "end_frame": 3234,
+        "text": "而每間銀行的表格都不一樣對吧"
+      },
+      {
+        "local_sec": 49.0,
+        "global_sec": 107.8,
+        "global_frame": 3234,
+        "end_frame": 3297,
+        "text": "這個就是 API 在做的事情"
+      },
+      {
+        "local_sec": 51.12,
+        "global_sec": 109.92,
+        "global_frame": 3297,
+        "end_frame": 3434,
+        "text": "利用 API 來定義兩個系統之間要怎麼說話的規則"
+      },
+      {
+        "local_sec": 55.68,
+        "global_sec": 114.48,
+        "global_frame": 3434,
+        "end_frame": 3478,
+        "text": "所以所謂的 API"
+      },
+      {
+        "local_sec": 57.16,
+        "global_sec": 115.96,
+        "global_frame": 3478,
+        "end_frame": 3560,
+        "text": "其實就是指可以讓兩個不同的軟體之間"
+      },
+      {
+        "local_sec": 59.88,
+        "global_sec": 118.68,
+        "global_frame": 3560,
+        "end_frame": 3650,
+        "text": "可以互相溝通交換資料的橋樑機制喔"
+      }
+    ],
+    "2.1": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 122.63,
+        "global_frame": 3679,
+        "end_frame": 3794,
+        "text": "那其實 API 這個詞我們以前或多或少都有聽過"
+      },
+      {
+        "local_sec": 3.84,
+        "global_sec": 126.47,
+        "global_frame": 3794,
+        "end_frame": 3893,
+        "text": "但我們以前在不同的地方聽到的 API"
+      },
+      {
+        "local_sec": 7.16,
+        "global_sec": 129.79,
+        "global_frame": 3893,
+        "end_frame": 3963,
+        "text": "指的會是同一件事情嗎?"
+      },
+      {
+        "local_sec": 9.48,
+        "global_sec": 132.11,
+        "global_frame": 3963,
+        "end_frame": 4001,
+        "text": "其實不太一定喔"
+      },
+      {
+        "local_sec": 10.76,
+        "global_sec": 133.39,
+        "global_frame": 4001,
+        "end_frame": 4101,
+        "text": "API 這個詞它其實有兩種不同的使用方式"
+      },
+      {
+        "local_sec": 14.08,
+        "global_sec": 136.71,
+        "global_frame": 4101,
+        "end_frame": 4193,
+        "text": "搞清楚的話會讓你比較不容易混亂喔"
+      },
+      {
+        "local_sec": 17.16,
+        "global_sec": 139.79,
+        "global_frame": 4193,
+        "end_frame": 4301,
+        "text": "API 其實我們可以從兩個不同的層次來理解"
+      },
+      {
+        "local_sec": 20.74,
+        "global_sec": 143.37,
+        "global_frame": 4301,
+        "end_frame": 4370,
+        "text": "第一種是比較抽象的層次"
+      },
+      {
+        "local_sec": 23.04,
+        "global_sec": 145.67,
+        "global_frame": 4370,
+        "end_frame": 4454,
+        "text": "我們可以把 API 當作是一種技術概念"
+      },
+      {
+        "local_sec": 25.86,
+        "global_sec": 148.49,
+        "global_frame": 4454,
+        "end_frame": 4577,
+        "text": "它是範子讓兩個不同的軟體可以互相溝通的機制"
+      },
+      {
+        "local_sec": 29.96,
+        "global_sec": 152.59,
+        "global_frame": 4577,
+        "end_frame": 4707,
+        "text": "這種說法就會比較偏向是在講一種通用的能力"
+      },
+      {
+        "local_sec": 34.28,
+        "global_sec": 156.91,
+        "global_frame": 4707,
+        "end_frame": 4798,
+        "text": "第二種的話就會是比較具體的層次"
+      },
+      {
+        "local_sec": 37.32,
+        "global_sec": 159.95,
+        "global_frame": 4798,
+        "end_frame": 4874,
+        "text": "是在講某一個特定的服務的 API"
+      },
+      {
+        "local_sec": 39.84,
+        "global_sec": 162.47,
+        "global_frame": 4874,
+        "end_frame": 4940,
+        "text": "譬如說你會聽到有人說"
+      },
+      {
+        "local_sec": 42.04,
+        "global_sec": 164.67,
+        "global_frame": 4940,
+        "end_frame": 5007,
+        "text": "我要串接某某平台的 API"
+      },
+      {
+        "local_sec": 44.28,
+        "global_sec": 166.91,
+        "global_frame": 5007,
+        "end_frame": 5055,
+        "text": "那這個時候就會是指"
+      },
+      {
+        "local_sec": 45.88,
+        "global_sec": 168.51,
+        "global_frame": 5055,
+        "end_frame": 5218,
+        "text": "用程式去遵循那個平台所定義的一套溝通規則還有資料的格式"
+      },
+      {
+        "local_sec": 51.32,
+        "global_sec": 173.95,
+        "global_frame": 5218,
+        "end_frame": 5263,
+        "text": "就像剛才提到的"
+      },
+      {
+        "local_sec": 52.8,
+        "global_sec": 175.43,
+        "global_frame": 5263,
+        "end_frame": 5335,
+        "text": "每一個服務都會有一個自己的規則"
+      },
+      {
+        "local_sec": 55.2,
+        "global_sec": 177.83,
+        "global_frame": 5335,
+        "end_frame": 5444,
+        "text": "而每一個 API 也都會有不同的格式還有限制"
+      },
+      {
+        "local_sec": 58.84,
+        "global_sec": 181.47,
+        "global_frame": 5444,
+        "end_frame": 5567,
+        "text": "那這個單元我們會聚焦在最常用的一種叫做 Web API"
+      },
+      {
+        "local_sec": 62.94,
+        "global_sec": 185.57,
+        "global_frame": 5567,
+        "end_frame": 5705,
+        "text": "就是透過網路讓不同的系統互相傳送資料的那一種"
+      },
+      {
+        "local_sec": 67.54,
+        "global_sec": 190.17,
+        "global_frame": 5705,
+        "end_frame": 5759,
+        "text": "而且你在開發的過程當中"
+      },
+      {
+        "local_sec": 69.34,
+        "global_sec": 191.97,
+        "global_frame": 5759,
+        "end_frame": 5812,
+        "text": "其實最常需要串接的"
+      },
+      {
+        "local_sec": 71.12,
+        "global_sec": 193.75,
+        "global_frame": 5812,
+        "end_frame": 5882,
+        "text": "也基本上都是 Web API 喔"
+      }
+    ],
+    "3.1": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 196.83,
+        "global_frame": 5905,
+        "end_frame": 5978,
+        "text": "現在你理解API是什麼了"
+      },
+      {
+        "local_sec": 2.44,
+        "global_sec": 199.27,
+        "global_frame": 5978,
+        "end_frame": 6105,
+        "text": "再來的問題就會是我們到底要怎麼把這些服務串起來呢"
+      },
+      {
+        "local_sec": 6.68,
+        "global_sec": 203.51,
+        "global_frame": 6105,
+        "end_frame": 6146,
+        "text": "聽起來好像很困難"
+      },
+      {
+        "local_sec": 8.04,
+        "global_sec": 204.87,
+        "global_frame": 6146,
+        "end_frame": 6232,
+        "text": "但其實沒有你想像中的那麼複雜哦"
+      },
+      {
+        "local_sec": 10.92,
+        "global_sec": 207.75,
+        "global_frame": 6232,
+        "end_frame": 6311,
+        "text": "整個流程基本上就是三個步驟"
+      },
+      {
+        "local_sec": 13.56,
+        "global_sec": 210.39,
+        "global_frame": 6311,
+        "end_frame": 6350,
+        "text": "而且有AI的幫忙"
+      },
+      {
+        "local_sec": 14.84,
+        "global_sec": 211.67,
+        "global_frame": 6350,
+        "end_frame": 6419,
+        "text": "整個過程會順利很多"
+      },
+      {
+        "local_sec": 17.16,
+        "global_sec": 213.99,
+        "global_frame": 6419,
+        "end_frame": 6460,
+        "text": "首先是第一個步驟"
+      },
+      {
+        "local_sec": 18.52,
+        "global_sec": 215.35,
+        "global_frame": 6460,
+        "end_frame": 6518,
+        "text": "就是確認可行性"
+      },
+      {
+        "local_sec": 20.44,
+        "global_sec": 217.27,
+        "global_frame": 6518,
+        "end_frame": 6562,
+        "text": "在開始動手之前"
+      },
+      {
+        "local_sec": 21.92,
+        "global_sec": 218.75,
+        "global_frame": 6562,
+        "end_frame": 6643,
+        "text": "你要先確認你想要串接的那個服務"
+      },
+      {
+        "local_sec": 24.6,
+        "global_sec": 221.43,
+        "global_frame": 6643,
+        "end_frame": 6704,
+        "text": "到底有沒有提供API"
+      },
+      {
+        "local_sec": 26.64,
+        "global_sec": 223.47,
+        "global_frame": 6704,
+        "end_frame": 6862,
+        "text": "而最直觀的方式就是去搜尋引擎"
+      },
+      {
+        "local_sec": 31.92,
+        "global_sec": 228.75,
+        "global_frame": 6862,
+        "end_frame": 6914,
+        "text": "搜尋一下服務的名稱"
+      },
+      {
+        "local_sec": 33.64,
+        "global_sec": 230.47,
+        "global_frame": 6914,
+        "end_frame": 6976,
+        "text": "加上API Docs"
+      },
+      {
+        "local_sec": 35.72,
+        "global_sec": 232.55,
+        "global_frame": 6976,
+        "end_frame": 7000,
+        "text": "舉例來說"
+      },
+      {
+        "local_sec": 36.52,
+        "global_sec": 233.35,
+        "global_frame": 7000,
+        "end_frame": 7078,
+        "text": "你可以搜尋discord API Docs"
+      },
+      {
+        "local_sec": 39.12,
+        "global_sec": 235.95,
+        "global_frame": 7078,
+        "end_frame": 7144,
+        "text": "看有沒有出現官方的文件"
+      },
+      {
+        "local_sec": 41.32,
+        "global_sec": 238.15,
+        "global_frame": 7144,
+        "end_frame": 7162,
+        "text": "如果有"
+      },
+      {
+        "local_sec": 41.92,
+        "global_sec": 238.75,
+        "global_frame": 7162,
+        "end_frame": 7227,
+        "text": "那代表高機率它可以串接"
+      },
+      {
+        "local_sec": 44.08,
+        "global_sec": 240.91,
+        "global_frame": 7227,
+        "end_frame": 7323,
+        "text": "但你看到官方文件的部分就不用太認真研究"
+      },
+      {
+        "local_sec": 47.28,
+        "global_sec": 244.11,
+        "global_frame": 7323,
+        "end_frame": 7414,
+        "text": "只要確定它是可以串接API的就好"
+      },
+      {
+        "local_sec": 50.32,
+        "global_sec": 247.15,
+        "global_frame": 7414,
+        "end_frame": 7492,
+        "text": "另外有些服務的文件它只有英文"
+      },
+      {
+        "local_sec": 52.92,
+        "global_sec": 249.75,
+        "global_frame": 7492,
+        "end_frame": 7561,
+        "text": "所以建議你搜尋關鍵字的時候"
+      },
+      {
+        "local_sec": 55.2,
+        "global_sec": 252.03,
+        "global_frame": 7561,
+        "end_frame": 7682,
+        "text": "可以用英文找到的結果會比較準確一點"
+      },
+      {
+        "local_sec": 59.24,
+        "global_sec": 256.07,
+        "global_frame": 7682,
+        "end_frame": 7784,
+        "text": "再來第二步就會是準備API Key"
+      },
+      {
+        "local_sec": 62.64,
+        "global_sec": 259.47,
+        "global_frame": 7784,
+        "end_frame": 7829,
+        "text": "確認可以串接之後"
+      },
+      {
+        "local_sec": 64.16,
+        "global_sec": 260.99,
+        "global_frame": 7829,
+        "end_frame": 7883,
+        "text": "你可以去那個服務的後台"
+      },
+      {
+        "local_sec": 65.96,
+        "global_sec": 262.79,
+        "global_frame": 7883,
+        "end_frame": 7943,
+        "text": "找到生成金鑰的地方"
+      },
+      {
+        "local_sec": 67.96,
+        "global_sec": 264.79,
+        "global_frame": 7943,
+        "end_frame": 8003,
+        "text": "去取得你的API Key"
+      },
+      {
+        "local_sec": 69.96,
+        "global_sec": 266.79,
+        "global_frame": 8003,
+        "end_frame": 8085,
+        "text": "這個東西有的時候也叫做Token"
+      },
+      {
+        "local_sec": 72.68,
+        "global_sec": 269.51,
+        "global_frame": 8085,
+        "end_frame": 8127,
+        "text": "但在這個情境之下"
+      },
+      {
+        "local_sec": 74.08,
+        "global_sec": 270.91,
+        "global_frame": 8127,
+        "end_frame": 8168,
+        "text": "無論看到哪一個詞"
+      },
+      {
+        "local_sec": 75.44,
+        "global_sec": 272.27,
+        "global_frame": 8168,
+        "end_frame": 8217,
+        "text": "它都是同樣的意思"
+      },
+      {
+        "local_sec": 77.08,
+        "global_sec": 273.91,
+        "global_frame": 8217,
+        "end_frame": 8277,
+        "text": "那這個時候你可能會想說"
+      },
+      {
+        "local_sec": 79.08,
+        "global_sec": 275.91,
+        "global_frame": 8277,
+        "end_frame": 8314,
+        "text": "阿講的這麼簡單"
+      },
+      {
+        "local_sec": 80.32,
+        "global_sec": 277.15,
+        "global_frame": 8314,
+        "end_frame": 8353,
+        "text": "但人家是第一次"
+      },
+      {
+        "local_sec": 81.6,
+        "global_sec": 278.43,
+        "global_frame": 8353,
+        "end_frame": 8407,
+        "text": "我根本不知道要從哪裡開始"
+      },
+      {
+        "local_sec": 83.4,
+        "global_sec": 280.23,
+        "global_frame": 8407,
+        "end_frame": 8434,
+        "text": "那這個時候"
+      },
+      {
+        "local_sec": 84.32,
+        "global_sec": 281.15,
+        "global_frame": 8434,
+        "end_frame": 8534,
+        "text": "我們就可以請出我們的神燈精靈來拯救你"
+      },
+      {
+        "local_sec": 87.64,
+        "global_sec": 284.47,
+        "global_frame": 8534,
+        "end_frame": 8606,
+        "text": "你可以直接把你的需求告訴AI"
+      },
+      {
+        "local_sec": 90.04,
+        "global_sec": 286.87,
+        "global_frame": 8606,
+        "end_frame": 8678,
+        "text": "讓它一步一步的帶你設定就好"
+      },
+      {
+        "local_sec": 92.44,
+        "global_sec": 289.27,
+        "global_frame": 8678,
+        "end_frame": 8721,
+        "text": "在下指令的時候"
+      },
+      {
+        "local_sec": 93.88,
+        "global_sec": 290.71,
+        "global_frame": 8721,
+        "end_frame": 8809,
+        "text": "要記得請AI一步一步的教你"
+      },
+      {
+        "local_sec": 96.8,
+        "global_sec": 293.63,
+        "global_frame": 8809,
+        "end_frame": 8869,
+        "text": "這四個字非常的好用哦"
+      }
+    ],
+    "3.2": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 296.57,
+        "global_frame": 8897,
+        "end_frame": 8972,
+        "text": "再來,串接API的第三個步驟"
+      },
+      {
+        "local_sec": 2.5,
+        "global_sec": 299.07,
+        "global_frame": 8972,
+        "end_frame": 9062,
+        "text": "就會是讓AI去生成串接的程式碼"
+      },
+      {
+        "local_sec": 5.5,
+        "global_sec": 302.07,
+        "global_frame": 9062,
+        "end_frame": 9113,
+        "text": "找到了API Key之後"
+      },
+      {
+        "local_sec": 7.2,
+        "global_sec": 303.77,
+        "global_frame": 9113,
+        "end_frame": 9212,
+        "text": "你就可以再重新把你的需求還有API的文件"
+      },
+      {
+        "local_sec": 10.5,
+        "global_sec": 307.07,
+        "global_frame": 9212,
+        "end_frame": 9278,
+        "text": "都整理清楚然後交給AI"
+      },
+      {
+        "local_sec": 12.7,
+        "global_sec": 309.27,
+        "global_frame": 9278,
+        "end_frame": 9362,
+        "text": "請他再來幫你寫串接用的程式碼"
+      },
+      {
+        "local_sec": 15.5,
+        "global_sec": 312.07,
+        "global_frame": 9362,
+        "end_frame": 9419,
+        "text": "最後再記得叫AI告訴你"
+      },
+      {
+        "local_sec": 17.4,
+        "global_sec": 313.97,
+        "global_frame": 9419,
+        "end_frame": 9479,
+        "text": "應該要把程式碼貼到哪裡去"
+      },
+      {
+        "local_sec": 19.4,
+        "global_sec": 315.97,
+        "global_frame": 9479,
+        "end_frame": 9542,
+        "text": "這樣串接就完成啦"
+      },
+      {
+        "local_sec": 21.5,
+        "global_sec": 318.07,
+        "global_frame": 9542,
+        "end_frame": 9662,
+        "text": "那在這邊也跟你分享一個工程師實戰的小撇步"
+      },
+      {
+        "local_sec": 25.5,
+        "global_sec": 322.07,
+        "global_frame": 9662,
+        "end_frame": 9767,
+        "text": "就會是不要一開始就要求功能完整"
+      },
+      {
+        "local_sec": 29.0,
+        "global_sec": 325.57,
+        "global_frame": 9767,
+        "end_frame": 9887,
+        "text": "建議你可以先確認資料有串起來才會是比較重要的"
+      },
+      {
+        "local_sec": 33.0,
+        "global_sec": 329.57,
+        "global_frame": 9887,
+        "end_frame": 9992,
+        "text": "操作的時候你可以跟AI先確認可行性"
+      },
+      {
+        "local_sec": 36.5,
+        "global_sec": 333.07,
+        "global_frame": 9992,
+        "end_frame": 10052,
+        "text": "像是你可以跟他說"
+      },
+      {
+        "local_sec": 38.5,
+        "global_sec": 335.07,
+        "global_frame": 10052,
+        "end_frame": 10112,
+        "text": "我可以透過這個服務的API"
+      },
+      {
+        "local_sec": 40.5,
+        "global_sec": 337.07,
+        "global_frame": 10112,
+        "end_frame": 10187,
+        "text": "拿到我資料庫裡面的資料嗎?"
+      },
+      {
+        "local_sec": 43.0,
+        "global_sec": 339.57,
+        "global_frame": 10187,
+        "end_frame": 10262,
+        "text": "那如果AI說OKOK沒問題"
+      },
+      {
+        "local_sec": 45.5,
+        "global_sec": 342.07,
+        "global_frame": 10262,
+        "end_frame": 10307,
+        "text": "那可以再跟他說"
+      },
+      {
+        "local_sec": 47.0,
+        "global_sec": 343.57,
+        "global_frame": 10307,
+        "end_frame": 10367,
+        "text": "那你幫我串好吧"
+      },
+      {
+        "local_sec": 49.0,
+        "global_sec": 345.57,
+        "global_frame": 10367,
+        "end_frame": 10442,
+        "text": "那通常他就會生成一個程式碼"
+      },
+      {
+        "local_sec": 51.5,
+        "global_sec": 348.07,
+        "global_frame": 10442,
+        "end_frame": 10502,
+        "text": "並且告訴你下一步要怎麼走"
+      },
+      {
+        "local_sec": 53.5,
+        "global_sec": 350.07,
+        "global_frame": 10502,
+        "end_frame": 10607,
+        "text": "所以記得不要一開始就塞一堆需求給AI"
+      },
+      {
+        "local_sec": 57.0,
+        "global_sec": 353.57,
+        "global_frame": 10607,
+        "end_frame": 10742,
+        "text": "一步一步來才能夠確保讓程式可以更順利的運作喔"
+      },
+      {
+        "local_sec": 61.5,
+        "global_sec": 358.07,
+        "global_frame": 10742,
+        "end_frame": 10802,
+        "text": "然後提醒你一下"
+      },
+      {
+        "local_sec": 63.5,
+        "global_sec": 360.07,
+        "global_frame": 10802,
+        "end_frame": 10892,
+        "text": "這幾個步驟基本上都會需要來回幾次"
+      },
+      {
+        "local_sec": 66.5,
+        "global_sec": 363.07,
+        "global_frame": 10892,
+        "end_frame": 10952,
+        "text": "所以記得要有一點耐心喔"
+      }
+    ],
+    "4.1": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 365.97,
+        "global_frame": 10979,
+        "end_frame": 11048,
+        "text": "但講到這裡你可能也會想要吐槽我"
+      },
+      {
+        "local_sec": 2.56,
+        "global_sec": 368.53,
+        "global_frame": 11055,
+        "end_frame": 11094,
+        "text": "說講的都很簡單"
+      },
+      {
+        "local_sec": 3.84,
+        "global_sec": 369.81,
+        "global_frame": 11094,
+        "end_frame": 11140,
+        "text": "但萬一我照著步驟做"
+      },
+      {
+        "local_sec": 5.38,
+        "global_sec": 371.35,
+        "global_frame": 11140,
+        "end_frame": 11171,
+        "text": "還是卡住了怎麼辦"
+      },
+      {
+        "local_sec": 6.92,
+        "global_sec": 372.89,
+        "global_frame": 11186,
+        "end_frame": 11217,
+        "text": "但老實說"
+      },
+      {
+        "local_sec": 8.2,
+        "global_sec": 374.17,
+        "global_frame": 11224,
+        "end_frame": 11270,
+        "text": "以實際的經驗來說"
+      },
+      {
+        "local_sec": 9.98,
+        "global_sec": 375.95,
+        "global_frame": 11278,
+        "end_frame": 11309,
+        "text": "API的串接"
+      },
+      {
+        "local_sec": 11.26,
+        "global_sec": 377.23,
+        "global_frame": 11316,
+        "end_frame": 11378,
+        "text": "就像是在各種軟體的後台闖關"
+      },
+      {
+        "local_sec": 13.56,
+        "global_sec": 379.53,
+        "global_frame": 11385,
+        "end_frame": 11454,
+        "text": "所以過程上一定會比較花時間"
+      },
+      {
+        "local_sec": 16.38,
+        "global_sec": 382.35,
+        "global_frame": 11470,
+        "end_frame": 11516,
+        "text": "AI雖然說它會指引你"
+      },
+      {
+        "local_sec": 18.18,
+        "global_sec": 384.15,
+        "global_frame": 11524,
+        "end_frame": 11609,
+        "text": "但因為軟體的介面其實經常做改版"
+      },
+      {
+        "local_sec": 21.24,
+        "global_sec": 387.21,
+        "global_frame": 11616,
+        "end_frame": 11724,
+        "text": "所以AI它有時候教你的可能會是舊版的操作方式"
+      },
+      {
+        "local_sec": 25.34,
+        "global_sec": 391.31,
+        "global_frame": 11739,
+        "end_frame": 11800,
+        "text": "所以一開始卡關的時候很正常"
+      },
+      {
+        "local_sec": 27.64,
+        "global_sec": 393.61,
+        "global_frame": 11808,
+        "end_frame": 11831,
+        "text": "但不用擔心"
+      },
+      {
+        "local_sec": 28.62,
+        "global_sec": 394.59,
+        "global_frame": 11837,
+        "end_frame": 11906,
+        "text": "我這邊在加碼提供以下三個策略"
+      },
+      {
+        "local_sec": 31.18,
+        "global_sec": 397.15,
+        "global_frame": 11914,
+        "end_frame": 11991,
+        "text": "讓你可以在失敗的時候輪流試試看"
+      }
+    ],
+    "4.2": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 400.0,
+        "global_frame": 12000,
+        "end_frame": 12053,
+        "text": "首先第一個策略是"
+      },
+      {
+        "local_sec": 2.04,
+        "global_sec": 402.04,
+        "global_frame": 12061,
+        "end_frame": 12099,
+        "text": "搜尋成功的案例"
+      },
+      {
+        "local_sec": 3.84,
+        "global_sec": 403.84,
+        "global_frame": 12115,
+        "end_frame": 12145,
+        "text": "失敗的時候"
+      },
+      {
+        "local_sec": 5.12,
+        "global_sec": 405.12,
+        "global_frame": 12153,
+        "end_frame": 12176,
+        "text": "你可以搜尋"
+      },
+      {
+        "local_sec": 6.14,
+        "global_sec": 406.14,
+        "global_frame": 12184,
+        "end_frame": 12199,
+        "text": "服務A"
+      },
+      {
+        "local_sec": 6.92,
+        "global_sec": 406.92,
+        "global_frame": 12207,
+        "end_frame": 12230,
+        "text": "服務B"
+      },
+      {
+        "local_sec": 7.94,
+        "global_sec": 407.94,
+        "global_frame": 12238,
+        "end_frame": 12268,
+        "text": "然後再加串接"
+      },
+      {
+        "local_sec": 9.48,
+        "global_sec": 409.48,
+        "global_frame": 12284,
+        "end_frame": 12361,
+        "text": "看看有沒有中文或者是英文的成功案例"
+      },
+      {
+        "local_sec": 12.28,
+        "global_sec": 412.28,
+        "global_frame": 12368,
+        "end_frame": 12399,
+        "text": "如果有的話"
+      },
+      {
+        "local_sec": 13.56,
+        "global_sec": 413.56,
+        "global_frame": 12406,
+        "end_frame": 12491,
+        "text": "那就表示再次的驗證了這個方式是可行的"
+      },
+      {
+        "local_sec": 16.64,
+        "global_sec": 416.64,
+        "global_frame": 12499,
+        "end_frame": 12591,
+        "text": "只是今天AI生成的程式碼可能有一些問題"
+      },
+      {
+        "local_sec": 19.96,
+        "global_sec": 419.96,
+        "global_frame": 12598,
+        "end_frame": 12652,
+        "text": "那我們就接著再繼續調整就好"
+      },
+      {
+        "local_sec": 22.78,
+        "global_sec": 422.78,
+        "global_frame": 12683,
+        "end_frame": 12721,
+        "text": "再來第二個策略是"
+      },
+      {
+        "local_sec": 24.32,
+        "global_sec": 424.32,
+        "global_frame": 12729,
+        "end_frame": 12790,
+        "text": "把API的文件貼給AI"
+      },
+      {
+        "local_sec": 26.62,
+        "global_sec": 426.62,
+        "global_frame": 12798,
+        "end_frame": 12867,
+        "text": "如果AI給的程式碼一直有問題"
+      },
+      {
+        "local_sec": 29.12,
+        "global_sec": 429.12,
+        "global_frame": 12873,
+        "end_frame": 12927,
+        "text": "你可以直接去官方的API Docs"
+      },
+      {
+        "local_sec": 31.18,
+        "global_sec": 431.18,
+        "global_frame": 12935,
+        "end_frame": 12973,
+        "text": "找到相對應的段落"
+      },
+      {
+        "local_sec": 32.72,
+        "global_sec": 432.72,
+        "global_frame": 12981,
+        "end_frame": 13104,
+        "text": "開啟網頁的翻譯把你需要的那一段內容直接貼給AI"
+      },
+      {
+        "local_sec": 37.06,
+        "global_sec": 437.06,
+        "global_frame": 13111,
+        "end_frame": 13188,
+        "text": "讓他依照正確的文件去重新生成"
+      },
+      {
+        "local_sec": 40.14,
+        "global_sec": 440.14,
+        "global_frame": 13204,
+        "end_frame": 13257,
+        "text": "那如果不知道怎麼找的話"
+      },
+      {
+        "local_sec": 42.18,
+        "global_sec": 442.18,
+        "global_frame": 13265,
+        "end_frame": 13311,
+        "text": "也可以請AI一步一步的教你"
+      },
+      {
+        "local_sec": 44.24,
+        "global_sec": 444.24,
+        "global_frame": 13327,
+        "end_frame": 13350,
+        "text": "這樣做"
+      },
+      {
+        "local_sec": 45.26,
+        "global_sec": 445.26,
+        "global_frame": 13357,
+        "end_frame": 13419,
+        "text": "AI就不是靠訓練的資料來猜"
+      },
+      {
+        "local_sec": 47.56,
+        "global_sec": 447.56,
+        "global_frame": 13426,
+        "end_frame": 13495,
+        "text": "而是根據你給他的實際內容來工作"
+      },
+      {
+        "local_sec": 50.12,
+        "global_sec": 450.12,
+        "global_frame": 13503,
+        "end_frame": 13526,
+        "text": "出錯的機率"
+      },
+      {
+        "local_sec": 51.14,
+        "global_sec": 451.14,
+        "global_frame": 13534,
+        "end_frame": 13557,
+        "text": "就會比較低喔"
+      },
+      {
+        "local_sec": 52.42,
+        "global_sec": 452.42,
+        "global_frame": 13572,
+        "end_frame": 13595,
+        "text": "最後"
+      },
+      {
+        "local_sec": 53.44,
+        "global_sec": 453.44,
+        "global_frame": 13603,
+        "end_frame": 13618,
+        "text": "策略三"
+      },
+      {
+        "local_sec": 54.22,
+        "global_sec": 454.22,
+        "global_frame": 13626,
+        "end_frame": 13718,
+        "text": "是把找到的程式碼範例直接貼給AI"
+      },
+      {
+        "local_sec": 57.68,
+        "global_sec": 457.68,
+        "global_frame": 13730,
+        "end_frame": 13838,
+        "text": "如果你從成功案例裡面剛好有找到別人寫好的程式碼"
+      },
+      {
+        "local_sec": 61.54,
+        "global_sec": 461.54,
+        "global_frame": 13846,
+        "end_frame": 13922,
+        "text": "那把那段程式碼直接複製下來貼給AI"
+      },
+      {
+        "local_sec": 64.6,
+        "global_sec": 464.6,
+        "global_frame": 13937,
+        "end_frame": 14047,
+        "text": "但這裡要注意的是程式碼才是重點喔不是文章說明"
+      },
+      {
+        "local_sec": 69.0,
+        "global_sec": 469.0,
+        "global_frame": 14070,
+        "end_frame": 14178,
+        "text": "最後一樣再請AI幫你修改成你所需要的格式"
+      },
+      {
+        "local_sec": 72.86,
+        "global_sec": 472.86,
+        "global_frame": 14185,
+        "end_frame": 14262,
+        "text": "或者是請他一步一步帶你操作"
+      },
+      {
+        "local_sec": 75.92,
+        "global_sec": 475.92,
+        "global_frame": 14277,
+        "end_frame": 14308,
+        "text": "所以總而言之"
+      },
+      {
+        "local_sec": 77.2,
+        "global_sec": 477.2,
+        "global_frame": 14316,
+        "end_frame": 14362,
+        "text": "在嘗試上面如果失敗"
+      },
+      {
+        "local_sec": 79.0,
+        "global_sec": 479.0,
+        "global_frame": 14370,
+        "end_frame": 14446,
+        "text": "那我們就盡力的提供更多的文件和範例"
+      },
+      {
+        "local_sec": 81.8,
+        "global_sec": 481.8,
+        "global_frame": 14454,
+        "end_frame": 14508,
+        "text": "幫助AI增加他的成功機率"
+      }
+    ],
+    "5.1": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 484.63,
+        "global_frame": 14539,
+        "end_frame": 14642,
+        "text": "那講完了API是什麼以及它的串接方式之後"
+      },
+      {
+        "local_sec": 3.44,
+        "global_sec": 488.07,
+        "global_frame": 14642,
+        "end_frame": 14757,
+        "text": "最後一樣我們要來聊一件非常非常重要的觀念"
+      },
+      {
+        "local_sec": 7.28,
+        "global_sec": 491.91,
+        "global_frame": 14757,
+        "end_frame": 14833,
+        "text": "就是API Key的保管方式"
+      },
+      {
+        "local_sec": 9.8,
+        "global_sec": 494.43,
+        "global_frame": 14833,
+        "end_frame": 14889,
+        "text": "在我告訴你怎麼保管它之前"
+      },
+      {
+        "local_sec": 11.68,
+        "global_sec": 496.31,
+        "global_frame": 14889,
+        "end_frame": 14939,
+        "text": "先跟你說一件事情"
+      },
+      {
+        "local_sec": 13.36,
+        "global_sec": 497.99,
+        "global_frame": 14939,
+        "end_frame": 15008,
+        "text": "API就等同於是密碼"
+      },
+      {
+        "local_sec": 15.64,
+        "global_sec": 500.27,
+        "global_frame": 15008,
+        "end_frame": 15041,
+        "text": "是密碼是密碼"
+      },
+      {
+        "local_sec": 16.76,
+        "global_sec": 501.39,
+        "global_frame": 15041,
+        "end_frame": 15069,
+        "text": "所以很重要"
+      },
+      {
+        "local_sec": 17.68,
+        "global_sec": 502.31,
+        "global_frame": 15069,
+        "end_frame": 15107,
+        "text": "我們要說三次"
+      },
+      {
+        "local_sec": 18.96,
+        "global_sec": 503.59,
+        "global_frame": 15107,
+        "end_frame": 15172,
+        "text": "所以所有你對密碼不會做的事情"
+      },
+      {
+        "local_sec": 21.12,
+        "global_sec": 505.75,
+        "global_frame": 15172,
+        "end_frame": 15241,
+        "text": "對API也完全一樣不能做"
+      },
+      {
+        "local_sec": 23.4,
+        "global_sec": 508.03,
+        "global_frame": 15241,
+        "end_frame": 15273,
+        "text": "什麼意思呢"
+      },
+      {
+        "local_sec": 24.48,
+        "global_sec": 509.11,
+        "global_frame": 15273,
+        "end_frame": 15297,
+        "text": "就例如"
+      },
+      {
+        "local_sec": 25.28,
+        "global_sec": 509.91,
+        "global_frame": 15297,
+        "end_frame": 15365,
+        "text": "你應該不會把密碼公開在你的社群上"
+      },
+      {
+        "local_sec": 27.56,
+        "global_sec": 512.19,
+        "global_frame": 15365,
+        "end_frame": 15388,
+        "text": "對吧"
+      },
+      {
+        "local_sec": 28.32,
+        "global_sec": 512.95,
+        "global_frame": 15388,
+        "end_frame": 15437,
+        "text": "所以API Key也是一樣"
+      },
+      {
+        "local_sec": 29.96,
+        "global_sec": 514.59,
+        "global_frame": 15437,
+        "end_frame": 15476,
+        "text": "一旦被別人拿到"
+      },
+      {
+        "local_sec": 31.24,
+        "global_sec": 515.87,
+        "global_frame": 15476,
+        "end_frame": 15571,
+        "text": "就等同於它可以直接使用你的權限"
+      },
+      {
+        "local_sec": 34.4,
+        "global_sec": 519.03,
+        "global_frame": 15571,
+        "end_frame": 15607,
+        "text": "為什麼這麼重要呢"
+      },
+      {
+        "local_sec": 35.6,
+        "global_sec": 520.23,
+        "global_frame": 15607,
+        "end_frame": 15675,
+        "text": "像過往就曾經有一個案例是"
+      },
+      {
+        "local_sec": 37.88,
+        "global_sec": 522.51,
+        "global_frame": 15675,
+        "end_frame": 15733,
+        "text": "一個知名的第三方工具"
+      },
+      {
+        "local_sec": 39.8,
+        "global_sec": 524.43,
+        "global_frame": 15733,
+        "end_frame": 15778,
+        "text": "因為資安漏洞的問題"
+      },
+      {
+        "local_sec": 41.32,
+        "global_sec": 525.95,
+        "global_frame": 15778,
+        "end_frame": 15853,
+        "text": "而洩漏了大量用戶的API Key"
+      },
+      {
+        "local_sec": 43.8,
+        "global_sec": 528.43,
+        "global_frame": 15853,
+        "end_frame": 15953,
+        "text": "而這些Key則是直接通往這些用戶戶的帳號"
+      },
+      {
+        "local_sec": 47.16,
+        "global_sec": 531.79,
+        "global_frame": 15953,
+        "end_frame": 16052,
+        "text": "最後他們造成了數千萬美元的損失"
+      },
+      {
+        "local_sec": 50.44,
+        "global_sec": 535.07,
+        "global_frame": 16052,
+        "end_frame": 16075,
+        "text": "所以說"
+      },
+      {
+        "local_sec": 51.2,
+        "global_sec": 535.83,
+        "global_frame": 16075,
+        "end_frame": 16180,
+        "text": "有好好的保管API Key是一件很重要的事情"
+      },
+      {
+        "local_sec": 54.72,
+        "global_sec": 539.35,
+        "global_frame": 16180,
+        "end_frame": 16252,
+        "text": "一旦外洩了會有什麼樣的損失"
+      },
+      {
+        "local_sec": 57.12,
+        "global_sec": 541.75,
+        "global_frame": 16252,
+        "end_frame": 16313,
+        "text": "就看你的帳號多有價值了"
+      }
+    ],
+    "5.2": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 543.9,
+        "global_frame": 16317,
+        "end_frame": 16404,
+        "text": "那 API 到底要怎麼保管會比較安全呢?"
+      },
+      {
+        "local_sec": 2.92,
+        "global_sec": 546.82,
+        "global_frame": 16404,
+        "end_frame": 16470,
+        "text": "這邊跟你分享幾個簡單的方法"
+      },
+      {
+        "local_sec": 5.12,
+        "global_sec": 549.02,
+        "global_frame": 16470,
+        "end_frame": 16525,
+        "text": "記住這幾點就夠囉"
+      },
+      {
+        "local_sec": 6.96,
+        "global_sec": 550.86,
+        "global_frame": 16525,
+        "end_frame": 16576,
+        "text": "首先是你要知道"
+      },
+      {
+        "local_sec": 8.64,
+        "global_sec": 552.54,
+        "global_frame": 16576,
+        "end_frame": 16698,
+        "text": "你是可以隨時撤銷 API Key 換一組新的 API"
+      },
+      {
+        "local_sec": 12.72,
+        "global_sec": 556.62,
+        "global_frame": 16698,
+        "end_frame": 16767,
+        "text": "只要你有覺得任何不安全的時候"
+      },
+      {
+        "local_sec": 15.0,
+        "global_sec": 558.9,
+        "global_frame": 16767,
+        "end_frame": 16851,
+        "text": "不管是你不小心貼到了奇怪的地方"
+      },
+      {
+        "local_sec": 17.8,
+        "global_sec": 561.7,
+        "global_frame": 16851,
+        "end_frame": 16918,
+        "text": "還是你只是感覺有點怪怪的"
+      },
+      {
+        "local_sec": 20.04,
+        "global_sec": 563.94,
+        "global_frame": 16918,
+        "end_frame": 17022,
+        "text": "就可以馬上去後台把那組 API Key 給撤銷"
+      },
+      {
+        "local_sec": 23.52,
+        "global_sec": 567.42,
+        "global_frame": 17022,
+        "end_frame": 17079,
+        "text": "重新生成一組新的"
+      },
+      {
+        "local_sec": 25.4,
+        "global_sec": 569.3,
+        "global_frame": 17079,
+        "end_frame": 17184,
+        "text": "而且這個撤銷重新生成的操作其實很簡單"
+      },
+      {
+        "local_sec": 28.92,
+        "global_sec": 572.82,
+        "global_frame": 17184,
+        "end_frame": 17250,
+        "text": "所以完全不需要嫌麻煩喔"
+      },
+      {
+        "local_sec": 31.12,
+        "global_sec": 575.02,
+        "global_frame": 17250,
+        "end_frame": 17285,
+        "text": "這是第一點"
+      },
+      {
+        "local_sec": 32.28,
+        "global_sec": 576.18,
+        "global_frame": 17285,
+        "end_frame": 17322,
+        "text": "第二點的話是"
+      },
+      {
+        "local_sec": 33.52,
+        "global_sec": 577.42,
+        "global_frame": 17322,
+        "end_frame": 17421,
+        "text": "開發測試的時候把 API Key 直接寫在程式裡面"
+      },
+      {
+        "local_sec": 36.8,
+        "global_sec": 580.7,
+        "global_frame": 17421,
+        "end_frame": 17464,
+        "text": "其實沒有什麼關係"
+      },
+      {
+        "local_sec": 38.24,
+        "global_sec": 582.14,
+        "global_frame": 17464,
+        "end_frame": 17587,
+        "text": "但是要記得的是開發完成之後要把它移走"
+      },
+      {
+        "local_sec": 42.36,
+        "global_sec": 586.26,
+        "global_frame": 17587,
+        "end_frame": 17709,
+        "text": "在開發階段的時候 API Key 被別人看到的機率會比較低"
+      },
+      {
+        "local_sec": 46.4,
+        "global_sec": 590.3,
+        "global_frame": 17709,
+        "end_frame": 17772,
+        "text": "所以風險相對就比較小"
+      },
+      {
+        "local_sec": 48.52,
+        "global_sec": 592.42,
+        "global_frame": 17772,
+        "end_frame": 17871,
+        "text": "但一旦你要把你的程式碼分享給別人看"
+      },
+      {
+        "local_sec": 51.8,
+        "global_sec": 595.7,
+        "global_frame": 17871,
+        "end_frame": 17927,
+        "text": "或者是你要部署上線"
+      },
+      {
+        "local_sec": 53.68,
+        "global_sec": 597.58,
+        "global_frame": 17927,
+        "end_frame": 18005,
+        "text": "那就要記得把它移到別的地方去"
+      },
+      {
+        "local_sec": 56.28,
+        "global_sec": 600.18,
+        "global_frame": 18005,
+        "end_frame": 18041,
+        "text": "要移到哪裡去"
+      },
+      {
+        "local_sec": 57.48,
+        "global_sec": 601.38,
+        "global_frame": 18041,
+        "end_frame": 18090,
+        "text": "你可以請 AI 教你"
+      },
+      {
+        "local_sec": 59.12,
+        "global_sec": 603.02,
+        "global_frame": 18090,
+        "end_frame": 18163,
+        "text": "怎麼把 API Key 放到更安全的位置"
+      },
+      {
+        "local_sec": 61.56,
+        "global_sec": 605.46,
+        "global_frame": 18163,
+        "end_frame": 18299,
+        "text": "比如說移到環境變數或者是特定的設定區域"
+      },
+      {
+        "local_sec": 66.08,
+        "global_sec": 609.98,
+        "global_frame": 18299,
+        "end_frame": 18391,
+        "text": "也要讓 API Key 直接暴露在程式碼裡面"
+      },
+      {
+        "local_sec": 69.16,
+        "global_sec": 613.06,
+        "global_frame": 18391,
+        "end_frame": 18437,
+        "text": "移到安全的位置之後"
+      },
+      {
+        "local_sec": 70.68,
+        "global_sec": 614.58,
+        "global_frame": 18437,
+        "end_frame": 18528,
+        "text": "就記得要把原本的那一組 API Key 給撤銷"
+      },
+      {
+        "local_sec": 73.72,
+        "global_sec": 617.62,
+        "global_frame": 18528,
+        "end_frame": 18606,
+        "text": "然後換一組新的 API Key 喔"
+      },
+      {
+        "local_sec": 76.32,
+        "global_sec": 620.22,
+        "global_frame": 18606,
+        "end_frame": 18643,
+        "text": "最後第三個是"
+      },
+      {
+        "local_sec": 77.56,
+        "global_sec": 621.46,
+        "global_frame": 18643,
+        "end_frame": 18708,
+        "text": "在設定 API 權限的時候"
+      },
+      {
+        "local_sec": 79.72,
+        "global_sec": 623.62,
+        "global_frame": 18708,
+        "end_frame": 18821,
+        "text": "可以給它最小的權限並且設定用量的上限"
+      },
+      {
+        "local_sec": 83.48,
+        "global_sec": 627.38,
+        "global_frame": 18821,
+        "end_frame": 18865,
+        "text": "建立 API Key 的時候"
+      },
+      {
+        "local_sec": 84.96,
+        "global_sec": 628.86,
+        "global_frame": 18865,
+        "end_frame": 18975,
+        "text": "只開放這一次任務真正會需要用到的權限就好了"
+      },
+      {
+        "local_sec": 88.6,
+        "global_sec": 632.5,
+        "global_frame": 18975,
+        "end_frame": 19032,
+        "text": "不要什麼功能全部都打開"
+      },
+      {
+        "local_sec": 90.52,
+        "global_sec": 634.42,
+        "global_frame": 19032,
+        "end_frame": 19144,
+        "text": "同時如果那個服務它有提供用量的上限"
+      },
+      {
+        "local_sec": 94.24,
+        "global_sec": 638.14,
+        "global_frame": 19144,
+        "end_frame": 19213,
+        "text": "那建議你也可以把它設定一下"
+      },
+      {
+        "local_sec": 96.56,
+        "global_sec": 640.46,
+        "global_frame": 19213,
+        "end_frame": 19288,
+        "text": "這樣就算你的 API Key 不幸外洩"
+      },
+      {
+        "local_sec": 99.04,
+        "global_sec": 642.94,
+        "global_frame": 19288,
+        "end_frame": 19379,
+        "text": "那它損失也是在一個可以控制的範圍當中"
+      },
+      {
+        "local_sec": 102.08,
+        "global_sec": 645.98,
+        "global_frame": 19379,
+        "end_frame": 19476,
+        "text": "而不是讓對方可以無限制的使用你的帳號喔"
+      }
+    ],
+    "6.1": [
+      {
+        "local_sec": 0.0,
+        "global_sec": 649.3,
+        "global_frame": 19479,
+        "end_frame": 19601,
+        "text": "那在這個單元我們聊到了串接前端跟後端是靠API"
+      },
+      {
+        "local_sec": 4.1,
+        "global_sec": 653.4,
+        "global_frame": 19601,
+        "end_frame": 19717,
+        "text": "也更瞭解了API的運作邏輯還有串接的方式"
+      },
+      {
+        "local_sec": 7.94,
+        "global_sec": 657.24,
+        "global_frame": 19717,
+        "end_frame": 19824,
+        "text": "一樣在這個單元的最後帶你稍微複習一下"
+      },
+      {
+        "local_sec": 11.52,
+        "global_sec": 660.82,
+        "global_frame": 19824,
+        "end_frame": 19932,
+        "text": "第一個是API是連接不同應用程式的橋樑"
+      },
+      {
+        "local_sec": 15.1,
+        "global_sec": 664.4,
+        "global_frame": 19932,
+        "end_frame": 20031,
+        "text": "可以讓軟體之間互相溝通交換資料"
+      },
+      {
+        "local_sec": 18.42,
+        "global_sec": 667.72,
+        "global_frame": 20031,
+        "end_frame": 20116,
+        "text": "我們日常生活中每天在用的第三方登入"
+      },
+      {
+        "local_sec": 21.24,
+        "global_sec": 670.54,
+        "global_frame": 20116,
+        "end_frame": 20193,
+        "text": "行動支付、天氣資料等等的"
+      },
+      {
+        "local_sec": 23.8,
+        "global_sec": 673.1,
+        "global_frame": 20193,
+        "end_frame": 20262,
+        "text": "都是靠API在運作"
+      },
+      {
+        "local_sec": 26.1,
+        "global_sec": 675.4,
+        "global_frame": 20262,
+        "end_frame": 20354,
+        "text": "再來第二個是串接API的三個步驟"
+      },
+      {
+        "local_sec": 29.18,
+        "global_sec": 678.48,
+        "global_frame": 20354,
+        "end_frame": 20431,
+        "text": "首先是先確認有沒有API的文件"
+      },
+      {
+        "local_sec": 31.74,
+        "global_sec": 681.04,
+        "global_frame": 20431,
+        "end_frame": 20500,
+        "text": "確認有了之後取得API的key"
+      },
+      {
+        "local_sec": 34.56,
+        "global_sec": 683.86,
+        "global_frame": 20515,
+        "end_frame": 20623,
+        "text": "取得APIkey之後讓AI去生成串接的程式碼"
+      },
+      {
+        "local_sec": 38.66,
+        "global_sec": 687.96,
+        "global_frame": 20638,
+        "end_frame": 20730,
+        "text": "記得在串接的時候不要追求一次到位"
+      },
+      {
+        "local_sec": 41.72,
+        "global_sec": 691.02,
+        "global_frame": 20730,
+        "end_frame": 20807,
+        "text": "先確認資料有串起來才會是重點"
+      },
+      {
+        "local_sec": 44.8,
+        "global_sec": 694.1,
+        "global_frame": 20823,
+        "end_frame": 20853,
+        "text": "再來第三個"
+      },
+      {
+        "local_sec": 46.08,
+        "global_sec": 695.38,
+        "global_frame": 20861,
+        "end_frame": 20968,
+        "text": "串接卡住的時候三個策略可以讓你輪流試試看"
+      },
+      {
+        "local_sec": 49.66,
+        "global_sec": 698.96,
+        "global_frame": 20968,
+        "end_frame": 21030,
+        "text": "分別是搜尋成功的案例"
+      },
+      {
+        "local_sec": 51.96,
+        "global_sec": 701.26,
+        "global_frame": 21037,
+        "end_frame": 21122,
+        "text": "再來把API的文件直接貼給AI"
+      },
+      {
+        "local_sec": 54.78,
+        "global_sec": 704.08,
+        "global_frame": 21122,
+        "end_frame": 21229,
+        "text": "或者是把範例的程式直接貼給AI去做修改"
+      },
+      {
+        "local_sec": 58.56,
+        "global_sec": 707.86,
+        "global_frame": 21235,
+        "end_frame": 21304,
+        "text": "第四個也就會是最重要的一點"
+      },
+      {
+        "local_sec": 60.86,
+        "global_sec": 710.16,
+        "global_frame": 21304,
+        "end_frame": 21374,
+        "text": "就是APIkey就是密碼"
+      },
+      {
+        "local_sec": 63.18,
+        "global_sec": 712.48,
+        "global_frame": 21374,
+        "end_frame": 21466,
+        "text": "所以如果外洩的話可能會產生嚴重的後果"
+      },
+      {
+        "local_sec": 66.26,
+        "global_sec": 715.56,
+        "global_frame": 21466,
+        "end_frame": 21528,
+        "text": "所以在開發完成之後"
+      },
+      {
+        "local_sec": 68.3,
+        "global_sec": 717.6,
+        "global_frame": 21528,
+        "end_frame": 21627,
+        "text": "請務必務必要將API的key移至安全的位置"
+      },
+      {
+        "local_sec": 71.62,
+        "global_sec": 720.92,
+        "global_frame": 21627,
+        "end_frame": 21704,
+        "text": "不要讓它直接暴露在程式碼裡面"
+      },
+      {
+        "local_sec": 74.18,
+        "global_sec": 723.48,
+        "global_frame": 21704,
+        "end_frame": 21827,
+        "text": "另外你也可以隨時撤銷舊的APIkey換一組新的"
+      },
+      {
+        "local_sec": 78.28,
+        "global_sec": 727.58,
+        "global_frame": 21827,
+        "end_frame": 21919,
+        "text": "同時再設定最小權限與用量上限"
+      },
+      {
+        "local_sec": 81.36,
+        "global_sec": 730.66,
+        "global_frame": 21919,
+        "end_frame": 22019,
+        "text": "這樣就算不幸的外洩也可以降低你的損失喔"
+      },
+      {
+        "local_sec": 84.68,
+        "global_sec": 733.98,
+        "global_frame": 22019,
+        "end_frame": 22104,
+        "text": "好啦在這個單元我們認識的API"
+      },
+      {
+        "local_sec": 87.66,
+        "global_sec": 736.96,
+        "global_frame": 22108,
+        "end_frame": 22224,
+        "text": "也知道它是一個系統之間交換資料的一種正式的方式"
+      },
+      {
+        "local_sec": 91.5,
+        "global_sec": 740.8,
+        "global_frame": 22224,
+        "end_frame": 22348,
+        "text": "但實際上不一定每一個網站都會提供API可以讓你使用"
+      },
+      {
+        "local_sec": 95.64,
+        "global_sec": 744.94,
+        "global_frame": 22348,
+        "end_frame": 22471,
+        "text": "那這個時候如果說你還是想要取得網站上的資料的話"
+      },
+      {
+        "local_sec": 99.74,
+        "global_sec": 749.04,
+        "global_frame": 22471,
+        "end_frame": 22531,
+        "text": "那我們就可以使用爬蟲"
+      },
+      {
+        "local_sec": 101.74,
+        "global_sec": 751.04,
+        "global_frame": 22531,
+        "end_frame": 22624,
+        "text": "所以在下個單元就會跟你分享什麼是爬蟲"
+      },
+      {
+        "local_sec": 104.86,
+        "global_sec": 754.16,
+        "global_frame": 22624,
+        "end_frame": 22670,
+        "text": "以及它的使用方法"
+      },
+      {
+        "local_sec": 106.38,
+        "global_sec": 755.68,
+        "global_frame": 22670,
+        "end_frame": 22730,
+        "text": "那我們就下個單元見囉"
+      }
+    ]
+  }
+}

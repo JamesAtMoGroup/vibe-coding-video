@@ -15,6 +15,7 @@ import { FullVideo09b, TOTAL_FRAMES_09B } from "./FullVideo09b";
 import { FullVideo10, TOTAL_FRAMES_10 } from "./FullVideo10";
 import { FullVideo11, TOTAL_FRAMES_11 } from "./FullVideo11";
 import { FullVideo12, TOTAL_FRAMES_12 } from "./FullVideo12";
+import { FullVideo13, TOTAL_FRAMES_13 } from "./FullVideo13";
 
 const FPS = 30;
 
@@ -153,6 +154,15 @@ export const RemotionRoot: React.FC = () => {
         component={FullVideo12}
         fps={FPS}
         durationInFrames={TOTAL_FRAMES_12}
+        width={3840}
+        height={2160}
+      />
+      {/* CH 2-6 完整影片 — 11 個音頻段落 (~12.6 分鐘) — v2 motion system */}
+      <Composition
+        id="FullVideo13"
+        component={FullVideo13}
+        fps={FPS}
+        durationInFrames={TOTAL_FRAMES_13}
         width={3840}
         height={2160}
       />
