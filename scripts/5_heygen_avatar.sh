@@ -4,7 +4,12 @@
 # Output: public/avatar/0-1_*.mp4
 # Skips: 0-1_1.1_studio.wav (not a main segment)
 
-API_KEY="***REMOVED-HEYGEN-KEY***"
+[ -f ~/.claude/secrets/vibe-coding-video.env ] && source ~/.claude/secrets/vibe-coding-video.env
+if [ -z "$HEYGEN_API_KEY" ]; then
+  echo "[error] HEYGEN_API_KEY not set — check ~/.claude/secrets/vibe-coding-video.env" >&2
+  exit 1
+fi
+API_KEY="$HEYGEN_API_KEY"
 AVATAR_ID="f7af57d29abd4254a1e43441ec16ce40"
 AUDIO_DIR="/Users/jamesshih/Projects/vibe-coding-video/public/audio"
 OUT_DIR="/Users/jamesshih/Projects/vibe-coding-video/public/avatar"
