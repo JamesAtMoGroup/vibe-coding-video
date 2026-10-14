@@ -22,6 +22,45 @@
 | CH 2-4 | ✅ 完成（**15 scene 純動畫 + 新 SOP HTML 三方比對**）| FullVideo11.tsx | ✅ 已上傳 + 上線 |
 | CH 2-5 | ✅ 完成（**11 scene + Scene 0.1 中央構圖修正 CH 2-4 教訓**）| FullVideo12.tsx | ✅ 已上傳 + 上線 |
 | CH 2-6 | ✅ 完成（**11 scene 純動畫 + v2 motion + 語意色 API紫/步驟綠/策略黃/Key紅**）| FullVideo13.tsx | ✅ 已上傳 + 上線 |
+| CH 2-7 | ✅ 完成（**20 scene + 6 段真人 demo 影片 + SyncedDemoVideoScene 節奏同步修正**）| FullVideo14.tsx | ✅ 已上傳 + 上線 |
+
+---
+
+## CH 2-7 — ✅ 完成（技術方案｜爬蟲——看得到就爬得到，3 招實用技巧）
+
+**TSX：** `src/FullVideo14.tsx`（20 場景，SEG_STARTS_14=[0,969,2476,4034,5673,7501,8699,9476,11111,12400,13375,14844,16177,17956,20047,20799,22043,24134,25686,28045]，TOTAL_FRAMES_14=31916）
+**Render：** `out/CH2-7-技術方案｜爬蟲——看得到就爬得到，3 招實用技巧/…-2026-10-14.mp4`（4K 3840×2160 / 30fps / **17:44** / 290 MB）2026-10-14
+**字幕：** `…-subtitles.vtt`（413 cues，20 段落 SEG_STARTS offset 合併；末 cue 17:42.733 ≈ mp4 17:43.9）
+**線上：** https://n8ncourse.zeabur.app/vibecoding/lecture14/
+
+### 教學內容（20 scene / 6 section + 6 段實機 demo 影片）
+- S0 開場：上集 API 回顧 + 沒有 API 時怎麼辦 → 爬蟲
+- S1 **爬蟲是什麼**（競品調查情境 + 定義「程式自動抓資料整理試算表」+ 定時/手動兩種觸發 + 應用場景）
+- S2 **靜態 vs 動態**（為什麼重要 + 定義差異 + 混合式網頁：重點是「那筆資料」不是整個網站）
+- S3 **三招快速判斷**（總覽 + 招式一檢視原始碼／招式二停用 JS／招式三下載 HTML，各配一段實機 demo 影片）
+- S4 **精準定位三種方法**（為何需要定位線索 + 原始碼法／元素法／網路法，各配一段實機 demo 影片）
+- S5 **工具選擇決策地圖**（四種情境對應方案 + 反爬蟲心理準備 + 簡單優先原則）
+- S6 **爬蟲倫理與法律**（圖書館比喻 + 三個原則：請求間隔／商業用途／台灣搶票機器人違法）
+- finale 5 條 takeaway（綠/綠/黃/橘/紅）+ 發光大卡下集預告「部署」（紫）
+
+### ⚠️ Phase 5 QA 抓到的問題：demo 影片節奏跟旁白完全脫節
+James 在 Phase 5 Studio 預覽時抓到：3.2（招式一）demo 影片畫面跟旁白對不上。逐幀 Read PNG 比對 VTT cue 後發現根因——**Scene Dev Agent 原本用 `playbackRate` 把整支素材影片變速、硬拉伸對齊旁白總長**，但完全沒比對過素材裡的真實動作時間點，跟原始劇本備注「配合音檔長度去播放，若影片過長，多出來的片段可直接刪除」的設計完全不符。
+
+逐一 ffmpeg 抽幀比對 6 支 demo 影片後：
+- **3.2 / 4.3 / 4.4** 三段素材真實動作節奏遠比旁白語速快（例如 3.2 全部動作在影片第 14 秒做完，但旁白講到「找得到=靜態」要到第 34.5 秒），需要新寫 `SyncedDemoVideoScene`：旁白純講概念時 Freeze 定格第 0 幀 → 動作段用 `playbackRate` 精準拉伸對齊關鍵動作幀（逐幀讀出來核對，不是用猜的）→ 動作完成後再 Freeze 定格陪旁白收尾
+- **3.3 / 3.4 / 4.2** 三段逐幀比對後節奏本來就對得上，維持原速 `DemoVideoScene`（Freeze 定格末幀 / 自然裁切）不變
+
+修完後逐一 Read PNG 驗證三段的「動作關鍵幀」是否精準對齊旁白 cue（例如 3.2 的「找到」結果畫面跟 iMessage 字卡「找得到=靜態 找不到=動態」同框、4.4 的「複製為 cURL/fetch」選單畫面跟字卡同框），全部通過才交付 render。
+
+### 已完成
+- [x] Phase 1-4（音檔正規化 20 段 + VTT 校正 + visual-spec-2-7.json + FullVideo14.tsx 1489 行 + Root.tsx 註冊 + package.json build:2-7）— 前次 session 完成
+- [x] Phase 5 Premortem 抽幀 27+ 幀全綠（含 PTT「AV女優板」、view-source find bar「中東衝突」等原始錄影內容確認非疊層問題）
+- [x] James 預覽抓到 demo 影片節奏問題 → 逐幀比對 VTT 重寫 3.2/4.3/4.4 三段同步邏輯（新增 `SyncedDemoVideoScene`）→ 重新驗證通過 → James 核准
+- [x] Phase 6 Render（290 MB / 17:44）+ VTT 合併（`scripts/merge_vtt_2-7.py`，413 cues）
+- [x] HTML 課程頁生成（含 6 段 demo 影片 assets embed，三方比對 scene-map/備注）
+- [x] Drive 上傳（folder ID `1e-XxtMgKsBQoTJ953eYgLtZGZSe_00QP`，9 檔含 6 支 demo assets）
+- [x] n8ncourse 上架 lecture14（`build_lecture_local.py` + courses.json + manifest + assets 另外複製 + push，HTTP 200 ✓）
+- [x] LINE bot 知識庫同步（cp html+vtt + INDEX.md 新增條目 + commit + push to claude-line-bot-v2）
 
 ---
 
