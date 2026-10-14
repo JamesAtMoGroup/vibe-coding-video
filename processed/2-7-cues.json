@@ -1,0 +1,2480 @@
+[
+  {
+    "seg": "0.1",
+    "start_sec": 0.0,
+    "global_frame": 0,
+    "text": "哈囉大家,在上個單元我們已經聊過了API"
+  },
+  {
+    "seg": "0.1",
+    "start_sec": 3.08,
+    "global_frame": 92,
+    "text": "知道它是前端跟後端之間溝通的橋樑"
+  },
+  {
+    "seg": "0.1",
+    "start_sec": 6.28,
+    "global_frame": 188,
+    "text": "但現實中有些網站並沒有提供API"
+  },
+  {
+    "seg": "0.1",
+    "start_sec": 9.24,
+    "global_frame": 277,
+    "text": "或者是沒有開放API給你使用"
+  },
+  {
+    "seg": "0.1",
+    "start_sec": 11.76,
+    "global_frame": 353,
+    "text": "那如果你還是想要取得網站上的資料"
+  },
+  {
+    "seg": "0.1",
+    "start_sec": 14.68,
+    "global_frame": 440,
+    "text": "那怎麼辦呢?"
+  },
+  {
+    "seg": "0.1",
+    "start_sec": 16.04,
+    "global_frame": 481,
+    "text": "這個時候我們就可以用一個技術叫做爬蟲"
+  },
+  {
+    "seg": "0.1",
+    "start_sec": 19.84,
+    "global_frame": 595,
+    "text": "爬蟲聽起來好像有點困難"
+  },
+  {
+    "seg": "0.1",
+    "start_sec": 21.68,
+    "global_frame": 650,
+    "text": "但其實你可以用一句話來理解它"
+  },
+  {
+    "seg": "0.1",
+    "start_sec": 25.2,
+    "global_frame": 756,
+    "text": "爬蟲就是讓程式去代替你讀取網站上面的內容"
+  },
+  {
+    "seg": "0.1",
+    "start_sec": 29.24,
+    "global_frame": 877,
+    "text": "並把需要的資料抓出來"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 0.0,
+    "global_frame": 969,
+    "text": "我們可以想像一個工作情境是"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 2.3,
+    "global_frame": 1038,
+    "text": "假設你每天早上上班的時候"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 4.6,
+    "global_frame": 1107,
+    "text": "都需要去三個不同的網站"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 6.66,
+    "global_frame": 1169,
+    "text": "分別去抄下競品今天的特價商品"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 9.48,
+    "global_frame": 1253,
+    "text": "然後一筆一筆把它貼進試算表"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 11.78,
+    "global_frame": 1322,
+    "text": "再傳給你的主管"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 13.56,
+    "global_frame": 1376,
+    "text": "雖然說這件事情本身沒有很困難"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 16.12,
+    "global_frame": 1453,
+    "text": "但就是會覺得很煩"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 17.4,
+    "global_frame": 1491,
+    "text": "而且每天都要做的話"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 18.94,
+    "global_frame": 1537,
+    "text": "就會更覺得自己在浪費生命對吧"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 21.76,
+    "global_frame": 1622,
+    "text": "每天做這些重複的事情你可能會想說"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 24.84,
+    "global_frame": 1714,
+    "text": "好煩喔"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 25.86,
+    "global_frame": 1745,
+    "text": "沒有什麼方法可以讓這件事情自動完成嗎"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 28.88,
+    "global_frame": 1835,
+    "text": "這樣我就不用每天都浪費那麼多時間自己再去複製貼上了"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 32.98,
+    "global_frame": 1958,
+    "text": "那答案"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 33.76,
+    "global_frame": 1982,
+    "text": "其實是有的喔"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 34.78,
+    "global_frame": 2012,
+    "text": "而且這個就是爬蟲在做的事情"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 37.34,
+    "global_frame": 2089,
+    "text": "所謂的爬蟲就是只讓程式自動去造訪指定的網站"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 41.44,
+    "global_frame": 2212,
+    "text": "找到你要的資料"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 42.72,
+    "global_frame": 2251,
+    "text": "抓取下來"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 43.74,
+    "global_frame": 2281,
+    "text": "然後整理成你可以直接用的格式"
+  },
+  {
+    "seg": "1.1",
+    "start_sec": 46.56,
+    "global_frame": 2366,
+    "text": "在這個格式的部分我們通常會是使用試算表"
+  },
+  {
+    "seg": "1.2",
+    "start_sec": 0.0,
+    "global_frame": 2476,
+    "text": "而且更讚的是,爬蟲它可以搭配定時觸發的機制"
+  },
+  {
+    "seg": "1.2",
+    "start_sec": 4.0,
+    "global_frame": 2596,
+    "text": "意思就是你可以設定好爬蟲的時間"
+  },
+  {
+    "seg": "1.2",
+    "start_sec": 7.0,
+    "global_frame": 2686,
+    "text": "然後讓程式每天在你早上上班之前"
+  },
+  {
+    "seg": "1.2",
+    "start_sec": 10.0,
+    "global_frame": 2776,
+    "text": "固定時間跑一次"
+  },
+  {
+    "seg": "1.2",
+    "start_sec": 12.0,
+    "global_frame": 2836,
+    "text": "這樣你就可以把省下來的時間"
+  },
+  {
+    "seg": "1.2",
+    "start_sec": 14.0,
+    "global_frame": 2896,
+    "text": "拿去做其他更有價值的事情喔"
+  },
+  {
+    "seg": "1.2",
+    "start_sec": 16.0,
+    "global_frame": 2956,
+    "text": "但當然你如果不想要設定排程"
+  },
+  {
+    "seg": "1.2",
+    "start_sec": 19.0,
+    "global_frame": 3046,
+    "text": "也可以在需要的時候手動跑一次"
+  },
+  {
+    "seg": "1.2",
+    "start_sec": 21.0,
+    "global_frame": 3106,
+    "text": "這兩種方式都可以"
+  },
+  {
+    "seg": "1.2",
+    "start_sec": 23.0,
+    "global_frame": 3166,
+    "text": "你可以依照自己的需求去選擇就可以了"
+  },
+  {
+    "seg": "1.2",
+    "start_sec": 26.0,
+    "global_frame": 3256,
+    "text": "那應用爬蟲技術的場景其實很多"
+  },
+  {
+    "seg": "1.2",
+    "start_sec": 29.0,
+    "global_frame": 3346,
+    "text": "比如說像剛剛的競品調查"
+  },
+  {
+    "seg": "1.2",
+    "start_sec": 31.0,
+    "global_frame": 3406,
+    "text": "定期去抓取多個網站上面的產品銷售的價格"
+  },
+  {
+    "seg": "1.2",
+    "start_sec": 35.0,
+    "global_frame": 3526,
+    "text": "或者是內容的整合"
+  },
+  {
+    "seg": "1.2",
+    "start_sec": 37.0,
+    "global_frame": 3586,
+    "text": "像是把分散在多個頁面的公告、訊息統一整理起來"
+  },
+  {
+    "seg": "1.2",
+    "start_sec": 41.0,
+    "global_frame": 3706,
+    "text": "甚至是資料監控"
+  },
+  {
+    "seg": "1.2",
+    "start_sec": 43.0,
+    "global_frame": 3766,
+    "text": "某一個數字如果一有更新"
+  },
+  {
+    "seg": "1.2",
+    "start_sec": 45.0,
+    "global_frame": 3826,
+    "text": "就可以立刻記錄到試算表裡面"
+  },
+  {
+    "seg": "1.2",
+    "start_sec": 47.0,
+    "global_frame": 3886,
+    "text": "那這些事情都可以靠爬蟲的技術來去實現喔"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 0.0,
+    "global_frame": 4034,
+    "text": "在到這裡初步瞭解了爬蟲是什麼之後"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 2.88,
+    "global_frame": 4120,
+    "text": "想必你已經躍躍欲試"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 4.64,
+    "global_frame": 4173,
+    "text": "想要叫AI直接幫你寫爬蟲了對吧"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 7.36,
+    "global_frame": 4255,
+    "text": "但如果你直接這樣跟他說"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 9.32,
+    "global_frame": 4314,
+    "text": "AI可能還是會回答一些你可能聽不懂的話"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 12.4,
+    "global_frame": 4406,
+    "text": "像是他可能會問你"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 14.32,
+    "global_frame": 4464,
+    "text": "這個網頁或是這個資料是靜態的還是動態的"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 18.52,
+    "global_frame": 4590,
+    "text": "這個時候你可能會有點茫然想說"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 21.28,
+    "global_frame": 4672,
+    "text": "什麼是靜態什麼是動態有差嗎"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 24.28,
+    "global_frame": 4762,
+    "text": "欸還其實真的有差喔"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 26.36,
+    "global_frame": 4825,
+    "text": "這個問題其實很重要"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 28.08,
+    "global_frame": 4876,
+    "text": "因為到底是動態網頁還是靜態網頁"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 31.0,
+    "global_frame": 4964,
+    "text": "會決定寫程式的難度"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 32.76,
+    "global_frame": 5017,
+    "text": "同時也會決定到底要用哪一種程式語言去寫"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 36.64,
+    "global_frame": 5133,
+    "text": "一般來說靜態的網站通常會比較好爬"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 40.32,
+    "global_frame": 5244,
+    "text": "可能幾十分鐘內就可以完成"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 42.48,
+    "global_frame": 5308,
+    "text": "但動態的網站就不一樣囉"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 44.4,
+    "global_frame": 5366,
+    "text": "有的時候可能會需要花好幾個小時來進行"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 47.88,
+    "global_frame": 5470,
+    "text": "對於新手來說就會有一定的挑戰性"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 50.6,
+    "global_frame": 5552,
+    "text": "所以你說有差嗎"
+  },
+  {
+    "seg": "2.1",
+    "start_sec": 51.96,
+    "global_frame": 5593,
+    "text": "還真的是差非常多喔"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 0.0,
+    "global_frame": 5673,
+    "text": "所以到底什麼是靜態網頁"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 2.16,
+    "global_frame": 5738,
+    "text": "什麼又是動態的網頁呢"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 4.08,
+    "global_frame": 5795,
+    "text": "靜態網頁是指網頁的內容"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 6.32,
+    "global_frame": 5863,
+    "text": "在打開之前就已經先準備好了"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 8.76,
+    "global_frame": 5936,
+    "text": "所以當你在載入頁面的時候"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 10.6,
+    "global_frame": 5991,
+    "text": "你看到的內容"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 11.8,
+    "global_frame": 6027,
+    "text": "基本上對每個人來說都是一樣的"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 14.08,
+    "global_frame": 6095,
+    "text": "不會因為你是誰而有所改變"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 16.44,
+    "global_frame": 6166,
+    "text": "一般來說"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 17.32,
+    "global_frame": 6193,
+    "text": "像公司的官網介紹頁"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 19.12,
+    "global_frame": 6247,
+    "text": "活動頁面"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 19.96,
+    "global_frame": 6272,
+    "text": "Landing Page"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 20.96,
+    "global_frame": 6302,
+    "text": "很多都會是屬於靜態的網頁"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 23.44,
+    "global_frame": 6376,
+    "text": "像你可以看看Notion的官網"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 25.4,
+    "global_frame": 6435,
+    "text": "它就是屬於靜態的網頁"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 27.6,
+    "global_frame": 6501,
+    "text": "但動態的網頁就不一樣囉"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 29.68,
+    "global_frame": 6563,
+    "text": "它的內容通常是根據使用者或當下的資料"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 33.04,
+    "global_frame": 6664,
+    "text": "由後端或前端再去產生出來的"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 36.28,
+    "global_frame": 6761,
+    "text": "例如說你登入之後看到的個人資料"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 39.2,
+    "global_frame": 6849,
+    "text": "電商網站的商品推薦"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 41.04,
+    "global_frame": 6904,
+    "text": "或者是社群平臺上的貼文內容"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 43.8,
+    "global_frame": 6987,
+    "text": "這些都會依照不同的人"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 45.64,
+    "global_frame": 7042,
+    "text": "去顯示不同的結果"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 47.68,
+    "global_frame": 7103,
+    "text": "像我們平常在滑的Instagram"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 49.68,
+    "global_frame": 7163,
+    "text": "如果你一直往下滑"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 51.0,
+    "global_frame": 7203,
+    "text": "它就會出現新的貼文"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 52.88,
+    "global_frame": 7259,
+    "text": "這些內容其實就是不斷的"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 54.6,
+    "global_frame": 7311,
+    "text": "上後端取得資料之後再顯示出來囉"
+  },
+  {
+    "seg": "2.2",
+    "start_sec": 57.76,
+    "global_frame": 7406,
+    "text": "那這個就會是動態網頁的經典例子喔"
+  },
+  {
+    "seg": "2.3",
+    "start_sec": 0.0,
+    "global_frame": 7501,
+    "text": "那我們知道了靜態網站和動態網站的差異之後"
+  },
+  {
+    "seg": "2.3",
+    "start_sec": 3.58,
+    "global_frame": 7608,
+    "text": "再跟你分享一個很重要的觀念"
+  },
+  {
+    "seg": "2.3",
+    "start_sec": 6.14,
+    "global_frame": 7685,
+    "text": "其實啊"
+  },
+  {
+    "seg": "2.3",
+    "start_sec": 6.9,
+    "global_frame": 7708,
+    "text": "現代的網頁"
+  },
+  {
+    "seg": "2.3",
+    "start_sec": 7.94,
+    "global_frame": 7739,
+    "text": "很少是純靜態或是純動態的喔"
+  },
+  {
+    "seg": "2.3",
+    "start_sec": 10.5,
+    "global_frame": 7816,
+    "text": "大部分其實都是混合式的"
+  },
+  {
+    "seg": "2.3",
+    "start_sec": 12.8,
+    "global_frame": 7885,
+    "text": "也就是說在同一個頁面裡面"
+  },
+  {
+    "seg": "2.3",
+    "start_sec": 15.36,
+    "global_frame": 7962,
+    "text": "不同區塊的資料來源可能會不一樣"
+  },
+  {
+    "seg": "2.3",
+    "start_sec": 18.18,
+    "global_frame": 8046,
+    "text": "像是頁面的標題或者是導覽列通常就會是固定的"
+  },
+  {
+    "seg": "2.3",
+    "start_sec": 22.26,
+    "global_frame": 8169,
+    "text": "但留言區、貼文的內容或者是商品列表"
+  },
+  {
+    "seg": "2.3",
+    "start_sec": 25.86,
+    "global_frame": 8277,
+    "text": "它往往就會是動態載入的喔"
+  },
+  {
+    "seg": "2.3",
+    "start_sec": 28.36,
+    "global_frame": 8352,
+    "text": "所以在做爬蟲的時候"
+  },
+  {
+    "seg": "2.3",
+    "start_sec": 30.14,
+    "global_frame": 8405,
+    "text": "重點不是判斷整個網頁"
+  },
+  {
+    "seg": "2.3",
+    "start_sec": 32.2,
+    "global_frame": 8467,
+    "text": "是哪一種類型"
+  },
+  {
+    "seg": "2.3",
+    "start_sec": 33.48,
+    "global_frame": 8505,
+    "text": "而是要看的是"
+  },
+  {
+    "seg": "2.3",
+    "start_sec": 34.76,
+    "global_frame": 8544,
+    "text": "你想要抓取的那一筆資料"
+  },
+  {
+    "seg": "2.3",
+    "start_sec": 36.3,
+    "global_frame": 8590,
+    "text": "它到底是屬於靜態的還是動態的喔"
+  },
+  {
+    "seg": "3.1",
+    "start_sec": 0.0,
+    "global_frame": 8699,
+    "text": "那知道了怎麼初步判斷網頁到底是靜態還是動態之後"
+  },
+  {
+    "seg": "3.1",
+    "start_sec": 4.04,
+    "global_frame": 8820,
+    "text": "如果說你還是有點不確定"
+  },
+  {
+    "seg": "3.1",
+    "start_sec": 6.24,
+    "global_frame": 8886,
+    "text": "那這邊教你三招快速判斷的方法喔"
+  },
+  {
+    "seg": "3.1",
+    "start_sec": 9.36,
+    "global_frame": 8980,
+    "text": "這三個方法不需要寫程式"
+  },
+  {
+    "seg": "3.1",
+    "start_sec": 11.6,
+    "global_frame": 9047,
+    "text": "只要用瀏覽器就可以做到"
+  },
+  {
+    "seg": "3.1",
+    "start_sec": 13.6,
+    "global_frame": 9107,
+    "text": "但因為每個方法它的準確度會有一點不一樣"
+  },
+  {
+    "seg": "3.1",
+    "start_sec": 16.6,
+    "global_frame": 9197,
+    "text": "所以建議你可以先從第一個方法開始先嘗試"
+  },
+  {
+    "seg": "3.1",
+    "start_sec": 20.4,
+    "global_frame": 9311,
+    "text": "試完了之後"
+  },
+  {
+    "seg": "3.1",
+    "start_sec": 21.36,
+    "global_frame": 9340,
+    "text": "如果還是不確定的話"
+  },
+  {
+    "seg": "3.1",
+    "start_sec": 22.88,
+    "global_frame": 9385,
+    "text": "那你可以再用後面的方法來去做確認"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 0.0,
+    "global_frame": 9476,
+    "text": "首先第一個方法是"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 1.8,
+    "global_frame": 9530,
+    "text": "你可以直接檢視網頁的原始碼"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 4.2,
+    "global_frame": 9602,
+    "text": "這會是最快速最常用的方式"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 6.9,
+    "global_frame": 9683,
+    "text": "做法也很簡單"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 8.3,
+    "global_frame": 9725,
+    "text": "你可以先直接從網頁上面"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 10.2,
+    "global_frame": 9782,
+    "text": "複製一小段你想要抓取的文字"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 13.0,
+    "global_frame": 9866,
+    "text": "然後在網頁的空白處按右鍵"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 16.0,
+    "global_frame": 9956,
+    "text": "選擇檢視網頁的原始碼"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 18.9,
+    "global_frame": 10043,
+    "text": "這個時候會打開一個新的分頁"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 21.5,
+    "global_frame": 10121,
+    "text": "它會顯示這個網頁完整的HTML程式碼"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 24.8,
+    "global_frame": 10220,
+    "text": "接著你可以按下Command加F"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 27.3,
+    "global_frame": 10295,
+    "text": "Windows的話就是Ctrl加F"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 29.7,
+    "global_frame": 10367,
+    "text": "它會跳出一個搜尋框"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 31.2,
+    "global_frame": 10412,
+    "text": "你可以把剛剛複製的文字貼上去搜尋"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 34.5,
+    "global_frame": 10511,
+    "text": "如果你發現找得到"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 36.2,
+    "global_frame": 10562,
+    "text": "那高機率就會是靜態的網站"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 38.7,
+    "global_frame": 10637,
+    "text": "如果找不到"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 39.4,
+    "global_frame": 10658,
+    "text": "那就有可能是動態網頁"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 41.5,
+    "global_frame": 10721,
+    "text": "這個方法很簡單也很方便"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 43.9,
+    "global_frame": 10793,
+    "text": "但要注意的是"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 45.1,
+    "global_frame": 10829,
+    "text": "它不一定是百分之百準確的"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 47.3,
+    "global_frame": 10895,
+    "text": "在少數的情況之下會有一些例外"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 50.0,
+    "global_frame": 10976,
+    "text": "所以如果你想要再更確認的話"
+  },
+  {
+    "seg": "3.2",
+    "start_sec": 52.2,
+    "global_frame": 11042,
+    "text": "我們可以嘗試使用第二個方法"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 0.0,
+    "global_frame": 11111,
+    "text": "再來第二個方法是"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 1.4,
+    "global_frame": 11153,
+    "text": "停用JavaScript"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 2.84,
+    "global_frame": 11196,
+    "text": "這個方法會再更準確一點"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 4.96,
+    "global_frame": 11260,
+    "text": "但是步驟就會稍微複雜一點"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 7.52,
+    "global_frame": 11337,
+    "text": "首先的話"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 8.28,
+    "global_frame": 11359,
+    "text": "你要先打開瀏覽器裡面的開發人員工具"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 11.8,
+    "global_frame": 11465,
+    "text": "然後找到偏好設定的地方"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 13.8,
+    "global_frame": 11525,
+    "text": "裡面會有一個偵錯工具的區塊"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 16.72,
+    "global_frame": 11613,
+    "text": "那我們把停用JavaScript勾選起來"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 18.92,
+    "global_frame": 11679,
+    "text": "然後重新整理這個頁面"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 21.2,
+    "global_frame": 11747,
+    "text": "這個時候"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 21.92,
+    "global_frame": 11769,
+    "text": "如果網頁基本上沒有什麼變化的話"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 24.6,
+    "global_frame": 11849,
+    "text": "你要抓的資料都還在"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 26.16,
+    "global_frame": 11896,
+    "text": "那表示這就是靜態網頁"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 28.36,
+    "global_frame": 11962,
+    "text": "如果網頁整個破綻"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 29.84,
+    "global_frame": 12006,
+    "text": "或者是資料消失"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 31.24,
+    "global_frame": 12048,
+    "text": "那就會是動態的網頁"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 33.28,
+    "global_frame": 12109,
+    "text": "最後"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 34.0,
+    "global_frame": 12131,
+    "text": "記得檢查完之後"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 35.4,
+    "global_frame": 12173,
+    "text": "要把停用JavaScript的選項取消勾選"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 38.32,
+    "global_frame": 12261,
+    "text": "然後再重新整理一次"
+  },
+  {
+    "seg": "3.3",
+    "start_sec": 40.2,
+    "global_frame": 12317,
+    "text": "讓網頁回到正常的狀態"
+  },
+  {
+    "seg": "3.4",
+    "start_sec": 0.0,
+    "global_frame": 12400,
+    "text": "最後第三個方法是你可以直接下載HTML的檔案"
+  },
+  {
+    "seg": "3.4",
+    "start_sec": 4.4,
+    "global_frame": 12532,
+    "text": "你可以在網頁上的空白處按右鍵"
+  },
+  {
+    "seg": "3.4",
+    "start_sec": 7.2,
+    "global_frame": 12616,
+    "text": "選另存為或者是儲存網頁為"
+  },
+  {
+    "seg": "3.4",
+    "start_sec": 10.16,
+    "global_frame": 12705,
+    "text": "存檔的格式我們可以選僅限HTML"
+  },
+  {
+    "seg": "3.4",
+    "start_sec": 13.72,
+    "global_frame": 12812,
+    "text": "把檔案下載下來之後"
+  },
+  {
+    "seg": "3.4",
+    "start_sec": 15.32,
+    "global_frame": 12860,
+    "text": "可以直接用瀏覽器打開這個下載下來的HTML檔案"
+  },
+  {
+    "seg": "3.4",
+    "start_sec": 19.44,
+    "global_frame": 12983,
+    "text": "打開檔案裡面看得到的內容就表示它是靜態的資料"
+  },
+  {
+    "seg": "3.4",
+    "start_sec": 23.76,
+    "global_frame": 13113,
+    "text": "看不到的就是動態資料"
+  },
+  {
+    "seg": "3.4",
+    "start_sec": 26.2,
+    "global_frame": 13186,
+    "text": "那這以上就是三種進一步確認網頁"
+  },
+  {
+    "seg": "3.4",
+    "start_sec": 29.4,
+    "global_frame": 13282,
+    "text": "到底是靜態還是動態的方法喔"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 0.0,
+    "global_frame": 13375,
+    "text": "在確認完網頁的類型之後"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 2.0,
+    "global_frame": 13435,
+    "text": "先別急著去找AI下指令喔"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 4.12,
+    "global_frame": 13499,
+    "text": "我會建議你可以再多給它一些資訊"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 6.68,
+    "global_frame": 13575,
+    "text": "執行上會更準確"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 8.64,
+    "global_frame": 13634,
+    "text": "像是你可以告訴AI要去哪裡抓"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 12.16,
+    "global_frame": 13740,
+    "text": "那你可能會想說"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 13.16,
+    "global_frame": 13770,
+    "text": "我不能直接把網址貼給AI就好了嗎"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 15.92,
+    "global_frame": 13853,
+    "text": "不是不行"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 16.84,
+    "global_frame": 13880,
+    "text": "但其實一個網頁上面的資訊會非常的多"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 20.08,
+    "global_frame": 13977,
+    "text": "它有程式碼"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 21.0,
+    "global_frame": 14005,
+    "text": "有logo"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 21.84,
+    "global_frame": 14030,
+    "text": "有各種跟你目標無關的東西"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 24.32,
+    "global_frame": 14105,
+    "text": "所以如果你只給網址的話"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 26.52,
+    "global_frame": 14171,
+    "text": "AI可能會不知道"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 27.8,
+    "global_frame": 14209,
+    "text": "你到底要的是哪一個部分的資料"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 30.4,
+    "global_frame": 14287,
+    "text": "所以如果你能夠給它更精準的線索"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 33.36,
+    "global_frame": 14376,
+    "text": "幫它去縮小範圍"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 34.92,
+    "global_frame": 14423,
+    "text": "那AI就能夠更精準的幫你寫出對的程式"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 38.88,
+    "global_frame": 14541,
+    "text": "在網頁中找到你要的資料"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 40.8,
+    "global_frame": 14599,
+    "text": "在頁面上的哪個位置"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 42.64,
+    "global_frame": 14654,
+    "text": "我們會稱作定位"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 44.6,
+    "global_frame": 14713,
+    "text": "所以在這邊"
+  },
+  {
+    "seg": "4.1",
+    "start_sec": 45.56,
+    "global_frame": 14742,
+    "text": "跟你分享三種常見的定位方法"
+  },
+  {
+    "seg": "4.2",
+    "start_sec": 0.0,
+    "global_frame": 14844,
+    "text": "第一種的話會是原始碼法"
+  },
+  {
+    "seg": "4.2",
+    "start_sec": 2.3,
+    "global_frame": 14913,
+    "text": "你的資料如果是靜態的那這就會是首選的方法"
+  },
+  {
+    "seg": "4.2",
+    "start_sec": 6.14,
+    "global_frame": 15028,
+    "text": "做法會是這樣子的"
+  },
+  {
+    "seg": "4.2",
+    "start_sec": 7.42,
+    "global_frame": 15067,
+    "text": "你在網頁上面的原始碼裡搜尋到你要的文字"
+  },
+  {
+    "seg": "4.2",
+    "start_sec": 11.26,
+    "global_frame": 15182,
+    "text": "然後複製前後包覆它的html標籤"
+  },
+  {
+    "seg": "4.2",
+    "start_sec": 14.84,
+    "global_frame": 15289,
+    "text": "就是你會看到很多用大於小於的符號"
+  },
+  {
+    "seg": "4.2",
+    "start_sec": 17.92,
+    "global_frame": 15382,
+    "text": "組成的語法"
+  },
+  {
+    "seg": "4.2",
+    "start_sec": 19.2,
+    "global_frame": 15420,
+    "text": "譬如說"
+  },
+  {
+    "seg": "4.2",
+    "start_sec": 19.96,
+    "global_frame": 15443,
+    "text": "DIV這類的東西"
+  },
+  {
+    "seg": "4.2",
+    "start_sec": 21.5,
+    "global_frame": 15489,
+    "text": "把這段標籤連同你要的內容一起複製然後貼給AI當作線索"
+  },
+  {
+    "seg": "4.2",
+    "start_sec": 26.56,
+    "global_frame": 15641,
+    "text": "AI看到這些標籤就能夠準確的知道要去哪裡找到你想要的資料"
+  },
+  {
+    "seg": "4.2",
+    "start_sec": 32.2,
+    "global_frame": 15810,
+    "text": "這個方法推薦給可以搭配Google Apps Script來使用"
+  },
+  {
+    "seg": "4.2",
+    "start_sec": 36.04,
+    "global_frame": 15925,
+    "text": "它不只快速而且簡單同時還可以設定定時爬取"
+  },
+  {
+    "seg": "4.2",
+    "start_sec": 40.4,
+    "global_frame": 16056,
+    "text": "以新手來說會是最推薦的組合喔"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 0.0,
+    "global_frame": 16177,
+    "text": "再來第二種方法是元素法"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 2.36,
+    "global_frame": 16248,
+    "text": "它適合動態的資料"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 4.24,
+    "global_frame": 16304,
+    "text": "你知道嗎"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 5.16,
+    "global_frame": 16332,
+    "text": "其實你在網頁上看得到的內容"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 7.32,
+    "global_frame": 16397,
+    "text": "不一定會出現在原始碼裡面"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 9.48,
+    "global_frame": 16461,
+    "text": "但它一定會出現在元素裡"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 12.08,
+    "global_frame": 16539,
+    "text": "原因是動態網頁的內容"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 14.28,
+    "global_frame": 16605,
+    "text": "是由 JavaScript 執行之後才生成的"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 17.04,
+    "global_frame": 16688,
+    "text": "而不是直接寫在原始碼裡面"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 19.24,
+    "global_frame": 16754,
+    "text": "但元素就是 JavaScript 執行之後"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 22.12,
+    "global_frame": 16841,
+    "text": "呈現給你的完整畫面的結構"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 24.6,
+    "global_frame": 16915,
+    "text": "所以它一定會包含你所看得到的所有內容"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 28.12,
+    "global_frame": 17021,
+    "text": "具體使用元素法的方法是"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 30.36,
+    "global_frame": 17088,
+    "text": "我們先打開開發人員的工具"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 32.76,
+    "global_frame": 17160,
+    "text": "點選左上角那個元素選取的圖示"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 36.08,
+    "global_frame": 17259,
+    "text": "然後用它去點擊你所想要抓取的內容"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 39.6,
+    "global_frame": 17365,
+    "text": "你就會看到右邊有對應的一組 HTML 的標籤"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 44.0,
+    "global_frame": 17497,
+    "text": "也就是一個元素"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 45.8,
+    "global_frame": 17551,
+    "text": "在這組標籤上面按右鍵"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 48.2,
+    "global_frame": 17623,
+    "text": "選複製元素"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 50.08,
+    "global_frame": 17679,
+    "text": "把這一段程式碼貼給 AI"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 51.92,
+    "global_frame": 17735,
+    "text": "就會是一個很好的定位線索了"
+  },
+  {
+    "seg": "4.3",
+    "start_sec": 54.6,
+    "global_frame": 17815,
+    "text": "這個方法會適合搭配主控臺的爬蟲來使用"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 0.0,
+    "global_frame": 17956,
+    "text": "最後一種方法是網路法"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 2.3,
+    "global_frame": 18025,
+    "text": "有的時候動態網頁的資料"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 4.28,
+    "global_frame": 18084,
+    "text": "其實是瀏覽器在背後從伺服器拉下來的"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 7.28,
+    "global_frame": 18174,
+    "text": "它有點像API呼叫的概念"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 9.38,
+    "global_frame": 18237,
+    "text": "那如果我們能夠找到這個背後的請求"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 12.14,
+    "global_frame": 18320,
+    "text": "就有機會把它翻譯成Google Apps Script來使用"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 15.24,
+    "global_frame": 18413,
+    "text": "就會省去很多的麻煩"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 17.3,
+    "global_frame": 18475,
+    "text": "具體的做法是"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 18.64,
+    "global_frame": 18515,
+    "text": "一樣打開開發人員的工具"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 20.94,
+    "global_frame": 18584,
+    "text": "然後切換到網路的分頁"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 23.24,
+    "global_frame": 18653,
+    "text": "再來重新整理一下頁面"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 24.98,
+    "global_frame": 18705,
+    "text": "然後用搜尋的功能"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 26.58,
+    "global_frame": 18753,
+    "text": "搜尋你所要的關鍵字"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 28.74,
+    "global_frame": 18818,
+    "text": "找到對應的請求之後"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 30.48,
+    "global_frame": 18870,
+    "text": "我們可以按右鍵點選複製為CURL格式"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 35.24,
+    "global_frame": 19013,
+    "text": "把這一段程式碼貼給AI"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 37.32,
+    "global_frame": 19076,
+    "text": "然後跟它說"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 38.68,
+    "global_frame": 19116,
+    "text": "幫我翻譯成Google Apps Script"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 41.08,
+    "global_frame": 19188,
+    "text": "然後再說明"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 42.18,
+    "global_frame": 19221,
+    "text": "你想要抓的是哪一個欄位就可以囉"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 44.78,
+    "global_frame": 19299,
+    "text": "在複製為CURL格式的地方"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 47.34,
+    "global_frame": 19376,
+    "text": "你還會看到另外一個是複製Fetch格式"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 50.78,
+    "global_frame": 19479,
+    "text": "你可能會猶豫說"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 52.28,
+    "global_frame": 19524,
+    "text": "CURL跟Fetch有什麼差別"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 54.82,
+    "global_frame": 19601,
+    "text": "要選哪一個比較好"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 56.38,
+    "global_frame": 19647,
+    "text": "但其實對AI來說"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 58.08,
+    "global_frame": 19698,
+    "text": "兩個格式它都可以看得懂"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 60.26,
+    "global_frame": 19764,
+    "text": "就有點像是你把同一份資料"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 62.36,
+    "global_frame": 19827,
+    "text": "翻成是英文或者是韓文給它看"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 65.12,
+    "global_frame": 19910,
+    "text": "那AI其實都可以理解"
+  },
+  {
+    "seg": "4.4",
+    "start_sec": 67.26,
+    "global_frame": 19974,
+    "text": "所以其實選哪一個都可以喔"
+  },
+  {
+    "seg": "5.1",
+    "start_sec": 0.0,
+    "global_frame": 20047,
+    "text": "在知道了判斷的方法還有定位的方式之後"
+  },
+  {
+    "seg": "5.1",
+    "start_sec": 3.12,
+    "global_frame": 20141,
+    "text": "我們可以給AI的線索是不是就變得更多啦"
+  },
+  {
+    "seg": "5.1",
+    "start_sec": 6.4,
+    "global_frame": 20239,
+    "text": "但在給AI線索之前"
+  },
+  {
+    "seg": "5.1",
+    "start_sec": 8.36,
+    "global_frame": 20298,
+    "text": "我們會需要先把現在所學到的東西做個整理"
+  },
+  {
+    "seg": "5.1",
+    "start_sec": 12.08,
+    "global_frame": 20409,
+    "text": "這樣你才會知道說什麼樣的情況"
+  },
+  {
+    "seg": "5.1",
+    "start_sec": 14.32,
+    "global_frame": 20477,
+    "text": "用什麼樣的方法和工具"
+  },
+  {
+    "seg": "5.1",
+    "start_sec": 16.52,
+    "global_frame": 20543,
+    "text": "在這個地方我幫你做了一個總整理"
+  },
+  {
+    "seg": "5.1",
+    "start_sec": 19.16,
+    "global_frame": 20622,
+    "text": "是根據不同的情境搭配不同的定位方法"
+  },
+  {
+    "seg": "5.1",
+    "start_sec": 22.56,
+    "global_frame": 20724,
+    "text": "那我們就一起來看一下吧"
+  },
+  {
+    "seg": "5.2",
+    "start_sec": 0.0,
+    "global_frame": 20799,
+    "text": "首先,第一種情境是"
+  },
+  {
+    "seg": "5.2",
+    "start_sec": 2.0,
+    "global_frame": 20859,
+    "text": "如果你要抓的是靜態的資料"
+  },
+  {
+    "seg": "5.2",
+    "start_sec": 4.2,
+    "global_frame": 20925,
+    "text": "那恭喜你,這會是最輕鬆的狀況"
+  },
+  {
+    "seg": "5.2",
+    "start_sec": 7.0,
+    "global_frame": 21009,
+    "text": "我們可以用原始碼法先找到定位的線索"
+  },
+  {
+    "seg": "5.2",
+    "start_sec": 10.2,
+    "global_frame": 21105,
+    "text": "然後搭配Google Apps Script來寫爬蟲"
+  },
+  {
+    "seg": "5.2",
+    "start_sec": 13.2,
+    "global_frame": 21195,
+    "text": "同時還可以去設定定時自動執行的功能"
+  },
+  {
+    "seg": "5.2",
+    "start_sec": 16.4,
+    "global_frame": 21291,
+    "text": "這個會是新手的首選,所以強烈推推喔"
+  },
+  {
+    "seg": "5.2",
+    "start_sec": 20.0,
+    "global_frame": 21399,
+    "text": "再來第二個情境是"
+  },
+  {
+    "seg": "5.2",
+    "start_sec": 21.6,
+    "global_frame": 21447,
+    "text": "如果是動態資料的話"
+  },
+  {
+    "seg": "5.2",
+    "start_sec": 23.4,
+    "global_frame": 21501,
+    "text": "那我們可以先試試看網路法"
+  },
+  {
+    "seg": "5.2",
+    "start_sec": 25.9,
+    "global_frame": 21576,
+    "text": "如果你能夠在網路的分頁裡面"
+  },
+  {
+    "seg": "5.2",
+    "start_sec": 28.1,
+    "global_frame": 21642,
+    "text": "找到相對應的API請求"
+  },
+  {
+    "seg": "5.2",
+    "start_sec": 30.1,
+    "global_frame": 21702,
+    "text": "然後把它翻譯成Google Apps Script"
+  },
+  {
+    "seg": "5.2",
+    "start_sec": 32.1,
+    "global_frame": 21762,
+    "text": "就可以降級用比較簡單的工具去處理"
+  },
+  {
+    "seg": "5.2",
+    "start_sec": 35.1,
+    "global_frame": 21852,
+    "text": "一樣是方便好用,但它的缺點就會是"
+  },
+  {
+    "seg": "5.2",
+    "start_sec": 38.3,
+    "global_frame": 21948,
+    "text": "不一定每個網頁都能夠成功"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 0.0,
+    "global_frame": 22043,
+    "text": "再來第三個情境是"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 1.6,
+    "global_frame": 22091,
+    "text": "如果動態資料用網路法行不通的話"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 4.52,
+    "global_frame": 22179,
+    "text": "那你就可以試試看改用元素法"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 6.72,
+    "global_frame": 22245,
+    "text": "並且搭配主控臺的爬蟲"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 8.88,
+    "global_frame": 22309,
+    "text": "好處是你在網頁上面看得到的東西"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 11.44,
+    "global_frame": 22386,
+    "text": "基本上都可以抓得下來"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 13.16,
+    "global_frame": 22438,
+    "text": "但缺點是它只能單次使用"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 15.64,
+    "global_frame": 22512,
+    "text": "沒有辦法設定定時的執行"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 17.84,
+    "global_frame": 22578,
+    "text": "每一次都要手動再跑一次"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 20.6,
+    "global_frame": 22661,
+    "text": "那最後的情境會是"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 22.4,
+    "global_frame": 22715,
+    "text": "如果網路法和元素法都失敗的話"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 24.92,
+    "global_frame": 22791,
+    "text": "那我們就要出動Python的進階爬蟲了"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 27.92,
+    "global_frame": 22881,
+    "text": "它的原理是用Python操作一個完整的瀏覽器"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 31.32,
+    "global_frame": 22983,
+    "text": "模擬人類操作的整個過程"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 33.44,
+    "global_frame": 23046,
+    "text": "幾乎會適用於任何的網站"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 35.76,
+    "global_frame": 23116,
+    "text": "但相對的它的難度也是最高的"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 38.24,
+    "global_frame": 23190,
+    "text": "所以會需要花一點力氣去研究它"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 41.28,
+    "global_frame": 23281,
+    "text": "另外跟你打一個小小的預防針"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 44.2,
+    "global_frame": 23369,
+    "text": "如果你要爬的網站本身"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 45.88,
+    "global_frame": 23419,
+    "text": "會有一個很嚴謹的反爬蟲機制的話"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 48.64,
+    "global_frame": 23502,
+    "text": "不管你有哪一個方法"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 50.0,
+    "global_frame": 23543,
+    "text": "其實難度都會大幅的提升"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 51.88,
+    "global_frame": 23599,
+    "text": "所以要做好心理準備喔"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 53.96,
+    "global_frame": 23662,
+    "text": "最後就是"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 55.0,
+    "global_frame": 23693,
+    "text": "測試的時候其實有一個基本的原則"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 57.36,
+    "global_frame": 23764,
+    "text": "如果我們能夠用簡單的方式"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 59.48,
+    "global_frame": 23827,
+    "text": "就不要用複雜的"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 61.08,
+    "global_frame": 23875,
+    "text": "所以測試的時候"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 62.4,
+    "global_frame": 23915,
+    "text": "可以先從最輕鬆的方案開始嘗試"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 65.16,
+    "global_frame": 23998,
+    "text": "如果真的行不通"
+  },
+  {
+    "seg": "5.3",
+    "start_sec": 66.24,
+    "global_frame": 24030,
+    "text": "那我們再往下一個方案去嘗試喔"
+  },
+  {
+    "seg": "6.1",
+    "start_sec": 0.0,
+    "global_frame": 24134,
+    "text": "在這個單元的最後想跟你分享一個很多人都很容易忽略的部分"
+  },
+  {
+    "seg": "6.1",
+    "start_sec": 4.56,
+    "global_frame": 24271,
+    "text": "就是關於爬蟲的倫理還有法律的問題"
+  },
+  {
+    "seg": "6.1",
+    "start_sec": 7.88,
+    "global_frame": 24370,
+    "text": "這裡有一個很好的比喻可以幫你理解這件事情的邊界"
+  },
+  {
+    "seg": "6.1",
+    "start_sec": 11.76,
+    "global_frame": 24487,
+    "text": "你可以把網站想像成是一間圖書館"
+  },
+  {
+    "seg": "6.1",
+    "start_sec": 14.6,
+    "global_frame": 24572,
+    "text": "你進去閱讀資料的時候是沒有問題的"
+  },
+  {
+    "seg": "6.1",
+    "start_sec": 17.24,
+    "global_frame": 24651,
+    "text": "因為這本來就是開放給大家使用"
+  },
+  {
+    "seg": "6.1",
+    "start_sec": 19.64,
+    "global_frame": 24723,
+    "text": "但如果說你在很短的時間內把整個圖書館的書全部都掃描帶走"
+  },
+  {
+    "seg": "6.1",
+    "start_sec": 24.88,
+    "global_frame": 24880,
+    "text": "那館方可能會阻止你"
+  },
+  {
+    "seg": "6.1",
+    "start_sec": 26.72,
+    "global_frame": 24936,
+    "text": "甚至還會限制你進入"
+  },
+  {
+    "seg": "6.1",
+    "start_sec": 28.84,
+    "global_frame": 24999,
+    "text": "這就像是爬蟲如果他的請求太頻繁"
+  },
+  {
+    "seg": "6.1",
+    "start_sec": 31.96,
+    "global_frame": 25093,
+    "text": "那網站就會進行封鎖"
+  },
+  {
+    "seg": "6.1",
+    "start_sec": 34.16,
+    "global_frame": 25159,
+    "text": "另外就是圖書館的書雖然是可以自由閱讀的"
+  },
+  {
+    "seg": "6.1",
+    "start_sec": 37.84,
+    "global_frame": 25269,
+    "text": "但不代表你可以隨便複製它出版或者是拿去賣"
+  },
+  {
+    "seg": "6.1",
+    "start_sec": 42.16,
+    "global_frame": 25399,
+    "text": "對應到爬蟲就會是資料的使用也會需要遵守相關的規範"
+  },
+  {
+    "seg": "6.1",
+    "start_sec": 47.28,
+    "global_frame": 25552,
+    "text": "在做爬蟲的時候我希望你有三個原則"
+  },
+  {
+    "seg": "6.1",
+    "start_sec": 50.2,
+    "global_frame": 25640,
+    "text": "一定要記住跟遵守"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 0.0,
+    "global_frame": 25686,
+    "text": "第一個原則是要控制好請求的頻率"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 3.32,
+    "global_frame": 25786,
+    "text": "會建議你每次請求之間的間隔大概會抓2到5秒的時間"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 7.94,
+    "global_frame": 25924,
+    "text": "這是現代網站基本上都能夠負荷的存取量"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 11.52,
+    "global_frame": 26032,
+    "text": "如果說你的程式沒有設定間隔或者是間隔低於1秒"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 15.36,
+    "global_frame": 26147,
+    "text": "那真的就不太建議了"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 16.9,
+    "global_frame": 26193,
+    "text": "這樣很容易被網站給封鎖"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 19.2,
+    "global_frame": 26262,
+    "text": "而且也可能對對方的伺服器造成不必要的負擔"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 23.54,
+    "global_frame": 26392,
+    "text": "再來第二個"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 24.58,
+    "global_frame": 26423,
+    "text": "會是商業用途要謹慎使用"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 27.08,
+    "global_frame": 26498,
+    "text": "把爬下來的資料直接用於自己的商業服務"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 30.42,
+    "global_frame": 26599,
+    "text": "可能會引發版權或者是其他的法律爭議"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 34.0,
+    "global_frame": 26706,
+    "text": "像之前就有知名的企業曾經因為爬蟲的商業用途而對簿公堂"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 38.86,
+    "global_frame": 26852,
+    "text": "所以這是一件很嚴重的事情不能隨便開玩笑"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 43.22,
+    "global_frame": 26983,
+    "text": "最後第三個是要好好遵守臺灣的一些特殊規定"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 47.56,
+    "global_frame": 27113,
+    "text": "依照相關的法規在臺灣使用搶票機器人"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 50.9,
+    "global_frame": 27213,
+    "text": "不管是演唱會高鐵或者是臺鐵"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 53.72,
+    "global_frame": 27298,
+    "text": "都是屬於違法的行為"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 55.44,
+    "global_frame": 27349,
+    "text": "就算你是自己用也是一樣的"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 57.5,
+    "global_frame": 27411,
+    "text": "請務必留意這個部分喔"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 59.54,
+    "global_frame": 27472,
+    "text": "那基本上你可以記住這個大原則"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 62.1,
+    "global_frame": 27549,
+    "text": "就是人做起來合理的事情程式就可以做"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 65.44,
+    "global_frame": 27649,
+    "text": "但一旦它變成大量快速而且會影響他人的行為"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 69.28,
+    "global_frame": 27764,
+    "text": "那就需要特別小心了"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 71.32,
+    "global_frame": 27826,
+    "text": "就像剛剛的圖書館的例子一樣"
+  },
+  {
+    "seg": "6.2",
+    "start_sec": 73.38,
+    "global_frame": 27887,
+    "text": "遵守這個精神大多數的情況之下就不會有問題喔"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 0.0,
+    "global_frame": 28045,
+    "text": "在這個單元我們介紹了很多關於爬蟲的核心概念"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 3.58,
+    "global_frame": 28152,
+    "text": "跟一開始相比"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 4.86,
+    "global_frame": 28191,
+    "text": "相信你現在應該不會覺得它那麼困難了吧"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 7.94,
+    "global_frame": 28283,
+    "text": "最後我們一樣來稍微複習一下這個單元的重點"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 12.28,
+    "global_frame": 28413,
+    "text": "第一個是"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 13.32,
+    "global_frame": 28445,
+    "text": "爬蟲就是讓程式自動造訪網站"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 16.12,
+    "global_frame": 28529,
+    "text": "抓取指定的資料整理成試算表的技術"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 19.46,
+    "global_frame": 28629,
+    "text": "它可以搭配定時的機制讓它每天幫你自動做就可以不需要人工操作了"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 25.04,
+    "global_frame": 28796,
+    "text": "第二個"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 25.82,
+    "global_frame": 28820,
+    "text": "在開始寫爬蟲之前要先判斷你要抓的目標資料到底是動態的還是靜態的"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 32.2,
+    "global_frame": 29011,
+    "text": "這個判斷會決定了寫程式的難度也決定了要使用什麼樣的工具"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 36.82,
+    "global_frame": 29150,
+    "text": "大家要記得這一點是我們要聚焦在資料本身而不是整個網站喔"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 42.96,
+    "global_frame": 29334,
+    "text": "第三個是"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 43.98,
+    "global_frame": 29364,
+    "text": "我們學了三招快速判斷的方法"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 46.8,
+    "global_frame": 29449,
+    "text": "第一個是原始碼的搜尋法"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 49.1,
+    "global_frame": 29518,
+    "text": "第二個停用JavaScript"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 51.16,
+    "global_frame": 29580,
+    "text": "第三個下載HTML檔案"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 54.18,
+    "global_frame": 29670,
+    "text": "三個方式的準確度不同建議你可以先從最簡單的開始嘗試"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 58.54,
+    "global_frame": 29801,
+    "text": "不確定的話再用下一個方式去確認"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 62.38,
+    "global_frame": 29916,
+    "text": "再來第四個"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 63.66,
+    "global_frame": 29955,
+    "text": "定位資料的方法有三種"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 65.7,
+    "global_frame": 30016,
+    "text": "靜態資料的話建議你可以首選使用原始碼法"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 69.8,
+    "global_frame": 30139,
+    "text": "動態用元素法或者是網路法"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 72.36,
+    "global_frame": 30216,
+    "text": "那根據資料的類型選對方法才能讓AI精準的去寫出你所要的程式喔"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 78.5,
+    "global_frame": 30400,
+    "text": "最後就是很重要的"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 80.3,
+    "global_frame": 30454,
+    "text": "爬蟲有倫理跟法律的底線會需要遵守"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 83.62,
+    "global_frame": 30554,
+    "text": "請求要有間隔"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 85.2,
+    "global_frame": 30601,
+    "text": "商業的用途要注意"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 86.74,
+    "global_frame": 30647,
+    "text": "在臺灣搶票機器人法律上是明確禁止的"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 90.06,
+    "global_frame": 30747,
+    "text": "不管是商用還是自用都是一樣的喔"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 92.88,
+    "global_frame": 30831,
+    "text": "好在這個單元我們已經學會了怎麼用爬蟲取得資料"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 96.98,
+    "global_frame": 30954,
+    "text": "但到目前為止我們所學的還只是停留在自己可以使用的階段"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 102.6,
+    "global_frame": 31123,
+    "text": "但如果今天你希望把你開發的程式變成一個真正的服務"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 106.96,
+    "global_frame": 31254,
+    "text": "例如自動更新資料的系統你想要讓別人也可以使用"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 111.0,
+    "global_frame": 31375,
+    "text": "甚至變成是一個網站或者是工具的話"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 114.08,
+    "global_frame": 31467,
+    "text": "那就會遇到一個問題"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 115.62,
+    "global_frame": 31514,
+    "text": "是這個程式要怎麼樣被穩定的放在線上運作"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 119.96,
+    "global_frame": 31644,
+    "text": "所以在下個單元我們就會著重介紹部署的概念"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 123.82,
+    "global_frame": 31760,
+    "text": "來去讓這件事情可以被實現喔"
+  },
+  {
+    "seg": "7.1",
+    "start_sec": 126.36,
+    "global_frame": 31836,
+    "text": "那我們就下個單元見囉"
+  }
+]
