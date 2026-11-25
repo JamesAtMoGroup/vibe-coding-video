@@ -24,6 +24,21 @@
 | CH 2-6 | ✅ 完成（**11 scene 純動畫 + v2 motion + 語意色 API紫/步驟綠/策略黃/Key紅**）| FullVideo13.tsx | ✅ 已上傳 + 上線 |
 | CH 2-7 | ✅ 完成（**20 scene + 6 段真人 demo 影片 + SyncedDemoVideoScene 節奏同步修正**）| FullVideo14.tsx | ✅ 已上傳 + 上線 |
 | CH 2-8 | ✅ 完成（**首支搭配 lessoncraft：設計單＋教材 PDF＋demo 推近框 cut**）| FullVideo15.tsx | ✅ 已上傳（n8ncourse 站 502 待查） |
+| CH 2-9 | ⏳ Phase 3–4 製作中（lessoncraft 設計單）| FullVideo16.tsx | — |
+
+---
+
+## CH 2-9 — ⏳ 製作中（技術方案｜資料庫——簡易版、專業版，哪個適合我）
+
+**設計單：** `chapters/2-9/design-2-9.md`｜**教材：** `chapters/2-9/教材/資料庫速查講義.pdf`（2 頁）
+
+### 已完成
+- [x] 講稿 docx → txt、Phase 1 剪靜音 18 段（17:57，不拆片）
+- [x] Phase 2 Whisper + 校正（Supabase、PostgreSQL、持久化層、外鍵、索書號、Pinecone、API、除錯等；逗號移除；時間軸單調）
+- [x] 教材 PDF
+
+### 進行中
+- [ ] Phase 3 visual-spec-2-9 + Phase 4 FullVideo16.tsx + QA + Premortem（子代理）
 
 ---
 
@@ -52,6 +67,7 @@
 - [x] VTT 合併（6.1 78.3s 後 +7 秒已處理，作業卡前後 cue 18:24.3 / 18:32.1 驗過）
 - [x] HTML 課程頁（三方比對，progress 83.3%，assets 3 demo＋講義 PDF）
 - [x] Drive 上傳、n8ncourse lecture15 push、LINE bot 知識庫同步（小等級，需 24h 內補審批單）
+- [x] Kolable 上架（aischool program 0a461020 Chapter 2 pos 7，content 1aac7db1；description、講義 PDF、片長 1137s；published_at = attachment.created_at 2026-11-25 18:07；轉檔 READY、字幕 zh.vtt 已上）。同日補上 CH 2-7（pos 6，content dcf1bac7，18:03）
 
 ### 待辦
 - [ ] n8ncourse 站 502：確認是否已搬 AI GO／停用，再決定 lecture15 放哪
