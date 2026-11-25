@@ -24,11 +24,15 @@
 | CH 2-6 | ✅ 完成（**11 scene 純動畫 + v2 motion + 語意色 API紫/步驟綠/策略黃/Key紅**）| FullVideo13.tsx | ✅ 已上傳 + 上線 |
 | CH 2-7 | ✅ 完成（**20 scene + 6 段真人 demo 影片 + SyncedDemoVideoScene 節奏同步修正**）| FullVideo14.tsx | ✅ 已上傳 + 上線 |
 | CH 2-8 | ✅ 完成（**首支搭配 lessoncraft：設計單＋教材 PDF＋demo 推近框 cut**）| FullVideo15.tsx | ✅ 已上傳（n8ncourse 站 502 待查） |
-| CH 2-9 | ⏳ Phase 3–4 製作中（lessoncraft 設計單）| FullVideo16.tsx | — |
+| CH 2-9 | ✅ 完成（lessoncraft；Kolable 已上架）| FullVideo16.tsx | ✅ 已上傳（n8ncourse 站 502 待查） |
 
 ---
 
-## CH 2-9 — ⏳ 製作中（技術方案｜資料庫——簡易版、專業版，哪個適合我）
+## CH 2-9 — ✅ 完成（技術方案｜資料庫——簡易版、專業版，哪個適合我）
+
+**Render：** `out/CH2-9-…/CH2-9-…-2026-11-25.mp4`（4K / 18:08 / 356 MB）｜**字幕：** 428 cues（`scripts/merge_vtt_2-9.py`）｜**Drive：** `19R03fWqqcxIR1hCuZZm5J54akgP0Jzfw`
+**Kolable：** Chapter 2 pos 8，content `a9bf83f1`，description＋講義 PDF＋片長 1088s，published_at = attachment.created_at 2026-11-25 19:41，READY、zh 字幕已上
+**n8ncourse：** lecture16 已 push（623f48d），站 502 未上線確認｜**LINE bot：** 已同步（小等級，需補審批單）
 
 **設計單：** `chapters/2-9/design-2-9.md`｜**教材：** `chapters/2-9/教材/資料庫速查講義.pdf`（2 頁）
 
@@ -37,8 +41,11 @@
 - [x] Phase 2 Whisper + 校正（Supabase、PostgreSQL、持久化層、外鍵、索書號、Pinecone、API、除錯等；逗號移除；時間軸單調）
 - [x] 教材 PDF
 
-### 進行中
-- [ ] Phase 3 visual-spec-2-9 + Phase 4 FullVideo16.tsx + QA + Premortem（子代理）
+- [x] Phase 3+4：FullVideo16.tsx（TOTAL 32653 = 18:08；作業卡接在 6.1 音檔後 240f，6.2 已含延遲，字幕照 SEG_STARTS 推即可）+ QA + Premortem 111 張；Director 複驗 14 張
+- [x] ⚠️ 講稿 2.3「三層升級路徑＋三個問題」沒有錄音 → 不做畫面，講義同步拿掉
+- [x] 拿掉旁白沒講的資訊：4.4 地區名改圖示、4.2 帳單金額改疊加 $ 符號
+
+- [x] James 預覽通過 → render → Drive／n8ncourse／bot／Kolable 全收尾
 
 ---
 
