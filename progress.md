@@ -23,6 +23,44 @@
 | CH 2-5 | ✅ 完成（**11 scene + Scene 0.1 中央構圖修正 CH 2-4 教訓**）| FullVideo12.tsx | ✅ 已上傳 + 上線 |
 | CH 2-6 | ✅ 完成（**11 scene 純動畫 + v2 motion + 語意色 API紫/步驟綠/策略黃/Key紅**）| FullVideo13.tsx | ✅ 已上傳 + 上線 |
 | CH 2-7 | ✅ 完成（**20 scene + 6 段真人 demo 影片 + SyncedDemoVideoScene 節奏同步修正**）| FullVideo14.tsx | ✅ 已上傳 + 上線 |
+| CH 2-8 | ✅ 完成（**首支搭配 lessoncraft：設計單＋教材 PDF＋demo 推近框 cut**）| FullVideo15.tsx | ✅ 已上傳（n8ncourse 站 502 待查） |
+
+---
+
+## CH 2-8 — ✅ 完成（技術方案｜部署——把作品放上網路的常見做法）
+
+**Render：** `out/CH2-8-…/CH2-8-…-2026-11-25.mp4`（4K / 30fps / **18:57** / 369 MB）2026-11-25
+**字幕：** `…-subtitles.vtt`（424 cues，`scripts/merge_vtt_2-8.py`；末 cue 18:56.1 ≈ mp4 18:57.3）
+**Drive：** folder `1Sq9EaNOZH6Pj8bcEvTwfVNSv2fZcWD_X`（mp4＋vtt＋html＋assets 3 demo＋講義 PDF）
+**n8ncourse：** lecture15 已 push（commit 3f83e11）；⚠️ 2026-11-25 驗證時整站 502（含 lecture14、首頁），n8ncourse 在 Zeabur→AI GO 搬遷名單，未上線確認
+
+**設計單：** `chapters/2-8/design-2-8.md`（lessoncraft 設計模式；成果、邏輯線、逐段畫面、語意色、與 pipeline 衝突的處理）
+**教材：** `chapters/2-8/教材/部署速查講義.html` → `.pdf`（3 頁，只取旁白內容：提示詞、三步驟、GitHub Pages 清單、四平台、怎麼選、地雷、域名）
+
+### 已完成
+- [x] 講稿 docx → txt（textutil）
+- [x] Phase 1 剪開頭靜音 21 段（總長 18:40，不拆片）
+- [x] Phase 2 Whisper + 校正（專有名詞 Google Apps Script／Cloudflare Pages／Registrar／Zeabur／Vercel／Render／Gandi、域名、s2twp 造成的 臺／開啟／檔案 等回正；時間軸單調）
+- [x] 教材 PDF
+
+- [x] Phase 3 visual-spec-2-8.json + Phase 4 FullVideo15.tsx（SEG_STARTS_15=[90,1960,3110,4754,6312,8443,10399,11282,13102,14835,15360,17923,19791,20901,21921,23386,25563,26493,27827,29779,30795]，TOTAL_FRAMES_15=34116，18:57）+ scene-map-2-8 + Root 註冊 + build:2-8
+- [x] QA：tsc 0 error、fontSize grep 0、Premortem 114 張；Director 自抽 8 張複驗
+- [x] demo 錄影個資：GitHub 帳號名逐幀模糊（OCR 1915 幀）
+- [x] James 預覽回饋「對不到的 highlight」：16 框中 8 框點完頁面變了還留著、1 框偏半、小地圖空 → 加 `cut`（逐幀差分量得）、修 Create repository 座標、小地圖放縮圖移右上；抽 12 幀複驗
+
+- [x] James 預覽通過 → Render
+- [x] VTT 合併（6.1 78.3s 後 +7 秒已處理，作業卡前後 cue 18:24.3 / 18:32.1 驗過）
+- [x] HTML 課程頁（三方比對，progress 83.3%，assets 3 demo＋講義 PDF）
+- [x] Drive 上傳、n8ncourse lecture15 push、LINE bot 知識庫同步（小等級，需 24h 內補審批單）
+
+### 待辦
+- [ ] n8ncourse 站 502：確認是否已搬 AI GO／停用，再決定 lecture15 放哪
+- [ ] LINE bot 變更補審批單
+
+### 跟 pipeline 不同的決定（照 James 2026-11-25 指示用 lessoncraft）
+- demo 錄影（2.4／2.5）加推近＋壓暗框（pipeline 原本禁止影片段 overlay）
+- 片頭 3 秒無聲鉤子、結尾無聲回家作業卡
+- 不加音效（維持系列一致）
 
 ---
 
